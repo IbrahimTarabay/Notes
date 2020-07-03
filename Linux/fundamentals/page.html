@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Fundamentals</title>
+</head><body><b>COMMANDS SYNTAX<br/>
+<br/>
+</b>Commands typically have the syntax:<br/>
+&nbsp; command-options(s)-arguments(s)<br/>
+ex: #ls -l bart (command-option-argument)<br/>
+<br/>
+<b>Options:</b><br/>
+1-Modify the way that a command works<br/>
+2-Usually consist of a hyphen or dash followed by a single letter(-l)<br/>
+3-Some commands accept multiple options which can usually be grouped together after a single hyphen (-tlr)<br/>
+<br/>
+<b>Arguments:</b><br/>
+1-Most commands are used together with one or more arguments<br/>
+2-Some commands assume a default arguments if none is supplied<br/>
+3-Arguments are optional for some commands and required by others<br/>
+-----------------------------------------------------------------------------<br/>
+<b>FILE PERMISSIONS<br/>
+<br/>
+</b>--&gt;UNIX is a multi-user system. Every file and directory in your account can be protected from or made accessible to other users by changing its access permissions. Every user has responsibility for controlling access to their files<br/>
+<br/>
+--&gt;Permissions for a file or directory may be restricted to by types<br/>
+<br/>
+--&gt;There are 3 type of permissions(r-read, w-write, x-execute)<br/>
+<br/>
+--&gt;Each permission (rwx) can be controlled at three levels:<br/>
+&nbsp;u user=yourself<br/>
+&nbsp;g group=can be people in the same project<br/>
+&nbsp;o other=everyone on the system<br/>
+<br/>
+--&gt;File or Directory permission can be displayed by running ls -l command<br/>
+&nbsp;rwxrwxrwx<br/>
+<br/>
+--&gt;Command to change permission<br/>
+&nbsp;chmod<br/>
+<br/>
+ex:<br/>
+chmod g-w jerry (mean delete write permission from group in the file jerry, notice (command-option-argument))<br/>
+<br/>
+ex:<br/>
+chmod a-r jerry (mean delete read permission form user,group,other in the file jerry)<br/>
+----------------------------------------------------------------------------<br/>
+<b>FILE OWNERSHIP<br/>
+<br/>
+</b>--&gt;There are 2 owners of a file or directory<br/>
+&nbsp; -User and Group(which user belongs)<br/>
+<br/>
+--&gt;Command to change file ownership<br/>
+&nbsp;chown--&gt;changes the ownership of a file<br/>
+&nbsp;chgrp--&gt;changes the group ownershop of a file<br/>
+<br/>
+--&gt;Recursive ownership change option (Cascade)<br/>
+&nbsp;#-R <br/>
+(it will not only change that directory but also all the files and directories within that parent directory)<br/>
+<br/>
+ex:<br/>
+#chown root lisa (mean change owner from ibrahim to root on file lisa)<br/>
+ex:<br/>
+#chgrp root lisa (mean change group from ibrahim to root on file lisa) <br/>
+---------------------------------------------------------------------------------<br/>
+<i><b>Help Commands</b></i><br/>
+<br/>
+whatis &lt;command&gt;<br/>
+&lt;command&gt; --help<br/>
+man &lt;command&gt;<br/>
+---------------------------------------------------------------------------------<br/>
+<b>TAB Completion</b><br/>
+<br/>
+-Hitting TAB key completes the available commands, files or directories<br/>
+&nbsp; chm TAB<br/>
+&nbsp; ls j&lt;TAB&gt;<br/>
+&nbsp; cd Des&lt;TAB&gt;<br/>
+----------------------------------------------------------------------------<br/>
+<b>Adding Text to Files (Redirects)</b><br/>
+<br/>
+3 ways:<br/>
+&nbsp;1-vi<br/>
+&nbsp;2-Redirect command output &gt; or &gt;&gt;<br/>
+&nbsp;3-echo &gt; or &gt;&gt;<br/>
+<br/>
+ex:<br/>
+#echo "hello hema" &gt; jerry<br/>
+#echo "hello hossam" &gt;&gt; jerry <br/>
+(we use &gt;&gt; in second time because if we use &gt; we will overwrite our jerry file)<br/>
+<br/>
+ex:<br/>
+ls -ltr &gt; listingofdir (write output of ls -tlr inside listingofdir file)<br/>
+---------------------------------------------------------------------------<br/>
+<b>Standard Output to a File (tee)<br/>
+<br/>
+</b>--&gt;"tee" command is used to store and view (both at the same time) the output of any command<br/>
+<br/>
+<img src="2020-06-25 20_33_42-window.png" /><br/>
+<br/>
+ex:<br/>
+#echo "David Puddy is Eliane's boy friend" | tee eliane<br/>
+#echo "David and Eliane" | tee -a eliane <br/>
+(-a to add new line without delete the previous)<br/>
+(eliane is the file)<br/>
+<br/>
+ex:<br/>
+#wc -c eliane (to know how many characters eliane file has)<br/>
+--------------------------------------------------------------------------------------<br/>
+<b>PIPES<br/>
+<br/>
+</b>A pipe is used by the shell to connect the output of one command directly to the input of another command<br/>
+<br/>
+<b>syntax:</b><br/>
+command1 | command2<br/>
+---------------------------------------------------------------------------------------<br/>
+<b>FILE MAINTENANCE COMMANDS</b><br/>
+<br/>
+<b>cp</b>--&gt;copy a file<br/>
+<b>rm</b>--&gt;remove a file<br/>
+<b>rm -Rf--</b>&gt;will forcefully remove sub-directories and its content as well<br/>
+<b>mv</b>--&gt;move file location to another location or to rename a file<br/>
+<b>mkdir</b>--&gt;make a directory<br/>
+<b>rmdir or rm -r</b>--&gt;to remove a directory<br/>
+<b>chgrp</b>--&gt;change group of a file<br/>
+<b>chown</b>--&gt;change owner of a file<br/>
+------------------------------------------------------------------------------<br/>
+<b>FILE DISPLAY COMMANDS<br/>
+<br/>
+</b><b>cat</b>--&gt;display entire content of the file<br/>
+<b>more</b>--&gt;display one page of content at the time<br/>
+<b>less</b>--&gt;displays the content of a page in reverse order<br/>
+<b>head</b>--&gt;if you want to know a few lines at the top of a file<br/>
+<b>tail</b>--&gt;lines of the bottom of the file<br/>
+-------------------------------------------------------------------------------<br/>
+<b>Filters/Text Processors Commands<br/>
+<br/>
+</b><b>cut</b>--&gt;gives us characters that you specify from each line in file<br/>
+<b>awk</b>--&gt;seperate each column in the file<br/>
+<b>grep</b>--&gt;search a word inside file<br/>
+<b>sort</b>--&gt;sort an alphaptical order<br/>
+<b>uniq</b>--&gt;remove all duplicates from the file<br/>
+<b>wc</b>--&gt;word count , it counts lines,words,file size<b><br/>
+</b><b><br/>
+</b>ex:<br/>
+#cut -c1-2 seinfeld <br/>
+(gives us first 2 characters from seinfeld file)<br/>
+ex:<br/>
+#awk '{print $1}' seinfeld<br/>
+(mean print first column in seinfeld file)<br/>
+ex:<br/>
+#grep Alton seinfeld <br/>
+(search Alton inside seinfeld character)<br/>
+ex:<br/>
+#sort seinfeld<br/>
+(sort an alphaptical order in file)<br/>
+ex:<br/>
+#cat seinfeld | awk '(print $2)' | sort | uniq<br/>
+-----------------------------------------------------------------------------------<br/>
+<b>Compare Files</b><br/>
+<br/>
+#diff (line by line)<br/>
+#cmp (byte by byte)<br/>
+-----------------------------------------------------------------------------------<br/>
+<b>Compress and un-Compress Files<br/>
+<br/>
+</b><b>tar</b>--&gt;to put files in one file<br/>
+<b>gzip</b>--&gt;to compress that one file<br/>
+<b>gzip -d or gunzip</b>--&gt;to unzip<br/>
+<br/>
+why compress??<br/>
+if you have problem in you organization and you use RedHat, you have support so when you send them your files you need to send it faster<br/>
+<br/>
+ex:<br/>
+#tar cvf ibrahim.tar . <br/>
+(mean put everything in current directory in ibrahim.tar)<br/>
+#mkdir blah<br/>
+#mv ibrahim.tar blah/<br/>
+#tar xvf ibrahim.tar (to extract ibrahim.tar)<br/>
+-------------------------------------------------------------------------------<br/>
+<b>Truncate File Size<br/>
+<br/>
+</b>--&gt;The Linux <b>truncate</b>&nbsp;command is often used to shrink or extend the size of a file to the specified size (your will lose your data)<br/>
+<br/>
+ex:<br/>
+#truncate -s 40 seinfeld <br/>
+(mean make seinfeld file 40 bytes only and delete redundant data)<br/>
+--------------------------------------------------------------------------------<br/>
+<b>COMBINING AND SPLITTING FILES<br/>
+<br/>
+</b>-Multiple files can be combined into one and<br/>
+-One file can be split into multiple files<br/>
+<br/>
+ex:<br/>
+#cat file1 file2 file3 &gt; file4<br/>
+<br/>
+ex:<br/>
+#split -l 300 file.txt childfile<br/>
+(mean split file.txt into 300 lines per file and output to childfileaa,childfileab,childfileac etc)<br/>
+--------------------------------------------------------------------------------<br/>
+<b>Linux vs Windows Commands<br/>
+<br/>
+</b><br/>
+<img src="2020-06-26 17_04_59-window.png" /><b><br/>
+</b><b>Note: </b>GUI takes a lot CPU and memory but CMD doesn't work this way so it's much faster and you can do so many things compared to windows, most of the desktop market is captured by Windows, But in a server environment, in a corporate environment where the higher-level applications runs of course we use LINUX<br/>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</body></html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Networking</title>
+</head><body><b>Network Components<br/>
+<br/>
+</b>-IP<br/>
+-Subnet mask<br/>
+-Gateway<br/>
+-Static vs DHCP<br/>
+<br/>
+-Interface<br/>
+-Interface MAC<br/>
+<br/>
+ex mac address<br/>
+3A-34-52-C4-69-B8<br/>
+<br/>
+OUI: Organizationally Unique Identifier<br/>
+NIC: Network Interface Controller<br/>
+-------------------------------------------------------------<br/>
+<b>Network Files and Commands</b><br/>
+<br/>
+-Interface Detection<br/>
+<br/>
+-Assigning an IP address<br/>
+<br/>
+-Interface configuration files<br/>
+<b>&nbsp; /etc/nsswitch.conf<br/>
+</b><b>&nbsp; </b>(tells the system where it should resolve its hostname in IP address)<b><br/>
+</b><b>&nbsp; /etc/hostname<br/>
+&nbsp; /etc/sysconfig/network<br/>
+</b><b>&nbsp; </b>(you know in the above two files your &nbsp; &nbsp;hostname)<b><br/>
+</b><b>&nbsp; /etc/sysconfig/network-scripts/<br/>
+</b>(you specify in this folder ip,subnet mask and gateway etc)<b><br/>
+</b><b>&nbsp; /etc/resolv.conf<br/>
+</b>(specifiy your dns server)<b><br/>
+</b><b>&nbsp; /etc/hosts<br/>
+</b><b>&nbsp; </b>(it's small DNS in your machine)<br/>
+<br/>
+<br/>
+<b>Network Commands</b><br/>
+<br/>
+<b>ping</b><br/>
+<b>ifconfig</b><br/>
+<b>ifup or ifdown</b><br/>
+(if you want to turn off interface to change its mode)<br/>
+<b>netstat</b><br/>
+<b>tcpdump<br/>
+</b>(it actually tracks every single transaction that leaves your machine and enters your machine)<b><br/>
+</b><b><br/>
+</b>ex:<br/>
+#tcpdump -i enp0s3<br/>
+--------------------------------------------------------------------<br/>
+<b>NIC Information<br/>
+<br/>
+</b>NIC=Network Interface Card<br/>
+<br/>
+ex:<br/>
+#ethtool enp0s3<br/>
+<br/>
+<b>Other NICs</b><br/>
+&nbsp;lo = The loopback device is a special interface that your computer uses to communicate with itself. It is used mainly for diagnostics and troubleshooting, and to connect devices running on the local machine<br/>
+<br/>
+virb0 = The virbr0, or "Virtual Bridge 0" interface is used for NAT(Network Address Translation). Virtual environments sometimes use it to connect to the outside network<br/>
+------------------------------------------------------------------------<br/>
+<b>NIC Bonding</b><br/>
+<br/>
+NIC bonding is also know as Network bonding. It can be defined as the aggregation or combination of multiple NIC into a single bond interface,It's main purpose is to provide high availability and redundancy<br/>
+<br/>
+--&gt;<b>First make snapshot and enable second adapter bridged</b><br/>
+<br/>
+<img src="2020-07-02 19_43_13-window.png" /><br/>
+<br/>
+<br/>
+#modinfo bonding | more<br/>
+<br/>
+when you create ifcfg-bond0 file add:<br/>
+<br/>
+DEVICE=bond0<br/>
+TYPE=Bond<br/>
+NAME=bond0<br/>
+BONDING_MASTER=yes<br/>
+BOOTPROTO=none<br/>
+ONBOOT=yes<br/>
+IPADDR=192.168.1.80<br/>
+NETMASK=255.255.255.0<br/>
+GATEWAY=192.168.1.1<br/>
+BONDING OPTS="mod=5 miimon=100"<br/>
+<br/>
+--&gt;save and exit the file<br/>
+<br/>
+<b>Edit the first NIC file (enp0s3)</b><br/>
+#nano /etc/sysconfig/network-scripts/ifcfg-enp0s3<br/>
+<br/>
+--&gt;delete the entire content<br/>
+--&gt;Add the following parameters<br/>
+<br/>
+TYPE=Ethernet<br/>
+BOOTPROTO=none<br/>
+DEVICE=enp0s3<br/>
+ONBOOT=yes<br/>
+HWADDR="MAC from the ifconfig command"<br/>
+MASTER=bond0<br/>
+SLAVE=yes<br/>
+<br/>
+--&gt;Save and exit the file<br/>
+<br/>
+#cp ifcfg-enp0s3 ifcfg-enp0s8<br/>
+--&gt;edit the ifcfg-enp0s8 file<br/>
+<br/>
+#systemctl restart network<br/>
+#ifconfig | more<br/>
+<br/>
+--&gt;use the following command to view bond interface<br/>
+<br/>
+#cat /proc/net/bonding/bond0<br/>
+---------------------------------------------------------------------<br/>
+<b>Download Files or Apps</b><br/>
+<br/>
+ex:<br/>
+#wget http://website.com/filename<br/>
+<br/>
+<b>why??</b><br/>
+Most of the servers in corporate environment do not have internet access<br/>
+----------------------------------------------------------------------<br/>
+<b>curl and ping Commands<br/>
+<br/>
+</b>#curl www.google.com<br/>
+(to see file content)<br/>
+#curl -O http://website.com/filename<br/>
+(to download)<br/>
+----------------------------------------------------------------------<br/>
+<b>File Transfer</b><br/>
+<br/>
+<b>ftp</b><br/>
+(one of the legendary commands used in many OS)<br/>
+<b>scp</b><br/>
+(secure copy protocol)<br/>
+<b>rsync</b><br/>
+(is mainly used by the system administrator to perform file backups from one system to another)<br/>
+<br/>
+ex:<br/>
+#ftp ftp.redhat.com<br/>
+Enter Username:<br/>
+Enter Password:<br/>
+<br/>
+At the ftp prompt<br/>
+ftp&gt;put filename<br/>
+<br/>
+To exit<br/>
+ftp&gt;bye<br/>
+---------------------------------------------------------------------<br/>
+<b>System Updates and Repos</b></body></html>

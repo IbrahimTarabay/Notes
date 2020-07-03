@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Shell Scripting</title>
+</head><body><b>Linux Kernel<br/>
+<br/>
+</b><img src="2020-07-01 21_27_41-window.png" /><b><br/>
+</b><b><br/>
+<br/>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------<br/>
+Introduction to Shell<br/>
+<br/>
+</b>What is a Shell?<br/>
+&nbsp;-Its like a container<br/>
+&nbsp;-Interface between users and Kernel/OS<br/>
+&nbsp;-CLI is a Shell<br/>
+<br/>
+Find your Shell<br/>
+&nbsp;echo $0<br/>
+&nbsp;Available Shells "cat/etc/shells"<br/>
+&nbsp;Your Shell? /etc/passwd<br/>
+<br/>
+Windows GUI is a shell<br/>
+Linux KDE GUI is a shell<br/>
+Linux sh, bash etc. is a shell<br/>
+------------------------------------------------------------------------------<br/>
+<b>Types of Linux Shells</b><br/>
+<br/>
+<b>GUI Shells:<br/>
+</b><br/>
+<b>1-Gnome</b>--&gt;it's like a graphical environment that's in Linux<br/>
+<b>2-KDE</b>--&gt;second option to install GUI in linux<br/>
+<br/>
+<b>CMD Shells:<br/>
+<br/>
+</b><b>1-sh</b>--&gt;first shell was in unix<b><br/>
+</b><b>2-bash</b>--&gt;born again shell newer version of sh<br/>
+<b>3-csh and tcsh</b>--&gt;most people don't use these shells unless you are proficient in the C,C++<br/>
+<b>4-ksh</b>--&gt;most of time used in Solaris<br/>
+------------------------------------------------------------------------------<br/>
+<b>Shell Scripting<br/>
+<br/>
+What is a Shell Script?<br/>
+</b>&nbsp;A shell script is an executable file containing multiple shell commands that are executed sequentially. The file can contain:<br/>
+<br/>
+1-<b>Shell </b>(#!/bin/bash)--&gt;shell that will run in<br/>
+2-<b>Comments</b>(# comments)<br/>
+3-<b>Commands</b>(echo,cp,grep etc)<br/>
+4-<b>Statements</b>(if,while,for etc)<br/>
+<br/>
+Shell script should have executable permissions(-rw<b>x</b>&nbsp;r-<b>x</b>&nbsp;r-<b>x</b>)<br/>
+<br/>
+Shell script has to be called from absolute path(ex: /home/userdir/script.bash)<br/>
+<br/>
+If called from current loaction then run: ./script.bash<br/>
+-------------------------------------------------------------------------<br/>
+<b>Shell Script-Basic Scripts</b><br/>
+<br/>
+-Output to screen using 'echo'<br/>
+<br/>
+-Creating tasks<br/>
+&nbsp;-Telling your id, current location, your files/directories, system info<br/>
+<br/>
+-Filters/Text processors through scripts(cut, awk, grep, sort, uniq, wc)<br/>
+----------------------------------------------------------------------------<br/>
+<b>Aliases<br/>
+<br/>
+</b>we run long commands and we need shorter version of it<br/>
+<br/>
+<b>Aliases</b>--&gt;is a very popular command that is used to cut down on lengthy and repetitive commands<br/>
+<br/>
+#alias ls="ls -al"<br/>
+#alias pl="pwd; ls"<br/>
+#alias tell="whoami; hostname; pwd"<br/>
+#alias dir="ls -l | grep ^d"<br/>
+#alias lmar="ls -l | grep Mar"<br/>
+#alias wpa="chmod a+w"<br/>
+#alias d="df -h | awk '{print \$6}' | cut -c1-4"<br/>
+<br/>
+#unalias ls<br/>
+-----------------------------------------------------------------------------<br/>
+<b>Shell History</b><br/>
+<br/>
+#history<br/>
+(you will get the list of your commands that has been executed by specific user)<br/>
+#!&lt;number of command you want to run&gt;<br/>
+------------------------------------------------------------------------------</body></html>

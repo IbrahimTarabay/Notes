@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>System Access&amp;File System</title>
+</head><body><b>Access To Linux System:<br/>
+<br/>
+</b>Each operating system has a different protocol or client that is used to access the system<br/>
+<br/>
+ex:<br/>
+Windows--&gt;Remote Desktop Protocol(RDP)--&gt;if you want to connect windows machine from another windows machine<br/>
+<br/>
+ex:<br/>
+VMware ESX = vSphere client<br/>
+<br/>
+ex:<br/>
+Linux = Putty,SecureCRT<br/>
+--------------------------------------------------------------------<br/>
+CentOS/RHEL 7.5 and up = ip addr<br/>
+<br/>
+to use ifconfig in 7.5 = yum install net-tools<br/>
+---------------------------------------------------------------------<br/>
+<b>Host-only Adapter</b>&nbsp;= Allows communication between your PC and the virtual machine<br/>
+<br/>
+<b>Bridged Adapter</b>&nbsp;= Allows communications between your PC and VM plus allows communication to the internet<br/>
+-----------------------------------------------------------------------<br/>
+<b>Note:</b>&nbsp;Logging from PUTTY is exactly if you were logging through the GUI, why use PUTTY because 98% you will work in a corporate environment there is no GUI environment,you always have the PUTTY session where you will enter a server IP address and then you can connect it<br/>
+------------------------------------------------------------------------<br/>
+<b>Note:</b><br/>
+1-Linux has a super administrator account "root"<br/>
+<br/>
+2-"root" is the most powerful account that can create,modify,delete accounts and make changes to system configuration files<br/>
+<br/>
+3-Linux is a case-sensitive system<br/>
+<br/>
+4-Avoid using file names with spaces<br/>
+-------------------------------------------------------------------------<br/>
+<b>Linux File System:<br/>
+<br/>
+</b>commands = /usr/bin<br/>
+Attached Devices = /dev<br/>
+Applications = /etc<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /var<br/>
+<br/>
+--&gt;OS store data on disk drives using a structure called a filesystem, consisting of files, directories, and the information needed to access and locate them<br/>
+<br/>
+--&gt;There are many different types of filesystems. In general, improvements have been made to filesystems with new releases of OS, and each new filesystem has been given a different name:<br/>
+&nbsp; E.g: ext3,ext4,XFS,NTFS,FAT etc<br/>
+<br/>
+--&gt;Linux filesystems store information in a hierarch of directories and files<br/>
+<br/>
+<img src="screenshot.png" /><img src="2020-06-24 14_51_10-window.png" /><br/>
+<br/>
+<br/>
+C: in windows like / in linux<br/>
+<br/>
+#cd /<br/>
+#ls -l (-l mean more details)<br/>
+#ls -ltr (oldest on the top newest on the bottom)<br/>
+--------------------------------------------------------------------------------------------<br/>
+<b>File System Structure<br/>
+<br/>
+</b><b>/boot</b>----&gt;Contains file that is used by the boot loader(grub.cfg)<br/>
+<br/>
+<b>/root</b>----&gt;root user home directory. It is not same as /<br/>
+<br/>
+<b>/dev</b>----&gt;System devices(disk,cdrom,speakers,flashdrive,keyboard etc)<br/>
+<br/>
+<b>/etc</b>----&gt;Configuration files of applications comes with linux like DNS app<br/>
+<br/>
+<b>/bin----&gt;/usr/bin-----&gt;</b>Everyday user commands<br/>
+<br/>
+<b>/sbin----&gt;/usr/sbin-</b>---&gt;System/filesystem commands, ex: if you want to extend your file system<br/>
+<br/>
+<b>/opt</b>----&gt;Optional add-on applications(Not part of OS apps) third party apps like oracle or asp<br/>
+<br/>
+<b>/proc</b>----&gt;Running processes (Only exist in Memory), when you shut down linux there will be nothing in /proc<br/>
+<br/>
+<b>/lib--&gt;usr/lib</b>----&gt;C programming library files needed by commands and apps, if you want to know which library used for pwd command wirte: strace -e open pwd<br/>
+<br/>
+<b>/tmp</b>----&gt;Directory for temporary files<br/>
+<br/>
+<b>/home</b>----&gt;Directory for user<br/>
+<br/>
+<b>/var</b>----&gt;System logs (every time os writes some outputs or logs of applications)<br/>
+<br/>
+<b>/run</b>----&gt;System daemons that start very early(systemd and udev) to store temporary runtime files like PID files<br/>
+<br/>
+<b>/mnt</b>----&gt;To mount external filesystem (NFS), if nothing mount on your existing filesystem you can create another external filesystem on it<br/>
+<br/>
+<b>/media</b>----&gt;For cdrom mounts<br/>
+---------------------------------------------------------------------------<br/>
+<b>NAVIGATING FILE SYSTEM<br/>
+<br/>
+</b><b>cd</b>----&gt;change directory<br/>
+<b>pwd</b>----&gt;print working directory (where your current location)<br/>
+<b>ls</b>----&gt;list all directories/files<br/>
+---------------------------------------------------------------------------<br/>
+<b>FILE SYSTEM PATHS<br/>
+<br/>
+</b>-There are two paths to navigate to a filesystem<br/>
+&nbsp; -&gt;Absolute Path<br/>
+&nbsp; -&gt;Relative Path<br/>
+<br/>
+-An absolute path always begins with a "/". This indicates that the path starts at the root directory, ex: cd /var/log/samba<br/>
+<br/>
+-A relative path doesn't begin with a "/". It identifies a location relative to your current position, ex:<br/>
+cd /var<br/>
+cd log<br/>
+cd samba<br/>
+------------------------------------------------------------------------------<br/>
+<b>DIRECTORY LISTING ATTRIBUTES</b><br/>
+<br/>
+<img src="2020-06-24 18_32_24-window.png" /><br/>
+<br/>
+#ls -l<br/>
+<br/>
+--&gt;ex: drwxr-xr-x(any file starts with d is directory)<br/>
+--&gt;ex: lrwxrwxrwx(any file starts with l is a link)<br/>
+--&gt;ex: -rw-r-r-- (no l or d is just a normal file)<br/>
+<br/>
+# of links (hard link which is attached to that directory)<br/>
+-----------------------------------------------------------------------------------<br/>
+<b>Creating Files:</b><br/>
+<br/>
+#touch &lt;filename&gt;<br/>
+#cp &lt;file you want to copy&gt; &lt;name of copied&gt;<br/>
+#vi (don't use it)<br/>
+<br/>
+<b>Creating Directories:<br/>
+<br/>
+</b>#mkdir<br/>
+-------------------------------------------------------------------------------------<br/>
+<b>LINUX FILE TYPES:<br/>
+</b><img src="2020-06-24 19_40_12-window.png" /><br/>
+<br/>
+------------------------------------------------------------------------------------------------------------------<br/>
+<b>Finding Files and Directories<br/>
+<br/>
+</b>-Two main commands are used to find files/directories<br/>
+<br/>
+#find . -name &lt;directory/file you want&gt;<br/>
+(. mean start search from current directory, / mean start searching from root)<br/>
+<br/>
+ex:<br/>
+#find / -name "ifcfg-enp0s3"<br/>
+<br/>
+#locate &lt;file/directory name&gt; (it will give you the full path of file/directory you search)<br/>
+<br/>
+<b>Difference Between find and locate:</b><br/>
+<br/>
+-<b>locate</b>&nbsp;uses a prebuilt database, which should be regularly updated, while <b>find</b>&nbsp;iterates over a filesystem to locate files. Thus, locate is much faster than find, but can be inaccurate if the database (can be seen as a cache) is not updated<br/>
+<br/>
+-To update locate database go as root and run: updatedb<br/>
+<br/>
+-----------------------------------------------------------------------<br/>
+<b>change password:<br/>
+</b>#passwd<br/>
+------------------------------------------------------------------------<br/>
+<b>WILDCARDS<br/>
+</b>--&gt;A wildcard is a character that can be used as a substitute for any of a class of characters in a search<br/>
+<br/>
+* represents zero or more characters<br/>
+? represents a single character<br/>
+{} represents a range of characters<br/>
+\ as an escap character<br/>
+^ the beginning of the line<br/>
+$ the end of the line<br/>
+<br/>
+ex to create 9 files:<br/>
+#touch abcd{1..9}-xyz<br/>
+----------------------------------------------------------------------------<br/>
+<b>SOFT AND HARD LINKS<br/>
+<br/>
+</b>inode = pointer or number of a file on the hard disk<br/>
+<br/>
+Soft Link = Link will be removed if file is removed or renamed, #ln -s<br/>
+<br/>
+Hard Link = Deleting renaming or moving the original file will not affect the hard link, #ln<br/>
+<br/>
+<img src="2020-06-25 12_03_02-window.png" /><br/>
+<br/>
+Link--&gt;is like a shortcut in normal term as if you were creating a shortcut on the desktop<br/>
+<br/>
+#ls -ltri (to arrange files from oldest to newest and display inode)<br/>
+--------------------------------------------------------------------------------------------<br/>
+<b>How to Open an Image File<br/>
+<br/>
+</b>-An image file format may store data in uncompressed,compressed or vector formats<br/>
+<br/>
+--&gt;Install a program that will allow us to open image file<br/>
+--&gt;Command syntax to open image file in GUI<br/>
+<br/>
+1-Become root<br/>
+2-yum install ImageMagick -y<br/>
+<br/>
+in case of unable to find x server<br/>
+--&gt;open another terminal as user not root:<br/>
+#xhost +<br/>
+#xhost<br/>
+#xhost -<br/>
+#xhost<br/>
+------------------------------------------------------------------------------------------------<br/>
+<b>unable to find a match<br/>
+</b><a href="https://forums.centos.org/viewtopic.php?t=71742">https://forums.centos.org/viewtopic.php?t=71742</a>&nbsp; <br/>
+<b><br/>
+</b>try to comment mirrolist and uncomment baseurl in:<b><br/>
+</b><b><br/>
+</b>/etc/yum.repos.d/CentOS-AppStream.repo<br/>
+/etc/yum.repos.d/CentOS-Base.repo<br/>
+/etc/yum.repos.d/CentOS-Extras.repo<br/>
+-------------------------------------------------------------------------------------------------<br/>
+</body></html>

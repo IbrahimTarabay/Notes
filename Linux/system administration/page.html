@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>System Administration</title>
+</head><body><b>Linux File Editor<br/>
+<br/>
+</b>There are several standard text editors available on most linux system<br/>
+<br/>
+<b>vi</b>--&gt;Visual editor<br/>
+<b>ed</b>--&gt;Standard line editor<br/>
+<b>ex</b>--&gt;Extended line editor<br/>
+<b>emacs</b>--&gt;A full screen editor<br/>
+<b>pico</b>--&gt;Beginner's editor<br/>
+<b>vim</b>--&gt;Advance version of vi<br/>
+<br/>
+Our editor = vi (available in almost every Linux distribution)<br/>
+<br/>
+<b>vi supplies commands for:</b><br/>
+&nbsp;-Inserting and deleting text<br/>
+&nbsp;-Replacing text<br/>
+&nbsp;-Moving around the file<br/>
+&nbsp;-Finding and substituting strings<br/>
+&nbsp;-Cutting and pasting text<br/>
+<br/>
+<b>Most common keys:</b><br/>
+<b>&nbsp;i</b>--&gt;insert (to able to write)<br/>
+<b>these commands not in insert mode:</b><br/>
+&nbsp;<b>Esc</b>--&gt;Escape out of any mode<br/>
+&nbsp;<b>r</b>--&gt;replace<br/>
+&nbsp;<b>d</b>--&gt;delete<br/>
+&nbsp;<b>u-</b>-&gt;to back step like ctrl+z<br/>
+<b>&nbsp;x</b>--&gt;to delete one character<br/>
+<b>&nbsp;/</b>&lt;word you want to search&gt;<br/>
+&nbsp;<b>:q!</b>--&gt;quit without saving<br/>
+&nbsp;<b>:wq!</b>--&gt;quit and save<br/>
+&nbsp;<b>shift+zz</b>--&gt;quit and save when you are in insert mode<br/>
+----------------------------------------------------------------------------<br/>
+<b>"sed" Command<br/>
+<br/>
+</b>-Replace a string in a file with a newstring<br/>
+-Find and delete a line<br/>
+-Remove empty lines<br/>
+-Remove the first or n lines in a file<br/>
+-To replace tabs with spaces<br/>
+-Show defined lines from a file<br/>
+-Substitute within vi editor<br/>
+<br/>
+ex:<br/>
+#sed -i 's/Kenny/Lenny/g' seinfeld<br/>
+(replace Kenny with Lenny in seinfeld file if you want to not replace but show the output don't use -i)<br/>
+ex:<br/>
+#sed '/seinfeld/d' seinfeld <br/>
+(delete seinfeld character in seinfeld file)<br/>
+ex:<br/>
+#sed -i '/^$/d' seinfeld<br/>
+(to delete any empty line)<br/>
+ex:<br/>
+#sed '1,2d' seinfeld<br/>
+(delete first 2 lines)<br/>
+ex:<br/>
+#sed -n 12,18p seinfeld<br/>
+(to see lines from 12 to 18)<br/>
+ex:<br/>
+#sed 12,18d seinfeld<br/>
+(to see all lines expect 12 form 18 lines)<br/>
+ex:<br/>
+#sed '8!s/Seinfeld/s/' seinfeld<br/>
+(to replace Seinfeld word with s expect in line 8)<br/>
+------------------------------------------------------------------------------<br/>
+<b>User Account Management<br/>
+<br/>
+</b>Commands:<b><br/>
+</b><b>useradd</b><br/>
+<b>groupadd</b><br/>
+<b>userdel</b><br/>
+<b>groupdel</b><br/>
+<b>usermod<br/>
+<br/>
+</b><b>Files:</b><br/>
+/etc/passwd<br/>
+/etc/group<br/>
+/etc/shadow<br/>
+<br/>
+ex:<br/>
+useradd -g superheros -s /bin/bash -c "user description" -m -d /home/ironman ironman<br/>
+<br/>
+ex:<br/>
+#su -<br/>
+#useradd spiderman<br/>
+#id spiderman<br/>
+#cat /etc/group<br/>
+#cat /etc/passwd<br/>
+<br/>
+ex:<br/>
+#useradd superheros<br/>
+#usermod -G superheros spiderman<br/>
+(add spiderman user to superheros group)<br/>
+#grep spiderman /etc/group<br/>
+(to search spiderman and group)<br/>
+#chgrp -R superheros spiderman<br/>
+(to make superheros group with spiderman in all permissions of files and folder because it's spiderman by default)<br/>
+<br/>
+ex:<br/>
+#passwd spiderman<br/>
+#su - spiderman<br/>
+--------------------------------------------------------------------------------------<br/>
+<b>Switch Users and sudo Access<br/>
+<br/>
+</b>sudo: it's basically a command that allows an ordinary user to execute commands at the root level <br/>
+<br/>
+1-Commands<br/>
+<br/>
+<b>su - &lt;username&gt;<br/>
+<br/>
+</b><b>sudo command</b>&nbsp;<br/>
+(you run this if you don't have root privileges but still need to run certain commands)<br/>
+<br/>
+<b>visudo<br/>
+</b>(configuration file that allows the user to add or remove rights)<br/>
+<br/>
+2-File<br/>
+<br/>
+/etc/sudoers<b><br/>
+</b>-----------------------------------------------------------------------------<br/>
+<b>Monitor Users<br/>
+<br/>
+</b>-system adminstrator must monitor users and what they are doing in our system<br/>
+<br/>
+Commands<br/>
+<br/>
+<b>who<br/>
+</b>(who will tell you how many people logged in userid,terminalid,time)<br/>
+<b>last<br/>
+</b>(to see last logins)<br/>
+<b>w</b><br/>
+<b>finger</b><br/>
+<b>id<br/>
+</b>(give you information about your ownself)<b><br/>
+</b><br/>
+ex:<b><br/>
+</b>#last | awk '{print $1}' | sort | uniq<br/>
+<br/>
+change hostname:<br/>
+<br/>
+1-Edit <span style="font-family: SFMono-Regular"><span style="font-size: 16pt"><div style="text-align: left">/etc/sysconfig/network</div></span></span>&nbsp; (optional)<br/>
+&nbsp; NETWORKING=yes<br/>
+&nbsp; NETWORKING_IPV6=no<br/>
+&nbsp; HOSTNAME=ibrahim &nbsp;<br/>
+<br/>
+2-Edit /etc/hosts<br/>
+&nbsp; &nbsp;127.0.0.1 ibrahim<br/>
+<br/>
+3- root@localhost#hostname ibrahim<br/>
+<br/>
+Note: if you don't have permission to write use #sudo chmod a+w hosts<br/>
+------------------------------------------------------------------------------<br/>
+<b>Talking to Users </b>&nbsp; &nbsp; <br/>
+<br/>
+<b>users</b><br/>
+(to know which users use machine)<br/>
+<b>wall</b><br/>
+(to send messages to users if you want to make maintance to you linux machine)<br/>
+<b>write</b><br/>
+(to send message to specific user)<br/>
+<br/>
+Note: Remeber to log as root <br/>
+--------------------------------------------------------------------------------<br/>
+<b>Linux Account Authentication<br/>
+<br/>
+</b>-We don't actually create user accounts individually on each server, so we add directory server in which the user can log in to have authentication to a different servers<br/>
+<br/>
+-what if you have to create a user account to 10000 different servers then you have to have one domain or directory account on a server<br/>
+<br/>
+Types of Accounts:<br/>
+&nbsp; 1-Local accounts: you create a user account on linux machine by running a useradd command<br/>
+<br/>
+&nbsp; 2-Domain/Directory accounts<br/>
+<br/>
+Windows = Active Directory<br/>
+Linux=LDAP<br/>
+<br/>
+-when we want to log in server we use ssh protocol (putty), when we use active directory server to log in to client server we use protocol called ldap<b>&nbsp;</b>to authnticate against a directory<br/>
+-------------------------------------------------------------------------------------<br/>
+<b>Difference between Active Directory,LDAP,IDM,WinBIND,OpenLDAP etc<br/>
+<br/>
+</b><b>Active Directory:</b><span style="font-size: 12pt"><span style="font-family: arial"><div style="text-align: left">is a </div></span><b>directory</b><span style="font-family: arial"><div style="text-align: left"> service that centralizes the management of users, computers and other objects within a network. Its primary </div></span><b>function</b><span style="font-family: arial"><div style="text-align: left"> is to authenticate and authorize users and computers in a windows domain,It is included in most Windows Server operating systems as a set of processes and services &nbsp;</div></span></span>&nbsp; <br/>
+<img src="computer-and-networks-active-directory-d.png" /><br/>
+<b><br/>
+</b><b>IDM:</b><span style="font-size: 12pt"><span style="font-family: arial"><div style="text-align: left">Identity management, also known as identity and access management, is a framework of policies and technologies for ensuring that the proper people in an enterprise have the appropriate access to technology resources. IdM systems fall under the overarching umbrellas of IT security and data management</div></span>&nbsp; <br/>
+</span><span style="font-size: 12pt"><br/>
+<br/>
+<b>OpenLDAP:</b>&nbsp;it's like active directory and IDM but it's free unlike IDM for redhat with money and it used specifically used for linux and unix<br/>
+<img src="0ff6d060-1146-432b-b720-e79de6534b4a.png" /><br/>
+<br/>
+</span><br/>
+<br/>
+<br/>
+<b>WindBind:</b>&nbsp;Used in Linux to communicate with windows (Samba)<br/>
+<br/>
+<b>IBM Directory server<br/>
+<br/>
+jumpCloud<br/>
+<br/>
+</b><b>Note:</b>&nbsp;all the above is directory services but LDAP not, if you are downloading any of the above directory services, you need a protocol to communicate to it (LDAP)<br/>
+<br/>
+<b>LDAP: </b>light weight directory access protocol<br/>
+<br/>
+<span style="font-family: inherit"><span style="font-size: 15pt">What are the differences between LDAP<br/>
+</span></span><br/>
+<span style="font-size: 12pt"><span style="font-family: Arial"><div style="text-align: left">LDAP was originally a protocol, Lightweight Directory Access Protocol, and is now a directory service specification in its own right, including all kinds of schemas and extras.<br/>
+</div></span><span style="font-family: inherit"><br/>
+</span><br/>
+</span><span style="font-family: Arial"><div style="text-align: left"><span style="font-size: 12pt">There is no such thing as 'Active OpenLDAP'. There is however <a href="http://openldap.org/">OpenLDAP</a>, which is an open-source implementation of LDAP, both server and client.</span><span style="font-size: 15pt"><br/>
+</span></div></span>---------------------------------------------------------------------------<br/>
+<b>System Utility Commands &nbsp;</b><br/>
+<br/>
+<b>date</b><br/>
+(to tell us date)<br/>
+<b>uptime</b><br/>
+(how long system is up and how many users have been registered and the average load)<br/>
+<b>hostname</b><br/>
+<b>uname</b><br/>
+<b>which</b><br/>
+(tell you where the file of any command, most of the commands are located in /usr/bin)<br/>
+<b>cal<br/>
+</b>(give a calendar)<br/>
+<b>bc<br/>
+</b>(it's a calculator)<br/>
+<br/>
+ex:<br/>
+#which pwd<br/>
+ex:<br/>
+#cd /usr/bin<br/>
+#ls -l | wc -l<br/>
+(to know how many linux commands in a machine)<br/>
+<img src="2020-06-28 18_32_10-window.png" /><br/>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------<br/>
+<b>Processes and Jobs<br/>
+<br/>
+</b><b>Application=Service</b><br/>
+(like word,powerpoint,firefox)<br/>
+<b>Script</b><br/>
+(something is written in a file and packaged it in a way that will run, so any application running on your computer such as Apache, you should run it as script and also commands are also referred as scripts)<br/>
+<b>Process<br/>
+</b>(process is created when you run application)<br/>
+<b>Daemon<br/>
+</b>(something continously run in the background until interrupted, so when run a daemon that is also a process but continues run and listening for incoming or outgoing traffic)<br/>
+<b>Threads<br/>
+</b>(every process can have multiple threads)<br/>
+<b>Job</b><br/>
+(Run a service or process at schedule time)<br/>
+----------------------------------------------------------------------------<br/>
+<b>Process / Services Commands<br/>
+<br/>
+</b><b>systemctl or service</b><br/>
+(command to start service like apache)<br/>
+<b>ps</b><br/>
+(to see what processes are running on your Linux system)<br/>
+<b>top</b><br/>
+(you will see all your processes running in your system depending on its load and it tells us the information about your memory,cpu that is used by that process)<br/>
+<b>kill</b><br/>
+(kills the process, you can use process name or process ID)<br/>
+<b>crontab</b><br/>
+(used to schedule your processes or your applications so it turn into a job)<br/>
+<b>at</b><br/>
+(it's like crontab but it's one time basis or ad hoc process)<br/>
+-------------------------------------------------------------------------<br/>
+<b>ntp</b><br/>
+(is application that run all the time "daemon" for network time protocol that synchronizes yours to other clocks, it's now replaced by <b>chronyd</b>&nbsp;service)<br/>
+<br/>
+ex:<br/>
+#systemctl restart chronyd<br/>
+(d stands for daemon)<br/>
+ex:<br/>
+#ps -ef | grep chronyd<br/>
+(to see if it running)<br/>
+ex:<br/>
+#systemctl enable chronyd<br/>
+(every time my computer starts, it will start)<br/>
+ex:<br/>
+#systemctl status rsyslog<br/>
+ex:<br/>
+#kill &lt;process ID&gt;<br/>
+-----------------------------------------------------------------------------<br/>
+<b>Additional Cron Jobs<br/>
+<br/>
+</b>-By default there are 4 different types of cronjobs<br/>
+&nbsp; -Hourly<br/>
+&nbsp; -Daily<br/>
+&nbsp; -Weekly<br/>
+&nbsp; -Monthly<br/>
+<br/>
+All the above crons are setup in /etc/cron.___(directory)<br/>
+<br/>
+The timing for each are set in /etc/anacrontab -- except hourly<br/>
+<br/>
+For hourly /etc/cron.d/0hourly<br/>
+<br/>
+ex:<br/>
+#su -<br/>
+#cd /etc<br/>
+#ls -l &nbsp;| grep cron<br/>
+----------------------------------------------------------------------------------<br/>
+<b>Process Management<br/>
+<br/>
+</b>background=<b>ctrl-z, jobs and bg</b><br/>
+(jobs to see what commands has stopped,ctrl-z to stop command like sleep 100,bg make the process running in the background)<br/>
+ex:<br/>
+#sleep 100<br/>
+ctrl+z<br/>
+#jobs<br/>
+#bg<br/>
+#jobs<br/>
+<br/>
+foreground=<b>fg<br/>
+</b>(fg make the process running in foreground in front of you)<br/>
+<br/>
+Run process even after exit = <b>nohup process &amp;<br/>
+</b><b>&nbsp; &nbsp;OR = nohup process &gt; /dev/null 2&gt;&amp;1 &nbsp;&amp;</b><br/>
+(to make the process continue even if you close the terminal ex: #nohup sleep 100 &amp;)<br/>
+<br/>
+kill a process by name = <b>pkill</b><br/>
+<br/>
+Process priority = <b>nice</b>&nbsp; (<b>#nice -n 5 process</b>)<br/>
+&nbsp;-th niceness scale goes from -20 to 19, the lower the number the more priority that task gets<br/>
+<br/>
+Process monitoring = <b>top</b><br/>
+<br/>
+List process = <b>ps<br/>
+</b>-------------------------------------------------------------------------<br/>
+<b>System Monitoring</b><br/>
+<br/>
+<b>top</b><br/>
+(to show you the processes running)<br/>
+<b>df</b><br/>
+(disk partition information, ex: df -h)<br/>
+<b>dmesg</b><br/>
+(gives you the output of error messages related to system errors)<br/>
+<b>iostat</b><br/>
+(input output statistics, describe what is happening when we are communicating with our system peripheral devices or system internal devices even if it's desk or a network)<br/>
+<b>netstat -rnv</b><br/>
+(to know gateway and genmask)<br/>
+<b>free</b><br/>
+(show you physical memory and swap space which is a use of virtual memory)<br/>
+cat /proc/cpuinfo<br/>
+cat /proc/meminfo<br/>
+--------------------------------------------------------------------------<br/>
+<b>Log Monitoring</b><br/>
+<br/>
+Log Directory=<b>/var/log</b><br/>
+<br/>
+<b>logs in /var/log:</b><br/>
+<br/>
+boot<br/>
+chronyd=NTP<br/>
+cron<br/>
+maillog<br/>
+secure<br/>
+<b>messages</b><br/>
+(the most important log, have all hardware and software information, all process information, everything)<br/>
+httpd<br/>
+<br/>
+ex:<br/>
+#grep -i error messages<br/>
+ex:<br/>
+#cd /var/log<br/>
+#more secure<br/>
+------------------------------------------------------------------------<br/>
+<b>System Maintenance Commands<br/>
+<br/>
+</b><b>shutdown</b><br/>
+<br/>
+<b>init 0-6</b><br/>
+(0 to shutdown 6 to reboot 3 to put it in multi-user mode)<br/>
+<b>reboot</b><br/>
+<b>halt</b><br/>
+(halt shutdown immediately even if processes running)<br/>
+---------------------------------------------------------------------------<br/>
+<b>Changing System Hostname</b><br/>
+<br/>
+#hostnamectl &nbsp;set-hostname &lt;newhostname&gt;<br/>
+<br/>
+OR<br/>
+Version 7,8 = Edit /etc/hostname<br/>
+Version 6 = Edit /etc/sysconfig/network<br/>
+----------------------------------------------------------------------<br/>
+<b>Finding System Information<br/>
+<br/>
+</b>cat /etc/redhat-release<br/>
+uname -a<br/>
+dmidecode<br/>
+----------------------------------------------------------------------<br/>
+<b>System Architecture</b><br/>
+<span style="font-size: 12pt"><br/>
+<b><div style="text-align: left"><span style="font-family: arial">What's the </span></div>difference between<div style="text-align: left"><span style="font-family: arial"> the Intel Core </span></div>i5<div style="text-align: left"><span style="font-family: arial"> vs Core </span></div>i7<div style="text-align: left"><span style="font-family: arial">?<br/>
+</span></div><div style="text-align: left"><span style="font-family: arial"><br/>
+</span></div></b></span><span style="font-size: 12pt"><div style="text-align: left"><span style="font-family: arial">You might think it's the number of cores, but for the most part desktop Core </span></div><b>i5</b><div style="text-align: left"><span style="font-family: arial"> processors have four cores, just like i7s. Intel Core </span></div><b>i7</b><div style="text-align: left"><span style="font-family: arial"> processors generally have faster base clock speeds, or in other words they have more Ghz</span></div>&nbsp;</span>&nbsp;<br/>
+<br/>
+<b>Differences between a 32-bit and 64-bit CPU?<br/>
+<br/>
+</b>A big difference between 32-bit processors and 64-bit processors is the number of calculations per second they can perform, which affects the speed at which they can complete tasks. 64-bit processors can come in dual core,quad core,six core and eight core versions for home computing. Multiple cores allow for an increased number of calculations per second that can be performed, which can increase the processing power and help make a computer run faster. Software programs that require many calculations to function smoothly can operate faster and more efficiently on the multi-core 64-bit processors.<br/>
+<br/>
+you can run 32-bit applications on 64-bit system but not vice versa<br/>
+<br/>
+Linux=arch<br/>
+windows=my computer--&gt;properties<br/>
+-------------------------------------------------------------------------<br/>
+<b>Terminal Control Keys<br/>
+<br/>
+</b><b>-</b>Several key combinations on your keyboard usually have a special effect on the terminal<br/>
+<br/>
+<b>CTRL-u</b><br/>
+(erase everything you've typed on the cmd)<br/>
+<b>CTRL-c</b><br/>
+(stop/kill a command)<br/>
+<b>CTRL-z</b><br/>
+(suspend a command)<br/>
+<b>CTRL-d</b><br/>
+(exit from an interactive program (signals end of data))<br/>
+---------------------------------------------------------------------------<br/>
+<b>Terminal Commands<br/>
+<br/>
+</b><b>clear</b><br/>
+(clears your screen)<br/>
+<b>exit</b><br/>
+(Exit out of the shell, terminal or a user session)<br/>
+<b>script</b><br/>
+(The script command stores terminal activities in a log file that can be named by a user, when a name is not provided by a user, the default file name, typescript is used)<br/>
+ex:<br/>
+#script logfile.log<br/>
+#......<br/>
+#exit<br/>
+---------------------------------------------------------------------------<br/>
+<b>Recover Root Password <br/>
+<br/>
+</b>1-Reboot your linux<br/>
+2-first choice centOS Linux(.......)(core) press e<br/>
+3-Edit grub(rw init=/sysroot/bin/sh)ctrl+x<br/>
+4-#chroot /sysroot<br/>
+5-#passwd root<br/>
+6-#touch /.autorelabel<br/>
+7-#exit<br/>
+8-#reboot<br/>
+---------------------------------------------------------------------------<br/>
+<b>SOS REPORT</b><br/>
+<br/>
+it's an international code that is used by many people when they are in really deep trouble,so this is based on the same idea,RedHat or CentOS created something called SOS command and when you run it, it actually collects all the information about your files, your logs put it in a package and send them to them<br/>
+<br/>
+<b>Package name</b><br/>
+&nbsp;sos-version<br/>
+<br/>
+<b>Command</b><br/>
+&nbsp;sosreport</body></html>
