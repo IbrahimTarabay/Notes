@@ -151,4 +151,290 @@ ftp&gt;put filename<br/>
 To exit<br/>
 ftp&gt;bye<br/>
 ---------------------------------------------------------------------<br/>
-<b>System Updates and Repos</b></body></html>
+<b>System Updates and Repos<br/>
+<br/>
+</b><b>yum(CentOS), apt-get(other Linux)</b><br/>
+--&gt;they need internet access,in some companies internet access is not allowed. In that case repos are setup locally on another server within the same network<br/>
+<br/>
+<b>rpm(Red hat Package Manager)<br/>
+</b>Many linux distributions now carried out the same command,rpm is used when you already have a package downloaded in your system so it's mainly used in environments where no internet access<br/>
+<br/>
+<b>Configuration files location:</b><br/>
+/etc/yum.repos.d<br/>
+<br/>
+#yum install bind<br/>
+#yum remove bind<br/>
+-----------------------------------------------------------------------<br/>
+<b>System Upgrade/Patch Management<br/>
+<br/>
+</b>Two type of upgrades<br/>
+&nbsp;Major version=5,6,7,8<br/>
+&nbsp;Minor version=8.1,8.2<br/>
+<br/>
+Major version = yum command (you can't upgrade)<br/>
+Minor version = yum update (you can upgrade)<br/>
+<br/>
+ex:<br/>
+#yum update<br/>
+<br/>
+#cat /etc/centos-release<br/>
+<br/>
+<b>yum update vs upgrade<br/>
+<br/>
+</b><b>upgrade=</b>Delete old packages and replace it with the most recent package<br/>
+<br/>
+<b>update</b>=it preserves the old packages as well because it's good practice for system administrators to keep all packages in case their applications that don't run with newer packages<br/>
+------------------------------------------------------------------------<br/>
+<b>Create Local Repository From DVD<br/>
+<br/>
+</b><img src="2020-07-03 17_14_58-window.png" /><b><br/>
+</b><b><br/>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------<br/>
+Advance Package Management<br/>
+<br/>
+Installing packages<br/>
+Upgrading<br/>
+Deleting<br/>
+View package details information<br/>
+Identify source or location information<br/>
+Packages configuration files<br/>
+<br/>
+</b><b>#</b>yum install ksh*<br/>
+<br/>
+#which pwd<br/>
+#rpm -qf /user/bin/pwd<br/>
+(to see the package that responsible for pwd command)<br/>
+--------------------------------------------------------------------------------<br/>
+<b>SSH AND TELNET<br/>
+<br/>
+</b><b>Telnet=</b>Un-secured connection between computers<br/>
+<br/>
+<b>SSH</b>=Secured<br/>
+<br/>
+--&gt;Two type of packages for most of the services<br/>
+&nbsp; -Client packages<br/>
+&nbsp; -Server packages<br/>
+<br/>
+<img src="2020-07-03 18_03_26-window.png" /><br/>
+<br/>
+#ssh &lt;ip address of remote computer&gt;<br/>
+--------------------------------------------------------------------------------------------------------<br/>
+<b>DNS=Domain Name System<br/>
+<br/>
+Purpose?<br/>
+</b>&nbsp; Hostname to IP &nbsp; (A Record)<br/>
+&nbsp; IP to Hostname &nbsp; (PTR Record)<br/>
+&nbsp; Hostname to Hostname (CNAME Record)<br/>
+<br/>
+<b>Files</b><br/>
+&nbsp; /etc/named.conf<br/>
+&nbsp; /var/named<br/>
+<br/>
+<b>Service<br/>
+</b><b>&nbsp; #</b>systemctl restart named<br/>
+<br/>
+<br/>
+<br/>
+#rpm -qa | grep bind<br/>
+<br/>
+--&gt;you should see: bind-9.11.13-3.el8.x86_64<br/>
+if you don't see it use:<br/>
+#yum install bind<br/>
+<br/>
+#gedit /etc/named.conf<br/>
+--&gt;file:named.ca--&gt;this is the file you write hostnames and IPs<br/>
+<br/>
+#nano /var/named/named.ca<br/>
+<br/>
+#systemctl restart named<br/>
+#systemctl status named<b><br/>
+</b>-----------------------------------------------------------------------------<br/>
+<b>Hostname/IP Lookup</b><br/>
+<br/>
+Commands used for DNS lookup<br/>
+<b>&nbsp;nslookup<br/>
+&nbsp;dig<br/>
+<br/>
+</b>--&gt;these commands resolve hostname to ip, ip to ip, hostname to hostname<br/>
+<br/>
+#nslookup www.google.com<br/>
+<br/>
+Non-authoritative answer: mean that your router doesn't have information on google.com<br/>
+-----------------------------------------------------------------------------<br/>
+<b>chronyd<br/>
+<br/>
+Purpose?<br/>
+</b><b>&nbsp;</b>--&gt;to synchronize the computer time with another server<br/>
+<br/>
+<b>Package name = </b>chronyd<b><br/>
+</b><b><br/>
+</b><b>Configuration file = </b>/etc/chronyd.conf<br/>
+<br/>
+<b>Log file</b>&nbsp;= /var/log/chrony<br/>
+<br/>
+<b>Service</b>&nbsp;= systemctl enable/restart chronyd<br/>
+<br/>
+<b>Program command</b>&nbsp;= chronyc<br/>
+<br/>
+<br/>
+#rpm -qa | grep chrony<br/>
+#nano /etc/chrony.conf<br/>
+#systemctl status chronyd<br/>
+#systemctl start chronyd<br/>
+#systemctl status chronyd<br/>
+#systemctl enable chronyd<br/>
+#chronyc<br/>
+&gt;sources<br/>
+-------------------------------------------------------------------------<br/>
+<b>Sendmail<br/>
+<br/>
+</b>--&gt;is a program that runs on Linux systems to send or receive emails, if you want to be notified if the process finished, you want to receive an email at the end that you actually need to have some sort of email program "Sendmail"<br/>
+<br/>
+<b>Purpose?</b><br/>
+&nbsp;send and receive emails<br/>
+<br/>
+<b>Files</b><br/>
+&nbsp; /etc/mail<br/>
+&nbsp; /etc/mail/sendmail.mc<br/>
+&nbsp; /etc/mail/sendmail.cf<br/>
+<br/>
+<b>Service</b><br/>
+&nbsp; #systemctl restart sendmail<br/>
+--&gt;although there is no "d" at the end of sendmail but it still a daemon(running all the time in the background)<br/>
+<br/>
+<b>Command</b><br/>
+&nbsp;#mail -s "subject line" email@domain.com<br/>
+<br/>
+ex:<br/>
+#rpm -qa | grep sendmail<br/>
+#yum install sendmail<br/>
+#yum install sendmail-cf<br/>
+#nano /etc/mail/sendmail.mc<br/>
+(here we will define our mail relay server it's like a middle man it's take your messages and deliver)<br/>
+#systemctl restart sendmail<br/>
+#systemctl status sendmail<br/>
+#ps -ef | grep sendmail<br/>
+#mail -s "cv" ibrahim@gmail.com<br/>
+hi ibrahim your cv is accepted<br/>
+ctrl+d<br/>
+--------------------------------------------------------------------------------<br/>
+<b>Web Server (httpd)<br/>
+<br/>
+</b><b>Purpose</b>&nbsp;= Serve webpages<br/>
+<br/>
+<b>Serivce or Package name</b>=httpd<br/>
+<br/>
+<b>Files</b><br/>
+&nbsp;/etc/httpd/conf/httpd.conf<br/>
+&nbsp;/var/www/html/index.html<br/>
+<br/>
+<b>Serivce</b><br/>
+&nbsp; systemctl restart httpd<br/>
+&nbsp; systemctl enable httpd<br/>
+<br/>
+<b>Log Files</b><br/>
+&nbsp;/var/log/httpd/<br/>
+<br/>
+ex:<br/>
+#rpm -qa | grep httpd<br/>
+#yum install httpd<br/>
+#nano /etc/httpd/conf/httpd.conf<br/>
+#nano /var/www/html/index.html<br/>
+#systemctl start/restart httpd<br/>
+-----------------------------------------------------------------------------<br/>
+<b>Central Logger(rsyslog)<br/>
+<br/>
+</b><b>Purpose</b>=Generate logs or collect logs from other servers<br/>
+<br/>
+<b>Service or package name</b>&nbsp;= rsyslog<br/>
+<br/>
+<b>Configuration file</b>&nbsp;= /etc/rsyslog.conf<br/>
+<br/>
+<b>Service</b><br/>
+&nbsp;#systemctl restart rsyslog<br/>
+&nbsp;<br/>
+&nbsp;#systemctl enable rsyslog<br/>
+(mean to start service at boot time)<br/>
+<br/>
+<img src="2020-07-04 13_09_22-window.png" /><br/>
+<br/>
+----------------------------------------------------------------------------------------------<br/>
+<b>Linux OS Hardening<br/>
+<br/>
+</b>1-User Account<br/>
+2-Remove unwanted packages<br/>
+3-Stop unused Services<br/>
+4-Check on Listening Ports<br/>
+5-Secure SSH Configuration<br/>
+6-Enable Firewall(iptables/firewalld)<br/>
+7-Enable SELinux<br/>
+8-Change Listening Services Port Numbers<br/>
+9-Keep your OS up to date (security patching)<br/>
+<br/>
+<b>1-User Account</b><br/>
+&nbsp;--&gt;you should use a hard to guess username<br/>
+#chage -l ibrahim<br/>
+--&gt;you should change your password from time to time<br/>
+<br/>
+<b>2-Remove unwanted packages<br/>
+</b>#rpm -qa | wc -l<br/>
+--&gt;to remove a package use:<br/>
+#rpm -e &lt;package name&gt;<br/>
+<br/>
+<b>3-Stop unused Services<br/>
+4-Check on Listening Ports<br/>
+</b>#netstat -tunlp<br/>
+<br/>
+<b>5-Secure SSH Configuration<br/>
+</b>#cd /etc/ssh/<br/>
+#more sshd_config<br/>
+1-change the port from 22 to another<br/>
+2-PermitRootLogin no<br/>
+(so they should login as themselves and this way they can become root)<br/>
+<br/>
+<b>6-Enable Firewall(iptables/firewalld)<br/>
+</b>#nano /etc/firewalld/firewalld.conf<br/>
+<br/>
+<b>7-Enable SELinux<br/>
+</b>--&gt;Security-Enhanced Linux<br/>
+(<div style="text-align: left"><span style="font-family: arial"><span style="font-size: 12pt">is a Linux kernel security module that provides a mechanism for supporting access control security policies, including mandatory access controls (MAC). </span></span></div><span style="font-size: 12pt">SELinux<div style="text-align: left"><span style="font-family: arial"> is a set of kernel modifications and user-space tools that have been added to various Linux distributions</span></div></span>)<br/>
+<br/>
+--&gt;it's have access to permissions of processes and applications<br/>
+#sestatus<br/>
+<br/>
+three modes for SELinux:<br/>
+1-enforcing<br/>
+2-permissive<br/>
+3-disabled<br/>
+<br/>
+<b>9-Keep your OS up to date (security patching)<br/>
+</b>every new patch that comes up you should notified, you have an email so go and sign up to redhat.com or centos.com<br/>
+---------------------------------------------------------------------------------<br/>
+<b>OpenLDAP Installation<br/>
+<br/>
+What is OpenLDAP??<br/>
+</b>--&gt;it's basically open source implementation of light weight access protocol<br/>
+<br/>
+<b>OpenLDAP Service</b><br/>
+&nbsp;slapd<br/>
+<br/>
+<b>Start or stop the service</b><br/>
+#systemctl start slapd<br/>
+#systemctl enable slapd<br/>
+<br/>
+<b>Configuration Files</b><br/>
+&nbsp;/etc/openldap/slapd.d<br/>
+<br/>
+<br/>
+ex:<br/>
+#yum install *openldap*<br/>
+-----------------------------------------------------------------------<br/>
+<b>Trace Network Traffic (traceroute)<br/>
+<br/>
+</b>--&gt;The traceroute command is used in Linux to map the journey that a packet of information undertakes from its source to its destination. One use for traceroute is to locate when data loss occurs throughout a network, which could signify a node that's down<br/>
+<br/>
+--&gt;Because each hop in the record reflects a new server or router between the originating PC and the intended target, reviewing the results of a traceroute scan also lets you identify slow points that may adversely affect your network traffic<br/>
+<br/>
+ex:<br/>
+#traceroute www.google.com<br/>
+-----------------------------------------------------------------------</body></html>
