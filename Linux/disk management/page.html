@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Disk Management</title>
+</head><body><b>System Run Level<br/>
+<br/>
+Main Run Level<br/>
+<br/>
+</b><b>0--&gt;</b>Shut down the system<b><br/>
+</b><b>1--&gt;</b>Single-user mode; usually aliased as s or S<b><br/>
+</b><b>6--&gt;</b>Reboot the system<b>&nbsp;<br/>
+</b><b><br/>
+Other Run levels<br/>
+<br/>
+</b><b>2--&gt;</b>Multiuser mode without networking<b><br/>
+</b><b>3--&gt;</b>Multiuser mode with networking<b><br/>
+</b><b>5--&gt;</b>Multiuser mode with networking and GUI<br/>
+<br/>
+ex:<br/>
+#who -r<br/>
+ex:<br/>
+#init 1<br/>
+----------------------------------------------------------------------------<br/>
+<b>Linux Boot Process<br/>
+<br/>
+</b><img src="2020-07-04 15_56_04-window.png" /><b><br/>
+</b><b><br/>
+---------------------------------------------------------------------------------------------------------------------------------------------------<br/>
+Message of the Day<br/>
+<br/>
+</b><b>--&gt;</b>it's a message you see when you login the system<b><br/>
+</b><b><br/>
+</b>--&gt;Message of the day file location<br/>
+&nbsp;#nano /etc/motd<br/>
+----------------------------------------------------------------------------<br/>
+<b>Customize Message of the Day<br/>
+<br/>
+</b>message of the day is the first message users will see when they login to the Linux machine<br/>
+<br/>
+<b>Steps:<br/>
+</b><b>&nbsp;</b>-Create a new file in /etc/profile.d/motd.sh<br/>
+&nbsp;-Add desired commands in motd.sh file<br/>
+&nbsp;-Modify the /etc/ssh/sshd_config file to edit <br/>
+&nbsp; #PrintMotd yes to PrintMotd no<br/>
+&nbsp;-Restart sshd service<br/>
+&nbsp; #systemctl restart sshd.service<br/>
+----------------------------------------------------------------------------<br/>
+<b>Storage<br/>
+<br/>
+</b><b>Local Storage</b><br/>
+<br/>
+<b>SAN(Storage Area Network)</b>--&gt;connects through your computer through fiber optic fiber<br/>
+<br/>
+<b>NAS(Network Attached Storage)</b>--&gt;connects to your computer via nfs or through ip,also in windows Samba is connected via the IP and is shared by a remote computer<br/>
+----------------------------------------------------------------------------<br/>
+<b>Disk Partition<br/>
+<br/>
+</b><b>Commands for disk partition</b><br/>
+&nbsp; <b>df</b>--&gt;how much disk is used,where is the partiition<br/>
+&nbsp; <b>fdisk</b>--&gt;total size<br/>
+<br/>
+ex:<br/>
+#df -h<br/>
+#fdisk -l<br/>
+-----------------------------------------------------------------------------<br/>
+<b>Adding Disk and Creating Partition<br/>
+<br/>
+</b>#fdisk /dev/sdb<br/>
+n<br/>
+p<br/>
+1<br/>
+enter<br/>
+w<br/>
+#fdisk -l<br/>
+<br/>
+#mkfs.xfs /dev/sdb1<br/>
+#mkdir data<br/>
+#mount /dev/sdb1 /data<br/>
+#nano /etc/fstab<br/>
+<br/>
+/dev/sdb1 &nbsp; &nbsp; /data &nbsp; xfs &nbsp; defaults &nbsp; &nbsp; 0 &nbsp; &nbsp; &nbsp;0<br/>
+------------------------------------------------------------------------------<br/>
+<b>Logical Volume Management(LVM)</b><br/>
+<br/>
+<img src="2020-07-04 19_08_43-window.png" /><br/>
+<br/>
+The main advantage of LVM is that if you run out of 300 giga created in figure, you can add a fourth disk without breaking your powers or your file system<br/>
+------------------------------------------------------------------------------------------<br/>
+<b>Add Disk and Create LVM Partition<br/>
+<br/>
+</b><img src="2020-07-05 08_18_59-window.png" /><b><br/>
+</b><b><br/>
+</b><br/>
+</body></html>
