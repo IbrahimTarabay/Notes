@@ -91,5 +91,222 @@ The main advantage of LVM is that if you run out of 300 giga created in figure, 
 <br/>
 </b><img src="2020-07-05 08_18_59-window.png" /><b><br/>
 </b><b><br/>
-</b><br/>
+<br/>
+</b>--&gt;We have 3 disks /dev/sda &nbsp;/dev/sdb &nbsp;/dev/sdc<br/>
+<br/>
+#fdisk /dev/sdc<br/>
+n<br/>
+p<br/>
+t<br/>
+L<br/>
+8e<br/>
+w<br/>
+#pvcreate /dev/sdc1<br/>
+#pvdisplay<br/>
+#vgcreate oracle vg /dev/sdc1<br/>
+#vgdisplay oracle_vg<br/>
+#lvcreate -n oracle_lv --size 1000M oracle_vg<br/>
+#mkfs.xfs /dev/oracle_vg/oracle_lv<br/>
+#mkdir /oracle<br/>
+#mount /dev/oracle_vg/oracle_lv /oracle<br/>
+#df -h<br/>
+--&gt;if you want to mount this partition at the boot time then edit the /etc/fstab file and add:<br/>
+/dev/oracle_vg/oracle_lv/oracle xfs defaults 0 0<br/>
+-------------------------------------------------------------------------------<br/>
+<b>Add And Extend Disk Using LVM<br/>
+<br/>
+</b>/oracle = 1G<br/>
+/oracle=Full<br/>
+<br/>
+Few Options:<br/>
+&nbsp; -Delete older files to free up disk space<br/>
+<br/>
+&nbsp; -Add new physical disk mount to /oracle2<br/>
+&nbsp; -Create a new virtual disk and mount to /oracle2<br/>
+&nbsp; -or extend /oracle through LVM<br/>
+----------------------------------------------------------------------------------<br/>
+<b>Add/Extend Swap Space<br/>
+<br/>
+What is swap?<br/>
+<br/>
+</b>--&gt;Swap space in Linux is used when the amount of physical memory(RAM) is full. if the system needs more memory resources and the RAM is full, inactive pages in memory are moved to the swap space. while swap space can help machines with a small amount of RAM, it should not to be considered a replacement for more RAM. Swap space is located on hard drives. which have a slower access time than physical memory<br/>
+<br/>
+<b>Recommended swap size = Twice the size of RAM <br/>
+&nbsp;<br/>
+</b>&nbsp;M=Amount of RAM in GB, and S=Amount of swap in GB, then<br/>
+&nbsp; if M&lt;2<br/>
+&nbsp; then S=M*2<br/>
+&nbsp; Else S=M+2<b><br/>
+</b><b><br/>
+Commands<br/>
+</b>&nbsp;dd<br/>
+&nbsp;mkswap<br/>
+&nbsp;swapon or swapoff<br/>
+<br/>
+#df -h<br/>
+--&gt;devtmpfs+tmpfs=4 giga why??<br/>
+2 giga is the physical memory(RAM) and 2 giga automatically created to swap<br/>
+#free -m<br/>
+<br/>
+--&gt;to increase swap space<br/>
+#dd if=/dev/zero of=/newswap bs=1M count=1024<br/>
+(dd to create new file, if--&gt;is going to read from file instead of standard input which is dev zero, of--&gt;write to a file instead of standard output,you will write everything about your virtual pages in /newswap, bs mean read and write bytes, count is total size of the file)<br/>
+<br/>
+<b>Why we can't create a file with touch command??<br/>
+<br/>
+</b>touch command create an empty file that you don't want to assign an empty file to swap, you want to take a piece from your desk and dedicate it to that exchange<br/>
+<br/>
+--&gt;you don't want group or others to read that file so:<br/>
+#chmod go-r newswap<br/>
+<br/>
+#mkswap /newswap<br/>
+#swapon /newswap<br/>
+#nano /etc/fstab<br/>
+add:<br/>
+/newswap &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; swap &nbsp; &nbsp; &nbsp;swap &nbsp; &nbsp;defaults &nbsp; &nbsp; &nbsp; 0 &nbsp; &nbsp; &nbsp;0<br/>
+#free -m<br/>
+#reboot<br/>
+<br/>
+<b>--&gt;to delete swap space</b><br/>
+#swapoff /newswap<br/>
+#rm /newswap<br/>
+y<br/>
+#free -m<br/>
+#nano /etc/fstab<br/>
+delete the line we wrote above<br/>
+---------------------------------------------------------------------------------<br/>
+<b>RAID(Redundant Array of Independent Disks) <br/>
+<br/>
+</b>--&gt;if one disk die we have another disk<br/>
+<br/>
+<b>Type of RAID</b><br/>
+&nbsp; &nbsp;-RAID0<br/>
+&nbsp; &nbsp;-RAID1<br/>
+&nbsp; &nbsp;-RAID5<br/>
+<br/>
+<b>RAID0</b>--&gt;if you lose one disk in RAID0 you out of luck because you lose your data, most of the time RAID0 is used for data warehousing or backups<br/>
+<br/>
+<b>RAID1</b>--&gt;eliminate the disadvantage of RAID0 where we lose a disk and lose data, in RAID1 you have a disk and you have another disk but you mirror them together, but the cons is slow<br/>
+<br/>
+<b>RAID5</b>--&gt;in RAID5 we have at least 3 disks because the way it works it will write to first disk and put some information on that data on the second disk, it will also write to second disk and put some information of that data to third disk and so on <br/>
+<br/>
+<b>Difference between RAID and LVM??</b><br/>
+<br/>
+is RAID is mostly configured on the pyhsical disks while LVM is mostly configured on virtual or logical disks<br/>
+--------------------------------------------------------------------------------<br/>
+<b>File System Check(fsck and xfs_repair)<br/>
+<br/>
+</b>--&gt;Linux fsck utility is used to check and repair Linux filesystems (ext2, ext3, ext4, etc)<br/>
+<br/>
+--&gt;Linux xfs_repair utility is used to check and repair Linux filesystems for xfs filesystem type<br/>
+<br/>
+--&gt;Depending on when was the last time a file system was checked, the system runs the fsck during boot time to check whether the filesystem is in consistent state<br/>
+<br/>
+--&gt;System administrator could also run it manually when there is a problem with the filesystems<br/>
+<br/>
+--&gt;Make sure to execute the fsck on an unmounted file systems to avoid any data corruption issues<br/>
+<br/>
+--&gt;Force a filesystem check even if it's clean using option -f<br/>
+<br/>
+--&gt;Attempt to fix detected problems automatically using option -y<br/>
+<br/>
+--&gt;Th xfs_repair utility is highly scalable and is designed to repair even very large file systems with many inodes efficiently. Unlike other Linux file system, xfs_repair does not run at boot time<br/>
+<br/>
+--&gt;The following are the possible exit codes for fsck command<br/>
+<br/>
+0 - No errors<br/>
+1 - Filesystem errors corrected<br/>
+2 - System should be rebooted<br/>
+4 - Filesystem errors left uncorrected<br/>
+8 - Operational error<br/>
+16 - Usage or syntax error<br/>
+32 - Fsck canceled by user request<br/>
+128 - Shared library error<br/>
+<br/>
+<b>How to Check file system?</b><br/>
+<br/>
+#su -<br/>
+#df -h &nbsp;<br/>
+#df -T<br/>
+#fsck /dev/mapper/cl-root<br/>
+#umount /<br/>
+#xfs_repair /dev/mapper/cl-root<br/>
+#echo $?<br/>
+#mount /dev/mapper/cl-root /<br/>
+-----------------------------------------------------------------------------<br/>
+<b>System Backup (dd command)<br/>
+<br/>
+</b>5 Different Types of Backups<br/>
+<br/>
+&nbsp;1-System backup (entire image using tools such as acronis,veeam,commvault etc)<br/>
+&nbsp;2-Application backup (3rd party application backup solution)<br/>
+&nbsp;3-Database backup (Oracl dataguard,SQL backup etc)<br/>
+&nbsp; 4-Filesystem backup (tar,gzip directories etc)<br/>
+&nbsp; 5-Disk backup or disk cloning (dd command)<br/>
+<br/>
+--&gt;dd is a command-line utility for Unix and Unix-like operating systems whose primary purpose is to convert and copy files<br/>
+<br/>
+--&gt;As a result, dd can be used for tasks such as backing up the boot sector of a hard drive, and obtaining a fixed amount of random data<br/>
+<br/>
+--&gt;Please note the source and destination disk should be the same size<br/>
+<br/>
+--&gt;<b>To backup or clone an entire hard disk to another hard disk connected to the same system, execute the dd command:</b><br/>
+<br/>
+#dd if=&lt;source file name&gt; of=&lt;target file name&gt; [Options]<br/>
+#dd if=/dev/sda of=/dev/sdb<br/>
+<br/>
+--&gt;<b>To backup/copy the disk partition<br/>
+</b>#dd if=/dev/sda1 of=/root/sda1.img<br/>
+<br/>
+--&gt;<b>Restoring this image file to other machine after copying the .img<br/>
+</b>#dd if=/root/sda1.img of=/dev/sdb3<br/>
+-----------------------------------------------------------------------------<br/>
+<b>Network File System (NFS)<br/>
+<br/>
+</b>--&gt;file system developed by sun microsystems<br/>
+<br/>
+--&gt;It is a client/server system that allows users to access files across a network and treat them as if they resided in a local file directory<br/>
+<br/>
+--&gt;for ex, if you were using a computer linked to a second computer via NFS, you could access files on the second computer as if they resided in a directory on the first computer. This is accomplished through the processes of exporting(the process by which an NFS server provides remote clients with access to its files) and mounting (the process by which client map NFS shared filesystem)<br/>
+<br/>
+<b>Steps for NFS Server Configuration<br/>
+<br/>
+Install NFS packages<br/>
+</b>&nbsp;#yum install nfs-utils libnfsidmap<br/>
+<b>enable and start NFS services<br/>
+</b>#systemctl enable rpcbind<br/>
+#systemctl enable nfs-server<br/>
+#systemctl start rpcbind<br/>
+#systemctl start nfs-server<br/>
+#systemctl start rpc-statd<br/>
+#systemctl start nfs-idmapd<br/>
+<b>Create NFS share directory and assign<br/>
+permissions<br/>
+</b>#mkdir /mypretzels<br/>
+#chmod a+rwx /mypretzels<br/>
+<b>Modify /etc/exports file to add new shared filesystem</b><br/>
+#/mypretzels 192.168.12.7 (rw,sync,no_root_squash) = for only 1 host<br/>
+#exportfs -rv<br/>
+<img src="2020-07-08 08_03_16-window.png" /><br/>
+--&gt;if you want to share this folder with all clients:<br/>
+#/mypretzels *(rw,sync,no_root_squash) = for everyone<br/>
+<br/>
+<b>Steps for NFS Client Configuration<br/>
+<br/>
+Install NFS packages<br/>
+</b><b>&nbsp;</b>#yum install nfs-utils rpcbind<br/>
+&nbsp;#service rpcbind start<br/>
+<b>Make sure firewalld or iptables stopped</b><br/>
+&nbsp;#ps -ef | egrep "firewall|iptable"<br/>
+<b>Show mount from the NFS server<br/>
+</b><b>&nbsp;</b>#showmount -e 192.168.1.5 (NFS Server IP)<br/>
+<b>Create a mount point<br/>
+</b>&nbsp;#mkdir /mnt/app<br/>
+<b>Mount the NFS filesystem</b><br/>
+&nbsp;#mount 192.168.1.5:/mypretzels /mnt/kramer<br/>
+<b>Verify mounted filesystem</b><br/>
+&nbsp;#df -h<br/>
+<b>To unmount<br/>
+</b>&nbsp;#unmount /mnt/kramer<br/>
+-------------------------------------------------------------------------------<br/>
 </body></html>
