@@ -2,7 +2,7 @@
 <node>
 <version>6</version>
 <dict>
-  <key>expanded</key><true/>
+  <key>expanded</key><false/>
   <key>title</key><string>Marketing Fundamentals</string>
   <key>nodeid</key><string>af7a90ab-8faf-4450-ac25-5a820c312f72</string>
   <key>modified_time</key><integer>1594203662</integer>
