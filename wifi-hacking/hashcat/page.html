@@ -1,0 +1,21 @@
+<!DOCTYPE html  PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>HashCat</title>
+</head><body><b><span style="font-size: 12pt">Installing &amp; using Hashcat</span></b><span style="font-size: 12pt"><ul><li>First you need to download Hashcat from<a href="https://hashcat.net/hashcat/"> https://hashcat.net/hashcat/</a></li>
+<li>Navigate to the location where you downloaded it, and unzip it, personally I like to use 7zip.</li>
+<li>Open the Command Prompt (go to windows search and type cmd).</li>
+<li>Navigate to your Hashcat folder where it’s unzipped.</li>
+<li>Type hashcat32.exe or hashcat64.exe depending on the architecture of your CPU.</li>
+<li>In order to use the GPU, you need to get its id using the following command</li>
+<li/>
+</ul>
+#hashcat64.exe -I (to know what ID #)<br/>
+<br/>
+#hashcat64.exe --help (to get familiar with the tool)<br/>
+<br/>
+#hashcat64.exe -m 2500 -d 1 Handshake.hccapx eightdigit.txt (1 is the ID #1 )<br/>
+<br/>
+Where Handshake.hccapx is my handshake file, and eithdigit.txt is my wordlist, you need to convert cap file to hccapx using <br/>
+</span><a href="https://hashcat.net/cap2hccapx/">https://hashcat.net/cap2hccapx/</a> <br/>
+</body></html>
