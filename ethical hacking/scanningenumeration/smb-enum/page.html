@@ -1,0 +1,29 @@
+<!DOCTYPE html  PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>SMB-enum</title>
+</head><body><b>SMB:</b>(server-message-block) is a network protocol used by Windows-based computers that allows systems within the same network to share files. it allows computers connected to the same network or domain to access files from other local computers as easily as if they were on the computer's local hard drive <br/>
+<br/>
+#msfconsole (install metasploit framework, it does a lot more than exploitation)<br/>
+<br/>
+msf5&gt; search smb (to search for any modules for SMB enumeration)<br/>
+<br/>
+msf5&gt; use auxiliary/scanner/smb/smb_version<br/>
+msf5&gt;use 60<br/>
+<br/>
+msf5 auxiliary(scanner/smb/smb_version) &gt; info<br/>
+<br/>
+msf5 auxiliary(scanner/smb/smb_version) &gt; options<br/>
+<br/>
+RHOSTS: remote host, the victim that's who we are attacking<br/>
+<br/>
+msf5 auxiliary(scanner/smb/smb_version) &gt; set RHOSTS 192.168.231.129<br/>
+msf5 auxiliary(scanner/smb/smb_version) &gt; run<br/>
+<br/>
+we will found unix(Samba 2.2.la) (information that we will insert in our report and try to exploit)<br/>
+<br/>
+#smbclient -L \\\\192.168.231.129\\ (smbclient tool which is going to attempt to connect to the file share that's out there, -L to list out the files, \\\\ \\ is character escaping)<br/>
+<br/>
+<b>note</b>: if we have the ability to connect to the file share with anonymous access we could potentially see files, these files might give us insight of what's going on the network or we can find like (backup file or password stored in txt)<br/>
+<br/>
+#smbclient \\\\192.168.231.129\\IPC$ (could anonymously connect to IPC with smbclient, but not Admin)</body></html>

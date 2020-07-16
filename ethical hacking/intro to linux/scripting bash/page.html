@@ -1,0 +1,26 @@
+<!DOCTYPE html  PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>scripting bash</title>
+</head><body>#ping 192.168.1.1 -c 1 (sending one packet)<br/>
+<br/>
+#ping 192.168.1.1 -c 1 &gt; ip.txt (put result in ip.txt)<br/>
+<br/>
+#cat ip.txt | grep &quot;64 bytes&quot; (cat for showing text inside ip.txt and grep &quot;64 bytes&quot; to narrow down results to show the lines with &quot;64 bytes&quot; which mean vaild response)<br/>
+<br/>
+#cat ip.txt | grep &quot;64 bytes&quot; | cut -d &quot; &quot; -f 4 (mean cut the line when meet space and then show 4 element in line after cutting which is ip address)<br/>
+<br/>
+#cat ip.txt | grep &quot;64 bytes&quot; | cut -d &quot; &quot; -f 4 | tr -d &quot;:&quot; (to remove : from ip address)<br/>
+<br/>
+<img src="2020-05-30 12_56_36-8. scripting with ba.png"/><br/>
+<br/>
+<br/>
+#gedit ipsweep.sh (to make ipsweep.sh file to run bash script)<br/>
+<br/>
+#chmod +x ipsweep.sh (to change ipsweep.sh mode and make it executable)<br/>
+<br/>
+#ls (to list directory and make sure that it's green)<br/>
+<br/>
+#./ipsweep.sh 192.168.1 &gt; iplist.txt (to sweep on this IPs addresses start with 192.168.1 and put it in iplist.txt)<br/>
+<br/>
+#for ip in $(cat iplist.txt); do nmap -sS -p 80 -T4 $ip &amp; done (means every IP in iplist.txt we're gonna loop through when we do that loop, we're gonna do nmap, we do a quick stealth scan of port 80, and we're gonna say declare IP address)</body></html>

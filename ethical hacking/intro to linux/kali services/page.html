@@ -1,0 +1,14 @@
+<!DOCTYPE html  PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>kali services</title>
+</head><body>#service apache2 start (if we actually wanted to maybe host a malicious web page and have it point back to us or we want to upload to a machine that might be malicious)<br/>
+<br/>
+#python -m SimpleHTTPServer 8080 (simple than the above)<br/>
+<br/>
+#service apache2 stop<br/>
+<br/>
+#systemctl enable postgresql (when we reboot, postgresql will load every single time)<br/>
+<br/>
+--&gt;the above command is important because it's going to allow us to run metasploit and have postgresql database running when we boot<br/>
+</body></html>

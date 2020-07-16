@@ -1,0 +1,34 @@
+<!DOCTYPE html  PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>tools</title>
+</head><body>#theharvester -d tesla.com -l 500 -b google -f myresults.html (-d you specify a domain to search, -l you specify how deep into search you want to go 500 searches, -b data source, -f where you want to output your results)<br/>
+<br/>
+#apt install sublist3r (we use it in subdomain hunting)<br/>
+<br/>
+#sublist3r -d tesla.com (to search for tesla.com)<br/>
+<br/>
+website: crt.sh--&gt;write in this website search--&gt;tesla.com and it will give you certificates that have been registered<br/>
+<br/>
+#cd Downloads<br/>
+<br/>
+#cd amass-master<br/>
+<br/>
+#apt-get update<br/>
+#apt-get install amass<br/>
+<br/>
+#amass (to check if it installed) (best at subdomain hunting)<br/>
+<br/>
+website: tomnomnom httprobe (to know if subdomain alive or not)<br/>
+<br/>
+website: builtwith (to find out what websites are built with)<br/>
+<br/>
+extension: Wappalyzer (to analysis website)<br/>
+<br/>
+#whatweb https://tesla.com (built in tool to also analysis websites but with technologies versions showing)<br/>
+<br/>
+burp suite: it's web proxy which means that it has the capability of intercepting traffic for us you should disable configuration in firefox after your work<br/>
+<br/>
+google search professional: (site:tesla.com -www)--&gt;to give us subdomains of tesla<br/>
+<br/>
+(site:tesla.com filetype:csv) or pdf or xlsx</body></html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html  PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Summary</title>
+</head><body><b>Notes:<br/>
+</b><br/>
+80/443 - 192.168.231.129 (note this ip address is changable)<br/>
+Default webpage - Apache - PHP<br/>
+Information Disclosure - 404 page<br/>
+Information Disclosure - server headers disclose version information<br/>
+<br/>
+80/tcp  open  http  Apache httpd 1.3.20 ((Unix) (Red-Hat/Linux) mod_ssl/2.8.4 OpenSSL/0.9.6b)<br/>
+<br/>
+mod_ssl/2.8.4 - mod_ssl 2.8.7 and lower are vulnerable to a remote buffer overflow which may allow a remote shell. http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2002-0082, OSVDB-756.(https/443)<br/>
+<br/>
+SMB (139+445)<br/>
+Unix (Samba 2.2.1a) <br/>
+<br/>
+Webalizer Version 2.01 - http://192.168.231.129/usage/usage_201911.html<br/>
+<br/>
+SSH (22)<br/>
+OpenSSH 2.9p2<br/>
+<br/>
+<br/>
+<b>exploits:<br/>
+<br/>
+</b>80/443 - Potentially vulnerable to OpenLuck (https://www.exploit-db.com/exploits/764), https://github.com/heltonWernik/OpenLuck<br/>
+<br/>
+139 - Potentially vulnerable to trans2open (https://www.rapid7.com/db/modules/exploit/linux/samba/trans2open), https://www.exploit-db.com/exploits/7, https://www.exploit-db.com/exploits/10<br/>
+<br/>
+<b>juicy stuff to search for exploit to attack first:</b><br/>
+<br/>
+1-http/80<br/>
+2-https/443<br/>
+3-SMB/(139+445)<br/>
+4-SSH(22) not juicy<br/>
+<br/>
+if you are offline and don't have access to internet, there is a tool that have all exploit-db:<br/>
+<br/>
+#searchsploit Samba 2 (it will search for the exploit database, every time you update your machine the database updates)</body></html>

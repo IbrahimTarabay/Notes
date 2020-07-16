@@ -1,0 +1,40 @@
+<!DOCTYPE html  PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>tools</title>
+</head><body><b>masscan</b>--&gt;is built to scan the entire internet really fast so it's really fast port scanner, <b>not recommended to use it for scan entire internet because you will have people knocking at your door pretty quick</b><br/>
+<br/>
+#masscan -p1-65535 --rate 1000 192.168.231.129 (--rate 1000 mean 1000 threads)<br/>
+<br/>
+<br/>
+<b>scan with metasploit:<br/>
+<br/>
+</b>#msfconsole<b><br/>
+</b><b><br/>
+</b>msf5&gt; search portscan<br/>
+<br/>
+msf5&gt; use 4<br/>
+msf5&gt; use auxiliary/scanner/portscan/syn<br/>
+<br/>
+msf5 auxiliary(scanner/portscan/syn) &gt; options<br/>
+<br/>
+msf5 auxiliary(scanner/portscan/syn) &gt; set RHOSTS 192.168.231.129<br/>
+<br/>
+msf5 auxiliary(scanner/portscan/syn) &gt; set ports 1-65535<br/>
+<br/>
+msf5 auxiliary(scanner/portscan/syn) &gt; set threads 1000<br/>
+<br/>
+msf5 auxiliary(scanner/portscan/syn) &gt; run<br/>
+<br/>
+--&gt;say you get onto a machine and this machine doesn't have any nmap build into it but we can run metasploit through a shell that we have on a machine so we can run a port scan so that makes life a lot easier instead of install nmap or other tools and run scanning <br/>
+<br/>
+<br/>
+<b>Nessus</b>--&gt; is vulnerability scanner, you use it frequently<br/>
+<br/>
+#cd Downloads/<br/>
+<br/>
+/Downloads# dpkg -i Nessus-8.10.1-ubuntu910_amd64.deb<br/>
+<br/>
+/Downloads# /etc/init.d/nessusd start<br/>
+<br/>
+--&gt;open the link https://kali:8834</body></html>

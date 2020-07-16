@@ -1,0 +1,52 @@
+<!DOCTYPE html  PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>tools</title>
+</head><body>kioptrix login: john<br/>
+password: TwoCows2<br/>
+<br/>
+john@kioptrix#ping 8.8.8.8 (to know your kioptrix ip address)<br/>
+--------------------------------------------------------------------------------------------<br/>
+<b><u>on kali</u></b><br/>
+<br/>
+#arp-scan -l (it's like netdiscover)<br/>
+<br/>
+#netdiscover -r 192.168.137.0/24 (we are going to use ARP to detect all the machines on the network)<br/>
+<br/>
+<br/>
+ARP(Address Resolution protocol): used for discovering the link layer(layer 2) such as MAC address associated with given internet layer address, typically an IPv4 address<br/>
+<br/>
+nmap: SYN SYN-ACK RST (we actually never establish a connection so it's technically stealthy we sent reset flag or RST)<br/>
+<br/>
+#nmap T4 -p- -A 192.168.137.254 (nmap scanning for open ports and services, T4 is the speed(1 slow to 5 fast) the slower the better in terms of detection, -p- mean i want to scan all ports if we don't write -p- it's going to scan the top 1000 ports which most common ports, -A means enable OS detection version detection script scanning and traceroute)<br/>
+<br/>
+#nmap --help (great for help)<br/>
+<br/>
+#nmap -sU -T4 -p 192.168.137.254 (-sU to scan for UDP, why we make it -p because UDP takes for ever to scan as it's connectionless protocol it doesn't have instant response time so we when we scan UDP we scan the top 1000 or we will wait hours)<br/>
+<br/>
+scan techniques (-sS for TCP, -sU for UDP)<br/>
+<br/>
+#nikto -h https://192.168.137.254 (nikto is web vulnerability scanner, -h mean host)<br/>
+<br/>
+#dirbuster&amp; (to bust directories)<br/>
+<br/>
+in Burp suite: go to proxy--&gt;click right--&gt;send to Repeater--&gt;Repeater will show your response in real time ex: GET - POST<br/>
+<br/>
+in Burp suite: go to scope--&gt;add http://192.168.137.254--&gt;it's limit only searching for in scope items--&gt;go to site map--&gt;look for response --&gt; look at server header<br/>
+<br/>
+summary:<br/>
+<br/>
+#arp-scan -l<br/>
+<br/>
+--&gt;looking for open ports (nmap)<br/>
+<br/>
+--&gt;looking for service version information and potential vulnerability (nikto)<br/>
+<br/>
+--&gt;looking for any sort of back-end directories (dirbuster)<br/>
+<br/>
+--&gt;looking for source code to find keys or passwords (view page source or inspect)<br/>
+<br/>
+--&gt;looking for information like server headers (Burpsuite)<br/>
+<br/>
+<b>note</b>: ip address on kioptrix will change every time you shutdown the machine<br/>
+</body></html>

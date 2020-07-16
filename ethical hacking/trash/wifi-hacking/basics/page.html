@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Basics</title>
+</head><body><span style="font-size: 12pt"><b>NAT:</b>&nbsp;Network-Address-Translation, it's going to create a virtual network where host machine which is my windows is going to be the router for this network<br/>
+<br/>
+<b>Snapshots:<br/>
+</b>1-snapshots allow you to save the state of a virtual machine<br/>
+2-can be used as bookmarks to go back and forward to different configurations<br/>
+3-store stable state, updated state....etc<br/>
+<br/>
+<br/>
+#apt-get update (apt-get name of the program that allows us to install programs, update to update the list of all programs that i can install)<br/>
+<br/>
+#apt-get install terminator(terminator allows us to have multiple terminal windows open in the same window)<br/>
+<br/>
+<br/>
+<b>How to reset the password of the machine:<br/>
+<br/>
+</b>Restart kali--&gt;Advanced--&gt;press e--&gt;rw--&gt;single init=bin/bash--&gt;ctrl+x--&gt;second choice(recovery mode)--&gt;#passwd root--&gt;hemanet66--&gt;hemanet66--&gt;reboot -f<br/>
+<br/>
+<br/>
+<b>Why change the MAC address??<br/>
+<br/>
+</b>1-Increase <b>anonymity</b><br/>
+2-<b>impersonate</b>&nbsp;other devices<br/>
+3-<b>Bypass</b>&nbsp;filters<br/>
+<br/>
+<br/>
+<b>commands: </b><br/>
+<br/>
+sudo apt update<br/>
+sudo apt install bc<br/>
+sudo rmmod r8188eu.ko<br/>
+git clone <a href="https://www.youtube.com/redirect?stzid=Ugw0DXPfxNAXRKZl8mJ4AaABAg&event=comments&q=https%3A%2F%2Fgithub.com%2Faircrack-ng%2Frtl8188eus&redir_token=KAH23G2cLD9NvosLGK0SqFXtCut8MTU5MTg5ODM1M0AxNTkxODExOTUz">https://github.com/aircrack-ng/rtl8188eus </a>&nbsp;<br/>
+cd rtl8188eus<br/>
+sudo -i<br/>
+echo "blacklist r8188eu.ko" &gt; "/etc/modprobe.d/realtek.conf"<br/>
+exit<br/>
+make<br/>
+sudo make install<br/>
+sudo modprobe 8188eu<br/>
+<br/>
+<b>To enable Monitor mode<br/>
+</b><br/>
+ifconfig wlan0 down<br/>
+airmon-ng check kill<br/>
+iwconfig wlan0 mode monitor<br/>
+ifconfig wlan0 up &nbsp;<br/>
+iwconfig \\check mode: monitor<br/>
+&nbsp;<br/>
+<b>Important note:</b>&nbsp; &nbsp;If after restarting your kali machine doesn't recognise your device.. As lot of people are facing the same problem .. I have a solution for you.. Whenever you restart your kali OS Insert the adapter and run the command &nbsp; <br/>
+<br/>
+sudo rmmod r8188eu.ko<br/>
+sudo modprobe 8188eu<br/>
+Disconnect the device and connect again.. &nbsp;Then check<br/>
+<br/>
+<b>to change mode to monitor:<br/>
+<br/>
+</b>#ifconfig wlan0 down<br/>
+#airmon-ng check kill <br/>
+(to kill any process that could interfere with use in my interface in monitor mode, it kill network manager that usually runs, so you'll completely lose your internet connection, but this is no problem because we will only need to be in monitor mode when we are running "Pre-connection attacks")<br/>
+#iwconfig wlan0 mode monitor<br/>
+#ifconfig wlan0 up<br/>
+#iwconfig (to see if the mode has changed)<br/>
+<br/>
+<br/>
+<b>Note: </b>in wireless network if you're within range then you'll be able to capture any communication because these packets are literally sent in the air, so we can capture them even if they do not have our MAC address as the destination, to do this we need to change the mode of operation of our wireless interface so that it operates in monitor mode<br/>
+<br/>
+Mode: Managed--&gt;it's default and it means is this device will only capture packets that has a destination MAC as the MAC address<br/>
+<br/>
+<b>note: </b>when we need to change configuration in wlan0 we use #ifconfig wlan0 down (at first command to disable it)<br/>
+</span></body></html>
