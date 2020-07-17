@@ -2,7 +2,7 @@
 <node>
 <version>6</version>
 <dict>
-  <key>expanded</key><false/>
+  <key>expanded</key><true/>
   <key>title</key><string>hack the box</string>
   <key>nodeid</key><string>606d731d-a03d-417a-90ed-901a79beeb2d</string>
   <key>modified_time</key><integer>1591291080</integer>
