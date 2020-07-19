@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Active Directory Overview</title>
+</head><body><b>What is Active Directory??</b><br/>
+<br/>
+-Directory service developed by Microsoft to manage windows domain networks<br/>
+<br/>
+-Stores information related to objects, such as computers, users, printers, etc<br/>
+&nbsp; --&gt;Think about it as a phone book for windows<br/>
+<br/>
+-Authenticates using Kerberos tickets<br/>
+&nbsp;--&gt;Non-Windows devices, such as Linux machines, firewalls, etc can also authenticate to Active Directory via RADIUS or LDAP<br/>
+<br/>
+<br/>
+ex:<br/>
+you log to your computer with username and password in company but maybe another computer in different building and you use the same username and password and it's because using something called active directory so you can have just one username and password and you can authenticate around the network using these credentials and this authentication is going to use <b>Kerberos tickets<br/>
+</b><b><br/>
+<br/>
+Why Active Directory?<br/>
+<br/>
+</b>--&gt;Active Directory is the most commonly used identity management service in the world<br/>
+<br/>
+--&gt;95% of fortune 1000 companies implement the service in their networks<br/>
+<br/>
+--&gt;Can be exploited without ever attacking patchable exploits<br/>
+&nbsp; --Instead, we abuse features, trusts, components and more<br/>
+---------------------------------------------------------------------------------------------<br/>
+<b>Physical AD Components<br/>
+<br/>
+</b>--&gt;when you set up Active Directory you have what is called a domain controller, it host your phone book, it has all the information on the users, computers, printers are in the network, it's providing authentication and authorization<br/>
+<br/>
+--&gt;when we attack an internal network it's very very bad, if we can compromise your domain controller we can compromise the whole network potentially<br/>
+<br/>
+<img src="domain.png" /><br/>
+<br/>
+<br/>
+<b>Ntds.dit file</b>--&gt;this file is very sensitive, it contains password hashes for all users in that domain<br/>
+<br/>
+<img src="data store.png" /><br/>
+<br/>
+-------------------------------------------------------------------------------<br/>
+<b>Logical AD Components<br/>
+<br/>
+</b><img src="schema.png" /><br/>
+<br/>
+<img src="domains.png" /><br/>
+<br/>
+<img src="trees.png" /><br/>
+<br/>
+<img src="forests.png" /><br/>
+<br/>
+<img src="ous.png" /><br/>
+<br/>
+<img src="trusts.png" /><br/>
+<br/>
+<img src="ous 2.png" /><br/>
+<br/>
+<br/>
+<br/>
+<b>Summary:</b><br/>
+<br/>
+--&gt;so we have <b>domains</b>&nbsp;and domains are used to group and manage <b>objects</b>&nbsp;in an organization, if you have multiple domains we called them<b>&nbsp;tree</b>&nbsp;you might have a parent domain and children domain and when you have multiple sets of trees you strarting to build out a <b>forest </b>, now inside these domains, trees and forests are what called <b>Ous</b>&nbsp;and Ous consists of these <b>objects</b>&nbsp;and <b>across</b>&nbsp;forests and across domains we have<b>&nbsp;trusts</b>, and trusts can be <b>directional</b>&nbsp;meaning that one domain trusts another and can be <b>transitive</b>&nbsp;meaning one domain trusts another domain and then trusts everything else that domain also trusts<br/>
+----------------------------------------------------------------------------<br/>
+<br/>
+<br/>
+</body></html>
