@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>OWASP</title>
+</head><body><b>OWASP</b>--&gt;<span style="font-size: 13pt">The Open Web Application Security Project is an online community that produces freely-available articles, methodologies documentation, tools, and technologies in the field of web application security<br/>
+</span><span style="font-size: 13pt">------------------------------------------------------------------------<br/>
+Top 10 OWASP vulnerabilites in 2020 are:<br/>
+<br/>
+1-Injection<br/>
+2-Broken Authentication<br/>
+3-Sensitve Data Exposure<br/>
+4-XML External Entities (XXE)<br/>
+5-Broken Access control<br/>
+6-Security misconfigurations<br/>
+7-Cross Site Scripting(XSS)<br/>
+8-Insecure Deserilizatioin<br/>
+9-Using Components with known vulnerabilities<br/>
+10-Insufficient logging and monitoring<br/>
+<br/>
+google: owasp checklist<br/>
+<br/>
+--&gt;OWASP based Web Application Security Testing Checklist is an Excel based checklist which helps you to track the status of completed and pending test cases.<br/>
+--------------------------------------------------------------<br/>
+<b>Installing OWASP Juice Shop<br/>
+<br/>
+</b>Google: install Docker Kali<br/>
+<br/>
+#curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -<br/>
+#echo 'deb [arch=amd64] https://download.docker.com/linux/debian buster stable' | sudo tee /etc/apt/sources.list.d/docker.list<br/>
+#apt update<br/>
+</span><span style="font-size: 13pt">#apt install docker-ce</span>&nbsp;<br/>
+<br/>
+Note: we can deploy juice shop to Heroku and attack it, But there's a couple attacks that cannot be performed on this so that's why we are going to Docker out<br/>
+<br/>
+#docker pull bkimminich/juice-shop<br/>
+#<div style="text-align: left"><span style="font-size: 13pt"><span style="font-family: SFMono-Regular">docker run --rm -p 3000:3000 bkimminich/juice-shop</span></span></div>&nbsp;<br/>
+----------------------------------------------------------------------<br/>
+<b>Installing Foxy Proxy <br/>
+<br/>
+</b>Foxy Proxy--&gt;make it easy to switch between proxies<br/>
+<br/>
+1-go to prefernces in firefox and make proxy manual<br/>
+<br/>
+<br/>
+1-Download the latest jar file into your Downloads folder<br/>
+2-Navigate to /usr/bin and select burpsuite<br/>
+3-Rename burpsuite to burpsuite(old)<br/>
+4-Copy the jar that was just downloaded into /usr/bin<br/>
+5-Right-click and rename the jar to burpsuite<br/>
+6-In the Permissions tab, select Allow executing file as program<br/>
+7-Hit close<br/>
+--------------------------------------------------------------------</body></html>

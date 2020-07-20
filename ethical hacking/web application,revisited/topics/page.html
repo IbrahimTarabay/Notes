@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Topics</title>
+</head><body><b>Installing Go</b>--&gt;a lot of the tools we're going to be use utilize go<br/>
+<br/>
+google: Go install--&gt;download go1.14.6.linux-amd64.tar.gz<br/>
+<br/>
+#cd /root/Downloads<br/>
+#tar -xvf go1.14.6.linux-amd64.tar.gz -C /usr/local<br/>
+#nano ~/.bashrc<br/>
+<br/>
+<div style="text-align: left"><span style="font-family: Lora"><span style="font-size: 13pt">Add the following paths to the end of the file:</span></span></div><br/>
+export GOPATH=/root/go-workspace<br/>
+export GOROOT=/usr/local/go<br/>
+PATH=$PATH:$GOROOT/bin/:$GOPATH/bin &nbsp;<br/>
+<br/>
+#source ~/.bashrc<br/>
+#go<br/>
+--------------------------------------------------------------------------<br/>
+<b>Assetfinder<br/>
+<br/>
+</b>--&gt;it's a great tool at finding subdomains<br/>
+<br/>
+google: tomnomnom/assetfinder<br/>
+<br/>
+#go get -u github.com/tomnomnom/assetfinder<br/>
+#assetfinder tesla.com &gt; tesla-subs.txt<br/>
+#cat tesla-subs.txt | wc -l<br/>
+<br/>
+#assetfinder --subs-only tesla.com<br/>
+(to show domains of that have tesla name in it)<br/>
+<br/>
+#nano run.sh<br/>
+add:<br/>
+<br/>
+#!/bin/bash<br/>
+<br/>
+$url=$1<br/>
+<br/>
+if [ ! -d "$url" ];then<br/>
+&nbsp; &nbsp; &nbsp; mkdir $url<br/>
+fi<br/>
+<br/>
+if [ ! -d "$url/recon" ];then<br/>
+&nbsp; &nbsp; &nbsp; mkdir $url/recon<br/>
+fi<br/>
+<br/>
+echo "[+] Harvesting subdomains with assetfinder....."<br/>
+assetfinder $url &gt;&gt; $url/recon/assets.txt<br/>
+cat $url/recon/assets.txt | grep $1 &gt;&gt; $url/recon/final.txt<br/>
+rm $url/recon/assets.txt<br/>
+---------------------------------------------------------------------<br/>
+#chmod +x run.sh<br/>
+#./run.sh tesla.com<br/>
+---------------------------------------------------------------------<br/>
+<b>Amass<br/>
+<br/>
+</b>it's also used for subdomain hunting, why i care??<br/>
+Ans: if you combine multiple subdomain tools you're bound to find more subdomains<br/>
+<br/>
+google: amass github<br/>
+<br/>
+#export GO111MODULE=on<br/>
+#go get -v github.com/OWASP/Amass/v3/...<br/>
+<br/>
+#amass enum -d tesla.com<br/>
+#nano run.sh<br/>
+<br/>
+add comments:<br/>
+#echo "[+] Harvesting subdomains with Amass..."<br/>
+#amass enum -d $url &gt;&gt; $url/recon/f.txt<br/>
+#sort -u $url/recon/f.txt &gt;&gt; $url/recon/final.txt<br/>
+#rm $url/recon/f.txt<br/>
+------------------------------------------------------------------------<br/>
+<b>Finding Alive Domains with Httprobe<br/>
+<br/>
+</b>google: httprobe github<br/>
+<br/>
+#go get -u github.com/tomnomnom/httprobe<br/>
+#cat tesla.com/recon/final.txt | httprobe<br/>
+#cat tesla.com/recon/final.txt | httprobe -s -p https:443<br/>
+#cat tesla.com/recon/final.txt | httprobe -s -p https:443 | sed 's/https\?:\/\///' | tr -d ':443'<br/>
+(if you want to show domains without 443 and https)<br/>
+<br/>
+#nano run.sh<br/>
+add:<br/>
+echo "[+] Probing for alive domains..."<br/>
+cat $url/recon/final.txt | sort -u | httprobe -s -p https:443 | sed 's/https\?:\/\///' | tr -d ':443' &gt;&gt; $url/recon/alive.txt<br/>
+---------------------------------------------------------------------<br/>
+#./run.sh tesla.com<br/>
+<br/>
+--&gt;good subdomains to look for:<br/>
+#cat tesla.com/recon/alive.txt | grep dev<br/>
+#cat tesla.com/recon/alive.txt | grep stag<br/>
+#cat tesla.com/recon/alive.txt | grep admin<br/>
+----------------------------------------------------------------------<br/>
+<b>Screenshotting Websites with GoWitness<br/>
+<br/>
+</b>#go get -u github.com/sensepost/gowitness<br/>
+<br/>
+--&gt;we will go to alive domain or addresses and take a screenshot of those addresses, so instead of having to go to a hundred domains or subdomains one by one you can just look at the pictures of each subdomin and visually understand what's going on very quickly, so if there's an interesting log in form you can target that page right away<br/>
+<br/>
+ex:<br/>
+#gowitness single --url=https://tesla.com<br/>
+-------------------------------------------------------------------------<br/>
+<b>Automation the Enumeration Process<br/>
+<br/>
+</b>there is files included to automate<br/>
+-------------------------------------------------------------------------</body></html>
