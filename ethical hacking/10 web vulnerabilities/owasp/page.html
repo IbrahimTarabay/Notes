@@ -50,4 +50,227 @@ Note: we can deploy juice shop to Heroku and attack it, But there's a couple att
 5-Right-click and rename the jar to burpsuite<br/>
 6-In the Permissions tab, select Allow executing file as program<br/>
 7-Hit close<br/>
---------------------------------------------------------------------</body></html>
+--------------------------------------------------------------------<br/>
+<b>Exploring Burp Suite</b><br/>
+<br/>
+--&gt;with web apps you have 3 stages of testing:<br/>
+<br/>
+1-unauthenticated user stage<br/>
+2-user tier(we log as a user)<br/>
+3-as admin<br/>
+<br/>
+<b>unauthenticated stage:</b><br/>
+<br/>
+1-in burpsuite--&gt;target--&gt;scope--&gt;add http://localhost:3000--&gt;click on Filter: Hiding out .....--&gt;check show only scope items<br/>
+<br/>
+2-scan feature[pro version], if you have a pen test you should have a pro version to scan the site and scanning will do 2 different things:<br/>
+<br/>
+--crawling(it will try different websites)<br/>
+--active scanning(it will do attacks like sql injection)<br/>
+<br/>
+Note: scanning is nice but you shouldn't rely on your scanning, rely on manual testing<br/>
+<br/>
+3-proxy--&gt;intercept--&gt;right click on raw packet and send to repeater--&gt;go to repeater--&gt;send<br/>
+<br/>
+<img src="burp.png" /><br/>
+<br/>
+<br/>
+<b>Repeater</b>--&gt;is going to allow us to intercept requests, send them to repeater and modify the requests<br/>
+-----------------------------------------------------------------------<br/>
+<b>What is SQL Injection?<br/>
+<br/>
+</b>--&gt;SQL injection is an attack in which malicious SQL statements are injected into a SQL database<br/>
+<br/>
+--&gt;SQL injection is easy to avoid, but still happens often<br/>
+<br/>
+--&gt;If successful, we can read sensitive databases, extract information, modify databases, and potentially even get a shell<br/>
+<br/>
+<b>Common SQL Verbs<br/>
+<br/>
+</b>--&gt;SQL Statements begin with verbs. Let's take a look at a few common verbs:<br/>
+<br/>
+<b>SELECT</b>-Retrieves data from a table<br/>
+<b>INSERT</b>-Adds data to a table<br/>
+<b>DELETE</b>-Removes data from a table<br/>
+<b>UPDATE</b>-Modifies data in a table<br/>
+<b>DROP</b>-Delete a table<br/>
+<b>UNION</b>-Combines data from multiple queries<br/>
+<b>WHERE</b>-Filters records based on specific condition<br/>
+<b>AND/OR/NOT</b>-Filter records based on multiple conditions<br/>
+<b>ORDER BY</b>-Sorts records in ascending/descending order<br/>
+<br/>
+<b>Special Characters</b><br/>
+<br/>
+'and"-string delimiters<br/>
+--,/*,and # -comment delimiters<br/>
+*and% -wildcards<br/>
+; -Ends SQL statement<br/>
+plus a bunch of others that follow programmatic logic =,+,&gt;,&lt;,(), etc<br/>
+--------------------------------------------------------------------------<br/>
+<b>SQL Injection Walkthrough <br/>
+<br/>
+</b><b>example</b>:<br/>
+<br/>
+email input: test<br/>
+SQL behind a scene: SELECT * FROM Users WHERE email='test';<br/>
+<br/>
+<b>example</b>:<br/>
+<br/>
+email input: test'<br/>
+SQL: SELECT * FROM Users WHERE email='test'';<br/>
+<br/>
+--&gt;the other single quote that's left over will cause an error that will give us some information because this isn't logically correct<br/>
+<br/>
+<b>exmaple:</b><br/>
+<br/>
+email input: test' OR 1=1; --<br/>
+SQL: SELECT * FROM Users WHERE email='test OR 1=1; --'<br/>
+<br/>
+--&gt;OR 1=1; make the entire statment true, every thing after -- comment no longer exist so we don't have to check for a password, what's going to happen is it's going to allow us to log in with this statement and it's going to allow us to log in as admin why??<br/>
+<br/>
+if we have user ids: 1 2 3 4 5, typically id 1 is your admin<br/>
+<br/>
+<b>Note</b>: there's a possibility that we have a sql injection and we aren't able to see it at all and called <b>blind sql injection </b>that becomes a little bit more complex<br/>
+<br/>
+<b>Note</b>: when we see error code in repeater we know we have sql injection, it's only a matter of time to figure out how the sql injection works, but when we inject and nothing comes back or comes back as a normal log we use sleep patterns<br/>
+<br/>
+solution:<br/>
+email input: test' (sleep 10)<br/>
+<br/>
+<img src="repeater.png" /><br/>
+<br/>
+-------------------------------------------------------------------------------------------------------------<br/>
+<b>SQL Injection Defenses</b><br/>
+<br/>
+Defense 1: Parameterized Statements<br/>
+&nbsp;-Ensure inputs (parameters) are used safely in SQL statements<br/>
+<br/>
+<b>good example:</b><br/>
+SELECT * FROM users WHERE email=?;<br/>
+<br/>
+--&gt;the way we're passing data here is the parameter string is going to be passed separately then the parameter is being provided<br/>
+<br/>
+<b>not good</b>&nbsp;<b>example:</b><br/>
+SELECT * FROM users WHERE email = ....+email+....<br/>
+<br/>
+--&gt;provide email as a variable <br/>
+<br/>
+Defense 2: Sanitizing Input<br/>
+--&gt;ensuring that the input that is provided is not malicious, filter malicious code but number 1 is parameterized statements<br/>
+-------------------------------------------------------------------------<br/>
+<b>Broken Authentication<br/>
+<br/>
+</b>1-you should have mutli-factor authentication<br/>
+2-you shouldn't be allowing weak credentials<br/>
+3-you should be rotating your session id<br/>
+4-you should have rate limiting for brute force attackes, you should have like a captcha that will prevent hacker from attacking website<br/>
+-----------------------------------------------------------------------<br/>
+<b>Testing for Broken Authentication</b><br/>
+<br/>
+1-username enumeration<br/>
+<br/>
+email: test@test.com<br/>
+password: test<br/>
+<br/>
+--&gt;if you click i forget password and give email to website and they say we don't have that email or security question not opened then that's still username enumeration<br/>
+----------------------------------------------------------------------<br/>
+<b>Testing for Sensitive Data Exposure<br/>
+<br/>
+</b>--&gt;look for key or keys, look for response of all js files<br/>
+<br/>
+headers--&gt;gives us information on how web app protect itself<br/>
+<br/>
+HSTS--&gt;http strict transport security, that is a header that should be set in order to prevent an attack where we take secure data say https and strip it and it's called a protocol downgrade attack and we make it http<br/>
+<br/>
+--&gt;if you want to scan headers in website use: https://securityheaders.com<br/>
+<br/>
+--&gt;we should also be looking at the level of encryption on the website, we use nmap<br/>
+<br/>
+ex:<br/>
+#nmap --script=ssl-enum-ciphers -p 443 tesla.com<br/>
+---------------------------------------------------------------------<br/>
+<b>XML External Entities(XXE)<br/>
+<br/>
+</b><img src="xxe.png" /><br/>
+<br/>
+XXE--&gt;it abuses systems that parse XML input, we are going to take XML input and get malicious with it, we're going to upload it into upload file feature and it's going to try to parse XML input and we will be able to get some information out of the system, and the attacks that we can do include DOS(denial of service), local file disclosure, remote code execution and much more<br/>
+<br/>
+classic XXE payload:<br/>
+&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;<br/>
+&nbsp;&lt;!DOCTYPE foo [<br/>
+&nbsp;&lt;!ELEMENT foo ANY &gt;<br/>
+&nbsp;&lt;!ENTITY xxe SYSTEM "file:///etc/passwd" &gt;]&gt;&lt;foo&gt;&amp;xxe;&lt;/foo&gt;<br/>
+-----------------------------------------------------------------------<br/>
+<b>XXE Attack and Defense</b><br/>
+<br/>
+1-we login as a normal user<br/>
+2-we should navigate around and see what we have access to<br/>
+<br/>
+<br/>
+--&gt;file uploads can be very devastating if they are not handled properly for web application, at a bare minimum we should see if the upload feature is functioning the way it is, so it shouldn't at least allow to upload xml files<br/>
+---------------------------------------------------------------------<br/>
+<b>Broken Access Control<br/>
+<br/>
+</b>--&gt;there's so many different vulnerabilities that can fall into Broken Access Control, what you need to know about Broken Access Conrol is you really should know what it is at high level and that means that user gets access to somewhere they shouldn't, it will be broken access control if &nbsp;a regular user like me is able to access the panel of admin<br/>
+----------------------------------------------------------------------<br/>
+<b>Security Misconfiguration Attacks and Defenses</b><br/>
+<br/>
+--&gt;like a default credential on a web page that happens so much <br/>
+<br/>
+Note: you should always use a best practice when installing things, make sure things are not installed on your systems that you don't need, you don't have any unnecessary ports open or accounts activated, you're not using default credentials on your web pages, you're not allowing for stack traces or more verbose error messaging<br/>
+--------------------------------------------------------------------------<br/>
+<b>Cross-Site Scripting (XSS)</b><br/>
+<br/>
+there are 3 types of cross-site scripting:<br/>
+<br/>
+1-<b>Reflected</b>(we're going to inject something malicious and you are going to get a pop up, it never gets stored on the server)<br/>
+<br/>
+2-<b>stored or persistent XSS</b>(what that means is we inject a malicious payload and then it's stored on the server)<br/>
+<br/>
+3-<b>DOM</b>(we attack specifically dom)<br/>
+<br/>
+<b>Example of reflected xss:<br/>
+<br/>
+</b>&lt;?php<br/>
+$username = $_GET['username']<br/>
+echo "Hi $username!";<br/>
+?&gt;<br/>
+<br/>
+index.php?username=heath<br/>
+Hi Heath!<br/>
+<br/>
+index.php?username=&lt;script&gt;alert(1)&lt;/script&gt;<br/>
+-------------------------------------------------------------------<br/>
+Reflective and Dom require social enineering, we have somebody to open malicious link, we might run javascript which is going to execute and steal a cookie from user and we're going to try to log in as them, but we need to be able to know the user and then send well crafted link social engineering, and guess what you're going to the page you don't even know that it's there, you're not looking at the source code,you have no idea what's going on<br/>
+<br/>
+<b>with xss</b>-&gt;we can steal cookies,key logging,dos, deface a web page<br/>
+<br/>
+DOM based cross site--&gt;source is where you insert malicious input, sink is where it's executed<br/>
+<br/>
+<img src="dom.png" /><br/>
+<br/>
+------------------------------------------------------------------------------<br/>
+<b>Preventing XSS</b><br/>
+<br/>
+<img src="xss.png" /><br/>
+<br/>
+------------------------------------------------------------------------------<br/>
+<b>Insecure Deserialization</b><br/>
+<br/>
+<b>Serialization</b>--&gt;convert data into json,xml,binary and sent over network<br/>
+<br/>
+<b>Deserialization</b>--&gt;that means we're taking this serialized data and then deserialized it<br/>
+<br/>
+--&gt;so we take something malicious, we serialize that exploit and then the application takes that data and deserialize it and executes it, web app use quite bit serialization and deserialization, <b>it's really difficult to just go out there and find this vulnerabilities </b>but it doesn't mean that they're not out there<br/>
+----------------------------------------------------------------------<br/>
+<b>Insufficient logging and monitoring</b><br/>
+<br/>
+1-web app should monitor logs like who logs in web app and when<br/>
+2-if there is no monitor to activities like brute force attack or scanning web app then it's logging and monitoring vulnerabilities<br/>
+-----------------------------------------------------------------------<br/>
+<b>Wireless Penetration testing</b><br/>
+<br/>
+<img src="wifi.png" /><br/>
+<br/>
+-----------------------------------------------------------------------------------------<br/>
+&nbsp;</body></html>
