@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node>
+<version>6</version>
+<dict>
+  <key>title</key><string>Financial Analysis</string>
+  <key>nodeid</key><string>1a7d7162-d6b3-45a6-abdd-6871eda32908</string>
+  <key>modified_time</key><integer>1595624028</integer>
+  <key>version</key><integer>6</integer>
+  <key>content_type</key><string>text/xhtml+xml</string>
+  <key>created_time</key><integer>1595608293</integer>
+  <key>order</key><integer>3</integer>
+</dict>
+</node>
