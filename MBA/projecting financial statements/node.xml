@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node>
+<version>6</version>
+<dict>
+  <key>title</key><string>Projecting Financial statements</string>
+  <key>nodeid</key><string>f3e2def0-ad12-4b4b-87cd-499ea1664cfc</string>
+  <key>modified_time</key><integer>1595780520</integer>
+  <key>version</key><integer>6</integer>
+  <key>content_type</key><string>text/xhtml+xml</string>
+  <key>created_time</key><integer>1595777104</integer>
+  <key>order</key><integer>6</integer>
+</dict>
+</node>
