@@ -2,14 +2,14 @@
 <node>
 <version>6</version>
 <dict>
-  <key>title</key><string>crucial</string>
-  <key>nodeid</key><string>2c3d5356-c9f5-4531-9bd8-863f8ba4f8e1</string>
-  <key>modified_time</key><integer>1595937904</integer>
+  <key>title</key><string>Delegating</string>
+  <key>nodeid</key><string>b1be2030-51d9-41a7-a7d5-58945d033122</string>
+  <key>modified_time</key><integer>1595960163</integer>
   <key>version</key><integer>6</integer>
   <key>content_type</key><string>text/xhtml+xml</string>
-  <key>created_time</key><integer>1595866452</integer>
+  <key>created_time</key><integer>1595938320</integer>
   <key>info_sort_dir</key><integer>1</integer>
-  <key>order</key><integer>8</integer>
+  <key>order</key><integer>9</integer>
   <key>info_sort</key><string>order</string>
 </dict>
 </node>
