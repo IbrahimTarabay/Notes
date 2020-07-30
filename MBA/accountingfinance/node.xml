@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node>
+<version>6</version>
+<dict>
+  <key>expanded</key><true/>
+  <key>title</key><string>Accounting&amp;Finance</string>
+  <key>nodeid</key><string>b5d09a0e-b765-4e20-8bf2-aa395a5fa3a4</string>
+  <key>modified_time</key><integer>1596018639</integer>
+  <key>version</key><integer>6</integer>
+  <key>content_type</key><string>application/x-notebook-dir</string>
+  <key>created_time</key><integer>1596018639</integer>
+  <key>info_sort_dir</key><integer>1</integer>
+  <key>order</key><integer>10</integer>
+  <key>info_sort</key><string>order</string>
+</dict>
+</node>
