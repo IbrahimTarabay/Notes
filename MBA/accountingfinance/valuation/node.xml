@@ -2,14 +2,14 @@
 <node>
 <version>6</version>
 <dict>
-  <key>title</key><string>financial modeling</string>
-  <key>nodeid</key><string>b9006918-a117-4e79-833a-89213f0fab3a</string>
-  <key>modified_time</key><integer>1596631854</integer>
+  <key>title</key><string>valuation</string>
+  <key>nodeid</key><string>a7de01a6-c38f-4af2-84f7-b55e7dfa5f07</string>
+  <key>modified_time</key><integer>1596737322</integer>
   <key>version</key><integer>6</integer>
   <key>content_type</key><string>text/xhtml+xml</string>
-  <key>created_time</key><integer>1596113969</integer>
+  <key>created_time</key><integer>1596631790</integer>
   <key>info_sort_dir</key><integer>1</integer>
-  <key>order</key><integer>2</integer>
+  <key>order</key><integer>3</integer>
   <key>info_sort</key><string>order</string>
 </dict>
 </node>
