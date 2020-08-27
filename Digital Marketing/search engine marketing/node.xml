@@ -2,7 +2,7 @@
 <node>
 <version>6</version>
 <dict>
-  <key>expanded</key><true/>
+  <key>expanded</key><false/>
   <key>title</key><string>Search Engine Marketing</string>
   <key>nodeid</key><string>3dc8470b-bda1-4630-b3aa-002199620fb6</string>
   <key>modified_time</key><integer>1598090366</integer>
