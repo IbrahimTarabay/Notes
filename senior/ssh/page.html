@@ -19,4 +19,21 @@ How SSH works?<br/>
 2-Asymmetrical Encryption<br/>
 3-Hashing<br/>
 <br/>
-<b>Symmetrical Encryption</b>--&gt;uses one secret key for both the encryption and decryption by both parties</body></html>
+<b>Symmetrical Encryption</b>--&gt;uses one secret key for both the encryption and decryption by both parties<br/>
+<br/>
+<b>Key exchange algorithm</b>--&gt;a secure way to exchange these keys without any bad actors intercepting it<br/>
+--------------------------------------------------------<br/>
+<b>Asymmetrical encryption</b>--&gt;uses two separate keys for encryption and decryption<br/>
+--------------------------------------------------------<br/>
+--&gt;Most of the SSH connections use symmetric encryption, asymmetric encryption is used only to share a public key and then finally using that key that is symmetric encryption for further communication so it's fast<br/>
+---------------------------------------------------------<br/>
+SSH is able to transmit messages securely but if a third party is able to dupe the client and the host, they can tamper with the messages maybe they could change the messages<br/>
+---------------------------------------------------------<br/>
+<b>Summary:</b><br/>
+<br/>
+1-Diffie-Hellman key exchange<br/>
+2-Arrive at Symmetric key<br/>
+3-Make sure of no funny business(hashing)<br/>
+4-Authenticate user<br/>
+<br/>
+--&gt;1-provide for us a way to share a shared secret and 2-arrive at a symetric key so that we have two computers who are able to talk to one another, 3-hashing to make sure no funny business,4-finally we had to authenticate the user in two ways we could either provide a password to say hey we are who we are and we have the right to access the server or we could do something like RSA which again allows us to prove the identity without password</body></html>

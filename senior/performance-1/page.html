@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Performance-1</title>
+</head><body>--&gt;Amazon calculated that on their website if a pageload slows down just one second that could cost them 1.6 billion in sales each year<br/>
+<br/>
+--&gt;Google so did a calculation and by slowing its search results by just four tenth of a second they could lose up to million searches per day meaning they'd lose out on all that advertising money that they get<br/>
+<br/>
+<img src="keys to performance 2.png" /><br/>
+<br/>
+<img src="network performance 2.png" /><br/>
+-----------------------------------------------------------<br/>
+<b>Network Performance<br/>
+<br/>
+</b>with jpg-jpeg you can't have a transparent background, to have transparent background you must use something like png or gif, so jpg for complex images with lots of colors, it's tend to be a little bit big in file size<br/>
+<br/>
+<b>Gif</b>--&gt;usually limit the number of total colors that you can use in a GIF<br/>
+<br/>
+<b>SVG</b>---&gt;is different category not like gif,jpg,png, they usually tend to be very simplistic visual things with few colors<br/>
+<br/>
+<img src="minimizing 2.png" /><br/>
+<br/>
+<img src="minimize images 2.png" /><br/>
+<br/>
+----------------------------------------------------------<br/>
+<b>Use CDNs like imigx--&gt;</b>they are saying hey give us all your images no matter how big they are no matter how an optimized they are, just upload it onto our website and then we'll give you back your URL<br/>
+---------------------------------------------------------<br/>
+<b>Delivery Optimizations--&gt;</b>if you must use a library find maybe libraries that are lightweight and think twice before you just put another script or another library just for some cool animations on your website<br/>
+---------------------------------------------------------<br/>
+<b>Critical Render Path<br/>
+<br/>
+</b><b>--&gt;</b>when HTML file arrives and browser starts reading it and as soon as HTML arrives it starts creating something called DOM(Document Object Model) and when the browser parses or read HTML it incrementally generates this tree model of the HTML tags that we need to build for the website and this dom describes the contents of the page but then just as it's about to start doing that it encounters a style link to grab the CSS from server and when CSS file arrives it get back working on the DOM, once the browser recei es all the CSS it also starts generating tree model called CSSOM.<br/>
+and after while it sees a javascript tag script so it grabs it from the server and this js file is read by the browser and executes any changes on DOM or CSSOM, now once all that's done the browser combines the DOM and CSSOM into render tree, so now the browser uses this render tree to figure out the layout(Where should i position these items in what location) and once it figures that out is going to paint all the pixels and then website render<br/>
+<br/>
+--&gt;The neat thing about images it's not part of this process, images are just kind of downloaded in the background<br/>
+<br/>
+<img src="critical render path 2.png" /><br/>
+<br/>
+<b>How do we optimize HTML file which is step 1?</b><br/>
+<br/>
+--&gt;load styles that is CSS files as soon as possible and js files as late as possible, javascript requires the HTML CSS Parsing to finish before it can be run<br/>
+<br/>
+--&gt;We want to make sure that javascript files tend to be at the bottom and there is some exeptions, let's say for example you have google analytics which is a script tag and you want that to be executed right away maybe you want to know what the user does the very first second on the website<br/>
+---------------------------------------------------------<br/>
+--&gt;CSS is called render blocking because in order to construct the render tree we wait for CSSOM to complete and combine it with the DOM to create the render tree<br/>
+---------------------------------------------------------<br/>
+<img src="part-3.png" /><br/>
+<br/>
+<img src="part-4.png" /><br/>
+<br/>
+<br/>
+--&gt;Rule with async for scripts add them to anything that doesn't affect the DOM or CSSOM like Google Analytics scripts or Tracking scripts<br/>
+<br/>
+--&gt;defer is really good option for scripts that will act on the rendered tree or the DOM but they're also not important to loading maybe the above the fold content<br/>
+<br/>
+<img src="part-5.png" /><br/>
+<br/>
+------------------------------------------------------------<br/>
+<b>HTTP/2--&gt;</b>still compatible with HTTP but its main goal is to improve network latency, HTTP/2 may change how you consider combining resource, for example: minification compression image optimization should definitely be continued with HTTP/2, However physically combining files into a bundle might not achieve the desired results with HTTP/2 because of something called multiplexing, This is primarily because server requests are faster on HTTP/2<br/>
+<br/>
+<b>HTTP/2</b><br/>
+<br/>
+1-it's binary instead of textual<br/>
+2-it's fully multiplexed<br/>
+3-with one connection you have many files sent to it</body></html>
