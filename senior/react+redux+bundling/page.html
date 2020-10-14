@@ -38,4 +38,46 @@ One thing you will notice with React is that because we always have to return ju
 <b>You are right! React realized this was an issue, and with the newer version of React 16.2, they introduced something called Fragment to fix this issue.</b>&nbsp; <br/>
 ----------------------------------------------------------<br/>
 <br/>
-<b>State</b>--&gt;is simply an object that describe your application</body></html>
+<b>State</b>--&gt;is simply an object that describe your application<br/>
+<br/>
+<b>Hooks</b>--&gt;a way for us to avoid classes so that we can avoid the super keyword, "this" keyword even componentDidMount() or lifecycle hooks that sometimes can get confusing so hooks allow us to use functional components<br/>
+<br/>
+--&gt;<b>Best resource is usually the documentation</b><br/>
+<br/>
+--&gt;idea of hooks isn't javascript concept it doesn't really exist in the javascript world, Hooks are very react specific so there is a bit of magic that's happening.<br/>
+<br/>
+--&gt;Hooks work side-by-side with existing code so you can adopt, there are no plans to remove classes from react<br/>
+<br/>
+--&gt;Only call hooks at the top level don't call hooks inside loops, conditions or nested functions<br/>
+<br/>
+--&gt;Only call hooks from react functions, don't call hooks from regular javascript functions<br/>
+--------------------------------------------------------<br/>
+<b>State management<br/>
+<br/>
+</b>--&gt;when react app gets bigger and bigger we can have massive states in components so keeping track of all this state is really hard so we need some form of a state management<br/>
+<br/>
+Redux solves this problem for us, what if we just remove all the state what if we just have props and now the state we keep it in store <br/>
+--------------------------------------------------------<br/>
+<b>Redux 3 principles<br/>
+<br/>
+</b>1-Single source of truth<br/>
+2-State is read only (instead we would create a new state after each action is taken by the user)<br/>
+3-Changes using pure functions<br/>
+--------------------------------------------------------<br/>
+<b>Four main ideas about webpack<br/>
+<br/>
+</b>1-Entry(usually your javascript file)<br/>
+2-Output(Where should we get back all these files)<br/>
+3-loaders(are tools that compile or transpile your code so you send your code and it use something like babel to transpile ex: ES6 to ES5)<br/>
+4-plugins<br/>
+--------------------------------------------------------<br/>
+<b>ESLint</b><div style="text-align: left"><span style="font-size: 16pt"><span style="font-family: arial"> </span></span><span style="font-family: arial"><span style="font-size: 13pt">is a tool for identifying and reporting on patterns found in ECMAScript/</span></span></div><span style="font-size: 13pt"><b>JavaScript</b><div style="text-align: left"><span style="font-family: arial"> code, with the goal of making code more consistent and avoiding bugs<br/>
+</span></div></span><span style="font-size: 13pt"><div style="text-align: left"><span style="font-family: arial">--------------------------------------------------------<br/>
+</span></div></span><span style="font-size: 13pt"><div style="text-align: left"><span style="font-family: arial">--&gt;Javascript is a big part of any website loading</span></div>&nbsp;</span>so long time parsing and compiling code for the browser can heavily delay how soon a user can interact with your site, the more javascript you send the longer it will take to parse and compile before your website becomes interactive, it's not just the parsing and compile that has a cost javascript execution which is running the code once parsing and compiling happen is one of the operations that has to happen on the main thread and that is one worker doing all the work and we can block it with heavy javascript<br/>
+<br/>
+<img src="js.png" /><br/>
+<br/>
+<br/>
+--&gt;Browser do something called JIT--&gt;just in time compilation as the js file gets loaded onto the browser they compile it right there while we wait for it to load, the angular team came up with the ahead of time compilation just from our terminal compiling it ahead of time and then just ship that code to the browser <br/>
+<br/>
+--&gt;don't go heavily with animation in website because it require a lot of processing and graphics power and can cause serious problem</body></html>
