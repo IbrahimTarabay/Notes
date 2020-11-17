@@ -14,4 +14,18 @@
 <br/>
 <img src="what can php build.png" /><br/>
 <br/>
+<br/>
+---------------------------------------------------------------<br/>
+To configure your php.ini and sendmail.ini file to send email from contact form to your gmail<br/>
+<br/>
+--&gt;first go to your gmail account and make it 2 step authentication and generate a 16 char password<br/>
+<br/>
+<b>php.ini file</b><br/>
+<br/>
+SMTP=smtp.gmail.com smtp_port=587 sendmail_from = businessprogrammer596@gmail.com sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t" ----------------------------------------------------- <b>sendmail.ini file<br/>
+</b><b><br/>
+</b>smtp_server=smtp.gmail.com<br/>
+smtp_port=587<br/>
+error_logfile=error.log<br/>
+debug_logfile=debug.log auth_username=businessprogrammer596@gmail.com auth_password= qyhhoaqyodagxgnp force_sender=businessprogrammer596@gmail.com<br/>
 </body></html>

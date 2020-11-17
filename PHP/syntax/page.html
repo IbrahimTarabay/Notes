@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Syntax</title>
+</head><body>&lt;?php<br/>
+&nbsp;$str = "10";<br/>
+&nbsp;$int = 20;<br/>
+&nbsp;$sum = $str + $int;<br/>
+&nbsp;echo ($sum);<br/>
+<br/>
+&nbsp;// Outputs <b>30</b><br/>
+?&gt;<br/>
+<br/>
+--&gt;PHP automatically converts each variable to the correct data type, according to its value. This is why the variable <br/>
+-----------------------------------------------------------<br/>
+<b>The global Keyword<br/>
+<br/>
+</b><b>--&gt;</b>The<b>&nbsp;global </b>keyword is used to access a global variable from within a function to do this, use the <b>global</b>&nbsp;keyword within the function, prior to the variables.<br/>
+<br/>
+&lt;?php<br/>
+$name = 'David';<br/>
+function getName(){<br/>
+&nbsp;global $name;<br/>
+&nbsp;echo $name;<br/>
+}<br/>
+getName();<br/>
+<br/>
+//Outputs 'David'<br/>
+?&gt;<br/>
+--------------------------------------------------------<br/>
+<b>Variable Variables<br/>
+<br/>
+</b>with PHP, you can use one variable to specify another variable's name. So, a variable variable treats the value of another variable as its name.<br/>
+<br/>
+&lt;?php<br/>
+$a = 'hello';<br/>
+$hello = "Hi!";<br/>
+echo $$a;<br/>
+<br/>
+//Outputs 'Hi!';<br/>
+?&gt;<br/>
+--------------------------------------------------------<br/>
+<b>Increment &amp; Decrement<br/>
+</b><br/>
+$x++; // post-increment <br/>
+$x--; // post-decrement<br/>
+++$x; // pre-increment<br/>
+--$x; // pre-increment<br/>
+<br/>
+The difference is that the post-increment returns the original value <b>before</b>&nbsp;it changes the variable, while the pre-increment changes the variable first and then returns the value.<br/>
+<br/>
+<b>ex:</b><br/>
+$a = 2; $b = $a++; // $a=3, $b=2<br/>
+$a = 2; $b = ++$a; // $a=3, $b=3<br/>
+-----------------------------------------------------<br/>
+<b>Associative Arrays<br/>
+<br/>
+</b><b>Associative </b>arrays are arrays that use named keys that you assign to them.There are two ways to create an associative array:<br/>
+<br/>
+$people = array("David"=&gt;"27","Amy"=&gt;"21","John"=&gt;"42");<br/>
+//or<br/>
+$people['David'] = "27";<br/>
+$people['Amy'] = "21";<br/>
+$people['John'] = "42";<br/>
+-----------------------------------------------------<br/>
+<b>Multi-Dimensional Arrays<br/>
+<br/>
+</b><b>--&gt;</b>A mulit-dimensional array contains one or more arrays<br/>
+<br/>
+The dimension of an array indicates the number of indices you woud need to select an element:<br/>
+1-for a <b>two-dimensional</b>&nbsp;array, you need two indices to select an element<br/>
+2-for a <b>three-dimensional</b>&nbsp;array, you need three indices to select an element<br/>
+<br/>
+--&gt;Arrays more than three levels deep are difficult to manage.</body></html>
