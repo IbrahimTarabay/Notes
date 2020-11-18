@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Syntax-1</title>
+</head><body>&lt;?php<br/>
+&nbsp;$str = "10";<br/>
+&nbsp;$int = 20;<br/>
+&nbsp;$sum = $str + $int;<br/>
+&nbsp;echo ($sum);<br/>
+<br/>
+&nbsp;// Outputs <b>30</b><br/>
+?&gt;<br/>
+<br/>
+--&gt;PHP automatically converts each variable to the correct data type, according to its value. This is why the variable <br/>
+-----------------------------------------------------------<br/>
+<b>The global Keyword<br/>
+<br/>
+</b><b>--&gt;</b>The<b>&nbsp;global </b>keyword is used to access a global variable from within a function to do this, use the <b>global</b>&nbsp;keyword within the function, prior to the variables.<br/>
+<br/>
+&lt;?php<br/>
+$name = 'David';<br/>
+function getName(){<br/>
+&nbsp;global $name;<br/>
+&nbsp;echo $name;<br/>
+}<br/>
+getName();<br/>
+<br/>
+//Outputs 'David'<br/>
+?&gt;<br/>
+--------------------------------------------------------<br/>
+<b>Variable Variables<br/>
+<br/>
+</b>with PHP, you can use one variable to specify another variable's name. So, a variable variable treats the value of another variable as its name.<br/>
+<br/>
+&lt;?php<br/>
+$a = 'hello';<br/>
+$hello = "Hi!";<br/>
+echo $$a;<br/>
+<br/>
+//Outputs 'Hi!';<br/>
+?&gt;<br/>
+--------------------------------------------------------<br/>
+<b>Increment &amp; Decrement<br/>
+</b><br/>
+$x++; // post-increment <br/>
+$x--; // post-decrement<br/>
+++$x; // pre-increment<br/>
+--$x; // pre-increment<br/>
+<br/>
+The difference is that the post-increment returns the original value <b>before</b>&nbsp;it changes the variable, while the pre-increment changes the variable first and then returns the value.<br/>
+<br/>
+<b>ex:</b><br/>
+$a = 2; $b = $a++; // $a=3, $b=2<br/>
+$a = 2; $b = ++$a; // $a=3, $b=3<br/>
+-----------------------------------------------------<br/>
+<b>Associative Arrays<br/>
+<br/>
+</b><b>Associative </b>arrays are arrays that use named keys that you assign to them.There are two ways to create an associative array:<br/>
+<br/>
+$people = array("David"=&gt;"27","Amy"=&gt;"21","John"=&gt;"42");<br/>
+//or<br/>
+$people['David'] = "27";<br/>
+$people['Amy'] = "21";<br/>
+$people['John'] = "42";<br/>
+-----------------------------------------------------<br/>
+<b>Multi-Dimensional Arrays<br/>
+<br/>
+</b><b>--&gt;</b>A mulit-dimensional array contains one or more arrays<br/>
+<br/>
+The dimension of an array indicates the number of indices you woud need to select an element:<br/>
+1-for a <b>two-dimensional</b>&nbsp;array, you need two indices to select an element<br/>
+2-for a <b>three-dimensional</b>&nbsp;array, you need three indices to select an element<br/>
+<br/>
+--&gt;Arrays more than three levels deep are difficult to manage.<br/>
+----------------------------------------------------------<br/>
+<b>The foreach Loop<br/>
+<br/>
+</b><b>--&gt;</b>The foreach loop works only on arrays, and is used to loop through eahc key/value pair in an array<br/>
+<br/>
+There are two syntaxes:<br/>
+<br/>
+foreach(array as $value){<br/>
+&nbsp;code to be executed;<br/>
+}<br/>
+//or<br/>
+foreach(array as $key =&gt;$value){<br/>
+&nbsp; code to be executed;<br/>
+}<br/>
+<br/>
+--&gt;The first form loops over the array. on each iteration the value of the current element is assigned to $value, and the array pointer is moved by one, until it reaches the last array element<br/>
+------------------------------------------------------<br/>
+<br/>
+--&gt;Using <b>nested if else statements </b>results in similar behavior, but switch offers a more elegant and optimal solution<br/>
+<br/>
+The <b>break </b>keyword that follows each case is used to keep the code from automatically running into the next case. if you forget the <b>break; </b>statement, PHP will automatically continue through the next case statements, even when the case doesn't match.<br/>
+--------------------------------------------------------<br/>
+<b>The break Statement<br/>
+<br/>
+</b>--&gt;If the break is absent, the code keeps<br/>
+running.<br/>
+<br/>
+ex:<br/>
+<br/>
+$x=1;<br/>
+switch($x){<br/>
+&nbsp;case 1:<br/>
+&nbsp; echo "One";<br/>
+&nbsp;case 2:<br/>
+&nbsp; echo "Two";<br/>
+&nbsp;case 3:<br/>
+&nbsp; echo "Three";<br/>
+&nbsp;default:<br/>
+&nbsp; echo "No match";<br/>
+}<br/>
+<br/>
+//Outputs "OneTwoThreeNo match"<br/>
+}<br/>
+---------------------------------------------------------<br/>
+<b>The continue Statement<br/>
+<br/>
+</b>When used within a looping structure, the <b>continue </b>statement allows for skipping over what remains of the current loop iteration. it then continue the execution at the condition evaluation and moves on to the beginning of the next iteration<br/>
+<br/>
+for($i=0;$i&lt;10;$i++){<br/>
+&nbsp;if($i%2==0){<br/>
+&nbsp; &nbsp;continue;<br/>
+&nbsp;}<br/>
+&nbsp;echo $i.' ';<br/>
+}<br/>
+<br/>
+//Output: 1 3 5 7 9<br/>
+---------------------------------------------------------<br/>
+<b>include<br/>
+<br/>
+</b>--&gt;The include and require statements allow for the insertion of the content of one PHP file into another PHP file, before the server executes it<br/>
+<br/>
+--&gt;Including files saves quite a bit of work. you can create a standard header, footer, or menu file for all of your web pages. then, when the header is requiring updating, You can update the header include file only.<br/>
+<br/>
+--&gt;Assume that we have a standard header file called <b>header.php<br/>
+</b><b><br/>
+</b>&lt;?php<br/>
+&nbsp;echo '&lt;h1&gt;Welcome&lt;/h1&gt;';<br/>
+?&gt;<br/>
+<br/>
+--&gt;Use the <b>include</b>&nbsp;statement to include the header file in a page.<br/>
+<br/>
+&lt;html&gt;<br/>
+&nbsp;&lt;body&gt;<br/>
+<b>&lt;?php include 'header.php';?&gt;<br/>
+</b>&lt;p&gt;Some text&lt;/p&gt;<br/>
+&lt;p&gt;Some text&lt;/p&gt;<br/>
+&lt;/body&gt;<br/>
+&lt;/html&gt;<br/>
+<br/>
+<b>Summary: </b>The include and require statements allow for the insertion of the content of one PHP file into another PHP file, before the server executes it.<b><br/>
+</b>-------------------------------------------------------<br/>
+<b>include vs require<br/>
+<br/>
+</b>--&gt;The <b>require </b>statement is identical to include, the exception being that, upon failure, it produces a fatal error. when a file is included using the <b>include</b>&nbsp;statement, but PHP is unable to find it, the script continues to execute<br/>
+--&gt;In the case of <b>require, </b>the script will cease execution and produce an error<br/>
+-------------------------------------------------------</body></html>

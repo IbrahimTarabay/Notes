@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Syntax-2</title>
+</head><body><b>Funciton</b><br/>
+<br/>
+--&gt;Function names are <b>NOT</b>&nbsp;case-sensitive.<br/>
+<br/>
+--&gt;When you define a function, the variables that represent the values that will be passed to it for processing are called  <b>parameters. </b>However, when you use a function, the value you pass to it is called an <b>argument.</b><br/>
+--------------------------------------------------------<br/>
+<b>Default Arguments<br/>
+<br/>
+</b><b>--&gt;</b>When using default arguments, any defaults should be on the right side of any non-default arguments; otherwise, things will not work as expected.<b><br/>
+</b>--------------------------------------------------------<b><br/>
+</b><b>Return<br/>
+<br/>
+</b>--&gt;Leaving out the return results in a <b>NULL </b>value being returned<br/>
+--&gt;A function cannot return multiple values, but returning an <b>array</b>&nbsp;will produce similar results<br/>
+--------------------------------------------------------<br/>
+<b>Funciton</b><br/>
+<br/>
+--&gt;Function names are <b>NOT</b>&nbsp;case-sensitive.<br/>
+<br/>
+--&gt;When you define a function, the variables that represent the values that will be passed to it for processing are called  <b>parameters. </b>However, when you use a function, the value you pass to it is called an <b>argument.</b><br/>
+------------------------------------------------------<br/>
+<b>Default Arguments<br/>
+<br/>
+</b><b>--&gt;</b>When using default arguments, any defaults should be on the right side of any non-default arguments; otherwise, things will not work as expected.<b><br/>
+</b>-------------------------------------------------------<b><br/>
+</b><b>Return<br/>
+<br/>
+</b>--&gt;Leaving out the return results in a <b>NULL </b>value being returned<br/>
+--&gt;A function cannot return multiple values, but returning an <b>array</b>&nbsp;will produce similar results<br/>
+--------------------------------------------------------<br/>
+<b>Predefined Variables<br/>
+<br/>
+</b><b>--&gt;A superglobal </b>is a predefined variable that is always accessible, regardless of scope. You can access the PHP superglobals through any function, class, or file<br/>
+<br/>
+--&gt;PHP's superglobal variables are: $_SERVER<br/>
+$GLOBALS<br/>
+$_REQUEST<br/>
+$_POST<br/>
+$_GET<br/>
+$_FILES<br/>
+$_ENV<br/>
+$_COOKIE<br/>
+$_SESSION<br/>
+---------------------------------------------------------<br/>
+<b>$_SERVER<br/>
+<br/>
+</b>--&gt;is an array that includes information such as <b>headers</b>, <b>paths</b>, and <b>script locations</b>. The entries in this array are created by the web server<br/>
+<br/>
+&lt;?php<br/>
+echo $_SERVER['SCRIPT_NAME'];<br/>
+//Outputs "/somefile.php"<br/>
+?&gt;<br/>
+<br/>
+&lt;?php<br/>
+echo $_SERVER['HTTP_HOST'];<br/>
+//Outputs "localhost"<br/>
+?&gt;<br/>
+---------------------------------------------------------<br/>
+--&gt;his method can be useful when you have a lot of images on your server and need to transfer the website to another host. Instead of changing the path for each image, you can do the following:<br/>
+Create a <b>config.php</b>&nbsp;file, that holds the path to your images:<br/>
+<br/>
+&lt;?php<br/>
+$host = $_SERVER['HTTP_HOST'];<br/>
+$image_path = $host.'/images';<br/>
+?&gt;<br/>
+<br/>
+--&gt;Use the <b>config.php </b>file in your scripts<br/>
+<br/>
+&lt;?php<br/>
+require 'config.php';<br/>
+echo '&lt;img src="'$image_path.'header.png"/&gt;';<br/>
+?&gt;<br/>
+<br/>
+--&gt;The path to your images is now dynamic. It will change automatically, based on the Host header.<br/>
+<br/>
+<img src="global.png" /><br/>
+<br/>
+--&gt;$_SERVER variable is an array<br/>
+-----------------------------------------------------------------<br/>
+<b>Forms<br/>
+<br/>
+</b><b>--&gt;</b>The purpose of the PHP superglobals $_GET and $_POST is to collect data that has been entered into a form.<b><br/>
+</b><b><br/>
+</b>&lt;form action="<b>first.php" </b>method="<b>post</b>"&gt;<br/>
+&nbsp;&lt;p&gt;Name: &lt;input type="text" name="name" /&gt;&lt;/p&gt;<br/>
+&nbsp;&lt;p&gt;Age: &lt;input type="text" name="age" /&gt;&lt;/p&gt;<br/>
+&nbsp;&lt;p&gt;&lt;input type="submit" name="submit" value="Submit" /&gt;&lt;/p&gt;<br/>
+&lt;/form&gt;<br/>
+<br/>
+--&gt;The <b>action</b>&nbsp;attribute specifies that when the form is submitted, the data is sent to a PHP file named <b>first.php<br/>
+</b>--&gt;HTML form elements have <b>names, </b>which will be used when accessing the data with PHP<br/>
+-----------------------------------------------------------------<br/>
+--&gt;Now, when we have an HTML form with the <b>action </b>attribute set to our PHP file, we can access the posted form data using the <b>$_POST </b>associative array<br/>
+<br/>
+<b>In the first.php file:<br/>
+<br/>
+</b>&lt;html&gt;<br/>
+&lt;body&gt;<br/>
+<br/>
+Welcome&lt;?php echo <b>$_POST["name"]; </b>?&gt;&lt;br /&gt;<br/>
+Your age: &lt;?php echo <b>$_POST["age"]; </b>?&gt;<br/>
+<br/>
+&lt;/body&gt;<br/>
+&lt;/html&gt;<br/>
+<br/>
+--&gt;The <b>$_POST </b>superglobal array holds key/value pairs. In the pairs, keys are the <b>names</b>&nbsp;of the form controls and values are the <b>input data</b>&nbsp;entered by the user<br/>
+----------------------------------------------------------------<br/>
+<b>POST<br/>
+<br/>
+</b>--&gt;The two methods for submitting forms are <b>GET </b>and <b>POST<br/>
+</b><b><br/>
+</b>--&gt;Information sent from a form via the <b>POST </b>method is invisible to others, since all names and/or values are embedded within the body of the HTTP request. Also, there are no limits on the amount of information to be sent.<b><br/>
+</b><b><br/>
+</b><b>--&gt;</b>Moreover, POST supports advanced functionality such as support for multi-part binary input while uploading files to the server.<b><br/>
+</b><b><br/>
+</b><b>--&gt;</b>However, it is not possible to bookmark the page, as the submitted values are not visible.<b><br/>
+</b><b><br/>
+--&gt;POST is the preferred method for sending form data.<br/>
+</b>-----------------------------------------------------------------<br/>
+<b>GET<br/>
+<br/>
+</b>Information sent via a form using the<b>&nbsp;GET </b>method is visible to everyone.(all variable names and values are displayed in the <b>URL). GET </b>also sets limits on the amount of information that can be sent - about 2000 characters.<b><br/>
+</b><b><br/>
+</b>However, because the variables are displayed in the URL, it is possible to bookmark the page, which can be useful in some situations.<br/>
+<br/>
+<b>Note: </b>Bookmarking<span style="font-family: arial"><span style="font-size: 16pt"><div style="text-align: left"> is when the browser remember the URL of a page. GETs can be </div></span></span>bookmarked<span style="font-family: arial"><span style="font-size: 16pt"><div style="text-align: left"> because the data needed for the </div></span></span>request<span style="font-family: arial"><span style="font-size: 16pt"><div style="text-align: left"> is stored in the URL and hence the </div></span></span>bookmark<span style="font-family: arial"><span style="font-size: 16pt"><div style="text-align: left">. POSTS cannot because the data is stored in the </div></span></span>request<span style="font-family: arial"><span style="font-size: 16pt"><div style="text-align: left"> body which is not stored as part of the </div></span></span>bookmark<span style="font-family: arial"><span style="font-size: 16pt"><div style="text-align: left">.</div></span></span><b>&nbsp;<br/>
+</b><b><br/>
+</b><b>---&gt;</b>GET should <b>NEVER </b>be used for sending passwords or other sensitive information when using <b>POST </b>or <b>GET, proper validation of form data through filtering and processing is vitally important to protect your form from hackers and exploits!<br/>
+</b>----------------------------------------------------------------<br/>
+<b>Sessions<br/>
+<br/>
+</b>--&gt;Using a session, you can store information in variables, to be used across multiple pages. information is not stored on the user's computer, as it is with <b>cookies.</b>&nbsp;by default, session variables last until the user closes the browser<br/>
+<br/>
+<b>Start a PHP Session<br/>
+<br/>
+</b><b>--&gt;</b>A session is started using the <b>session_start() </b>function. Use the PHP global <b>$_SESSION </b>to set session variables<br/>
+<br/>
+&lt;?php<br/>
+// Start the session<br/>
+<b>session_start();<br/>
+<br/>
+</b>$_SESSION['color'] = "red";<br/>
+$_SESSION['name'] = "John";<br/>
+?&gt;<br/>
+<br/>
+--&gt;Now, the <b>color</b>&nbsp;and <b>name</b>&nbsp;session variables are accessible on multiple pages, throughout the entire session.<br/>
+<br/>
+--&gt;The <b>session_start() </b>function must be the very first thing in your document. Before any HTML tags<br/>
+<br/>
+--&gt;<b>Another page </b>can be created that can access the session variables we set in the previous page:<br/>
+<br/>
+&lt;?php<br/>
+//<b>&nbsp;</b>Start the session<br/>
+session_start();<br/>
+?&gt;<br/>
+&lt;!DOCTYPE html&gt;<br/>
+&lt;html&gt;<br/>
+&lt;body&gt;<br/>
+&lt;?php<br/>
+echo "Your name is ". <b>$_SESSION['name'];<br/>
+</b><b>// </b>Outputs "Your name is John"<br/>
+?&gt;<br/>
+&lt;/body&gt;<br/>
+&lt;/html&gt;<br/>
+<br/>
+--&gt;Your session variables remain available in the <b>$_SESSION </b>superglobal until you close your session.<br/>
+--&gt;All global session variables can be removed manually by using <b>session_unset(). </b>you can also destory the session with <b>session_destory()<br/>
+</b>-----------------------------------------------------------------<br/>
+<b>Cookies<br/>
+<br/>
+</b><b>Cookies</b>&nbsp;are often used to identify the user. A <b>cookie</b>&nbsp;is a small file that the server embeds on the user's computer. Each time the same computer requests a page through a browser, it will send the <b>cookie</b>&nbsp;too. with PHP, you can both create and retrieve <b>cookie </b>values<br/>
+<br/>
+<b>Create cookies using the setcookie() function:</b>&nbsp; <br/>
+<br/>
+--&gt;setcookie(name, value, expire, path, domain, secure, httponly);<br/>
+<br/>
+<b>name:</b>&nbsp;Specifies the <b>cookie's </b>name<br/>
+<br/>
+<b>value: </b>Specifies the <b>cookie's </b>value<br/>
+<br/>
+<b>expire: </b>Specifies (in seconds) when the <b>cookie</b>&nbsp;is to expire. The value: time()+86400*30, will set the <b>cookie</b>&nbsp;to expire in 30 days. if this parameter is omitted or set to 0, the <b>cookie</b>&nbsp;will expire at the end of the session(when the browser closes). Default is 0<br/>
+<br/>
+<b>path: </b>Specifies the server path of the <b>cookie.</b>&nbsp;if set to "/", the <b>cookie</b>&nbsp;will be available within the entire domain. if set to "/php/", the <b>cookie</b>&nbsp;will only be available within the php directory and all sub-directories of php. The default value is the current directory in which the <b>cookie </b>is being set.<br/>
+<br/>
+<b>domain:</b>&nbsp;Specifies the <b>cookie's</b>&nbsp;domain name. To make the <b>cookie </b>available on all subdomains of example.com, set the domain to "example.com".<br/>
+<br/>
+<b>secure: </b>Specifies whether or not the <b>cookie</b>&nbsp;should only be transmitted over a secure, HTTPS connection. TRUE indicates that the <b>cookie</b>&nbsp;will only be set if a secure connection exists. Default is FALSE<br/>
+<br/>
+<b>httponly: </b>if set to TRUE, the <b>cookie</b>&nbsp;will be accessible only through the HTTP protocol(the <b>cookie </b>will not be accessible to scripting languages). Using httponly helps reduce identity theft using XSS attacks. Default is FALSE<br/>
+<br/>
+--&gt;The <b>name </b>parameter is the only one that's required. All of the other parameters are optional<br/>
+----------------------------------------------------------<br/>
+<b>Cookies<br/>
+<br/>
+</b>The following example creates a <b>cookie </b>named "user" with the value "John". The <b>cookie </b>will expire after 30 days, which is written as 86400*30 in which 86400 = one day. The '/' means that the <b>cookie </b>is available throughout the entire website<br/>
+<br/>
+--&gt;We then retrieve the value of the <b>cookie </b>"user"(using the global variable <b>$_COOKIE</b>). we also use the <b>isset() </b>function to find out if the <b>cookie </b>is set:<br/>
+<br/>
+&lt;?php<br/>
+$value = "John";<br/>
+<b>setcookie</b>("user",$value,time()+(86400*30),'/');<br/>
+<br/>
+if(isset($_COOKIE['user'])){<br/>
+&nbsp;echo "Value is: ". $_COOKIE['user'];<br/>
+}<br/>
+//Outputs "Value is: John"<br/>
+?&gt;<br/>
+<br/>
+--&gt;The <b>setcookie()</b>&nbsp;function must appear BEFORE the &lt;html&gt; tag. The value of the cookie is automatically encoded when the cookie is sent, and is automatically decoded when it's received. Nevertheless, <b>NEVER </b>store sensitive information in cookies.<br/>
+----------------------------------------------------------<br/>
+<b>Manipulating Files<br/>
+<br/>
+</b>PHP offers a number of functions to use when creating, reading, uploading, and editing files. The <b>fopen() </b>function creates or opens a file. if you use <b>fopen() </b>with a file that doesn't exist, file will be created, given that the file has been opened for writing(w) or appending(a)<br/>
+<br/>
+--&gt;Use one of the following <b>modes </b>to open the file:<br/>
+<br/>
+<b>r: </b>Opens file for read only<br/>
+<b>w: </b>Opens file for write only. Erases the contents of the file or creates a new file if it doesn't exist.<br/>
+<b>a: </b>Opens file for write only.<br/>
+<b>x: </b>Creates new file for write only<br/>
+<b>r+: </b>Opens file for read/write<br/>
+<b>w+: </b>Opens file for read/write. Erases the contents of the file or creates a new file if it doesn't exist<br/>
+<b>a+: </b>Opens file for read/write. Creates a new file if the file doesn't exist<br/>
+<b>x+: </b>Creates new file for read/write<br/>
+<br/>
+--&gt;The example below creates a new file, "file.txt", which will be created in the same directory that houses the PHP code.<br/>
+<br/>
+$myfile = fopen("file.txt", "w");<br/>
+<br/>
+<b>Summary: </b>PHP offers a number of functions to use when creating, reading, uploading, and editing files.<b><br/>
+</b>----------------------------------------------------------<br/>
+<b>Write to File<br/>
+<br/>
+</b>&lt;?php<br/>
+$myfile = fopen("names.txt","w");<br/>
+<br/>
+$txt = "John\n";<br/>
+fwrite($myfile,$txt);<br/>
+$txt = "David\n";<br/>
+fwrite($myfile,$txt);<br/>
+<br/>
+fclose($myfile);<br/>
+<br/>
+/* File contains<br/>
+John<br/>
+David<br/>
+*/<br/>
+?&gt;<br/>
+<br/>
+<b>fclose()<br/>
+<br/>
+</b>--&gt;The <b>fclose() </b>function closes an open file and returns TRUE on success or FALSE on failure<br/>
+<br/>
+<b>It's a good practice to close all files after you have finished working with them.<br/>
+</b>----------------------------------------------------------<br/>
+<b>Appending to a File<br/>
+<br/>
+</b>Ex:<br/>
+$myFile = "text.txt";<br/>
+<b>$fh = fopen($myFile,'a');<br/>
+</b>fwrite($fh, "Some text");<br/>
+fclose($fh);<br/>
+<br/>
+--&gt;When appending to a file using the '<b>a</b>' <b>mode,</b>&nbsp;the file pointer is placed at the end of the file, ensuring that all new data is added at the end of the file.<br/>
+<br/>
+--&gt;example of a form that adds filled-in data to a file<br/>
+<br/>
+&lt;?php<br/>
+if(isset($_POST['text'])){<br/>
+&nbsp;$name = $_POST['text'];<br/>
+&nbsp;$handle = fopen('names.txt','a');<br/>
+&nbsp;fwrite($handle,$name."\n");<br/>
+&nbsp;fclose($handle);<br/>
+}<br/>
+?&gt;<br/>
+&lt;form method="post"&gt;<br/>
+&nbsp;Name: &lt;input type="text" name="text" /&gt;<br/>
+&nbsp;&lt;input type="submit" name="submit" /&gt;<br/>
+&lt;/form&gt;<br/>
+<br/>
+--&gt;Now, each time a name is entered and submitted, it's added to the "names.txt" file, along with a new line.<br/>
+<br/>
+--&gt;The <b>isset() </b>function determined whether the form had been submitted, as well as whether the text contained a value<br/>
+<br/>
+--&gt;We did not specify an <b>action </b>attribute for the form, so it will submit to itself.<br/>
+----------------------------------------------------------</body></html>
