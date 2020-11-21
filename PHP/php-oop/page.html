@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>PHP-OOP</title>
+</head><body><b>Classes &amp; Objects in PHP<br/>
+<br/>
+</b>--&gt;Object Oriented Programming(OOP) is a programming style that is intended to make thinking about programming closer to thinking about the real world<br/>
+<br/>
+--&gt;<b>Objects</b>&nbsp;are created using <b>classes</b>, which are the focal point of OOP. The class describes what the object will be, but is separate from the object itself. In other words, a class can be thought of as an object's <b>blueprint,</b>&nbsp;description, or definition<br/>
+<br/>
+ex:<br/>
+<br/>
+<img src="oop.jpg" /><br/>
+<br/>
+--&gt;You can use the same class as a blueprint for creating multiple different objects.<br/>
+----------------------------------------------------------<br/>
+<b>PHP Classes<br/>
+<br/>
+</b>in PHP, a class can include member variables called <b>properties</b>&nbsp;for defining the features of an object, and functions, called <b>methods</b>, for defining the behavior of an object. A class definition begins with keyword <b>class</b>, followed by a class name.<br/>
+<br/>
+ex:<br/>
+class Person{<br/>
+&nbsp;public $age;//property<br/>
+&nbsp;public function speak(){//method<br/>
+&nbsp;echo "Hi!"; <br/>
+}<br/>
+}<br/>
+<br/>
+--&gt;A valid class name starts with a letter or underscore, followed by any number of letters, numbers, or underscores.<br/>
+<br/>
+--&gt;The <b>public </b>keyword specifies that the member can be accessed from anywhere in the code.<br/>
+----------------------------------------------------------<br/>
+<b>PHP Objects<br/>
+<br/>
+</b>--&gt;The process of creating an object of a class is called <b>instantiation<br/>
+</b>--&gt;To instantiate an object of a class, use the keyword <b>new,<br/>
+</b><b><br/>
+</b>$bob = <b>new </b>Person();<br/>
+<br/>
+--&gt;To access the properties and methods of an object, use the arrow (-&gt;)<br/>
+echo $bob-&gt;age;<br/>
+<br/>
+<b>ex:</b><br/>
+<b>class</b>&nbsp;Person{<br/>
+&nbsp;public $age;<br/>
+&nbsp;function speak(){<br/>
+&nbsp; echo "Hi!";<br/>
+}<br/>
+}<br/>
+$p1 = <b>new</b>&nbsp;Person(); //instantiate an object<br/>
+$p1-&gt;age = 23;//assignmet<br/>
+echo $p1-&gt;age;//23<br/>
+$p1-&gt;speak();//Hi!<br/>
+----------------------------------------------------------<br/>
+<b>$this<br/>
+<br/>
+</b><b>$this </b>is a pseudo-variable that is a reference to the calling object. when working within a method use <b>$this </b>in the same way you would use an object name outside the class<br/>
+<br/>
+ex:<br/>
+<br/>
+class Dog{<br/>
+&nbsp;public $leg=4;<br/>
+&nbsp;public function display(){<br/>
+&nbsp; echo <b>$this</b>-&gt;legs;<br/>
+}<br/>
+}<br/>
+$d1 = new Dog();<br/>
+$d1-&gt;display();//4<br/>
+<br/>
+$d2 = new Dog();<br/>
+$d2-&gt;legs = 2;<br/>
+$d2-&gt;display();//2<br/>
+----------------------------------------------------------<br/>
+<b>PHP Class Constructor<br/>
+<br/>
+</b>--&gt;PHP provides the constructor magic method <b>__construct(),</b>&nbsp;which is called automatically whenever a new object is instantiated<br/>
+<br/>
+class Person{<br/>
+&nbsp;public function<b>__construct</b>(){<br/>
+&nbsp; echo "Object created";<br/>
+}<br/>
+}<br/>
+$p = new Person();<br/>
+<br/>
+--&gt;The <b>__construct() </b>method is often used for any initialization that the object may need before it is used. Parameters can be included in <b>__construct()</b>&nbsp;to accept values when the object is created for example:<br/>
+<br/>
+class Person{<br/>
+&nbsp;public $name;<br/>
+&nbsp;public $age;<br/>
+&nbsp;public function<b>__construct</b>($name,$age){<br/>
+&nbsp; $this-&gt;name = $name;<br/>
+&nbsp; $this-&gt;age = $age;<br/>
+<br/>
+}<br/>
+}<br/>
+$p = new Person("David",42);<br/>
+<br/>
+--&gt;You can't write multiple <b>__construct() </b>methods with different numbers of parameters<br/>
+----------------------------------------------------------<br/>
+<b>PHP Class Destructor<br/>
+<br/>
+</b>--&gt;Similar to the class constructor, there is a destructor magic method <b>__destruct(), </b>which is automatically called when an object is destroyed<br/>
+<br/>
+class Person{<br/>
+&nbsp; public function<b>__destruct</b>(){<br/>
+&nbsp; echo "Object destroyed";<br/>
+}<br/>
+}<br/>
+$p = new Person();<br/>
+<br/>
+--&gt;Destructors are useful for performing certain tasks when the object finishes its lifecycle. For example, release resources, write log files, close a database connection, and so on. PHP releases all resources when a script finishes its execution.<br/>
+----------------------------------------------------------<br/>
+<b>PHP Class Inheritance<br/>
+<br/>
+</b>--&gt;Classes can inherit the methods and properties of another class. The class that inherits the methods and properties is called a  <b>subclass. </b>The class a subclass inherits from is called the <b>parent class</b><br/>
+<br/>
+ex:<br/>
+<br/>
+class Animal{<br/>
+&nbsp; public $name;<br/>
+&nbsp; public function hi(){<br/>
+&nbsp; &nbsp;echo "Hi from Animal";<br/>
+}<br/>
+}<br/>
+class Dog <b>extends </b>Animal{<br/>
+}<br/>
+$d = new Dog();<br/>
+$d-&gt;hi();<br/>
+<br/>
+--&gt;Parent constructors are not called implicity if the subclass defines a constructor. However, child does not define a constructor then it will be inherited from the parent class if it's not declared <b>private<br/>
+</b>----------------------------------------------------------<br/>
+<b>PHP Visibility<br/>
+<br/>
+</b><b>Visibility</b>&nbsp;controls how and from where <b>properties </b>and <b>methods</b>&nbsp;can be accessed<br/>
+<br/>
+<b>public: </b>to specify that a property/method is accessible from anywhere<br/>
+<br/>
+<b>protected: </b>makes members accessible only within the class itself, by inheriting, and by parent classes<br/>
+<br/>
+<b>private: </b>Makes members accessible only by the class that defines them<br/>
+<br/>
+--&gt;Class properties must always have a visibility type. Methods declared without any explicit visibility keyword are defined as <b>public<br/>
+</b><b><br/>
+</b><b>Protected</b>&nbsp;members are used with inheritance<br/>
+<b>private </b>members are used only internally in a class<br/>
+----------------------------------------------------------<br/>
+<b>PHP Interfaces<br/>
+<br/>
+</b>--&gt;An <b>interface </b>specifies a list of methods that a class <b>must</b>&nbsp;implement. However, the interface itself does not contain any method implementations. This is an important aspect of interfaces because it allows a method to be handled differently in each class that uses the interface<br/>
+<br/>
+--&gt;The <b>interface</b>&nbsp;keyword defines an interface<br/>
+--&gt;The <b>implements </b>keyword is used in a class to implement an interface<br/>
+<br/>
+For example, <b>AnimalInterface </b>is defined with a declaration for the <b>makeSound() </b>function, but it isn't implemented until it is used in a class:<br/>
+<br/>
+&lt;?php<br/>
+&nbsp;<b>interface </b>AnimalInterface{<br/>
+&nbsp; public function makeSound();<br/>
+}<br/>
+<br/>
+class Dog <b>implements </b>AnimalInterface {<br/>
+&nbsp;public function makeSound(){<br/>
+&nbsp; echo "Woof!&lt;br /&gt;";<br/>
+}<br/>
+}<br/>
+class Cat <b>implements </b>AnimalInterface{<br/>
+&nbsp; public function makeSound(){<br/>
+&nbsp; &nbsp;echo "Meow!&lt;br /&gt;";<br/>
+}<br/>
+}<br/>
+<br/>
+$myObj1 = new Dog();<br/>
+$myObj1-&gt;makeSound();<br/>
+<br/>
+$myObj2 = new Cat();<br/>
+$myObj2-&gt;makeSound();<br/>
+?&gt;<br/>
+<br/>
+--&gt;A class can implement multiple interfaces. More than one interfaces can be specified by separating them with commas. For example:<br/>
+<br/>
+class Demo implements AInterface,BInterface,CInterface{<br/>
+&nbsp;// Functions declared in interfaces must be defined here<br/>
+}<br/>
+<br/>
+--&gt;An interface can be inherit another interface by using the <b>extends </b>keyword<br/>
+<br/>
+--&gt;All the methods specified in an interface require <b>public </b>visibility<br/>
+---------------------------------------------------------<br/>
+<b>PHP Abstract Classes<br/>
+<br/>
+</b>--&gt;Abstract classes can be inherited but they cannot be instantiated, They offer the advantage of being able to contain both methods with definitions and abstract methods that aren't defined until they are inherited<br/>
+<br/>
+--&gt;A class inheriting from an abstract class must implement all the abstract methods<br/>
+<br/>
+--&gt;The <b>abstract</b>&nbsp;keyword is used to create an abstract class or an abstract method.<br/>
+<br/>
+&lt;?php<br/>
+<b>abstract </b>class Fruit{<br/>
+&nbsp;private $color;<br/>
+<br/>
+&nbsp;<b>abstract </b>public function eat();<br/>
+<br/>
+&nbsp;public function setColor($c){<br/>
+&nbsp; $this-&gt;color = $c;<br/>
+}<br/>
+}<br/>
+<br/>
+class Apple extends Fruit{<br/>
+&nbsp;public function eat(){<br/>
+&nbsp; echo "Omnomnom";<br/>
+}<br/>
+}<br/>
+<br/>
+$obj = new Apple();<br/>
+$obj-&gt;eat();<br/>
+?&gt;<br/>
+<br/>
+--&gt;Abstract functions can only appear in an abstract class.<br/>
+---------------------------------------------------------<br/>
+<b>The static Keyword<br/>
+<br/>
+</b>--&gt;The PHP <b>static </b>keyword defines static properties and static methods. A static property/method of a class can be accessed without creating an object of that class<br/>
+<br/>
+--&gt;A static property or method is accessed by using the <b>scope resolution operator:: </b>between the class name and the property/method name<br/>
+<br/>
+&lt;?php<br/>
+&nbsp;class myClass{<br/>
+&nbsp; <b>static </b>$myStaticProperty = 42;<br/>
+}<br/>
+<br/>
+echo myClass::$myStaticProperty;<br/>
+?&gt;<br/>
+<br/>
+--&gt;The <b>self </b>keyword is needed to access a static property from a static method in a class definition<br/>
+<br/>
+&lt;?php<br/>
+&nbsp;class myClass{<br/>
+&nbsp; static $myProperty = 42;<br/>
+&nbsp; static function myMethod(){<br/>
+&nbsp; &nbsp;echo <b>self</b>::$myProperty;<br/>
+}<br/>
+}<br/>
+<br/>
+myClass::myMethod();<br/>
+?&gt;<br/>
+<br/>
+--&gt;Objects of a class cannot access static properties in the class but they can access static methods.<br/>
+---------------------------------------------------------<br/>
+<b>The final keyword<br/>
+<br/>
+</b>--&gt;The PHP <b>final </b>keyword defines methods that cannot be overridden in child classes. Classes that are defined final cannot be inherited<br/>
+<br/>
+&lt;?php<br/>
+&nbsp;class myClass{<br/>
+&nbsp; <b>final</b>&nbsp;function myFunction(){<br/>
+&nbsp; &nbsp;echo "Parent";<br/>
+}<br/>
+}<br/>
+<b>//ERROR</b>&nbsp;<b>because a final method cannot be overriden in child classes.<br/>
+</b>class myClass2 extends myClass{<br/>
+&nbsp;function myFunction(){<br/>
+&nbsp; echo "Child";<br/>
+}<br/>
+}<br/>
+?&gt;<br/>
+<br/>
+--&gt;The following code demonstrates that a final class cannot be inherited:<br/>
+<br/>
+&lt;?php<br/>
+<b>final </b>class myFinalClass{<br/>
+}<br/>
+<br/>
+<b>//ERROR because a final class cannot be inherited<br/>
+</b>class myClass extends myFinalClass{<br/>
+}<br/>
+?&gt;<br/>
+<br/>
+--&gt;Unlike classes and methods, properties cannot be marked <b>final</b></body></html>

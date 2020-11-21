@@ -288,4 +288,27 @@ if(isset($_POST['text'])){<br/>
 --&gt;The <b>isset() </b>function determined whether the form had been submitted, as well as whether the text contained a value<br/>
 <br/>
 --&gt;We did not specify an <b>action </b>attribute for the form, so it will submit to itself.<br/>
-----------------------------------------------------------</body></html>
+----------------------------------------------------------<br/>
+<b>Reading a File<br/>
+<br/>
+</b>--&gt;The <b>file() </b>function reads the entire file into an <b>array</b>. Each element within the <b>array </b>corresponds to a line in the file:<br/>
+<br/>
+$read = <b>file</b>('names.txt');<br/>
+foreach($read as $line){<br/>
+&nbsp;echo $line.",";<br/>
+}<br/>
+<br/>
+--&gt;We used the <b>foreach </b>loop, because the <b>$read </b>variable is an <b>array</b><br/>
+<br/>
+--&gt;The following code lets us avoid printing that final comma.<br/>
+<br/>
+$read = file('names.txt');<br/>
+$count = count($read);<br/>
+$i = 1;<br/>
+foreach($read as $line){<br/>
+&nbsp;echo $line;<br/>
+&nbsp;if($i &lt; $count){<br/>
+&nbsp; echo ',';<br/>
+}<br/>
+$i++;<br/>
+}</body></html>
