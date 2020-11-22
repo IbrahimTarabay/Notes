@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Encryption&amp;Hashing</title>
+</head><body><b>Symmetric Encryption<br/>
+<br/>
+</b><img src="symmetric encryption.png" /><b><br/>
+</b><b><br/>
+</b><b>--&gt;</b>the keys are the same, so you should take care you don't transfer key to another people<br/>
+---------------------------------------------------------<br/>
+<img src="encryption algorithms.png" /><br/>
+<br/>
+<br/>
+<b>AES</b>--&gt;used more often key can be 128 bits or 256 bits, use more bits and more secure than DES and 3DES, and it is used in ssl communication<br/>
+---------------------------------------------------------<br/>
+<img src="hash.png" /><br/>
+<br/>
+--&gt;Data that is encrypted during transfer over a network could be easily changed or compromised and that will lead to a situation that the receiver will not be able to read original data or will read it with some errors and that where <b>hash</b>&nbsp;come in<br/>
+<br/>
+<b>Hash</b>--&gt;it's fixed length and this length depends on the algorithm that is used for creation of the hash<br/>
+<br/>
+How hash works??<br/>
+<br/>
+--&gt;data maybe word or sentence or a file and when hash function is applied it creates fixed lengths hash based on the input data and it creates an irreversible hash what is mean?? mean if you have hash and don't know what input data you are not able to retrieve data from the hash so that's why hash function is always one way<br/>
+<br/>
+--&gt;another important character is when you slightly change input data or even single character, hash will change completely<br/>
+<br/>
+--&gt;Hash don't require any key<br/>
+<br/>
+--&gt;there is also hash function that also add key into the hash process<br/>
+<br/>
+<img src="hashes.png" /><br/>
+--&gt;after hashing original data, data along with hash sent over the network to receiver and receiver receives data and hash separately, and apply hash function to data and compare the generated hash with received hash and if those hashes matches it means for receiver that this data was not changed or mutated<br/>
+<br/>
+<b>The Purpose of hash</b>--&gt;it verifies integrity of data<br/>
+<br/>
+--&gt;when hash doesn't match receiver simply rejects data <br/>
+<br/>
+<b>Note: </b>keys are optional and are used by some hash functions, but they are hash functions that utilize symmetric keys and with keys we perform not just integrity check on the receiver we also perform authentication<br/>
+<br/>
+--&gt;Keys in hash function add sender authentication<br/>
+---------------------------------------------------------<br/>
+<img src="hashing algorithms.png" /><br/>
+<br/>
+<br/>
+--&gt;Hash is often used for password storage for example: password that was entered by user somewhere in any application or website maybe stored not as a plain text password instead stored as hash and each time when user enters its password application creates hash again and compares two hashes<br/>
+<br/>
+<b>HMAC</b>--&gt;The main purpose of this algorithm is adding a special secret key into hash <br/>
+<br/>
+<b>HMAC: </b>Data + Key = Hash<br/>
+<br/>
+--&gt;That mean in HMAC that the other side may read same hash only if it has same secret key<br/>
+---------------------------------------------------------<br/>
+<b>Asymmetric key<br/>
+<br/>
+</b><img src="asymmetric keys.png" /><br/>
+<br/>
+--&gt;Private key is always kept secret only in one place and public key is public and available for anyone<br/>
+<br/>
+--&gt;public key is used for encryption of data and only owner of the private key is able to decrypt an agreed data<br/>
+<br/>
+--&gt;The owner of this pair of keys creates hash using private key and anybody who has public key may verify signature<br/>
+---------------------------------------------------------<br/>
+<img src="encryption using asymmetric keys.png" /><br/>
+<br/>
+<br/>
+---------------------------------------------------------<br/>
+<b>Sign and verify signature using asymmetric keys<br/>
+<br/>
+</b><img src="sign and verify signature using asymmetr.png" /><br/>
+<br/>
+--&gt;when data sent from the owner, the data flow is opposite<br/>
+---------------------------------------------------------<br/>
+<b>RSA<br/>
+<br/>
+</b>--&gt;(Rivest-Shamir-Adleman) is a public-key cryptosystem that is widely used for secure data<br/>
+<br/>
+<img src="rsa 2.png" /><br/>
+<br/>
+<br/>
+--&gt;Note that the key length is always the same for private and public keys when you generate key, two keys are generated not just one<br/>
+<br/>
+--&gt;When you feel that private key was compromised by someone else please regenerate keys and if you need a certificate based on keys you need to recreate certificate as well<br/>
+---------------------------------------------------------<br/>
+<b>PKI--&gt;</b>public key infrastructure<br/>
+<br/>
+<img src="pki.png" /><br/>
+<br/>
+<b>PKI</b>--&gt;is set of different protocols,algorithms,entities,certificates that allows you to perform communication based on certificates<br/>
+<br/>
+--&gt;There are many different elements in the PKI infrastructure for example: CA--&gt;Certification Authority and it's job to sign certificates or delegates trust to other entities and those entities are called intermediate CA and main responsibility for intermediate CA is signature of new certificates that are issued for all the entities for example for your website<br/>
+<br/>
+--&gt;you can use certificate to build VPN(viewable private network)<br/>
+<br/>
+<b>Certificate--&gt;</b>is a set of data, and most important information in any certificate is public key of the owner, it means that every entity in PKI infrastructure has its own public key<br/>
+<br/>
+<img src="pki2.png" /><br/>
+<br/>
+<br/>
+<br/>
+<img src="ca.png" /><br/>
+<br/>
+<img src="ca2.png" /><br/>
+<br/>
+---------------------------------------------------------<br/>
+<b>Certificate--&gt;</b>simply a file with some data<br/>
+<br/>
+<img src="certificate.png" /><br/>
+<br/>
+<b>Signature--&gt;</b>is Encrypted with Private Key Hash of Certificate<br/>
+<br/>
+--&gt;if certificate is signed by CA(certification authority) and we trust CA - we trust owner of the certificate too<br/>
+<br/>
+<b>Self-signed certificate</b>-&gt;is issued and signed by the owner<br/>
+<br/>
+--&gt;Public key in certificate always belongs to the owner of certificate<br/>
+<br/>
+--&gt;<b>The entire goal of certificate is to store public key</b>&nbsp;which is always belongs to the owner not issuer<br/>
+<br/>
+--&gt;Private key must always be kept secret so of course it's not available in certificate</body></html>

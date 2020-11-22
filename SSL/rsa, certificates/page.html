@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>RSA, Certificates</title>
+</head><body>#openssl genrsa -aes256<br/>
+<br/>
+--&gt;passphrase will be used for and creation of private key<br/>
+<br/>
+<b>passphrase: </b>hema<br/>
+<br/>
+#openssl genrsa -aes256 -out private.pem<br/>
+<br/>
+--&gt;pem is extension that is used for all files that include the certificates and also we can use this extension for storage of private key<br/>
+<br/>
+--&gt;we can extract public key from private key<br/>
+<br/>
+#openssl rsa -in private.pem -outform PEM -pubout -out public.pem<br/>
+<br/>
+Enter pass phrase for private.pem: hema<br/>
+------------------------------------------------------------<br/>
+<b>Exploring certificate of instagram<br/>
+<br/>
+</b><img src="certificate-instgram.png" /><br/>
+<br/>
+<b>Root CA</b>--&gt;this certification authority doesn't usually issue certificate, it's considered as a root entity in the chain of trust<br/>
+<br/>
+<b>Intermediate CA or Server CA--&gt;</b>this intermediate CA has issued certificate for instagram.com<br/>
+<br/>
+<img src="hash then encrypt.png" /><br/>
+<br/>
+--&gt;<b>DigiCert SHA2 High Assurance Server CA </b>first it hashes data with SHA-256 for integrity(to make sure data didn't mutated or changed) then encrypt hash with RSA Encryption to ensure authority(that instagram itself is send these data not website else and also to encrypt passwords or any sensitive data)<br/>
+<br/>
+<img src="sign and verify signature using asymmetr.png" /><br/>
+<br/>
+<b>Encrypted Hash </b>= <b>Signature<br/>
+</b><b><br/>
+</b>--&gt;you can use public key to encrypt data and send these encrypted data to any website like (instagram) and only using corresponding private key this data maybe decrypte, private key is of course kept secret and it's located on the servers that host pages for example (instagram)<br/>
+<br/>
+<img src="sub domains.png" /><br/>
+<br/>
+--&gt;you will find here DNS names for which this certificate is valid, it means that if you try to use this certificate on any other domain that is not listed here you'll get a certificate verification error and in this certificate you'll see only two DNS names<br/>
+<br/>
+--&gt;DNS Name here told us that this certificate was actually created only for a single domain www.instagram.com, it's look like wildcard certificate but in fact you will not see any other subdomains of this domain(www.instagram.com), usually subdomains used without www at the beginning<br/>
+<br/>
+<img src="fingerprints.png" /><br/>
+<br/>
+<b>fingerprints--&gt;</b>are simply hashes of certificate and you can use those fingerprints to verify integrity of certificate<br/>
+------------------------------------------------------------</body></html>
