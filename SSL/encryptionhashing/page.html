@@ -118,4 +118,12 @@ How hash works??<br/>
 <br/>
 --&gt;<b>The entire goal of certificate is to store public key</b>&nbsp;which is always belongs to the owner not issuer<br/>
 <br/>
---&gt;Private key must always be kept secret so of course it's not available in certificate</body></html>
+--&gt;Private key must always be kept secret so of course it's not available in certificate<br/>
+<br/>
+<ul><li><b><span style="font-family: Open Sans">Root Certificate.</span></b><span style="font-family: Open Sans"> A root certificate is a digital certificate that belongs to the issuing Certificate Authority. It comes pre-downloaded in most browsers and is stored in what is called a “trust store.” The root certificates are closely guarded by CAs.</span></li>
+</ul>
+ <ul><li><b><span style="font-family: Open Sans">Intermediate Certificate.</span></b><span style="font-family: Open Sans"> Intermediate certificates branch off root certificates like branches of trees. They act as middle-men between the protected root certificates and the server certificates issued out to the public. There will always be at least one intermediate certificate in a chain, but there can be more than one.</span></li>
+</ul>
+<ul><li><b><span style="font-family: Open Sans">Server Certificate.</span></b><span style="font-family: Open Sans"> The server certificate is the one issued to the specific domain the user is needing coverage for.</span></li>
+</ul>
+&nbsp;</body></html>

@@ -46,4 +46,144 @@ Enter pass phrase for private.pem: hema<br/>
 <img src="fingerprints.png" /><br/>
 <br/>
 <b>fingerprints--&gt;</b>are simply hashes of certificate and you can use those fingerprints to verify integrity of certificate<br/>
-------------------------------------------------------------</body></html>
+------------------------------------------------------------<br/>
+google certificate<br/>
+<br/>
+<img src="google.png" /><br/>
+<br/>
+--&gt;it was issued for google.com and for any subdomains <br/>
+<br/>
+<img src="subjective alternative names.png" /><br/>
+<br/>
+<img src="youtube.png" /><br/>
+<br/>
+--&gt;list of DNS names indicates websites where the certificate is allowed to be used<br/>
+------------------------------------------------------------<br/>
+<b>Comodo certificate<br/>
+<br/>
+</b><img src="comodo.png" /><br/>
+<br/>
+--&gt;we don't see any asterisks and that mean that this certificate is domain certificate not multi-domain<br/>
+<br/>
+<img src="comodo2.png" /><br/>
+<br/>
+--&gt;this called certificate with extended validation so more information is included here and more checks where performed by issuer of the certificate<br/>
+<br/>
+<b>Questions:<br/>
+<br/>
+</b>1-How web browsers trust Root CA??<br/>
+<br/>
+2-How chain of trust is built?<br/>
+<br/>
+3-When certificate is considered invalid?<br/>
+------------------------------------------------------------<br/>
+<b>Questions<br/>
+<br/>
+</b>1-What is root CA??<br/>
+<br/>
+2-How root CA looks like??<br/>
+<br/>
+3-How web browsers trust Root CA??<br/>
+<br/>
+<img src="globalsign.png" /><br/>
+<ul><li><span style="font-family: Open Sans"><b>Root Certificate.</b> A root certificate is a digital certificate that belongs to the issuing Certificate Authority. It comes pre-downloaded in most browsers and is stored in what is called a “trust store.” The root certificates are closely guarded by CAs.</span></li>
+</ul>
+<ul><li><span style="font-family: Open Sans"><b>Intermediate Certificate.</b> Intermediate certificates branch off root certificates like branches of trees. They act as middle-men between the protected root certificates and the server certificates issued out to the public. There will always be at least one intermediate certificate in a chain, but there can be more than one.</span></li>
+</ul>
+ <ul><li><span style="font-family: Open Sans"><b>Server Certificate.</b> The server certificate is the one issued to the specific domain the user is needing coverage for.</span></li>
+</ul>
+&nbsp;<br/>
+<br/>
+--&gt;GlobalSign is a root CA<br/>
+<br/>
+--&gt;if you compare subject name and issuer name they are the same that means that this certificate is self-signed<br/>
+<br/>
+--&gt;Because any company actually can create self-signed certificate<br/>
+<b>How web browser trusts self-signed certificate of the Root CA??<br/>
+<br/>
+</b>--&gt;Every operating system such as mac or windows ships with list of all certificates of root CA's and this certificate isn't an exception, it's located in operating system and that's why web browser trust these self signed certificate<br/>
+<br/>
+--&gt;open run from window and type certmgr.msc after that you'll see list of certificates that trust by default by windows<br/>
+<br/>
+<b>Conclusion:<br/>
+<br/>
+</b>--&gt;Each operating system ships with the list of the pre-installed certificates of Root CAs<br/>
+<br/>
+<b>Does list of the trusted certificates includes certificates of the intermediate CAs?<br/>
+<br/>
+</b>No there is only list of root CAs inside operating systems and it doesn't include the intermediate CA why? Because it's not needed if there was a trust between the operating system and root CA and if there was a trust between root CA and intermediate CA there was a trust between operating system and these intermediate CA<br/>
+-----------------------------------------------------------<br/>
+<b>What is chain of trust and how is it built?</b><br/>
+<br/>
+<img src="chain of trust.png" /><br/>
+<br/>
+<br/>
+--&gt;Every entity in public key infrastructure(KPI) has pair of keys private key and public key<br/>
+<br/>
+--&gt;this self-signed certificate was signed by root CA itself what does it mean?? it mean that signature in Root CA is made by its own private key<br/>
+<br/>
+--&gt;intermediate CA there are two differences from Root CA first signature made by private key of root CA second difference is that owner info diffferent from issuer info<br/>
+<br/>
+--&gt;after Root CA sign signature of intermediate CA it's add issuer info(information about himself also such information as serial number)<br/>
+<br/>
+--&gt;End user(for web servers or VPN) user certificate is signed by intermediate CA when intermediate CA sign signature of end user it also adds infromation about himself into this certificate so issuer info in end user matches owner info of intermediate CA<br/>
+<br/>
+<b>Question<br/>
+<br/>
+</b><b>How end user certificate was securely signed by private key of the intermediate CA??</b><br/>
+<br/>
+<b>Answer:<br/>
+</b>--&gt;Signing occurs on the intermediate CA server with it's private key it securely signes CSR(Certificate Signing Request) received from the end user<br/>
+<br/>
+--&gt;it means that signing process always goes on a machine where private key is located<br/>
+-----------------------------------------------------------<br/>
+<b>Verifying chain of certificate<br/>
+<br/>
+</b><b>How certificate is verified?</b><br/>
+<br/>
+--&gt;when you open up any webpage and you see https, web server sends own certificate and certificates of all intermediate CAs<br/>
+<br/>
+--&gt;first check Current date and time should fall within the certificate validity interval<br/>
+<br/>
+--&gt;second check verification of the signature (see if owner info of intermediate CA is the same of issuer info of end user) if signature was verified successfully trust between intermediate CA and End user is established<br/>
+<br/>
+--&gt;next intermediate CA certificate signature must be verified<br/>
+<br/>
+--&gt;find certificate(Root CA) with owner info equal to issuer info in the intermediate CA certificate<br/>
+<br/>
+--&gt;Root CA certificate is found in the built-in OS certificates store<br/>
+<br/>
+--&gt;verify intermediate CA certificate signature using public key found in the Root CA certificate and if signature was verified successfully trust between Root CA and Intermediate CA is established<br/>
+<br/>
+<b>Trust Root CA &gt; Trust Intermediate CA &gt; Trust End User</b><br/>
+<br/>
+--&gt;after all of that <b>Identity of the End User(for example web server) was successfully verified</b>&nbsp;and certifcate is <b>valid</b><br/>
+-----------------------------------------------------------<br/>
+<b>Verifying SSL certificate and certificates chain</b><br/>
+<br/>
+--&gt;computer verify entire chain not just the end user certificate that is supplied by web server<br/>
+<br/>
+--&gt;There are many different online utilities that allow you to perform such a verification and gain entire information about the certificate chain<br/>
+<br/>
+--&gt;one of services verify ssl <b>https://www.geocerts.com/ssl-checker<br/>
+</b><b><br/>
+</b><img src="ssl check.png" /><b><br/>
+</b><b><br/>
+</b>------------------------------------------------------------<br/>
+<b>PKI<br/>
+<br/>
+</b>--&gt;is a set of rules, algorithms and protocols that allow you to build trust relationships between different entities between Root CA and intermediate CA and end users, key point here is publi key so every entity owns public key<br/>
+<br/>
+<img src="pki3.png" /><br/>
+<br/>
+--&gt;each certificate contains inforamtion about owner, issuer, signature, <b>public key<br/>
+</b><b><br/>
+</b><img src="certificate.png" /><b><br/>
+</b><b><br/>
+</b><b>--&gt;</b>Each entity in pki infrastructure has its own certificate<br/>
+------------------------------------------------------------<br/>
+<b>Certificate domain scope<br/>
+<br/>
+</b><img src="domain scopes.png" /><br/>
+<br/>
+</body></html>

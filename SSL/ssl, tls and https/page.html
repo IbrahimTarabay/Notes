@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>SSL, TLS and HTTPS</title>
+</head><body>--&gt;the certificate isn't used itself for encryption of data between the web browser and web server and that's where SSL and TLS cryptographic protocols comes in<br/>
+<br/>
+<img src="certificate.png" /><br/>
+<br/>
+<b>SSL--&gt;</b>Secure Sockets Layer<br/>
+<b>TLS--&gt;</b>Transport Layer Security<br/>
+<br/>
+<b>Question<br/>
+<br/>
+</b><b>Does certificate depend on SSL, TLS and does it require which protocol exactly must be used??</b><br/>
+<br/>
+<b>Answer:<br/>
+</b>--&gt;Certificate doesn't depend on specific protocol (TLS or SSL) and could be used for both<br/>
+-----------------------------------------------------------<br/>
+<b>History<br/>
+<br/>
+</b><img src="history.png" /><br/>
+<br/>
+--&gt;that's why SSL Certificate is incorrect term<br/>
+<br/>
+<img src="ssl-tls.png" /><br/>
+<br/>
+<img src="ssl-tls history.png" /><br/>
+<br/>
+<img src="google.com.png" /><br/>
+<br/>
+--&gt;it's recommended to disable TLS 1.0 and TLS 1.1 Protocols<br/>
+-----------------------------------------------------------<br/>
+<b>Why RSA is not used in HTTPS for data encryption?<br/>
+<br/>
+</b>1-RSA encryption is slow<br/>
+<br/>
+2-Bi-directional data encryption requires RSA key pairs on both sides<br/>
+<br/>
+<b>So how data is encrypted in https??<br/>
+<br/>
+</b>--&gt;and that when TLS comes in where we encrypt data using symmetric key<br/>
+<br/>
+<img src="questions.png" /><br/>
+<br/>
+-----------------------------------------------------------<br/>
+--&gt;we now know that TLS use symmetric encryption so only one key which is private and known only by browser and web server<br/>
+<br/>
+<img src="establishing tls session.png" /><br/>
+<br/>
+1-in negotiate cipher suite, browser sends to web server list of supported cipher suite and web server choose one of cipher suite<br/>
+<br/>
+<b>cipher suite--&gt;</b>is set of protocols that will be used in TLS communication for example each cipher suite specifies how symmetric key for data encryption will be generated also specifies which algorithm will be used for actual data encryption and decryption, also cipher suite include information about hashing protocol(it's usually sha algorithm)<br/>
+<br/>
+2-after negotiate cipher suite SSL/TLS Certificate is sent to browser, usually exculding root CA because it's assumed that root certificate are located at web browser side in (root certificate store in OS)<br/>
+<br/>
+3-Certificate verification(<br/>
+&nbsp;1-Verify sinature<br/>
+&nbsp;2-Check validity period<br/>
+&nbsp;3-Verify whether certificate was revoked or not<br/>
+) <br/>
+<br/>
+4-Generate symmetric key for data encryption and here things maybe different for different cipher suite, in some cases symmetric key will be generated on browser, another way of generation of symmetric key is by utilizing diffie-hellman key excahnge algorithm and in that case we don't encrypt communication because diffie-hellman key exchange algorithm is designed for generation of same key on both sides by encrypted public connection and when both sides possess same encryption key we can start sending and receiving actual data<br/>
+------------------------------------------------------------<br/>
+<img src="cipher suite.png" /><br/>
+<br/>
+--&gt;first in cipher suite is protocol that is used for communication it either TLS or SSL, next comes algorithm that is used for security generation usually it's diffie-hellman algorithm, then comes algorithm used for encryption like AES or CHACHA and finally algorithm of hashing like SHA<br/>
+<br/>
+<img src="questions2.png" /><br/>
+<br/>
+-----------------------------------------------------------<br/>
+<img src="how diffie.png" /><b><br/>
+</b><b><br/>
+-----------------------------------------------------------<br/>
+</b><img src="delivering key for encryption tls.png" /><b><br/>
+</b><b><br/>
+</b>--&gt;web browser enrypt random key using public key from web server<br/>
+<br/>
+--&gt;RSA key pair is "static" and isn't changed until certificate is renewed<br/>
+<br/>
+--&gt;so if anyone know the private key in web server he can decrypt data between web server and all clients<br/>
+<br/>
+<b>Summary: </b>you should avoid using such key delivery whenever possible, RSA key pair should be used only for server authentication, it shouldn't be used for encrypt any sensitive data like secure key that is used for data encryption<br/>
+-----------------------------------------------------------<br/>
+<img src="diffie hellman 2.png" /><br/>
+<br/>
+<b>NOTE</b>: we didn't use public key of web server for any data encryption, the reason is simple, diffie hellman key exchange is designed exactly for such purposes for generation of secure key on both sides via public and secure network<br/>
+<br/>
+--&gt;after generate key on both side we can start encryption between web browser and web server<br/>
+-----------------------------------------------------------<br/>
+<img src="diffie hellman key.png" /><br/>
+<br/>
+--&gt;this algorithm allows you to generate keys over insecure public connection<br/>
+<br/>
+--&gt;Nobody can generate same key why? because Diffie hellman algorithm uses one-way functions<br/>
+<br/>
+--&gt;once key generated, we use it in encryption and that's exactly what happens in TLS <br/>
+-----------------------------------------------------------<br/>
+<img src="one-way function.png" /><br/>
+<br/>
+--&gt;you can result same numbers for different inputs<br/>
+-----------------------------------------------------------<br/>
+<img src="diffie-hellman key exchange.png" /><br/>
+<br/>
+--&gt;a,b are private keys and not transfered<br/>
+<br/>
+--&gt;g,p are public keys<br/>
+<br/>
+--&gt;Both public keys "g" and "p" are usually generated on one side to decrease quantity of messages between sites<br/>
+-----------------------------------------------------------<br/>
+<img src="elliptic curve cryptography.png" /><br/>
+<br/>
+1-symmetric relative to x axis <br/>
+2-any line that you draw through it will cross the curve at least in two points but usually is three points and there a relation between those three points<br/>
+<br/>
+--&gt;with changing a,b we can change outline of the curve<br/>
+-----------------------------------------------------------<br/>
+<img src="point addition 2.png" /><br/>
+<img src="point addition2.png" /><br/>
+<br/>
+<img src="point addition4.png" /><br/>
+<br/>
+<img src="question lines.png" /><br/>
+<br/>
+yes<br/>
+------------------------------------------------------------<br/>
+<img src="point doubling.png" /><br/>
+<br/>
+--&gt;we can use just two lines instead of three to find <br/>
+<br/>
+--&gt;if you know starting point and last point it's almost impossible to find out how many times point was added to itself<br/>
+------------------------------------------------------------<br/>
+<img src="elliptic curve discrete.png" /><br/>
+<br/>
+<b>Why it's not possible to get "n" knowing G and E?</b><br/>
+<br/>
+<img src="agb.png" /><br/>
+<br/>
+--&gt;same we can't know a knowing A,g,p<br/>
+<br/>
+<img src="elliptic curve cryptography2.png" /><br/>
+<br/>
+G--&gt;is point on the curve<br/>
+n,m--&gt;are numbers<br/>
+------------------------------------------------------------<br/>
+<img src="elliptic curve diffie hellman exchange.png" /><br/>
+<br/>
+ECDSA--&gt;to prevent man in the middle attack</body></html>
