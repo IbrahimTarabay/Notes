@@ -5,4 +5,29 @@
 <title>Website TLS</title>
 </head><body><img src="website.png" /><br/>
 <br/>
---&gt;free domains will be usually subdomains and such free domains usually come with pre-installed TLS certificate</body></html>
+--&gt;free domains will be usually subdomains and such free domains usually come with pre-installed TLS certificate<br/>
+------------------------------------------------------------<br/>
+<img src="github.png" /><br/>
+<br/>
+<b>TLS</b>--&gt;is the protocol <br/>
+<b>ECDHE_RSA</b>--&gt;elliptic curve diffie hellman exchange and it means that the keys will be generated using elliptic cryptography, that will be used for actual encryption of data(<b>AES_128</b>)<br/>
+<br/>
+<b>RSA</b>--&gt;it means private key in server will be used for signing packet on ECDHE phase<br/>
+<br/>
+<b>AES_128</b>--&gt;is the length of the key be used for data encryption, we don't use RSA in ecryption of data because it will be slow<br/>
+<br/>
+<b>GCM</b>--&gt;it's mode of operation of encryption protocol, for AES there two modes of operation GCM(Galois/Counter Mode) and CBC(Cipher Block Chaining) <br/>
+<br/>
+--&gt;in CBC the encryption of next packet is based on previous packet and that's why receiver of the packets when it receives them should reorder them in the previous order and only after that it will be able to decrypt them<br/>
+<br/>
+--&gt;in GCM mode there was no such a dependency and each packet in a section is encrypted independently<br/>
+<br/>
+<b>SHA256</b>--&gt;means that SHA256 will be used for ensuring data integrity<br/>
+<br/>
+<b>OCSP</b>--&gt;Online Certificate Status Protocol, this protocol is used for revocation check of certificate<br/>
+<br/>
+<b>CRL</b>--&gt;Certificate Revocation list<br/>
+<br/>
+--&gt;if certificate compromised anywhere you are able to add you certificate, actually it's serial number to list of revoked certificate and after that you are able to send request by OCSP protocol to check whether a particular certificate is present in the certificate revocation list or not<br/>
+<br/>
+<img src="github pages.png" /></body></html>
