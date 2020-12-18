@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>free TLS at paid hosting</title>
+</head><body><img src="hosting.png" /><br/>
+<br/>
+in VPS<br/>
+<b>Oversubscription</b>--&gt;sums of the resources (vCPUs, RAM, disk space) allocated to all VPSs on a single physical server are larger than real amount of resources on the physical server<br/>
+<br/>
+<b>EX:<br/>
+</b>24 VPSs on a single physical server with 2 vCPU, 4GB RAM each. Total 48 vCPUs and 96GB RAM. But physical server has only 32 CPUs and 80 GB RAM<br/>
+<br/>
+--&gt;Internet Providers also almost always use oversubscription and sum of the bandwidth allocated for the customer is much higher than total bandwidth internet provider could handle.<br/>
+<br/>
+--&gt;that's why VPS are usually less expensive than dedicated servers with same parameters<br/>
+<br/>
+<img src="dedicated server.png" /><br/>
+<br/>
+--&gt;<b>Dedicated Server</b>: can be physical server or VPS(will not oversubscriped, has guaranteed resources)<br/>
+<br/>
+--&gt;During some peak times VPS server may get less resources than it was allocated. But usually it's not noticable.<br/>
+----------------------------------------------------------<br/>
+<b>Hosting Services<br/>
+<br/>
+</b>1-Amazon<br/>
+2-Google Cloud<br/>
+3-Microsoft Azure<br/>
+4-DigitalOcean<br/>
+<br/>
+--&gt;you can get a fully scaled production solution in each of those, there are suitable for small companies, medium or even large enterprises<br/>
+<br/>
+<b>Spot instances</b>--&gt;it's not a good choice to host website that should be available all the time<br/>
+----------------------------------------------------------<br/>
+<b>How to link domain name with other server?<br/>
+<br/>
+</b>1-Change name servers to name servers of DigitalOcean<br/>
+<br/>
+2-Add "A" records to the DNS configuration<br/>
+<br/>
+<b>Recommendation--&gt;</b>Redirect HTTP to HTTPS if HTTPS is enabled and you have valid TLS Certificate<br/>
+----------------------------------------------------------<br/>
+--&gt;Free TLS Certificates from Let's Encrypt are valid for 90 days<br/>
+-----------------------------------------------------------<br/>
+--&gt;Designed to automate entire process of obtain and renewing free TLS certificates<br/>
+<br/>
+--&gt;with let's encrypt you will get certificate with domain validation<br/>
+<br/>
+<img src="lets encrypt.png" /><br/>
+<br/>
+<img src="certbot.png" /><br/>
+<br/>
+<img src="multi web servers.png" /><br/>
+<br/>
+<b>How to solve this problem?</b><br/>
+<br/>
+--&gt;stop other webservers except one and after that obtain certificate and distributed it to other web servers<br/>
+<br/>
+<img src="solution.png" /><br/>
+<br/>
+<img src="buying cert.png" /><br/>
+<br/>
+----------------------------------------------------------<br/>
+--&gt;<b>Free Certificate</b>--&gt;valid for 90 dyas and they should be updated, usually it happens automatically each two month that means that during the year you will get six new certificates<br/>
+<br/>
+<b>CloudFlare</b>--&gt;is one of largest cloud network platforms and it allows to serve content for your website much faster and also it gives your ability to use free TLS encryption </body></html>
