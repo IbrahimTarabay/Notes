@@ -1,0 +1,576 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>C# Basics-2</title>
+</head><body><b>Destructors<br/>
+<br/>
+</b>--&gt;A s constructors are used when a class is instantiated, <b>destructors </b>are automatically invoked when an object is destroyed or deleted<br/>
+<br/>
+--&gt;Destructors have the following attributes:<br/>
+<br/>
+1-A class can only have <b>one </b>destructor<br/>
+<br/>
+2-Destructors cannot be called. They are invoked automatically<br/>
+<br/>
+3-A destructor doesn't take modifiers or have parameters<br/>
+<br/>
+4-The name of a destructor is exactly the same as the class prefixed with a <b>tilde (~)<br/>
+</b><b><br/>
+ex:<br/>
+</b>class Dog{<br/>
+&nbsp;~Dog(){<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+--&gt;Destructors can be very useful for releasing resources before coming out of the program. This can include closing files, releasing memory and so on.<br/>
+<br/>
+<b>ex:<br/>
+</b>class Dog{<br/>
+&nbsp; public Dog(){<br/>
+&nbsp; &nbsp;Console.WriteLine("Constructor");<br/>
+&nbsp;}<br/>
+&nbsp; ~Dog(){<br/>
+&nbsp; &nbsp; Console.WriteLine("Destructor");<br/>
+&nbsp;}<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp; Dog d = new Dog();<br/>
+}<br/>
+<br/>
+<br/>
+--&gt;When the program runs, it first creates the object, which calls the constructor. The object is deleted at the end of the program and the destructor is invoked when the program's execution is complete.<br/>
+----------------------------------------------------------<br/>
+<b>static<br/>
+<br/>
+</b>--&gt;class members(variables,properties,methods) can be declared as <b>static</b>. This makes those members belong to the class itself, instead of belonging to individual objects. No matter how many objects of the class are created, there is only <b>one </b>copy of the static member<br/>
+<br/>
+--&gt;Because of their global nature, static members can be accessed directly using the <b>class name </b>without an object<br/>
+<br/>
+<b>ex:<br/>
+</b>class Cat{<br/>
+&nbsp; public static int count=0;<br/>
+&nbsp; public Cat(){<br/>
+&nbsp; &nbsp;count++;<br/>
+&nbsp;}<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp; Cat c1 = new Cat();<br/>
+&nbsp; Cat c2 = new Cat();<br/>
+&nbsp; Console.WriteLine(Cat.count);<br/>
+}<br/>
+<br/>
+--&gt;The <b>count </b>&nbsp;variable is shared between all Cat objects. each time an object is created, the static value is incremented, the program above demonstrates this when 2 is displayed after creating two objects of that class<br/>
+<br/>
+--&gt;You must access <b>static</b>&nbsp;members using the class name. if you try to access them via an object of that class, you will generate an error.<br/>
+<br/>
+--&gt;The same concept applies to <b>static </b>methods<br/>
+<br/>
+<b>ex:<br/>
+</b>class Dog{<br/>
+&nbsp; public static void Bark(){<br/>
+&nbsp; &nbsp;Console.WriteLine("Woof");<br/>
+&nbsp; }<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp; Dog.Bark();<br/>
+}<br/>
+<br/>
+--&gt;Static methods can access <b>only </b>static members<br/>
+<br/>
+--&gt;The Main method is <b>static</b>, as it is the starting point of any program. Therefore any method called directly from Main had to be <b>static</b><br/>
+<br/>
+--&gt;<b>Constant </b>members are static by definition<br/>
+<br/>
+<b>ex:<br/>
+</b>class MathClass{<br/>
+&nbsp; public const int ONE =1;<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp; Console.Write(MathClass.ONE);<br/>
+}<br/>
+<br/>
+--&gt;The static constructor is automatically called once when we access a static member of the class<br/>
+<br/>
+<b>ex:<br/>
+</b>class SomeClass{<br/>
+&nbsp; public static int X {get; set;}<br/>
+&nbsp; public static int Y {get; set;}<br/>
+<br/>
+&nbsp; static SomeClass(){<br/>
+&nbsp; &nbsp; &nbsp;X = 10;<br/>
+&nbsp; &nbsp; &nbsp;Y = 20;<br/>
+&nbsp; &nbsp;}<br/>
+}<br/>
+<br/>
+--&gt;The constructor will get called once when we try to access SomeClass.X or SomeClass.Y<br/>
+<br/>
+----------------------------------------------------------<br/>
+<b>Static Classes</b><br/>
+<br/>
+--&gt;An entire class can be declared as <b>static</b><br/>
+<br/>
+--&gt;A<b>&nbsp;static class </b>can contain only static members<br/>
+<br/>
+--&gt;You cannot instantiate an object of a static class, as only one instance of the static class can exist in a program<br/>
+<br/>
+<b>ex:<br/>
+</b>Console.WriteLine(Math.Pow(2,3));<br/>
+<br/>
+--&gt;You access all members of the Math class using the class name, without declaring an object.<br/>
+<br/>
+--&gt;The <b>Console </b>class is also an example of a static class. we use its static <b>WriteLine() </b>method to output to the screen, or the static <b>ReadLine() </b>method to get user input.<br/>
+-----------------------------------------------------------<br/>
+<b>this keyword</b><br/>
+<br/>
+--&gt;The <b>this </b>keyword is used inside the class and refers to the current instance of the class, meaning it refers to the current object<br/>
+<br/>
+--&gt;One of the common uses of <b>this </b>is to distinguish class members from other data, such as local or formal parameters of a method, as shown in <b>ex:<br/>
+</b><br/>
+class Person{<br/>
+&nbsp; private string name;<br/>
+&nbsp; public Person(string name){<br/>
+&nbsp; &nbsp; this.name = name;<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+--&gt;Here, <b>this.name</b>&nbsp;represents the member of the class, whereas <b>name</b>&nbsp;represents the parameter of the constructor<br/>
+<br/>
+--&gt;Another common use of <b>this </b>is for passing the current instance to a method as parameter: ShowPersonInfo(<b>this</b>)<b>;</b><br/>
+-----------------------------------------------------------<br/>
+<b>The readonly Modifier<br/>
+<br/>
+</b>--&gt;The <b>readonly </b>modifier prevents a member of a class from being modified after construction. it means that the field declared as <b>readonly </b>can be modified only when you declare it or from within a constructor <br/>
+<br/>
+<b>ex:<br/>
+</b>class Person{<br/>
+&nbsp; private readonly string name = "John";<br/>
+&nbsp; public Person(string name){<br/>
+&nbsp; &nbsp; this.name = name;<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+--&gt;if we try to modify the <b>name </b>field anywhere else, we will get an error, There are three major differences between <b>readonly </b>and <b>const </b>fields:<br/>
+<br/>
+1-a constant field must be initialized when it is declared, whereas as readonly field can be declared without initialization<b>, ex:<br/>
+</b><br/>
+readonly string name; //Ok<br/>
+const double PI; //Error<br/>
+<br/>
+2-<b>&nbsp;readonly </b>field value can be changed in a constructor, but a constant value cannot<br/>
+<br/>
+3-the <b>readonly </b>field can be assigned a value that is a result of a calculation, but constants cannot <b>ex:<br/>
+</b><br/>
+readonly double a = Math.Sin(60); //Ok<br/>
+const double b = Math.Sin(60); //Error!<br/>
+<br/>
+--&gt;<b>The readonly modifier prevents a member of a class from being modified after construction</b><br/>
+-----------------------------------------------------------<br/>
+<b>Indexers<br/>
+<br/>
+</b>--&gt;An <b>indexer </b>allows objects to be indexed like an array<br/>
+<br/>
+<b>ex:<br/>
+</b>string str = "Hello World";<br/>
+char x = str[4];<br/>
+Console.WriteLine(x);<br/>
+<br/>
+1-Declaration of an indexer is to some extent similar to a property. The difference is that indexer accessor require an <b>index</b>, like a property you can use <b>get</b>&nbsp;and <b>set</b>&nbsp;accessors for defining an indexer<br/>
+<br/>
+2-However, where properties return or set a specific data member, indexers return or set a particular value from the object instance.<br/>
+<br/>
+3-Indexers are defined with the <b>this </b>keyword<br/>
+<br/>
+<br/>
+<b>ex:<br/>
+</b>class Clients{<br/>
+&nbsp; private string[] names = new string[10];<br/>
+<br/>
+&nbsp; public string this[int index]{<br/>
+&nbsp; &nbsp; get {<br/>
+&nbsp; &nbsp; &nbsp; return names[index];<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; set {<br/>
+&nbsp; &nbsp; &nbsp; names[index] = value;<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp; Clients c = new Clients();<br/>
+&nbsp; c[0] = "Dave";<br/>
+&nbsp; c[1] = "Bob";<br/>
+&nbsp;<br/>
+&nbsp; Console.WriteLine(c[1]);<br/>
+}<br/>
+<br/>
+--&gt;Now, when we declare an object of class Clients, we use an index to refer to specific objects like the elements of an array<br/>
+<br/>
+<b>--&gt;You typically use an indexer if the class represents a list, collection, or array of objects</b><br/>
+-----------------------------------------------------------<br/>
+<b>Operator Overloading<br/>
+<br/>
+</b>Most operators in C# can be <b>overloaded, </b>meaning they can be redefined for custom actions<b><br/>
+</b><b><br/>
+</b>--&gt;Overloaded operators are methods with special names, where the keyword <b>operator</b>&nbsp;is followed by the symbol for the operator being defined.<br/>
+<br/>
+--&gt;similar to any other method, an overloaded operator has a return type and a parameter list<br/>
+<br/>
+--&gt;the overloaded operator must be <b>static<br/>
+</b><b><br/>
+ex:<br/>
+</b>class Box {<br/>
+&nbsp; public int Height {get; set;}<br/>
+&nbsp; public int Width {get; set;}<br/>
+&nbsp; public Box(int h, int w){<br/>
+&nbsp; &nbsp; Height = h;<br/>
+&nbsp; &nbsp; Width = w;<br/>
+&nbsp; }<br/>
+public static Box operator+(Box a, Box b){<br/>
+&nbsp; int h = a.Height + b.Height;<br/>
+&nbsp; int w = a.Width + b.Width;<br/>
+&nbsp; Box res = new Box(h,w);<br/>
+&nbsp; return res;<br/>
+&nbsp;}<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp; Box b1 = new Box(14,3);<br/>
+&nbsp; Box b2 = new Box(5,7);<br/>
+&nbsp; Box b3 = b1 +b2;<br/>
+}<br/>
+<br/>
+<b>ex:<br/>
+</b>public static bool operator &gt; (Box a, Box b){<br/>
+&nbsp; if(a.Height*a.Width &gt; b.Height*b.Width)<br/>
+&nbsp; &nbsp;return true;<br/>
+&nbsp; else<br/>
+&nbsp; &nbsp;return false;<br/>
+}<br/>
+<br/>
+--&gt;No, it's not 'Box'. Don't be confused by an previous example. It was Box there, because the operator returned a Box object. Here it returns a boolean value, so it's 'bool'.<br/>
+-----------------------------------------------------------<br/>
+<b>old examples<br/>
+<br/>
+What is the output of this code?<br/>
+<br/>
+</b>class Temp { <br/>
+&nbsp; public int num = 2;<br/>
+&nbsp; &nbsp;public Temp() {<br/>
+&nbsp; &nbsp;num++;<br/>
+&nbsp; &nbsp;} <br/>
+&nbsp; &nbsp;~Temp() { <br/>
+&nbsp; &nbsp; num++; <br/>
+&nbsp; } <br/>
+} <br/>
+&nbsp;static void Main(string[] args) { <br/>
+&nbsp;Temp t = new Temp();<br/>
+&nbsp;Console.WriteLine(t.num);<br/>
+}<b><br/>
+</b><b><br/>
+</b>--&gt;"NO IT SHOULD BE 4!! IT MUST BE 4!!!! BECAUSE OF THE DESTRUCTOR!!!!!" Stop right there!!! Remember, the destructor gets executed ONLY after the method in which its object is declared ENDS, in this case, it's the Main method.<br/>
+-----------------------------------------------------------<br/>
+<b>Inheritance<br/>
+<br/>
+</b><b>Inheritance</b>&nbsp;allows us to define a class based on another calss. This makes creating and maintaining an application easy.<br/>
+<br/>
+--&gt;The class whose properties are inherited by another class is called the <b>Base </b>class. The class which inherits the properties is called the <b>Derived </b>class. For example, base class <b>Animal </b>can be used to derive <b>Cat </b>and <b>Dog </b>classes. The dervied class inherits all the features from the base class, and can have its own additional features<br/>
+<br/>
+<img src="inheritance.png" /><br/>
+<br/>
+<b>ex:<br/>
+</b>class Animal {<br/>
+&nbsp; public int Legs {get; set;}<br/>
+&nbsp; public int Age {get; set;}<br/>
+}<br/>
+class Dog: Animal {<br/>
+&nbsp; public Dog(){<br/>
+&nbsp; &nbsp; Legs = 4;<br/>
+&nbsp; }<br/>
+&nbsp; public void Bark(){<br/>
+&nbsp; &nbsp;Console.Write("Woof");<br/>
+&nbsp;}<br/>
+}<br/>
+<br/>
+static void Main(string[] args){<br/>
+&nbsp; Dog d = new Dog();<br/>
+&nbsp; Console.WriteLine(d.Legs); // Outputs 4<br/>
+<br/>
+&nbsp; d.Bark();<br/>
+}<br/>
+<br/>
+--&gt;A base class can have multiple derived classes.<br/>
+<br/>
+--&gt;C# doesn't support multiple inheritance, so you cannot inherit from multiple classes, However you can use <b>interfaces </b>to implement multiple inheritance.<br/>
+-----------------------------------------------------------<br/>
+<b>protected<br/>
+<br/>
+</b>--&gt;Public members may be accessed from anywhere outside of the class, while access to private members is limited to their class<br/>
+<br/>
+--&gt;The <b>protected </b>access modifier is very similar to <b>private </b>with one difference, it can be accessed in the derived classes. So, a <b>protected </b>member is accessible only from derived classes<br/>
+<br/>
+<b>ex:<br/>
+</b>class Person {<br/>
+&nbsp; protected int Age {get; set;}<br/>
+&nbsp; protected string Name {get; set;}<br/>
+}<br/>
+class Student: Person {<br/>
+&nbsp; public Student(string nm){<br/>
+&nbsp; &nbsp; Name = nm;<br/>
+&nbsp; }<br/>
+<br/>
+public void Speak(){<br/>
+&nbsp; Console.Write("Name: "+Name);<br/>
+&nbsp;}<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp; Student s = new Student("David");<br/>
+&nbsp; s.Speak();<br/>
+&nbsp; s.Name = "Bob"//Error<br/>
+}<br/>
+-----------------------------------------------------------<br/>
+<b>sealed<br/>
+<br/>
+</b>--&gt;A class can prevent other classes from inheriting it, or any of its members, by using the <b>sealed </b>modifier.<br/>
+<br/>
+<b>ex:<br/>
+</b>sealed class Animal {<br/>
+&nbsp; //some code<br/>
+}<br/>
+class Dog : Animal { } //Error<br/>
+<br/>
+<b>What is the maximum number of base classes a sealed class can have?</b>&nbsp;like any othe class just one base class<br/>
+-----------------------------------------------------------<br/>
+<b>Derived Class Constructor &amp; Destructor<br/>
+<br/>
+</b>--&gt;Constructors are called when objects of a class are created. With inheritance the base class constructor and destructor are not inherited, so you should define constructors for the derived classes<br/>
+<br/>
+--&gt;However, the base class constructor the destructor are being invoked automatically when an <b>object of the derived class is created</b>&nbsp;<b>or deleted</b><br/>
+<br/>
+<b>ex:<br/>
+</b>class Animal {<br/>
+&nbsp; public Animal(){<br/>
+&nbsp; &nbsp;Console.WriteLine("Animal created");<br/>
+&nbsp;}<br/>
+&nbsp; ~Animal(){<br/>
+&nbsp; &nbsp; Console.WriteLine("Animal deleted");<br/>
+&nbsp; }<br/>
+}<br/>
+class Dog: Animal{<br/>
+&nbsp;public Dog(){<br/>
+&nbsp; &nbsp;Console.WriteLine("Dog created");<br/>
+&nbsp; }<br/>
+&nbsp;~Dog(){<br/>
+&nbsp; &nbsp;Console.WriteLine("Dog deleted");<br/>
+&nbsp;}<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp; Dog d = new Dog();<br/>
+}<br/>
+<br/>
+<b>Output:</b><br/>
+Animal created<br/>
+Dog created<br/>
+Dog deleted<br/>
+Animal deleted &nbsp;<br/>
+<br/>
+--&gt;Note that the base class constructor is called first and the derived class constructor is called next, when the object is destroyed, the derived class destructor is invoked and then the base class destructor is invoked<br/>
+<br/>
+--&gt;You can think of it as the following: The derived class needs its base class in order to work, which is why the base class constructor is called first<br/>
+-----------------------------------------------------------<br/>
+<b>Polymorphism<br/>
+<br/>
+</b>--&gt;The word <b>polymorphism </b>means "having many forms"<br/>
+<br/>
+--&gt;Typically, polymorphism occurs when there is a hierarchy of classes and they are related through inheritance from a common base class<br/>
+<br/>
+--&gt;Simply, polymorphism means that a single method can have a number of different implementations.<br/>
+<br/>
+<b>Polymorphism<br/>
+<br/>
+</b>--&gt;Consider having a program that allows users to draw different shapes. each shape is drawn differently, you don't know which shape the user will choose<br/>
+<br/>
+<b>ex:<br/>
+</b>class Shape{<br/>
+&nbsp; public virtual void Draw(){<br/>
+&nbsp; &nbsp;Console.Write("Base Draw");<br/>
+&nbsp;}<br/>
+}<br/>
+<br/>
+--&gt;The <b>virtual </b>keyword allows methods to be overridden in derived classes<br/>
+<br/>
+--&gt;Virtual methods enable you to work with groups of related objects in a uniform way<br/>
+&nbsp;<b><br/>
+</b><b>ex:<br/>
+</b>class Shape{<br/>
+&nbsp; public virtual void Draw(){<br/>
+&nbsp; &nbsp;Console.Write("Base Draw");<br/>
+&nbsp;}<br/>
+}<br/>
+class Circle : Shape {<br/>
+&nbsp; public override void Draw(){<br/>
+&nbsp; &nbsp;// draw a circle...<br/>
+&nbsp; &nbsp;Console.WriteLine("Circle Draw");<br/>
+&nbsp;}<br/>
+}<br/>
+class Rectangle : Shape {<br/>
+&nbsp; public override void Draw(){<br/>
+&nbsp; &nbsp;// draw a rectangle<br/>
+&nbsp; &nbsp;Console.WriteLine("Rect Draw");<br/>
+&nbsp;}<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp; Shape c = new Circle();<br/>
+&nbsp; c.Draw();<br/>
+<br/>
+&nbsp; Shape r = new Rectangle();<br/>
+&nbsp; r.Draw();<br/>
+}<br/>
+<br/>
+--&gt;Polymorphism can be useful in many cases. For example, we could create a game where we would have different Player types with each Player having a separate behavior for the Attack method.<br/>
+-----------------------------------------------------------<br/>
+<b>Abstract Classes<br/>
+<br/>
+</b>--&gt;In some situations there is no meaningful need for <b>virtual </b>method to have a separate defnition in the base class like(<b>polymorphism</b>)<br/>
+<br/>
+<b>ex:<br/>
+</b>abstract class Shape {<br/>
+&nbsp; public abstract void Draw();<br/>
+}<br/>
+<br/>
+1-<b>abstract </b>method declarations are only permitted in <b>abstract </b>Classes<br/>
+<br/>
+2-Members marked as <b>abstract</b>, or included in an abstract class, must be implemented by classes that derive from abstract class<br/>
+<br/>
+3-An abstract class can have multiple abstract members<br/>
+<br/>
+<br/>
+<b>Abstract Classes<br/>
+<br/>
+</b>--&gt;An abstract class is intended to be a base class of other classes. it acts like a template for its derived classes<br/>
+<br/>
+<b>ex:<br/>
+</b>abstract class Shape {<br/>
+&nbsp; public abstract void Draw();<br/>
+}<br/>
+class Circle : Shape {<br/>
+&nbsp; public override void Draw(){<br/>
+&nbsp; &nbsp;Console.WriteLine("Circle Draw");<br/>
+&nbsp;}<br/>
+}<br/>
+class Rectangle : Shape {<br/>
+&nbsp; public override void Draw(){<br/>
+&nbsp; &nbsp; Console.WriteLine("Rect Draw");<br/>
+&nbsp; }<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp; Shape c = new Circle();<br/>
+&nbsp; c.Draw();<br/>
+}<br/>
+<br/>
+1-An abstract class cannot be instantiated<br/>
+<br/>
+2-An abstract class may contain abstract methods and accessors<br/>
+<br/>
+3-A non-abstract class derived from an abstract class must include actual implementation of all inherited abstract methods and accessors<br/>
+<br/>
+<br/>
+--&gt;it's not possible to modify an <b>abstract </b>class with the <b>sealed </b>modifier because the two modifiers have opposite meanings. The <b>sealed </b>modifier prevents a class from being inherited and the <b>abstract </b>modifier requires a class to be inherited<br/>
+-----------------------------------------------------------<br/>
+<b>Interfaces<br/>
+<br/>
+</b>--&gt;An<b>&nbsp;interface </b>is a completely abstract class, which contains <b>only </b>abstract members<b><br/>
+</b><br/>
+<b>ex:<br/>
+</b>public interface Ishape{<br/>
+&nbsp; void Draw();<br/>
+}<br/>
+<br/>
+1-All members of the interface are by default abstract, so no need to use the abstract keyword<br/>
+<br/>
+2-Interfaces can have public(by default) private and protected members.<br/>
+<br/>
+3-It's common to use the capital letter <b>I </b>as the starting letter for an interface name<br/>
+<br/>
+4-Interfaces can contain properties, methods, etc. but <b>cannot </b>contain fields(variables)<br/>
+<br/>
+<b>Interfaces<br/>
+<br/>
+</b>1-The term <b>implementing an interface </b>is used(opposed to the term "inheriting from") to describe the process of creating a class based on an interface.<br/>
+<br/>
+<b>ex:<br/>
+</b>public interface IShape {<br/>
+&nbsp; void Draw();<br/>
+}<br/>
+class Circle : IShape {<br/>
+&nbsp; public void Draw(){<br/>
+&nbsp; &nbsp; Console.WriteLine("Circle Draw");<br/>
+&nbsp;}<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp; IShape c = new Circle();<br/>
+&nbsp; c.Draw();<br/>
+}<br/>
+<br/>
+<b>Note</b>--&gt;The <b>override </b>keyword is not needed when you implement an interface<br/>
+<br/>
+<b>Why use interfaces rather than abstract classes??<br/>
+<br/>
+</b>--&gt;A class can inherit from just one base class, but it can implement <b>multiple </b>interfaces, therefore by using interfaces you can include behavior from multiple sources in a class, to implement multiple interfaces, use a comma separated list of interfaces when creating the class: <b>class A: IShape, IAnimal</b><br/>
+<br/>
+<br/>
+<b>Default Implementation<br/>
+<br/>
+</b>--&gt;in interfaces allows to write an implementation of any method. this is useful when there is a need to provide a single implementation for common functionality<br/>
+<br/>
+<b>ex:<br/>
+</b>public interface IShape {<br/>
+&nbsp; void Draw();<br/>
+&nbsp; void Finish(){<br/>
+&nbsp; &nbsp;Console.WriteLine("Done!")<br/>
+&nbsp;} <br/>
+}<br/>
+class Circle : IShape {<br/>
+&nbsp; public void Draw(){<br/>
+&nbsp; &nbsp;Console.WriteLine("Circle Draw");<br/>
+&nbsp;}<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp; IShape c = new Circle();<br/>
+&nbsp; c.Draw();<br/>
+&nbsp; c.Finish();<br/>
+}<br/>
+-----------------------------------------------------------<br/>
+<b>Nested Classes</b><br/>
+<br/>
+<b>ex:<br/>
+</b>class Car {<br/>
+&nbsp; string name;<br/>
+&nbsp; public Car(string nm){<br/>
+&nbsp; &nbsp; name = nm;<br/>
+&nbsp; &nbsp; Motor m = new Motor();<br/>
+&nbsp; }<br/>
+&nbsp; public class Motor {<br/>
+&nbsp; &nbsp;//some code<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+--&gt;A nested class acts as a member of the class, so it can have the same access modifiers as other members (public, private, protected).<br/>
+<br/>
+--&gt;Just as in real life, objects can contain other objects. For example, a car, which has its own attributes (color, brand, etc.) contains a motor, which as a separate object, has its own attributes (volume, horsepower, etc.). Here, the Car class can have a nested Motor class as one of its members.<br/>
+-----------------------------------------------------------<br/>
+<b>Namespaces<br/>
+<br/>
+</b>--&gt;Namespaces declare a scope that contains a set of related objects. you can use a namespace to organize code elements. you can define your own namespaces and use them in your program<br/>
+<br/>
+<b>ex:<br/>
+</b>using System;<b><br/>
+</b><b><br/>
+</b>System.Console.WriteLine("Hi");<b><br/>
+</b><b><br/>
+<br/>
+</b>--&gt;The .NET Framework uses namespaces to organize its many classes. <b>System</b>&nbsp;is one example of a .NET Framework namespace.<b><br/>
+</b>-----------------------------------------------------------<b><br/>
+</b><b><br/>
+<br/>
+<br/>
+<br/>
+</b></body></html>

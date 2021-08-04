@@ -143,7 +143,7 @@ ex:<b><br/>
 <br/>
 change hostname:<br/>
 <br/>
-1-Edit <span style="font-family: SFMono-Regular"><span style="font-size: 16pt"><div style="text-align: left">/etc/sysconfig/network</div></span></span>&nbsp; (optional)<br/>
+1-Edit <div style="text-align: left"><span style="font-size: 16pt"><span style="font-family: SFMono-Regular">/etc/sysconfig/network</span></span></div>&nbsp; (optional)<br/>
 &nbsp; NETWORKING=yes<br/>
 &nbsp; NETWORKING_IPV6=no<br/>
 &nbsp; HOSTNAME=ibrahim &nbsp;<br/>
@@ -184,10 +184,10 @@ Linux=LDAP<br/>
 -------------------------------------------------------------------------------------<br/>
 <b>Difference between Active Directory,LDAP,IDM,WinBIND,OpenLDAP etc<br/>
 <br/>
-</b><b>Active Directory:</b><span style="font-size: 12pt"><span style="font-family: arial"><div style="text-align: left">is a </div></span><b>directory</b><span style="font-family: arial"><div style="text-align: left"> service that centralizes the management of users, computers and other objects within a network. Its primary </div></span><b>function</b><span style="font-family: arial"><div style="text-align: left"> is to authenticate and authorize users and computers in a windows domain,It is included in most Windows Server operating systems as a set of processes and services &nbsp;</div></span></span>&nbsp; <br/>
+</b><b>Active Directory:</b><div style="text-align: left"><span style="font-family: arial"><span style="font-size: 12pt">is a </span></span></div><span style="font-size: 12pt"><b>directory</b><div style="text-align: left"><span style="font-family: arial"> service that centralizes the management of users, computers and other objects within a network. Its primary </span></div><b>function</b><div style="text-align: left"><span style="font-family: arial"> is to authenticate and authorize users and computers in a windows domain,It is included in most Windows Server operating systems as a set of processes and services &nbsp;</span></div></span>&nbsp; <br/>
 <img src="computer-and-networks-active-directory-d.png" /><br/>
 <b><br/>
-</b><b>IDM:</b><span style="font-size: 12pt"><span style="font-family: arial"><div style="text-align: left">Identity management, also known as identity and access management, is a framework of policies and technologies for ensuring that the proper people in an enterprise have the appropriate access to technology resources. IdM systems fall under the overarching umbrellas of IT security and data management</div></span>&nbsp; <br/>
+</b><b>IDM:</b><div style="text-align: left"><span style="font-family: arial"><span style="font-size: 12pt">Identity management, also known as identity and access management, is a framework of policies and technologies for ensuring that the proper people in an enterprise have the appropriate access to technology resources. IdM systems fall under the overarching umbrellas of IT security and data management</span></span></div><span style="font-size: 12pt">&nbsp; <br/>
 </span><span style="font-size: 12pt"><br/>
 <br/>
 <b>OpenLDAP:</b>&nbsp;it's like active directory and IDM but it's free unlike IDM for redhat with money and it used specifically used for linux and unix<br/>
@@ -206,13 +206,13 @@ jumpCloud<br/>
 <br/>
 <b>LDAP: </b>light weight directory access protocol<br/>
 <br/>
-<span style="font-family: inherit"><span style="font-size: 15pt">What are the differences between LDAP<br/>
+<span style="font-size: 15pt"><span style="font-family: inherit">What are the differences between LDAP<br/>
 </span></span><br/>
-<span style="font-size: 12pt"><span style="font-family: Arial"><div style="text-align: left">LDAP was originally a protocol, Lightweight Directory Access Protocol, and is now a directory service specification in its own right, including all kinds of schemas and extras.<br/>
-</div></span><span style="font-family: inherit"><br/>
+<div style="text-align: left"><span style="font-family: Arial"><span style="font-size: 12pt">LDAP was originally a protocol, Lightweight Directory Access Protocol, and is now a directory service specification in its own right, including all kinds of schemas and extras.<br/>
+</span></span></div><span style="font-size: 12pt"><span style="font-family: inherit"><br/>
 </span><br/>
-</span><span style="font-family: Arial"><div style="text-align: left"><span style="font-size: 12pt">There is no such thing as 'Active OpenLDAP'. There is however <a href="http://openldap.org/">OpenLDAP</a>, which is an open-source implementation of LDAP, both server and client.</span><span style="font-size: 15pt"><br/>
-</span></div></span>---------------------------------------------------------------------------<br/>
+</span><div style="text-align: left"><span style="font-family: Arial"><span style="font-size: 12pt">There is no such thing as 'Active OpenLDAP'. There is however <a href="http://openldap.org/">OpenLDAP</a>, which is an open-source implementation of LDAP, both server and client.</span><span style="font-size: 15pt"><br/>
+</span></span></div>---------------------------------------------------------------------------<br/>
 <b>System Utility Commands &nbsp;</b><br/>
 <br/>
 <b>date</b><br/>
@@ -251,23 +251,23 @@ ex:<br/>
 <b>Job</b><br/>
 (Run a service or process at schedule time)<br/>
 ----------------------------------------------------------------------------<br/>
-<b>Process / Services Commands<br/>
+<b>Process / Services Commands</b><br/>
 <br/>
-</b><b>systemctl or service</b><br/>
+systemctl or service<br/>
 (command to start service like apache)<br/>
-<b>ps</b><br/>
+ps<br/>
 (to see what processes are running on your Linux system)<br/>
-<b>top</b><br/>
+top<br/>
 (you will see all your processes running in your system depending on its load and it tells us the information about your memory,cpu that is used by that process)<br/>
-<b>kill</b><br/>
+kill<br/>
 (kills the process, you can use process name or process ID)<br/>
-<b>crontab</b><br/>
+crontab<br/>
 (used to schedule your processes or your applications so it turn into a job)<br/>
-<b>at</b><br/>
+at<br/>
 (it's like crontab but it's one time basis or ad hoc process)<br/>
 -------------------------------------------------------------------------<br/>
 <b>ntp</b><br/>
-(is application that run all the time "daemon" for network time protocol that synchronizes yours to other clocks, it's now replaced by <b>chronyd</b>&nbsp;service)<br/>
+(is application that run all the time "daemon" for network time protocol that synchronizes yours to other clocks, it's now replaced by chronyd service)<br/>
 <br/>
 ex:<br/>
 #systemctl restart chronyd<br/>
@@ -283,9 +283,9 @@ ex:<br/>
 ex:<br/>
 #kill &lt;process ID&gt;<br/>
 -----------------------------------------------------------------------------<br/>
-<b>Additional Cron Jobs<br/>
+<b>Additional Cron Jobs</b><br/>
 <br/>
-</b>-By default there are 4 different types of cronjobs<br/>
+-By default there are 4 different types of cronjobs<br/>
 &nbsp; -Hourly<br/>
 &nbsp; -Daily<br/>
 &nbsp; -Weekly<br/>
@@ -302,9 +302,9 @@ ex:<br/>
 #cd /etc<br/>
 #ls -l &nbsp;| grep cron<br/>
 ----------------------------------------------------------------------------------<br/>
-<b>Process Management<br/>
+<b>Process Management</b><br/>
 <br/>
-</b>background=<b>ctrl-z, jobs and bg</b><br/>
+background=ctrl-z, jobs and bg<br/>
 (jobs to see what commands has stopped,ctrl-z to stop command like sleep 100,bg make the process running in the background)<br/>
 ex:<br/>
 #sleep 100<br/>
@@ -313,21 +313,21 @@ ctrl+z<br/>
 #bg<br/>
 #jobs<br/>
 <br/>
-foreground=<b>fg<br/>
-</b>(fg make the process running in foreground in front of you)<br/>
+foreground=fg<br/>
+(fg make the process running in foreground in front of you)<br/>
 <br/>
-Run process even after exit = <b>nohup process &amp;<br/>
-</b><b>&nbsp; &nbsp;OR = nohup process &gt; /dev/null 2&gt;&amp;1 &nbsp;&amp;</b><br/>
+Run process even after exit = nohup process &amp;<br/>
+&nbsp; &nbsp;OR = nohup process &gt; /dev/null 2&gt;&amp;1 &nbsp;&amp;<br/>
 (to make the process continue even if you close the terminal ex: #nohup sleep 100 &amp;)<br/>
 <br/>
-kill a process by name = <b>pkill</b><br/>
+kill a process by name = pkill<br/>
 <br/>
-Process priority = <b>nice</b>&nbsp; (<b>#nice -n 5 process</b>)<br/>
+Process priority = nice &nbsp;(#nice -n 5 process)<br/>
 &nbsp;-th niceness scale goes from -20 to 19, the lower the number the more priority that task gets<br/>
 <br/>
-Process monitoring = <b>top</b><br/>
+Process monitoring = top<br/>
 <br/>
-List process = <b>ps<br/>
+List process = ps<b><br/>
 </b>-------------------------------------------------------------------------<br/>
 <b>System Monitoring</b><br/>
 <br/>
@@ -393,9 +393,9 @@ dmidecode<br/>
 ----------------------------------------------------------------------<br/>
 <b>System Architecture</b><br/>
 <span style="font-size: 12pt"><br/>
-<b><div style="text-align: left"><span style="font-family: arial">What's the </span></div>difference between<div style="text-align: left"><span style="font-family: arial"> the Intel Core </span></div>i5<div style="text-align: left"><span style="font-family: arial"> vs Core </span></div>i7<div style="text-align: left"><span style="font-family: arial">?<br/>
-</span></div><div style="text-align: left"><span style="font-family: arial"><br/>
-</span></div></b></span><span style="font-size: 12pt"><div style="text-align: left"><span style="font-family: arial">You might think it's the number of cores, but for the most part desktop Core </span></div><b>i5</b><div style="text-align: left"><span style="font-family: arial"> processors have four cores, just like i7s. Intel Core </span></div><b>i7</b><div style="text-align: left"><span style="font-family: arial"> processors generally have faster base clock speeds, or in other words they have more Ghz</span></div>&nbsp;</span>&nbsp;<br/>
+<b><span style="font-family: arial"><div style="text-align: left">What's the </div></span>difference between<span style="font-family: arial"><div style="text-align: left"> the Intel Core </div></span>i5<span style="font-family: arial"><div style="text-align: left"> vs Core </div></span>i7<span style="font-family: arial"><div style="text-align: left">?<br/>
+</div></span><span style="font-family: arial"><div style="text-align: left"><br/>
+</div></span></b></span><span style="font-size: 12pt"><span style="font-family: arial"><div style="text-align: left">You might think it's the number of cores, but for the most part desktop Core </div></span><b>i5</b><span style="font-family: arial"><div style="text-align: left"> processors have four cores, just like i7s. Intel Core </div></span><b>i7</b><span style="font-family: arial"><div style="text-align: left"> processors generally have faster base clock speeds, or in other words they have more Ghz</div></span>&nbsp;</span>&nbsp;<br/>
 <br/>
 <b>Differences between a 32-bit and 64-bit CPU?<br/>
 <br/>

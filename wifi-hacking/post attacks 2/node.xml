@@ -2,7 +2,7 @@
 <node>
 <version>6</version>
 <dict>
-  <key>expanded</key><true/>
+  <key>expanded</key><false/>
   <key>title</key><string>Post Attacks</string>
   <key>nodeid</key><string>5978dd71-f9f2-4c61-bda1-af9448e18a92</string>
   <key>modified_time</key><integer>1591982288</integer>

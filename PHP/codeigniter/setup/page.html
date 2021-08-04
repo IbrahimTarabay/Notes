@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>setup</title>
+</head><body>--&gt;install codeigniter with composer help us to update packages in the future<br/>
+<br/>
+1-go to htdocs<br/>
+<br/>
+2-open cmd and run:<br/>
+#composer create-project codeigniter4/appstarter taskapp<br/>
+-----------------------------------------------------------<br/>
+1-make env to .env<br/>
+<br/>
+2-remove comment CI_ENVIRONMENT = production<br/>
+<br/>
+3-make it CI_ENVIRONMENT = development<br/>
+<br/>
+4-app/config/Database.php<br/>
+<br/>
+public $default = [<br/>
+&nbsp; 'hostname' =&gt; 'localhost',<br/>
+&nbsp; 'username' =&gt; 'root',<br/>
+&nbsp; 'password' =&gt; '';<br/>
+&nbsp; 'database' =&gt; 'taskapp',<br/>
+&nbsp; &nbsp;.......<br/>
+];<br/>
+---------------------------------------------------------<br/>
+<b>Add a Virtual Host<br/>
+<br/>
+</b>--&gt;This will allow us to run the framework in its own root folder on the web server(apache)<br/>
+<br/>
+1-in <b>httpd.conf</b>(xampp/apache/conf) make sure the line under # Virtual hosts is uncommented<br/>
+<br/>
+ex:<br/>
+# Virtual hosts<br/>
+Include conf/extra/httpd-vhosts.conf<br/>
+<br/>
+2-in <b>httpd-vhosts.conf</b>&nbsp;write:<br/>
+<br/>
+&lt;VirtualHost *:80&gt;<br/>
+&nbsp; ServerName taskapp.localhost<br/>
+&nbsp; <br/>
+&nbsp; DocumentRoot "C:\xampp\htdocs\taskapp\public"<br/>
+<br/>
+&nbsp; &lt;Directory "C:\xampp\htdocs\taskapp\public"&gt;<br/>
+&nbsp; &nbsp; &nbsp;Require all granted<br/>
+&nbsp; &nbsp; &nbsp;AllowOverride All<br/>
+&nbsp; &nbsp;&lt;/Directory&gt;<br/>
+&lt;/VirtualHost&gt;<br/>
+<br/>
+&lt;VirtualHost *:80&gt;<br/>
+&nbsp; &nbsp; ServerName localhost<br/>
+&nbsp;<br/>
+&nbsp; &nbsp; DocumentRoot "C:\xampp\htdocs"<br/>
+&nbsp;<br/>
+&nbsp; &nbsp; &lt;Directory "C:\xampp\htdocs"&gt;<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; Require all granted<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; AllowOverride All<br/>
+&nbsp; &nbsp; &lt;/Directory&gt;<br/>
+&lt;/VirtualHost&gt;<br/>
+<br/>
+3-Open <b>php.ini</b>(C:\xampp\php\php.ini), and remove the starting semicolon from this line:<br/>
+<b>;extension=php_intl.dll</b><br/>
+<br/>
+--&gt;if this line doesn't exist, you can simply add it to the file<br/>
+<br/>
+4-if you downloaded any codeigniter project from github you must run #<b>composer install </b>&nbsp;on this folder<br/>
+---------------------------------------------------------</body></html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Error-Handling</title>
+</head><body><b>Put application configuration settings in a separate file<br/>
+<br/>
+Applicatoin configuration<br/>
+</b>--&gt;Configuration settings should be <b>separate </b>from the rest of the code<br/>
+<br/>
+--&gt;Configuration settings are different when <b>developing </b>and <b>in production </b><br/>
+<br/>
+--&gt;Settings need to be <b>easily changed </b>when moving code between servers<br/>
+------------------------------------------------------------<br/>
+<b>How PHP reports problems, errors, exceptions, and how handle them<br/>
+<br/>
+</b>1-Errors and exceptions occur when <b>something goes wrong</b>&nbsp;in the code<br/>
+<br/>
+2-PHP provides both <b>errors </b>and <b>exceptions </b>to tell us when there's a problem<br/>
+<br/>
+3-If we don't write code that <b>handles </b>them, the program will stop<br/>
+<br/>
+<b>Errors<br/>
+<br/>
+</b>1-<b>Internal PHP functions </b>mainly use <b>errors </b>to signal a problem<br/>
+<br/>
+2-<b>Errors </b>generally occur at the language level, for example a <b>syntax error </b>or an <b>invalid action </b>with a <b>variable</b><br/>
+<br/>
+<img src="warning.png" /><br/>
+<br/>
+<b>Triggering errors manually<br/>
+</b>--&gt;Can be generated manually using the trigger_error function:<br/>
+<br/>
+<img src="triggering errors manually.png" /><br/>
+<img src="handling erros.png" /><br/>
+<br/>
+<b>Exceptions<br/>
+<br/>
+</b>--<b>&gt;Exceptions </b>are the errors you get when dealing with <b>classes </b>and <b>objects<br/>
+</b><b><br/>
+</b>--&gt;Modern object oriented PHP extensions generally use <b>exceptions </b>to signal a problem<br/>
+<br/>
+<img src="exceptions.png" /><br/>
+<b>Raising exceptions<br/>
+</b>--&gt;Can be generated or "thrown" manually using the throw statement and passing in a new Exception object:<br/>
+<br/>
+<img src="raising exceptions.png" /><br/>
+<b>Handling exceptions<br/>
+<br/>
+</b>--&gt;Unlike errors, <b>exceptions </b>can be <b>caught </b>and dealt with, allowing the program to continue:<br/>
+<br/>
+<img src="handling exceptions2.png" /><br/>
+<b>Converting errors to exceptions<br/>
+<br/>
+</b>1-The easiest way to handle both types is to <b>convert errors to exceptions, </b>then only one handler is needed<br/>
+<br/>
+2-So when an error occurs, an <b>exception </b>is raised instead<br/>
+<br/>
+3-Exceptions have the added benefit of having a <b>stack trace, </b>which is helpful when debugging<br/>
+<br/>
+<img src="converting errors to exceptions.png" /><br/>
+---------------------------------------------------------<br/>
+<b>Handling errors and exceptions<br/>
+<br/>
+</b><img src="handling errors and exceptions.png" /><br/>
+<b>Database errors when using PDO<br/>
+</b>--&gt;Throw an <b>Exception </b>when a database error occurs<br/>
+<img src="database errors.png" /><br/>
+---------------------------------------------------------<br/>
+<b>PHP configuration settings<br/>
+<br/>
+</b>1-PHP has <b>various settings </b>that can be configured, e.g show or hide errors amount of memory to use<br/>
+<br/>
+2-<b>Current settings </b>can be viewed using the phpinfo() command<br/>
+<br/>
+3-Settings are stored in the <b>php.ini </b>configuration file:<br/>
+<img src="php.ini.png" /><br/>
+<b>Changing PHP settings<br/>
+<br/>
+</b><img src="php.ini2.png" /><br/>
+--&gt;You can change PHP settings directly from <b>php.ini </b>file which affects all the scripts on the server or you can change them in code which only affect a current script, in code ex:<br/>
+<br/>
+ini_set('setting', 'value');<br/>
+<br/>
+error_reporting(....);<br/>
+set_include_path(....);<br/>
+---------------------------------------------------------<br/>
+<b>PHP error configuration<br/>
+<br/>
+</b>1-Errors occur when <b>something goes wrong </b>in the code<br/>
+<br/>
+2-PHP can be configured to <b>show </b>or <b>hide </b>errors, or only show errors <b>of certain types<br/>
+</b><b><br/>
+</b>3-We want to see errors <b>so we can fix them</b><br/>
+<br/>
+<b>Display all types of errors<br/>
+</b>--&gt;Configure <b>which type </b>of errors to display<br/>
+<br/>
+ex:<br/>
+error_reporting(E_ALL);<br/>
+---------------------------------------------------------<br/>
+<b>Show detailed error messages to developers, friendly error messages to user<br/>
+<br/>
+</b><img src="detailed error messages.png" /><br/>
+<img src="detailed error messages2.png" /><br/>
+<b>Logging the error<br/>
+<br/>
+</b>1-if an error occurs in <b>production, </b>we still want to know the <b>details<br/>
+</b><b><br/>
+</b>2-<b>Save </b>the error message so we can still access it <br/>
+<br/>
+<img src="logging error messages.png" /><br/>
+---------------------------------------------------------<br/>
+<b>Categorise different types of errors using HTTP status codes<br/>
+<br/>
+HTTP status codes<br/>
+</b>--&gt;HTTP has many status codes that are sent <b>from the server to the browser<br/>
+</b><br/>
+<img src="http status codes.png" /><br/>
+<b>Sending status codes with exceptions<br/>
+<br/>
+</b><img src="sending status codes with exceptions.png" /><br/>
+---------------------------------------------------------<br/>
+<br/>
+<b>Laravel</b>--&gt;need power web server to work<br/>
+<b>phalcon</b>--&gt;if a speed is your main concern<br/>
+---------------------------------------------------------<br/>
+<b>Summary<br/>
+<br/>
+</b>1-Code organised into <b>Models, views </b>and <b>Controllers<br/>
+</b><b><br/>
+</b>2-Advanced <b>router<br/>
+</b><b><br/>
+</b>3-Classes in <b>namespaces </b>with <b>autoloading<br/>
+</b><b><br/>
+</b>4-<b>Controllers </b>with <b>action filters<br/>
+</b><b><br/>
+</b>5-<b>Views </b>including a <b>template engine<br/>
+</b><b><br/>
+</b>6-<b>Models </b>with <b>resource-friendly database connectivity<br/>
+</b><b><br/>
+</b>7-Environment-specific <b>configuration </b>and <b>error handling<br/>
+</b><b><br/>
+</b>8-<b>Understand </b>how MVC frameworks work</body></html>

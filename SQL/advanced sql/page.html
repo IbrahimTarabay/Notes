@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Advanced SQL</title>
+</head><body><b>GROUP BY<br/>
+<br/>
+</b>--&gt;Summarizing or Aggergating data by groups.<br/>
+<br/>
+<b>ex:<br/>
+</b>What if we wanted to know how many employees worked in each department?<br/>
+<br/>
+SELECT dept_no, COUNT(emp_no) FROM dept_emp GROUP BY dept_no;<br/>
+<br/>
+--&gt;GROUP BY splits data into groups or chunks so we can apply functions against the group rather than the entire table.<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT dept_no, COUNT(emp_no) FROM dept_emp;--&gt;gives error<br/>
+<br/>
+<b>Note: </b>we use GROUP BY almost exclusively with aggregate functions.<br/>
+<br/>
+<b>Note: </b>when we "GROUP BY" we apply the function per group, not on the entire data set<br/>
+<br/>
+--&gt;GROUP BY is stricter than it looks <b>Why?</b>&nbsp;to reduce all records found for the matching "GROUP" to a single record.<br/>
+<br/>
+--&gt;GROUP BY utilizes a <b>SPLIT-APPLY-COMBINE </b>strategy, We split by groups we apply the aggregate functions to the remaining columns and then we combine the results to gain the output.<br/>
+<br/>
+<b>Order of Operations<br/>
+<br/>
+</b>FROM--&gt;WHERE-&gt;GROUP BY-&gt;SELECT-&gt;ORDER<br/>
+--------------------------------------------------------<br/>
+<b>HAVING<br/>
+<br/>
+</b>--&gt;What if i want to filter groups??<br/>
+<br/>
+<b>Note: </b>every column not in the GROUP BY clause must apply a function.<br/>
+<br/>
+<b>"Having" </b>applies filters to a group as a whole<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT d.dept_name, COUNT(e.emp_no) AS "# of employees" FROM employees AS e<br/>
+INNER JOIN dept_emp AS de ON de.emp_no = e.emp_no<br/>
+INNER JOIN departments AS d ON de.dept_no = d.dept_no<br/>
+WHERE count(e.emp_no) &gt; 25000<br/>
+GROUP BY d.dept_name<br/>
+<br/>
+--&gt;ERROR: aggregate functions are not allowed in WHERE clause<br/>
+<br/>
+instead we use:<br/>
+<b>ex:<br/>
+</b>SELECT d.dept_name, COUNT(e.emp_no) AS "# of employees" FROM employees AS e<br/>
+INNER JOIN dept_emp AS de ON de.emp_no = e.emp_no<br/>
+INNER JOIN departments AS d ON de.dept_no = d.dept_no<br/>
+GROUP BY d.dept_name<br/>
+HAVING count(e.emp_no) &gt; 25000<br/>
+<br/>
+--&gt;<div style="text-align: left"><span style="font-size: 12pt"><span style="font-family: Source Code Pro">argument of HAVING must be type boolean</span></span></div><br/>
+--------------------------------------------------------<br/>
+<b>Ordering Grouped Data<br/>
+<br/>
+Order of Operations<br/>
+<br/>
+</b>FROM--&gt;WHERE-&gt;GROUP BY-&gt;SELECT-&gt;ORDER<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT d.dept_name, COUNT(e.emp_no) AS "# of employees"<br/>
+FROM employees AS e<br/>
+INNER JOIN dept_emp AS de ON de.emp_no = e.emp_no<br/>
+INNER JOIN departments AS d ON de.dept_no = d.dept_no<br/>
+GROUP BY d.dept_name<br/>
+ORDER BY COUNT(e.emp_no) DESC<br/>
+<br/>
+--&gt;Just always remember that order by happens all the way at the end<br/>
+--------------------------------------------------------<br/>
+<b>Group By Mental Model<br/>
+<br/>
+</b>--&gt;We can't run our aggregate functions to relate two columns of data to each other in the same exact query <br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT emp_no, MAX(from_date),MAX(salary)<br/>
+FROM salaries<br/>
+GROUP BY emp_no, from_date<br/>
+<br/>
+--&gt;We should understand the shortcomings of GROUP BY because we can grab an answer out of it doesn't mean we can do everything in a singular query, There are limitations to what we can do in a single query, but there will be techniques and ways to how to reuse that and chain it to do other things<br/>
+---------------------------------------------------------<br/>
+<b>Grouping Sets<br/>
+<br/>
+</b>--&gt;What if we want to combine the results of multiple Groupings?<br/>
+<br/>
+<b>UNION<br/>
+<br/>
+ex:<br/>
+</b>SELECT col1, SUM(col2)<br/>
+FROM table GROUP BY col1<br/>
+<br/>
+UNION<br/>
+<br/>
+SELECT SUM(col2) FROM table<br/>
+<br/>
+<b>UNION ALL</b>--&gt;Doesn't remove duplicate records<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT NULL AS "prod_id", sum(ol.quantity)<br/>
+FROM orderlines AS ol<br/>
+<br/>
+UNION<br/>
+<br/>
+SELECT prod_id AS "prod_id", sum(ol.quantity) FROM orderlines AS ol<br/>
+GROUP BY prod_id<br/>
+ORDER BY prod_id DESC;<br/>
+<br/>
+==<br/>
+<br/>
+SELECT prod_id AS "prod_id", sum(ol.quantity) FROM orderlines AS ol<br/>
+GROUP BY GROUPING SETS(<br/>
+&nbsp; (),<br/>
+&nbsp; (prod_id)<br/>
+)<br/>
+ORDER BY prod_id DESC; <br/>
+<br/>
+--&gt;<b>GROUPING SETS &nbsp;</b>A Subclause of GROUP BY that allows you to define multiple groupings<br/>
+----------------------------------------------------------<br/>
+<b>Rollup<br/>
+<br/>
+ex:<br/>
+</b>SELECT <br/>
+EXTRACT (YEAR FROM orderdate) AS "year",<br/>
+EXTRACT (MONTH FROM orderdate) AS "month",<br/>
+EXTRACT (DAY FROM orderdate) AS "day",<br/>
+sum(ol.quantity)<br/>
+FROM orderlines AS ol<br/>
+GROUP BY<br/>
+GROUPING SETS(<br/>
+&nbsp;(EXTRACT (YEAR FROM orderdate)),<br/>
+&nbsp;(<br/>
+&nbsp; EXTRACT (YEAR FROM orderdate),<br/>
+&nbsp; EXTRACT (MONTH FROM orderdate)<br/>
+),<br/>
+(<br/>
+&nbsp;EXTRACT (YEAR FROM orderdate),<br/>
+&nbsp;EXTRACT (MONTH FROM orderdate),<br/>
+&nbsp;EXTRACT (DAY FROM orderdate)<br/>
+),<br/>
+(<br/>
+&nbsp; (EXTRACT (MONTH FROM orderdate)),<br/>
+&nbsp; (EXTRACT (DAY FROM orderdate))<br/>
+)<br/>
+ORDER BY<br/>
+&nbsp;EXTRACT (YEAR FROM orderdate),<br/>
+&nbsp;EXTRACT (MONTH FROM orderdate),<br/>
+&nbsp;EXTRACT (DAY FROM orderdate)<br/>
+);<br/>
+<br/>
+<b>Rollup</b>--&gt;it will take a group and it will make all of the extractions for you <br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT <br/>
+EXTRACT (YEAR FROM orderdate) AS "year",<br/>
+EXTRACT (MONTH FROM orderdate) AS "month",<br/>
+EXTRACT (DAY FROM orderdate) AS "day",<br/>
+sum(ol.quantity)<br/>
+FROM orderlines AS ol<br/>
+GROUP BY<br/>
+ROLLUP(<br/>
+&nbsp;EXTRACT (YEAR FROM orderdate),<br/>
+&nbsp;EXTRACT (MONTH FROM orderdate),<br/>
+&nbsp;EXTRACT (DAY FROM orderdate) &nbsp;<br/>
+)<br/>
+ORDER BY<br/>
+&nbsp;EXTRACT (YEAR FROM orderdate),<br/>
+&nbsp;EXTRACT (MONTH FROM orderdate),<br/>
+&nbsp;EXTRACT (DAY FROM orderdate)<br/>
+);<br/>
+<br/>
+--&gt;it's going to basically make all of those combinations up until nothing &nbsp;<br/>
+----------------------------------------------------------<br/>
+<b>Window what?<br/>
+<br/>
+</b>--&gt;What if you wanted to know the average salary per department?<br/>
+<br/>
+SELECT d.dept_name, ROUND(AVG(salary))<br/>
+FROM salaries<br/>
+JOIN dept_emp as de USING(emp_no)<br/>
+JOIN departments as d USING(dept_no)<br/>
+GROUP BY dept_no, dept_name<br/>
+<br/>
+--&gt;Add the average to every salary so we could visually see how much each employee is from the average.<br/>
+<br/>
+Answer: <b>Window Functions</b>--&gt;it creates a new column based on functions performed on a subset or "Window" of the data<br/>
+<br/>
+--&gt;if your job is doing a lot of data analysis or trying to crunch some numbers, do predictive analysis, you may find yourself using window functions a lot in your day to day querying<br/>
+<br/>
+--&gt;if you request 10 million records, the window function applies against each individual row so window functions by nature can take longer to run because they run against the entire window of data for each individual row<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT *,MAX(salary) OVER() FROM salaries;<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT *,MAX(salary) OVER() FROM salaries LIMIT 100;<br/>
+<br/>
+--&gt;window of data refers to data that the query calculated out, not what limit cut off but when apply filters it affects window<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT *,MAX(salary) OVER() FROM salaries WHERE salary &lt; 7000;<br/>
+<br/>
+<b>PARTITION BY</b>--&gt;Divide rows into groups to apply the function against (optional)<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT *,AVG(salary) OVER(<br/>
+&nbsp;PARTITION BY d.dept_name<br/>
+)<br/>
+FROM salaries<br/>
+JOIN dept_emp AS de USING (emp_no)<br/>
+JOIN departments AS d USING (dept_no);<br/>
+---------------------------------------------------------<br/>
+<b>ORDER BY acting strange<br/>
+<br/>
+ex:<br/>
+</b>SELECT emp_no, COUNT(salary) OVER(PARTITION BY emp_no) FROM salaries;<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT emp_no, COUNT(salary) OVER(ORDER BY emp_no) FROM salaries;<br/>
+<br/>
+--&gt;it's cummulative, ORDER BY has special property is called <b>framing</b>, ORDER BY change the frame of the window function<br/>
+---------------------------------------------------------<br/>
+<b>Framing<br/>
+<br/>
+</b>--&gt;When using a frame clause in a window function we can create a sub-range or frame<br/>
+<br/>
+<b>Syntax<br/>
+</b><br/>
+<b>Rows or Range</b>--&gt;Whether you want to use a range or rows as a frame<br/>
+<br/>
+<b>Preceding</b>--&gt;Rows before the current one<br/>
+<br/>
+<b>Following</b>--&gt;Rows after the current one<br/>
+<br/>
+<b>Unbounded Preceding or Following</b>--&gt;Returns all before or after<br/>
+<br/>
+<b>Current Row</b>--&gt;Your Current Row<br/>
+<br/>
+--&gt;<b>Without ORDER BY</b>&nbsp;by default the framing is usually all partition rows<br/>
+<br/>
+--&gt;<b>With ORDER BY </b>by default the framing is usually everything before the current row and the current row<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT emp_no,salary,COUNT(salary) OVER(PARTITION BY emp_no ORDER BY salary) FROM salaries;<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT emp_no,salary,COUNT(salary) OVER(PARTITION BY emp_no ORDER BY salary<br/>
+RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) <br/>
+FROM salaries;<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT emp_no,salary,COUNT(salary) OVER(PARTITION BY emp_no <br/>
+ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) <br/>
+FROM salaries;<br/>
+----------------------------------------------------------<br/>
+</body></html>

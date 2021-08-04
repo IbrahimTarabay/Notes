@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>self-signed certificate</title>
+</head><body><img src="csr.png" /><br/>
+<br/>
+--&gt;Before getting any certificate, You should create a Certificate Signing Request <b>CSR, </b>but before creating any CSR you should generate public private key player and for that you can use <b>RSA </b>algorithm or <b>ECDSA </b>Algorithm <br/>
+<br/>
+--&gt;CSR is actually created in the same format as a certificate, it does usually pem format<br/>
+<b><br/>
+</b><b>Recommendation</b><br/>
+--&gt;Choose CN(Common Name) according to the main domain where certificate will be used<br/>
+---------------------------------------------------------<br/>
+--&gt;Browsers doesn't trust self-signed certificate bu we after that use CSR to make it valid<br/>
+<br/>
+--&gt;we make self signed certificate with openssl<br/>
+<br/>
+--&gt;self signed certificates are good if it used between two servers that are not public for example our web server and Cloudflare servers<br/>
+<br/>
+<img src="next.png" /><br/>
+<br/>
+<img src="nodes.png" /><br/>
+<br/>
+--&gt;nodes make unencrypted private key<br/>
+----------------------------------------------------------<br/>
+<img src="intermediate ca.png" /><br/>
+<br/>
+</body></html>

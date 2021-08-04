@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CRUD</title>
+</head><body>--&gt;to make code bit more portable, it's good idea to use codeigniter helper to generate links<br/>
+<br/>
+--&gt;helper is collection of useful functions so we need to load helpers in BaseController<br/>
+------------------------------------------------------------<br/>
+<b>Flash messages</b><br/>
+<br/>
+--&gt;They are useful for displaying one time error or status messages<br/>
+------------------------------------------------------------<br/>
+<b>Prevent XSS attacks by escaping untrusted data<br/>
+<br/>
+</b>--&gt;A malicious user can insert some code into our site (forms) to avoid this we traditionaly use <b>htmlspecialchars</b>&nbsp;when displaying untrused data, in codeigniter there is a function called <b>esc()</b>&nbsp;for escaping data like this, specifically designed to avoid XSS <b><br/>
+</b><br/>
+--&gt;github detects PHP files that contain only HTML as Hack files<br/>
+---------------------------------------------------------<br/>
+<b>Entities</b>--&gt;are basically classes that represent a single database row, the main feature of an entity that it doesn't contain any database code, this is left to the model<br/>
+<br/>
+--&gt;we can use entity class for saving tasks to the database too<br/>
+---------------------------------------------------------<br/>
+<b>User account registration<br/>
+<br/>
+</b>#php spark migrate:create create_user<br/>
+<br/>
+--&gt;write your columns in migrate user file and then run:<br/>
+<br/>
+#php spark migrate<br/>
+---------------------------------------------------------<br/>
+<b>Helper</b>--&gt;is simply a collection of functions normally used in views<br/>
+<br/>
+--&gt;we don't load helper in views instead we loaded in controller<br/>
+----------------------------------------------------------<br/>
+<b>Service</b>--&gt;is simply a type of factory that creates instances of a specified class, All core classes in codeigniter are defined this way, for ex: the session which we've already been using<br/>
+---------------------------------------------------------<br/>
+--&gt;Avoid multiple identical database queries by caching the user record<br/>
+<br/>
+--&gt;whenever we use the service helper to get instance of the authentication class as it's shared, it's only returns the same object<br/>
+---------------------------------------------------------<br/>
+--&gt;Codeigniter has control of filters which lets us run code before or after every method in a controller<br/>
+<br/>
+<b>Filters</b>--&gt;are classes that implement the codeignitor filter interface and that contain a before and after method that run code before and after all the controller methods respectively<br/>
+--------------------------------------------------------<br/>
+--&gt;Codeignitor comes with CSRF protection built in, it runs as a filter, so the first step in activating it is to enable it in the filter configuration<br/>
+<br/>
+<b>CSRF--&gt;</b>works by generating a random token, storing this in the session and comparing this to a value supplied in post requests<br/>
+---------------------------------------------------------<br/>
+<b>Pagination<br/>
+<br/>
+</b>--&gt;to show tasks a group at time, codeigniter has simple but flexible pagination library that will do this for us, This is loaded automatically with the model, so we don't need to explicitly load it in the tasks controller<br/>
+<br/>
+--&gt;to view the rest of the records, we need pagination links so we can navigate from one page to another, to do this first, we need to get the instance of the page library that the model is using, this is set as a property on the model automatically<br/>
+--------------------------------------------------------<br/>
+<b>Database Seeding<br/>
+<br/>
+</b>--&gt;is a way of adding data that the application needs in order to run<br/>
+<br/>
+--&gt;when we put the site live, in addition to the migration's to create the database, we also run the database seeds to insert this data, just like migration's, seeds are just classes, they can be created manually or with CMD <br/>
+<br/>
+ex:<br/>
+$php spark make:seeder UserSeeder<br/>
+--------------------------------------------------------<br/>
+<b>Send mail localhost<br/>
+<br/>
+</b>--&gt;xampp/sendmail/sendmail<br/>
+--&gt;xampp/php/php<br/>
+---------------------------------------------------------</body></html>

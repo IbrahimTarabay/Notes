@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MVC concepts</title>
+</head><body><img src="mvc.png" /><br/>
+<br/>
+<b>The Problems<br/>
+<br/>
+</b><b>1-Difficult to maintain the code: </b>script files are unstructured, and you might even have horrible lines like this:<br/>
+<br/>
+require '../../../../../database.inc.php';<br/>
+<br/>
+<b>2-Difficult to develop: </b>application logic is mixed up with presentation, a programmer and a designer can't work on the same file<br/>
+<br/>
+<b>3-Insecure: </b>database passwords are in a file in a publicly-accessible folder<br/>
+<br/>
+<b>The solution: Use a framework<br/>
+<br/>
+</b>A framework is <b>a library </b>of code. it provides structure that you can use to build your application on.<br/>
+<br/>
+1-You can code faster<br/>
+<br/>
+2-<b>More that one person</b>&nbsp;can work on the code at once<br/>
+<br/>
+3-The code is less complicated, so therefore <b>easier to maintain<br/>
+</b><b><br/>
+</b>4-<b>More secure: </b>database passwords etc. can be stored <b>outside </b>of the publicly accessible folder<br/>
+----------------------------------------------------------<br/>
+<b>The model-view-controller pattern<br/>
+<br/>
+</b><img src="mvc2.png" /><br/>
+<br/>
+<br/>
+<b>Controllers:<br/>
+</b><br/>
+1-are what the user <b>interacts</b>&nbsp;with<br/>
+<br/>
+2-They receive a <b>request </b>from the user, decide what to do, and send a <b>response </b>back<br/>
+<br/>
+3-it's the only component that interacts with the models<br/>
+<br/>
+<b>Models:<br/>
+<br/>
+</b>1-are where an application's <b>data</b>&nbsp;are store<br/>
+<br/>
+2-Responsible for <b>storing </b>and <b>retrieving</b>&nbsp;data<br/>
+<br/>
+3-Know nothing about the user interface<br/>
+<br/>
+<b>Views:<br/>
+<br/>
+</b>1-are what the user sees on the <b>screen<br/>
+</b><b><br/>
+</b>2-They <b>present </b>the data to the user<br/>
+<br/>
+3-Know nothing about the models<br/>
+<br/>
+<img src="why mvc.png" /><br/>
+<br/>
+<img src="developer specialisation.png" /><br/>
+<br/>
+-------------------------------------------------------------<br/>
+<b>Building a PHP MVC framework<br/>
+<br/>
+</b>Required components:<br/>
+<br/>
+1-A web server(for example, Apache)<br/>
+2-PHP<br/>
+3-A database(for example, MySQL)<br/>
+<br/>
+Optional:<br/>
+--&gt;phpMyAdmin to manage the database<br/>
+<br/>
+<br/>
+<b>AMPPS--&gt; </b>is an easy to install software stack of Apache, Mysql, PHP, Perl, Python and Softaculous auto-installer that can be used on Desktops and office servers.<br/>
+<br/>
+<b>XAMPP--&gt;</b>&nbsp;is a completely free, easy to install Apache distribution containing MariaDB, PHP, and Perl.<br/>
+<br/>
+<img src="framework folders.png" /><br/>
+<br/>
+<b><span style="font-size: 16pt">The public folder:</span><br/>
+<br/>
+</b>1-The <b>only</b>&nbsp;folder accessible to the web<br/>
+2-The <b>root </b>of the web server, the folder <b>http://localhost/</b>&nbsp;points to.<br/>
+3-The <b>front controller </b>and any <b>static files</b>(CSS, images) go in here<br/>
+4-The big advantage is most of the code, including database passwords, is <b>not in a web accessible folder </b>and therefore is <b>more secure<br/>
+</b><b><br/>
+</b><img src="configure the root of web server.png" /><b><br/>
+</b><b><br/>
+</b><br/>
+<div style="text-align: left"><span style="font-family: Arial"><span style="font-size: 15pt">Ubuntu </span><span style="font-size: 13pt">doesn't use httpd.conf as standard, instead global configuration stuff for apache is found in /etc/apache2/apache2.conf. You can create a httpd.conf in the apache2 directory, and load any further configuration from it by including the following line in /etc/apache2/apache2.conf.</span><span style="font-size: 15pt"><br/>
+</span></span></div>Include /etc/apache2/httpd.conf &nbsp;<br/>
+<br/>
+</body></html>

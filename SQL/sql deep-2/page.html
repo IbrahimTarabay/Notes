@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>SQL Deep-2</title>
+</head><body><b>IN Keyword<br/>
+<br/>
+</b>--&gt;What if i want to find multiple values but not write endless AND statements??<br/>
+<br/>
+--&gt;IN Keyword check if a value matches any value in a list of values<br/>
+<br/>
+<b>ex:</b><br/>
+SELECT * FROM &lt;table&gt; WHERE &lt;column&gt; IN (value1,value2,...);<br/>
+<br/>
+<b>ex:</b><br/>
+SELECT * FROM employees WHERE emp_no IN (100001, 100006, 11008);<br/>
+<br/>
+--&gt;<b>Question:</b>&nbsp;How many orders were made by customer 7888, 1082, 12808, 9623<br/>
+<br/>
+<b>ans:</b>&nbsp;SELECT COUNT(orderid)FROM ordersWHERE customerid IN (7888, 1082, 12808, 9623);<br/>
+----------------------------------------------------------<br/>
+<b>LIKE Keyword<br/>
+<br/>
+Partial Lookups<br/>
+<br/>
+</b>--&gt;What if you don't know exactly what you're searching for?? &nbsp;<br/>
+<br/>
+ex:<br/>
+SELECT first_name FROM employees WHERE first_name LIKE 'M%';<br/>
+<br/>
+--&gt;This mean get everyone who's name start with 'M'<br/>
+<br/>
+<b>Pattern Matching<br/>
+<br/>
+</b>--&gt;in order to use LIKE you need to build patterns to match<br/>
+<br/>
+<img src="pattern matching.png" /><br/>
+<br/>
+<img src="pattern matching2.png" /><br/>
+<br/>
+<b>Note: </b>Postgres LIKE only does <b>text comparison </b>so we must <b>CAST </b>whatever we use to <b>text</b><br/>
+<br/>
+<b>CASTING</b>--&gt;is the act of changing something to something else<br/>
+<br/>
+How to cast??<br/>
+<br/>
+1-CAST(salary AS text);<br/>
+<br/>
+2-salary::text<br/>
+<br/>
+<b>Case Insensitive Matching<br/>
+</b>name ILIKE 'MO%';<br/>
+----------------------------------------------------------<br/>
+<b>Date Filtering<br/>
+<br/>
+</b>--&gt;Date are hard because of time zones, because we all live in a different place in the world<br/>
+<br/>
+--&gt;Some people set their database in GMT to align to a universal standard and others set that to their local time zone databases<br/>
+<br/>
+--&gt;How do you determine what your standard is??<br/>
+<br/>
+<b>What is GMT??<br/>
+</b>--&gt;Greenwich Mean Time, it wasn't a standard it was more an alignment, so we decided to create a standard<br/>
+<br/>
+<b>What is UTC??<br/>
+</b>--&gt;Universal Coordinate Time, this is our standard, it's a way to measure time, it's not a time zone, no country in the world is using UTC to determine its time<br/>
+<br/>
+<b>What's the difference??<br/>
+</b>GMT--&gt;is a time zone<br/>
+UTC--&gt;is a time standard<br/>
+<br/>
+<b>What's the same??<br/>
+</b>--&gt;They share the same current time, in essence they are the same, but conceptually they are different<br/>
+<br/>
+--&gt;SET TIME ZONE 'UTC';<br/>
+--&gt;"Always" use UTC<br/>
+<br/>
+--&gt;<b>Don't try storing data for different users in different ways</b>&nbsp;always try to find a standard<br/>
+<br/>
+ex:<br/>
+SHOW TIMEZONE;<br/>
+----------------------------------------------------------<br/>
+<b>Setting Up Timezones<br/>
+<br/>
+</b>#ALTER USER postgres SET timezone=' ';<br/>
+<br/>
+--&gt;postgres is the default username that you use in windows or linux<br/>
+----------------------------------------------------------<br/>
+<b>How do dates look??<br/>
+</b>--&gt;Postgresql uses ISO-8601<br/>
+<br/>
+<img src="how do dates look.png" /><br/>
+<br/>
+<b>What is a format??<br/>
+<br/>
+</b>--&gt;A format is a way of representing a <b>date </b>and <b>time<br/>
+</b>----------------------------------------------------------<br/>
+<b>Timestamps<br/>
+<br/>
+</b>--&gt;A timestamp is a date with time and timezone info<br/>
+<br/>
+<b>ex:<br/>
+</b>CREATE TABLE timezones(<br/>
+&nbsp; ts TIMESTAMP WITHOUT TIME ZONE,<br/>
+&nbsp; tz TIMESTAMP WITH TIME ZONE<br/>
+);<br/>
+<br/>
+<b>TIMESTAMPS OR DATES??<br/>
+<br/>
+</b>--&gt;It depends on what you're storing, for the majority of the cases we often find the dates because the granular information that we require isn't really necessary<br/>
+<br/>
+--&gt;it's easy to go from a date to a timestamp and it's easy to go from timestamp back to date.<br/>
+---------------------------------------------------------<br/>
+<b>Date Operations<br/>
+<br/>
+</b>--&gt;Postgres gives us operators to help simplify dates<br/>
+<br/>
+<b>Current Date<br/>
+<br/>
+</b>SELECT NOW()::date;<br/>
+SELECT CURRENT_DATE;<br/>
+<br/>
+<b>Formatting<br/>
+<br/>
+</b>SELECT TO_CHAR(CURRENT_DATE, 'dd/mm/yyyy');<br/>
+<br/>
+--&gt;Subtracting Dates returns the difference in days<br/>
+<br/>
+<b>Calculate Age<br/>
+<br/>
+</b>SELECT AGE(date '1800/01/01');<br/>
+<br/>
+--&gt;when calculate age, we have to make sure that we put a cast to date.<br/>
+<b>ex:<br/>
+</b>SELECT AGE(date '1992/11/13', date '1800/01/01');<br/>
+<br/>
+<b>Extracting information<br/>
+</b><br/>
+SELECT EXTRACT (DAY FROM date '1992/11/13') AS DAY;<br/>
+<br/>
+<b>Round A DATE<br/>
+<br/>
+</b>SELECT DATE_TRUNC('year', date '1992/11/13');--&gt;1992-01-01<br/>
+---------------------------------------------------------<br/>
+<b>INTERVAL<br/>
+<br/>
+ex:<br/>
+</b>SELECT * FROM orders WHERE purchaseDate &lt;= now() - interval '30 days';<br/>
+<br/>
+--&gt;intervals can store and manipulate a period of time in years, months, days, hours, minutes, seconds, etc<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT EXTRACT(year FROM INTERVAL '5 years 20 months');--&gt;6<br/>
+----------------------------------------------------------<br/>
+<b>DISTINCT KEYWORD<br/>
+<br/>
+</b>--&gt;Remove Duplicates, DISTINCT clause keeps one row for each group of duplicates<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT DISTINCT &lt;col&gt;, &lt;col2&gt; FROM &lt;table&gt;;<br/>
+<br/>
+<b>ex:</b><br/>
+may be people with the exact same age<br/>
+---------------------------------------------------------<br/>
+<b>Sorting Data<br/>
+<br/>
+</b>--&gt;relational databases don't really care about sorting<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT * FROM CUSTOMERS ORDER BY &lt;column&gt; [ASC/DESC];<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT * FROM customers ORDER BY name, lastName DESC;<br/>
+<br/>
+--&gt;The above example is same as:<br/>
+SELECT * FROM customers ORDER BY name ASC, lastName DESC;<br/>
+---------------------------------------------------------<br/>
+<b>Multi Table SELECT<br/>
+<br/>
+</b>--&gt;Multi table select are combining the data from multiple tables in order to create visualization that can span relationships, relationships across tables.<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT a.emp_no, CONCAT(a.first_name,a.last_name) as "name", b.salary FROM employees as a, salaries as b WHERE a.emp_no = b.emp_no;<br/>
+<br/>
+<b>Note: </b>you should use WHERE clause, because if you didn't include it you not doing anything, we're not linking, we're aggregating based on nothing<br/>
+<br/>
+<b>JOINS<br/>
+<br/>
+</b>--&gt;Take a column from one table that can map to the column of another table, most common approach is to link primary key to foreign key.<br/>
+---------------------------------------------------------<br/>
+<b>INNER JOIN<br/>
+<br/>
+</b>--&gt;if you have a columns that links the column from table A to table B you can use an INNER JOIN<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT a.emp_no, CONCAT(a.first_name, a.last_name) as "name", b.salary FROM employees as a INNER JOIN salaries as b ON b.emp_no = a.emp_no ORDER BY a.emp_no;<br/>
+<br/>
+--&gt;that's the same example of WHERE clause above.<br/>
+<br/>
+--&gt;The INNER JOIN syntax is generally considered a best practice, it's more readable than using the WHERE syntax it shows you what's being joined.<br/>
+<br/>
+<b>ex:<br/>
+</b>--&gt;title change always follows 2 days after the raise<br/>
+<br/>
+SELECT a.emp_no, CONCAT(a.first_name, a.last_name) as "name", b.salary,c.title, c.from_date AS "promoted on" FROM employees AS a INNER JOIN salaries AS b ON a.emp_no = b.emp_no INNER JOIN titles AS c ON c.emp_no = a.emp_no AND c.from_date = (b.from_date+interval '2 days') ORDER BY a.emp_no;<br/>
+---------------------------------------------------------<br/>
+<b>SELF JOIN<br/>
+<br/>
+</b>--&gt;Joining a table to itself, This usually can be done when a table has a foreign key referencing its primary key<br/>
+<br/>
+--&gt;There can be a foreign key in a table that references the same primary key in the table.<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT a.id, a.name as "employee", b.name as "supervisor name" FROM employee as a, employee as b WHERE a.supervisorId = b.id;<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT a.id, a.name as "employee", b.name as "supervisor name" FROM employee as a INNER JOIN employee as b ON a.supervisorId = b.id;<br/>
+---------------------------------------------------------<br/>
+<b>OUTER JOIN<br/>
+<br/>
+</b>--&gt;What if i also need the rows that don't match?<br/>
+<br/>
+--&gt;LEFT JOINS add the data that don't have a match from table A<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT * FROM &lt;table A&gt; AS a LEFT [OUTER] JOIN &lt;table B&gt; AS b ON a.id = b.id;<br/>
+<br/>
+<b>ex:<br/>
+</b>--&gt;You want to know how many employees aren't managers?<br/>
+<br/>
+SELECT COUNT(emp.emp_no) FROM employees AS emp LEFT JOIN dept_manager AS dep ON emp.emp_no = dep.emp_no WHERE dep.emp_no IS NULL;<br/>
+<br/>
+<b>ex:</b><br/>
+SELECT a.emp_no, b.salary, COALESCE(c.title,'no title change') FROM employees AS a INNER JOIN salaries AS b ON b.emp_no = a.emp_no LEFT JOIN titles AS c ON c.emp_no = a.emp_no AND (c.from_date = b.from_date OR c.from_date = b.from_date + INTERVAL '2 days') ORDER BY a.emp_no;<br/>
+<br/>
+--&gt;in this example we expanding intersection to also include all of the salaries that aren't necessarily linked to a title or from date<br/>
+<br/>
+<b>RIGHT OUTER JOIN = RIGHT JOIN<br/>
+LEFT OUTER JOIN = LEFT JOIN<br/>
+<br/>
+</b>--&gt;RIGHT JOINS add the data that don't have a match from table B, it's basically the opposite of a left join<br/>
+----------------------------------------------------------<br/>
+<b>JOINS YOU WON'T SEE OFTEN<br/>
+<br/>
+</b>--&gt;There are more join techniques they just aren't used that often<br/>
+<br/>
+<b>CROSS JOIN<br/>
+</b>--&gt;create a combination of every row, it's a cartesian product or make every possible variation<br/>
+<br/>
+<b>FULL OUTER JOIN<br/>
+</b>--&gt;Return results from both whether they match or not.<br/>
+---------------------------------------------------------<br/>
+<b>USING Keyword<br/>
+</b>--&gt;simplifying the JOIN syntax.<br/>
+<br/>
+<b>ex:<br/>
+</b>SELECT e.emp_no, e.first_name, de.dept_no FROM employees AS e INNER JOIN dept_emp AS de USING(emp_no);<br/>
+<br/>
+--&gt;USING keyword can be used to easily match primary to foreign key relationships.<br/>
+----------------------------------------------------------</body></html>

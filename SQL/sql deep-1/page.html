@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>SQL Deep</title>
+</head><body><img src="sql commands.png" /><br/>
+<br/>
+<b>DCL</b>--&gt;Data Control Language, so <b>granting </b>and <b>revoking </b>access the ability to give someone access to a certain data set<br/>
+<br/>
+<b>DDL</b>--&gt;Data Definition Language, these are a set of statements that are often used when you're setting up your database<br/>
+<br/>
+<b>CREATE</b>--&gt;to create a database, to create a table<br/>
+<br/>
+<b>ALTER</b>--&gt;to change the state of database or table<br/>
+<br/>
+<b>DROP</b>--&gt;delete something <br/>
+<br/>
+<b>RENAME</b>--&gt;rename a database or table<br/>
+<br/>
+<b>TRUNCATE</b>--&gt;fully remove all of the data inside <br/>
+<br/>
+<b>DQL</b>--&gt;Data Query Language, we will focus heavily, because <b>SELECT</b>&nbsp;help us to figure out how to view the data and how to draw things from our database<br/>
+<br/>
+<b>DML</b>--&gt;Data Modification Language, and these have to do with the data that we actually have inside of the tables<br/>
+<br/>
+<img src="what is select.png" /><br/>
+<br/>
+---------------------------------------------------------<br/>
+<b>Exercise<br/>
+<br/>
+</b><b>ex:</b>How many times has employee 10001 had a raise??<br/>
+<br/>
+#SELECT * FROM salaries;<br/>
+<br/>
+<b>ex: </b>What title does 10006 have??<br/>
+<br/>
+#SELECT * FROM titles;<br/>
+---------------------------------------------------------<br/>
+<b>Renaming Columns<br/>
+<br/>
+</b>#SELECT column as '&lt;new name&gt;';<br/>
+<br/>
+#SELECT emp_no AS "Employee #", birth_date AS "Birthday", first_name AS "First name" FROM employees;<br/>
+---------------------------------------------------------<br/>
+<b>Column Concatenation<br/>
+<br/>
+</b>--&gt;Make your data prettier/simpler/...<br/>
+--&gt;You can concatenate columns together to form one column<br/>
+<br/>
+<b>Question:<br/>
+</b>1-Concatenate the first and last name of the employee into one column<br/>
+<br/>
+2-Rename the concatenated column<br/>
+<br/>
+#SELECT CONCAT(emp_no,' is a ',title) AS "Employee Title" FROM titles;<br/>
+<br/>
+<img src="column concatenation.png" /><br/>
+<br/>
+<b><br/>
+</b>#SELECT emp_no, CONCAT(first_name, ' ', last_name) as "full name" FROM employees;<b><br/>
+</b><b><br/>
+</b><b>Note</b>: in concat you must use ' ' not " " because double quote refer to a column<br/>
+---------------------------------------------------------<br/>
+<b>What is A Function in SQL??<br/>
+<br/>
+</b>--&gt;the concat function run on each row<br/>
+<br/>
+<b>Function</b>--&gt;is a set of steps that creates a single value<br/>
+<br/>
+<b>Types of Functions:<br/>
+</b><br/>
+1-<b>Aggregate</b>--&gt;they aggregate data, they take all data and produce one single value, ex: if you want to calculate the total amount of salaries<br/>
+<br/>
+2-<b>Scalar</b>--&gt;is what concat did they run against each individual row so you get multiple outputs<br/>
+<br/>
+<b>Summary:<br/>
+<br/>
+</b><b>Aggregate: </b>Operate on many records to produce 1 value<br/>
+<br/>
+<b>Scalar(non-aggregate): </b>Operate on each record independently <br/>
+----------------------------------------------------------<br/>
+<b>Aggregate Functions<br/>
+<br/>
+</b><b>AVG()</b>--&gt;Calculates the average of a set of values<br/>
+<br/>
+<b>COUNT()</b>--&gt;Counts rows in a specified table or view<br/>
+<br/>
+<b>MIN()</b>--&gt;Gets the minimum value in a set of values<br/>
+<br/>
+<b>MAX()</b>--&gt;Gets the maximum value in a set of values<br/>
+<br/>
+<b>SUM()</b>--&gt;Calculates the sum of values<br/>
+<br/>
+<b>ex:<br/>
+</b>#SELECT count(emp_no) FROM employees;<br/>
+#SELECT max(salary) FROM salaries;<br/>
+#SELECT sum(salary) FROM salaries;<br/>
+----------------------------------------------------------<br/>
+<b>Adding Comments<br/>
+<br/>
+</b>--&gt;if you want one line comment use <b>--<br/>
+</b>--&gt;if you want multi line comment use <b>/**/<br/>
+</b>----------------------------------------------------------<br/>
+<b>Common SELECT Mistakes<br/>
+<br/>
+</b>1-Misspelling Commands<br/>
+<br/>
+2-Using ; instead of , or vice versa<br/>
+<br/>
+3-Using " instead of '<br/>
+<br/>
+" "--&gt;for tables or columns<br/>
+' '--&gt;for text<br/>
+<img src="case sensitive.png" /><br/>
+<br/>
+--&gt;if make table name capital or have space in it you should use " "<br/>
+<br/>
+4-Invalid Column Name<br/>
+----------------------------------------------------------<br/>
+<b>Filtering Data<br/>
+<br/>
+</b>--&gt;filtering data can become infinitely more complex as you go along<br/>
+<br/>
+--&gt;When we think of queries like questions, it become easier to answer them<br/>
+<br/>
+ex:<br/>
+#SELECT first_name FROM employees WHERE gender = 'F';<br/>
+<br/>
+ex:<br/>
+#SELECT firstname, lastname, gender FROM customers WHERE (state = 'OR' OR state = 'NY') AND gender = 'F';<br/>
+<br/>
+ex:<br/>
+#SELECT COUNT(firstname) FROM customers WHERE (state = 'OR' OR state = 'NY') AND gender = 'F';<br/>
+----------------------------------------------------------<br/>
+<b>AND/OR<br/>
+<br/>
+</b>--&gt;When sql see OR it will start doing a new filter<br/>
+<br/>
+--&gt;AND allows you to chain when you filter it allows you to filter down into specifics<br/>
+----------------------------------------------------------<br/>
+<b>The "NOT" Keyword<br/>
+<br/>
+</b>ex:<br/>
+#SELECT firstName, gender FROM users WHERE NOT gender = 'm';<br/>
+---------------------------------------------------------<br/>
+<b>Comparison Operators<br/>
+<br/>
+</b>ex:<br/>
+<b>Equal to</b><br/>
+0 = 0 --&gt;true<br/>
+'Mo' = 'mo' --&gt;false<br/>
+<br/>
+<b>Not Equal to<br/>
+</b>0 != 1 --&gt;true<br/>
+0 &lt;&gt; 1 --&gt;true<br/>
+<br/>
+<b>Greater than<br/>
+</b>10 &gt; 0 --&gt;true<br/>
+0 &gt; 10 --&gt;false<br/>
+'abc' &gt; 'ace' --&gt;true<br/>
+<br/>
+<b>Less than<br/>
+</b>0 &lt; 1 --&gt;true<br/>
+<br/>
+<b>Greater than or Equal to<br/>
+</b>2 &gt;= 1 --&gt;true<br/>
+2 &gt;=2 --&gt;true<br/>
+<br/>
+<b>Less than or Equal to<br/>
+</b>0 &lt;= 1 --&gt;true<br/>
+1 &lt;= 1 --&gt;true<br/>
+---------------------------------------------------------<br/>
+<b>Order of Operations<br/>
+<br/>
+</b><img src="order of operations.png" /><br/>
+<br/>
+<img src="order of operations2.png" /><br/>
+<br/>
+---------------------------------------------------------<br/>
+<b>Operator Precedence<br/>
+<br/>
+</b>--&gt;A statement having multiple operators is evaluated based on the priority of operators<br/>
+<br/>
+<img src="operator precedence.png" /><br/>
+<br/>
+<br/>
+--&gt;if the operators have equal precedence, then the operators are evaluated directionally, from left to right or right to left<br/>
+<br/>
+<b>who determines left to right or right to left??</b><br/>
+<br/>
+<img src="operator precedence2.png" /><br/>
+<br/>
+---------------------------------------------------------<br/>
+<b>Priority<br/>
+<br/>
+</b>--&gt;A statement having multiple operators is evaluated based on the priority of operators<br/>
+<br/>
+ex:<br/>
+SELECT state, gender FROM customers WHERE gender = 'F' AND state = 'OR' OR gender = 'F' AND state = 'NY';<br/>
+<br/>
+--&gt;we have in the above query two filters:<br/>
+1-Gender female and from oregon<br/>
+2-Gender female and from NY<br/>
+<br/>
+--&gt;that doesn't mean that the database management software is going to execute the query like this, that may be not optimal or not fast enough, the database management software does optimization behind the scenes on queries<br/>
+<br/>
+ex:<br/>
+age &gt; 20<br/>
+AND salary &gt; 1000<br/>
+AND gender = 'f'<br/>
+AND NOT state = 'NY'<br/>
+<br/>
+--&gt;NOT was more important than AND so it will execute first<br/>
+<br/>
+so it will execute like this:<br/>
+<br/>
+1-NOT from NY<br/>
+2-OLDER THAN 20<br/>
+3-SALARY &gt; 1000<br/>
+4-gender female<br/>
+<br/>
+ex:<br/>
+(age &gt; 20 OR age &lt; 30)<br/>
+AND salary &gt; 1000<br/>
+AND NOT state = 'NY'<br/>
+AND NOT state = 'OR'<br/>
+<br/>
+so it wil execute like this:<br/>
+<br/>
+1-ages 21 and 29<br/>
+2-NOT from NY<br/>
+3-NOT from OR<br/>
+4-salary &gt; 1000<br/>
+<br/>
+ex:<br/>
+age &gt; 20<br/>
+OR age &lt; 30<br/>
+AND salary &gt; 1000<br/>
+AND NOT state = 'NY'<br/>
+AND NOT state = 'OR'<br/>
+<br/>
+so it will execute like this:<br/>
+<br/>
+<b>Filter 1:</b><br/>
+<br/>
+1-younger than 30<br/>
+2-NOT from NY<br/>
+3-NOT from OR<br/>
+4-salary &gt; 1000<br/>
+<br/>
+<b>Filter 2:<br/>
+</b>1-OLDER THAN 20<br/>
+<br/>
+ex:<br/>
+(<br/>
+&nbsp; salary &gt; 10000 AND state = 'NY'<br/>
+&nbsp; &nbsp;OR(<br/>
+&nbsp; &nbsp; &nbsp;(age &gt; 20 AND age &lt; 30)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp;AND salary &lt;= 20000<br/>
+&nbsp; &nbsp; )<br/>
+)<br/>
+AND gender = 'F'<br/>
+<br/>
+so it will execute like this:<br/>
+<br/>
+<b>Filter 1:<br/>
+<br/>
+</b>1-salry &gt; 10000<br/>
+2-from NY<br/>
+3-female<br/>
+<br/>
+<b>Filter 2:<br/>
+</b>1-between 21 AND 29<br/>
+2-salary &lt;= 20000<br/>
+3-female<br/>
+---------------------------------------------------------<br/>
+<b>Checking for empty values<br/>
+<br/>
+</b>--&gt;When a record does not have a value it is considered empty<br/>
+<br/>
+<img src="null values.png" /><br/>
+<br/>
+--&gt;A NULL value is different from a zero value or a field that contains spaces<br/>
+<br/>
+--&gt;Don't make Fields "Nullable" that are vital information to the business like first and last name, or Fields that you will make calculations on it<br/>
+<br/>
+--&gt;NULL is a contentious issue no matter what opinion you have people may disagree<br/>
+<br/>
+--&gt;once someone consumes your database to build an app, a website or any other thing, NULL will come into play and it may cause bugs issues hard times being able to handle the data<br/>
+<br/>
+<b>NULL is special<br/>
+</b><br/>
+1 = 1 --&gt;true<br/>
+1 != 1 --&gt;false<br/>
+null = null --&gt;null<br/>
+null &lt;&gt; null --&gt;null<br/>
+<br/>
+<b>All Roads lead to NULL<br/>
+<br/>
+</b>--&gt;No matter what you do with NULL it will always be NULL subtract, divide, equal,.....<br/>
+<br/>
+<b>So How Should i use NULL??<br/>
+<br/>
+</b>1-is my data Optional or Required?<br/>
+2-Future Info?<br/>
+3-Rational?<br/>
+<br/>
+--&gt;Optional info is often future info, Usually when you have optional information, it's information that you are goint to either get in the future or get at some point in the user process<br/>
+<br/>
+--&gt;Rational mean if i make this nullable, what impact is that going to have? so always build a rational and build a team opinion<br/>
+<br/>
+<b>Be Defensive<br/>
+<br/>
+</b>--&gt;Always check for NULLS when necessary<br/>
+--&gt;when you're trying to do complex queries, make sure you catch those NULLs because they may just cause a bug<br/>
+<br/>
+<b>1-</b>Filter out NULLS<br/>
+<br/>
+<b>THE "IS" Operator<br/>
+<br/>
+</b>--&gt;Allows you to filter on values that are NULL, NOT NULL, TRUE OR FALSE<br/>
+<br/>
+ex:<br/>
+SELECT name, lastName from "Student" WHERE lastName IS NOT NULL;<br/>
+<br/>
+ex:<br/>
+SELECT * FROM users WHERE age = 20 IS FALSE;<br/>
+<br/>
+same thing as:<br/>
+SELECT * FROM users WHERE NOT age = 20;<br/>
+<br/>
+<b>2-</b>Clean up your data<br/>
+<br/>
+--&gt;NULL value substitution(ability to replace null values to operate on the data)<br/>
+<br/>
+--&gt;<b>coalesce </b>keyword replace NULL value<br/>
+<br/>
+ex:<br/>
+SELECT coalesce(name, 'no name available'), lastName from "Students";<br/>
+<br/>
+ex:<br/>
+SELECT sum(coalesce(age, 200)) from "Student";<br/>
+<br/>
+--&gt;always try to use coalesce() when dealing with no values<br/>
+---------------------------------------------------------<br/>
+<b>Three-Valued Logic<br/>
+<br/>
+</b>--&gt;Besides <b>TRUE</b>&nbsp;and <b>FALSE</b>, the result of logical expressions can also be <b>UNKNOWN</b><br/>
+<br/>
+--&gt;in most programming languages UNKNOWN would often result in FALSE<br/>
+<br/>
+<img src="three-valued logic.png" /><br/>
+--&gt;The SQL NULL value "Could be anything"<br/>
+--&gt;Nothing Equals NULL not even NULL each NULL could be different, that's why we use "IS NULL" to check<br/>
+<br/>
+<img src="three-valued logic2.png" /><br/>
+<br/>
+--&gt;NULL = 1 --&gt;NULL<br/>
+--&gt; 1 = 1 --&gt;TRUE<br/>
+<br/>
+NULL OR TRUE --&gt;TRUE<br/>
+<br/>
+NULL AND FALSE --&gt;NULL<br/>
+<br/>
+ex:<br/>
+SELECT &lt;column&gt; FROM &lt;table&gt; WHERE &lt;column&gt; = NULL<br/>
+<br/>
+--&gt;NULL is always UNKNOWN so it will return nothing because NULL is not equal to NULL<br/>
+<br/>
+ex:<br/>
+SELECT &lt;column&gt; FROM &lt;table&gt; WHERE &lt;column&gt; IS NULL<br/>
+<br/>
+--&gt;IS NULL checks for UNKNOWNS so it will return results if there is unknown value<br/>
+<br/>
+ex:<br/>
+SELECT &lt;column&gt; FROM &lt;table&gt; WHERE (&lt;column&gt; = NULL) OR (NOT &lt;column&gt; = NULL)<br/>
+<br/>
+<br/>
+NULL OR NOT NULL --&gt; NULL<br/>
+<br/>
+ex:<br/>
+SELECT &lt;column&gt; FROM &lt;table&gt; WHERE (&lt;column&gt; IS NULL) OR (&lt;column&gt; IS NOT NULL)<br/>
+<br/>
+--&gt;in this case nothing will be rejected, the entire data set will return<br/>
+---------------------------------------------------------<br/>
+<b>BETWEEN AND<br/>
+<br/>
+</b>--&gt;shorthand to match against a range of values<br/>
+<br/>
+<b>instead of using:<br/>
+</b>SELECT &lt;column&gt; FROM &lt;table&gt; WHERE &lt;column&gt; &gt;= X AND &lt;column&gt; &lt;= Y<br/>
+<br/>
+<b>use:<br/>
+</b>SELECT &lt;column&gt; FROM &lt;table&gt; WHERE &lt;column&gt; BETWEEN X AND Y<br/>
+---------------------------------------------------------</body></html>

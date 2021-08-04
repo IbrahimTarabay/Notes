@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Controllers&amp;Actions</title>
+</head><body><b>Controllers and actions<br/>
+<br/>
+</b>--&gt;Controllers are <b>Classes<br/>
+</b>--&gt;They contain <b>methods </b>that are the <b>actions</b><br/>
+<br/>
+<img src="controllers and actions.png" /><br/>
+<br/>
+---------------------------------------------------------<br/>
+<b>How to create objects and run methods dynamically<br/>
+<br/>
+</b>1-To create a new object:<br/>
+&nbsp; &nbsp;$post = new Post();<br/>
+<br/>
+2-To create an object <b>based on a variable:<br/>
+</b>&nbsp; &nbsp;$class_name = "Post";<br/>
+&nbsp; &nbsp;$post = new $class_name();<br/>
+<br/>
+<b>Dynamically calling methods:<br/>
+</b>ex:<br/>
+class Post{<br/>
+&nbsp; public function save(){<br/>
+&nbsp; ......<br/>
+}<br/>
+}<br/>
+<br/>
+1-To call a method:<br/>
+&nbsp; $post = new Post();<br/>
+&nbsp; $post-&gt;save();<br/>
+<br/>
+2-To call a method <b>based on a variable:<br/>
+</b><b>&nbsp; </b>$method = "save";<br/>
+&nbsp; $post-&gt;$method();<br/>
+<br/>
+<b>Passing parameters<br/>
+</b>ex:<br/>
+class Post{<br/>
+&nbsp; public function save($arg1,$arg2){<br/>
+&nbsp; &nbsp; .......<br/>
+}<br/>
+}<br/>
+<br/>
+--&gt;To call a method and <b>pass parameters</b>&nbsp;to it:<br/>
+$post = new Post();<br/>
+call_user_func_array([$post, "save"], [123,"abc"]);<br/>
+<br/>
+<b>Error handling<br/>
+</b>--&gt;To check if the <b>class exists </b>before creating and object:<br/>
+<br/>
+$class_name = "Post";<br/>
+if(class_exists($class_name)){<br/>
+&nbsp; $post = new $class_name();<br/>
+}<br/>
+<br/>
+--&gt;To check the <b>method exists, </b>and <b>is public </b>before calling it:<br/>
+<br/>
+$post = new Post();<br/>
+$method = "save";<br/>
+if(is_callable([$post,$method])){<br/>
+&nbsp; $post-&gt;$method();<br/>
+}<br/>
+---------------------------------------------------------<br/>
+<b>Dispatch the route: create the controller object and run the action method<br/>
+<br/>
+Dispatching<br/>
+<br/>
+</b>--&gt;Routing = <b>asking for directions<br/>
+</b>--&gt;Dispatching = <b>following those directions<br/>
+</b><b><br/>
+</b>--&gt;The dispatching step is going to <b>create a controller object </b>and <b>run the action method</b><br/>
+<br/>
+<img src="get the controller class.png" /><br/>
+<br/>
+<img src="get the action method.png" /><br/>
+<br/>
+<img src="convert parameters to classes and method.png" /><br/>
+---------------------------------------------------------<br/>
+<b>How to better organise your classes by using namespaces<br/>
+<br/>
+</b><img src="unique class names.png" /><br/>
+<br/>
+<img src="class name collisions.png" /><br/>
+<br/>
+<b>Namespaces<br/>
+<br/>
+</b>1-A <b>namespace</b>&nbsp;is like a folder or directory<br/>
+2-Defined with the <b>namespace </b>keyword<br/>
+3-Allows you to have two(or more) classes <b>with the same name<br/>
+</b>4-The name can be anything you like<br/>
+<br/>
+<img src="namespace.png" /><br/>
+<br/>
+<img src="namespace2.png" /><br/>
+<br/>
+<img src="using namespace.png" /><br/>
+<br/>
+<img src="creating objects of namespaced.png" /><br/>
+<img src="relativity and the root namespace.png" /><br/>
+<br/>
+<img src="relativity and the root namespace2.png" /><br/>
+<br/>
+<img src="using classes in namespaces.png" /><br/>
+<br/>
+<img src="use statement.png" /><br/>
+<img src="alias.png" /><br/>
+----------------------------------------------------------<br/>
+<b>Class autoloading<br/>
+<br/>
+</b>--&gt;load classes automatically without having to require them<br/>
+<br/>
+<b>Class files<br/>
+</b>--&gt;it's common(and good) practice to define each class in a <b>separate file:<br/>
+</b><img src="class files.png" /><br/>
+<br/>
+<img src="using classes from separate files.png" /><br/>
+<br/>
+<img src="using classes from separate files2.png" /><br/>
+--&gt;Instead of doing this, PHP can load class files <b>automatically</b>, on demand, we can do this by adding on <b>autoload function</b><br/>
+<br/>
+<img src="how php creates objects.png" /><br/>
+<img src="how php creates objects with an autoload.png" /><br/>
+<b>The autoload function<br/>
+<br/>
+</b>--&gt;To add an autoload function, use <b>spl_autoload_register,</b>&nbsp;passing in a function that will run when the autoloader is needed:<br/>
+<br/>
+<b>spl_autoload_register</b>(function($className){<br/>
+&nbsp; require "$className.php";<br/>
+});<br/>
+<br/>
+<img src="how the autoload function works.png" /><br/>
+<img src="autoload namespaces.png" /><br/>
+<img src="autoloading any class.png" /><br/>
+----------------------------------------------------------<br/>
+<b>Adding the autoload function<br/>
+<br/>
+</b>1-we want to require class files relative to the <b>root </b>of the site<br/>
+2-Front controller(index.php) is in the <b>public </b>folder<br/>
+3-The root folder is the parent directory of the <b>public </b>folder<br/>
+<br/>
+<img src="adding the autoload function.png" /><br/>
+----------------------------------------------------------<br/>
+<b>Remove query string variables from the URL before matching to a route<br/>
+<br/>
+</b><img src="routing using the query string.png" /><br/>
+<img src="removing query string.png" /><br/>
+--&gt;once we removing query string we can match routes<br/>
+----------------------------------------------------------<br/>
+<b>Pass route parameters from the route to all controllers<br/>
+<br/>
+</b><img src="custom router variables.png" /><b><br/>
+</b>--&gt;to be able to access this variables(<b>id</b>) in the controller we need to pass them in controller object<br/>
+<br/>
+--&gt;as we pass these variables into every controller, we will build <b>Base Controller</b>&nbsp;to do this as all controllers inherit from it<br/>
+<br/>
+<img src="base controller class.png" /><br/>
+----------------------------------------------------------<br/>
+The <b>__call</b>&nbsp;magic method: how to call inaccessible methods in a class<br/>
+<br/>
+<img src="classes-objects-methods.png" /><br/>
+<img src="visibility.png" /><br/>
+<img src="call.png" /><br/>
+--&gt;in these cases(modify(),publish()) __call will be executed and it won't be any errors, it similar to autoload function<br/>
+<br/>
+<img src="adding the __call.png" /><br/>
+----------------------------------------------------------<br/>
+<b>Actions filters:</b>&nbsp;call a method before and after every action in a controller<br/>
+<br/>
+<b>Controller actions<br/>
+<br/>
+</b>--&gt;A controller can have <b>many actions:<br/>
+</b>--&gt;Actions will generally:<br/>
+1-write out <b>content</b>(HTML)<br/>
+2-<b>redirect</b>&nbsp;to another action<br/>
+etc<br/>
+<br/>
+How to execute some code <b>before</b>&nbsp;or <b>after every </b>action?<br/>
+<br/>
+For example:<br/>
+1-Checking that the user has logged in<br/>
+2-Writing a message to a log<br/>
+3-Setting the language, etc<br/>
+<br/>
+--&gt;This functionality is present in most popular MVC frameworks<br/>
+<br/>
+<b>Filtering actions<br/>
+<br/>
+</b>--&gt;__call is executed for a <b>non-existent</b>&nbsp;or <b>non-public</b>&nbsp;method call<br/>
+<br/>
+--&gt;By executing __call first, we can run code <b>before </b>and <b>after </b>a method:<br/>
+<br/>
+class Posts{<br/>
+&nbsp;public function __call($name, $args){<br/>
+&nbsp; //run code before<br/>
+&nbsp; &nbsp;call_user_func_array([$this, $name], $args);//running a method<br/>
+&nbsp; //run code after<br/>
+}<br/>
+}<br/>
+<br/>
+<b>So how we can use __call before running method itself??<br/>
+<br/>
+</b>1-make the action methods private<br/>
+<br/>
+2-add a suffix to the method name<br/>
+<img src="add suffix.png" /><br/>
+--&gt;so when we call <b>index</b>&nbsp;method for example, it wouldn't exist of that name so __call magic method will be called, this option a lot of frameworks go with<br/>
+<br/>
+<img src="actions with suffix.png" /><br/>
+---------------------------------------------------------<br/>
+<b>Organise controllers subdirectories:</b>&nbsp;add a route namespace option<br/>
+<br/>
+<img src="controller class files.png" /><br/>
+--&gt;We have <b>namespace</b>&nbsp;to allow autoload function work, we don't have to explit require a files with controller classes in them<br/>
+<br/>
+<img src="controllers in subdirectories.png" /><br/>
+<br/>
+But what if we want to organise our controllers in subdirectories like(admin), at the moment in our router this wouldn't work because we have $controller = "App\controllers\\$controller";<br/>
+hardcoded in dispatch method so solution is:<br/>
+<br/>
+<b>Routes with namespaces:<br/>
+</b>--&gt;<b>Option</b>&nbsp;to specify the <b>namespace</b>&nbsp;in the route<br/>
+--&gt;Defaults to App\Controllers if not specified<br/>
+<br/>
+<img src="routes with namespaces.png" /><br/>
+<br/>
+</body></html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Views</title>
+</head><body><b>Views<br/>
+<br/>
+</b>1-Views are what the user sees on the <b>screen<br/>
+</b>2-They <b>present </b>data to the user<br/>
+<br/>
+<b>View files<br/>
+<br/>
+</b>1-Contain <b>PHP </b>and <b>HTML</b>, But just enough PHP to <b>display data<br/>
+</b>2-Easy for a <b>designer </b>to work on the view files <b>separately</b><br/>
+------------------------------------------------------------<br/>
+<b>Display a view:</b>&nbsp;create a class to render views and use it in a controller<br/>
+<br/>
+<b>Controllers and views<br/>
+</b><br/>
+1-The controller <b>doesn't write any output</b>(HTML)<br/>
+2-It loads and outputs a <b>view </b>file, which is what contains the content(HTML, JSON, XML etc)<br/>
+<br/>
+<img src="controllers and views.png" /><br/>
+<b>Views<br/>
+</b><br/>
+--&gt;The view <b>just shows data,</b>&nbsp;so contains a <b>minimum </b>amount of <b>PHP: </b>echo, if, for, etc<br/>
+<br/>
+--&gt;Has <b>no knowledge </b>of models, sessions, databases etc<br/>
+<br/>
+<br/>
+<img src="views.png" /><br/>
+------------------------------------------------------------<br/>
+<b>Output escaping: </b>what it is, why do it, and how and when to do it<br/>
+<br/>
+<img src="writing html.png" /><br/>
+<img src="writing html2.png" /><br/>
+<img src="writing html3.png" /><br/>
+<b>How does HTML work?<br/>
+</b><br/>
+--&gt;An HTML file contains both <b>content </b>and <b>commands:<br/>
+</b><br/>
+1-The <b>content </b>is what you see in the browser<br/>
+<img src="html content.png" /><br/>
+2-<b>Commands </b>are used to markup content, or insert images, scripts etc:<br/>
+<img src="html commands.png" /><br/>
+--&gt;<b>Commands </b>are enclosed in <b>tags: </b>&lt;h1&gt;, &lt;em&gt;, &lt;div&gt; etc<br/>
+<br/>
+--&gt;<b>Tags </b>are wrapped with the <b>&lt; </b>and <b>&gt; </b>characters<br/>
+<br/>
+--&gt;Writing special characters in code like 1&lt;2 the browser wouldn't understand that one is less than two but it thinks that beginning of tag<br/>
+<br/>
+<b>HTML entities<br/>
+</b>--&gt;Commands that insert <b>special characters:</b><br/>
+<img src="html entities.png" /><br/>
+--&gt;so <b>one is less than two:</b>&nbsp;1 &amp;lt; 2<br/>
+<br/>
+<b>Output escaping<br/>
+<br/>
+</b>--&gt;Convert &lt;, &gt; and " into HTML entites<br/>
+<img src="output escaping.png" /><br/>
+<b>htmlspecialchars()</b><br/>
+--&gt;Fortunately the <b>htmlspecialchars() </b>function does this for us<br/>
+<img src="htmlspecialchars.png" /><br/>
+<br/>
+----------------------------------------------------------<br/>
+<b>Pass data from the controller to the view</b><br/>
+<br/>
+1-The controller passes <b>data </b>to the view<br/>
+2-The view simply <b>diplays </b>the data<br/>
+<br/>
+<img src="passing data.png" /><br/>
+<b>Extracting variables from an array<br/>
+<br/>
+</b><img src="extracting variables.png" />--&gt;We pass data as an array because we don't know how many variables we are going to have so in the <b>view render method </b>we need to convert the <b>associative array</b>&nbsp;into individual variables<br/>
+----------------------------------------------------------<br/>
+<b>Templating engines: </b>What they are and how they can improve your PHP<br/>
+<br/>
+<b>What is a template engine?</b>&nbsp;<br/>
+<br/>
+--&gt;Tool that helps to separate <b>application code </b>from <b>presentation code<br/>
+</b><br/>
+--&gt;Templates(views) contain <b>no PHP </b>at all: just <b>HTML </b>and <b>simple tags </b>to show data.<br/>
+<br/>
+<img src="template engine.png" /><br/>
+<b>What are the advantages?<br/>
+<br/>
+</b>1-<b>Simpler, easier syntax</b>--&gt;easier to code and read, less prone to errors<br/>
+2-<b>Autoescaping of variables</b>--&gt;more secure<br/>
+3-<b>Template inheritance</b>--&gt;simpler templates, easier to maintain<br/>
+4-<b>No PHP in the templates</b>--&gt;Designers don't need to know PHP<br/>
+<br/>
+<b>Simpler syntax: displaying variables<br/>
+<br/>
+</b><img src="template engine2.png" /><br/>
+<br/>
+<b>Simpler syntax: displaying collections<br/>
+<br/>
+</b><img src="template engine3.png" /><br/>
+<b>Automatically autoescaping of variables</b><br/>
+<br/>
+<img src="autoescaping.png" /><br/>
+<b>Including a common header and footer<br/>
+<br/>
+</b><img src="including a common header and footer.png" /><br/>
+<br/>
+--&gt;The disadvantage of this you got opening and closing tags in different files which is hard to maintain. with a template engine you can use something called template <b>inheritance</b><br/>
+<br/>
+<img src="template inheritance.png" /><br/>
+This means creating a base template, and then extending it like this. This makes it much easier and cleaner<br/>
+---------------------------------------------------------<br/>
+--&gt;it's <b>recommended</b>&nbsp;if you have a lot of files in <b>view folder </b>to use <b>template engine </b>like<b>&nbsp;Twig </b>to make code much cleaner<br/>
+--------------------------------------------------------- </body></html>

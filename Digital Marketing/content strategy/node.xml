@@ -2,7 +2,7 @@
 <node>
 <version>6</version>
 <dict>
-  <key>expanded</key><true/>
+  <key>expanded</key><false/>
   <key>title</key><string>Content Strategy</string>
   <key>nodeid</key><string>a4840b36-45c9-4a01-a23c-e5356fdfdde7</string>
   <key>modified_time</key><integer>1599121800</integer>

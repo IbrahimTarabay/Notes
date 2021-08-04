@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MVC</title>
+</head><body>--&gt;in a MVC framework, the url doesn't correspond directly to files and folders on the web server<br/>
+<br/>
+--&gt;the <b>index.php </b>in <b>public</b>&nbsp;the root of the site is called a front controller, this loads the framework, this is part of the framework<br/>
+------------------------------------------------------------<br/>
+--&gt;it's good practice to create a subfolder for each controller's views<br/>
+<br/>
+--&gt;it's also good practice to match the name of the view file to the name of the method in the controller<br/>
+<br/>
+--&gt;the <b>view function </b>loads the contents of the view file and returns it as a string, this function isn't part of standard php, it's part of codeignitor framework, it's inherited from the parent controller<br/>
+------------------------------------------------------------<br/>
+<b>Routing: which controller and method to run<br/>
+<br/>
+</b>ex:<br/>
+<span style="font-size: 14pt"><span style="font-family: Consolas"><span style="background-color: #282c34"><span style="color: #abb2bf"><span style="color: #be5046">&lt;?php </span><span style="color: #c678dd">namespace </span><span style="color: #e5c07b">App\Controllers</span>;<br/>
+<span style="color: #c678dd">class </span><span style="color: #e5c07b">Home </span><span style="color: #c678dd">extends </span><span style="color: #e5c07b">BaseController</span>{<br/>
+<span style="color: #c678dd">public function </span><span style="color: #61afef">index</span>()<br/>
+{<span style="color: #56b6c2">echo </span><span style="color: #61afef">view</span>(<span style="color: #98c379">"Home/index"</span>);}<br/>
+</span></span></span></span><span style="font-size: 14pt"><span style="font-family: Consolas"><span style="background-color: #282c34"><span style="color: #abb2bf">}</span></span></span></span>&nbsp; &nbsp;<br/>
+<br/>
+How does the framework know to run this controller and a method when you go to root page??<br/>
+<br/>
+--&gt;The framework uses a component called a router to decide which controller and a method to run based on the URL <br/>
+<br/>
+--&gt;<b>The router contains various rules or routes which map your URLs to controllers and methods</b><br/>
+<br/>
+ex:<br/>
+example.com/class/method/ID<br/>
+<br/>
+--&gt;class in controller, method in class, ID represents arguments in method<br/>
+<br/>
+so<br/>
+taskapp.localhost = taskapp.localhost/index.php = taskapp.locahost/home/index.php<br/>
+<br/>
+we configure routes in:<br/>
+<b>app/config/Routes.php<br/>
+<br/>
+</b>$routes-&gt;setAutoRoute(true);<br/>
+<br/>
+--&gt;leave this setAutoRoute to true as it means most URLs will just work without you having to add route for each one<br/>
+---------------------------------------------------------<br/>
+--&gt;The PHP standard for class name is to start them with a <b>capital letter</b><br/>
+<br/>
+--&gt;as we created the file with the same name as the class, this file will be loaded automatically when we first use it<br/>
+---------------------------------------------------------<br/>
+<b>Showing multiple views: reducing code repetition<br/>
+<br/>
+</b>1-to deal with repeated view code calling <b>view function </b>multiple times in a controller, This was common in earlier versions of codeigniter<br/>
+<br/>
+2-use <b>include() </b>in view file itself (better)<br/>
+---------------------------------------------------------<br/>
+<b>View layouts<br/>
+<br/>
+</b>--&gt;a base layout for common view code<br/>
+<br/>
+--&gt;we use renderSection() and we make layout folder in views (this is the best way)<br/>
+---------------------------------------------------------<br/>
+<b>Configure the framework to connect to the database<br/>
+<br/>
+</b>in <b>app/config/Database.php</b>&nbsp;we can configure database<br/>
+<br/>
+--&gt;but if you will upload files to github you can make same configuration in <b>.env </b>file<b><br/>
+</b>---------------------------------------------------------<br/>
+<b>Database migrations<br/>
+<br/>
+</b>--&gt;to store data in the database, we need one or more tables, we could create them directly using <b>phpmyadmin</b>, this mean keeping track of the database structure somehow, for example by saving the sql to create the tables in a script with the rest of the code<br/>
+<br/>
+--&gt;There's a better way to do it in codeigniter, <b>Database Migrations </b>allow us to manipulate the database from the framework itself, The advantage of this is that it's easier to share the database structure between developers as the code to create the tables is part of the code base in PHP<br/>
+<br/>
+--&gt;it's also easier to put your site into production on a live server<br/>
+<br/>
+--&gt;Migration go in the <b>app/Database/Migrations</b><br/>
+<br/>
+--&gt;you can create migration file manually, but it's easier to do it using cmd<br/>
+<br/>
+#php spark migrate:create create_task<br/>
+<br/>
+in create_task.php:<br/>
+<br/>
+<b>up method:</b>&nbsp;is to make changes we need to create the table, in this case creating the task table <br/>
+<br/>
+<b>down method: </b>is for undoing or rolling back these changes<br/>
+<br/>
+--&gt;inside <b>migration class</b>&nbsp;we use the <b>Forge class </b>to manipulate the database<br/>
+<span style="color: #5c6370"><span style="font-size: 14pt"><span style="font-family: Consolas"><span style="background-color: #282c34"><span style="color: #abb2bf">to run the migration you should run this command line:<br/>
+</span></span></span></span></span><span style="color: #5c6370"><span style="font-size: 14pt"><span style="font-family: Consolas"><span style="background-color: #282c34"><span style="color: #abb2bf">#php spark migrate</span></span></span></span></span>&nbsp; <br/>
+<br/>
+--&gt;you will find two tables in <b>taskapp</b>&nbsp;database in phpmyadmin<br/>
+<br/>
+--&gt;the migrations table is used by codeigniter to keep track of which migrations have been run, this is used internally by codeigniter and we don't need to do anything with it<br/>
+<br/>
+--&gt;another thing that migrations's allow us to do is undo the most recent migration, which is why we put code in the <b>down method</b>&nbsp;of the migration file, we roll back by calling:<br/>
+#<b>php spark migrate:rollback<br/>
+</b><b><br/>
+</b>--&gt;this will remove <b>task table</b>, rolling back changes like this is useful if you've made an error in the most recent migration so you can fix the error and when the migration <br/>
+<br/>
+#<b>php spark migrate<br/>
+</b>--&gt;we run it again so we have task table back<br/>
+---------------------------------------------------------<br/>
+<b>Models: connect to the database and select data automatically<br/>
+<br/>
+</b>--&gt;in pure php application, you might first connect to the database, then write some sql to select some data, then run the query and fetch the results<br/>
+<br/>
+--&gt;the Codeignitor <b>model class </b>does a lot of this for you, so it's much faster to develop with <br/>
+--------------------------------------------------------<br/>
+<b>Debugging tools: </b>enable the debug bar nad use the add function<br/>
+<br/>
+--&gt;go to .env file and uncomment <b>app.baseURL </b>and make it <br/>
+<b>app.baseURL = 'http://taskapp.localhost'<br/>
+<br/>
+</b>var_dump($data);<br/>
+exit;<br/>
+=<br/>
+dd($data);</body></html>

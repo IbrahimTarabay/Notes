@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>introduction</title>
+</head><body><b>What is MVC?<br/>
+<br/>
+</b>1-MVC is a programming design pattern or methodology<br/>
+<br/>
+2-It is an architectural pattern separating an application into three main logical components: the model, the view, and controller<br/>
+<br/>
+3-Its separates your application presentation from your business logic<br/>
+<br/>
+4-Each part are designed to perform specific task<br/>
+<br/>
+<b><br/>
+Benefits of MVC<br/>
+<br/>
+</b>1-Reusability<br/>
+<br/>
+2-Easy maintain our application<br/>
+<br/>
+3-Many developers work at a time without affecting one another<br/>
+<br/>
+4-it supports TTD (Test-Driven Development)<br/>
+--------------------------------------------------------------<br/>
+<b>Why we should learn laravel??<br/>
+<br/>
+</b>1-Laravel is a first development life cycle and less code functionalities<br/>
+<br/>
+2-Its easy to learn<br/>
+<br/>
+3-Making web applications faster<br/>
+<br/>
+4-Configuration error and exception handling<br/>
+<br/>
+5-Automation testing work<br/>
+<br/>
+6-URL Routing Configuration<br/>
+<br/>
+7-Scheduling tasks configuration and management<br/>
+<br/>
+8-It has huge community<br/>
+<br/>
+9-unlimited resource<br/>
+<br/>
+10-Its very easy to get a job if you have laravel skill<br/>
+-----------------------------------------------------------<br/>
+<b>Features of Laravel<br/>
+<br/>
+</b>1-MVC support and object oriented approach<br/>
+<br/>
+2-Built in Authentication and authorization(<div style="text-align: left"><span style="font-family: arial"><span style="font-size: 13pt">authentication is the process of verifying who a user is, while </span></span></div><span style="font-size: 13pt"><b>authorization is the process of verifying what they have access to</b><div style="text-align: left"><span style="font-family: arial">.</span></div></span>)<br/>
+<br/>
+3-Packaging System(are a great way to accelerate development and provide functionality we need out of the box)<br/>
+<br/>
+4-Multiple File System(laravel has a built in support for the cloud storage system such Amazon S3 and local storage)<br/>
+<br/>
+5-Artisan Console<br/>
+<br/>
+6-Eloquent ORM<br/>
+<br/>
+7-Templating Engine<br/>
+<br/>
+8-Testing<br/>
+-----------------------------------------------------------<br/>
+<b>Laravel installation<br/>
+<br/>
+</b>1-install node.js<br/>
+<br/>
+2-install xampp<br/>
+<br/>
+3-create folder like: laravel8 in htdocs<br/>
+<br/>
+4-open folder in cmd and write:<br/>
+#php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"<br/>
+<br/>
+5-#php -r "unlink('composer-setup.php');"<br/>
+<br/>
+6-#composer create-project laravel/laravel basic<br/>
+<br/>
+<b>--&gt;if you want http://localhost/laravel8/basic/public/ == http://127.0.0.1:8000/</b><br/>
+<br/>
+#cd basic<br/>
+#php artisan serve<br/>
+-----------------------------------------------------------<br/>
+<b>Laravel Folder Structure<br/>
+<br/>
+</b>app--&gt;Http--&gt;(Controllers+Middleware)<br/>
+<br/>
+<b>Middleware</b>--&gt;it's like a guard, with middleware you can manage all users so know which user is authenticate for access which url<br/>
+<br/>
+<br/>
+<b>Routes:<br/>
+<br/>
+</b>1-<b>api route:</b>&nbsp;if you work with vue.js so you have to use api route<br/>
+<br/>
+2-<b>web route:</b>&nbsp;if you want to create application with the web then you have to use web route<br/>
+<br/>
+<br/>
+<b>What is Route?<br/>
+<br/>
+</b>--&gt;it's a way of creating a request url of your application, routes in laravel allows you to route all your application requests to it's appropriate controller <br/>
+<br/>
+<b>Six type of route method:<br/>
+<br/>
+</b>1-Get--&gt;when you want to fetch content<br/>
+2-Post--&gt;when you want to insert data in database<br/>
+3-Put--&gt;when you want to update data into database<br/>
+4-Delete--&gt;when you want to delete data<br/>
+5-Patch--&gt;when you want to update one single field in database<br/>
+6-Options<br/>
+-----------------------------------------------------------<br/>
+<b>Blade in laravel</b><br/>
+<br/>
+--&gt;Blade is the <b>simple, yet powerful templating engine that is included with laravel</b>&nbsp;unlike some PHP templating engines, Blade doesn't restrict you from using plain PHP code in your templates, Blade template files use the .blade.php file extension and are typically stored in the <b>resources/views </b>directory<br/>
+----------------------------------------------------------<br/>
+<b>Authentication install Laravel 8<br/>
+<br/>
+</b>#composer require laravel/jetstream<br/>
+#php artisan jetstream:install livewire<br/>
+#php artisan migrate<br/>
+#npm install &amp;&amp; npm run dev<br/>
+<br/>
+<br/>
+<b>Laravel Jetstream--&gt;</b><div style="text-align: left"><span style="font-size: 14pt"><span style="font-family: arial"> </span></span><span style="font-family: arial"><span style="font-size: 13pt">is a beautifully designed application starter kit for</span><span style="font-size: 14pt"> </span></span></div>Laravel<div style="text-align: left"><span style="font-family: arial"><span style="font-size: 13pt"> and provides the perfect starting point for your next</span><span style="font-size: 14pt"> </span></span></div>Laravel<div style="text-align: left"><span style="font-size: 14pt"><span style="font-family: arial"> </span></span><span style="font-family: arial"><span style="font-size: 13pt">application.</span></span></div>&nbsp; <br/>
+<br/>
+<br/>
+<b>Laravel Livewire--&gt; </b><div style="text-align: left"><span style="font-size: 13pt"><span style="font-family: arial">is</span></span></div>&nbsp;a library that makes it simple to build modern, reactive, dynamic interfaces using laravel blade as your templating language, This is a greate stack to choose if you want to build an application that is dynamic and reactive but don't feel comfortable jumping into a full javascript framework like Vue<br/>
+----------------------------------------------------------<br/>
+<b>Eloquent vs Query Builder(DB Query)<br/>
+<br/>
+Eloguent better in:<br/>
+<br/>
+</b>1-To create a better relationship and get the results in view with so much simple syntax, when there needs to join<br/>
+<br/>
+2-Eloquent is also for who have not much knowledge of SQL query<br/>
+<br/>
+3-An MVC framework follow the rules of code readability, code maintainability and which eloquent is<br/>
+<br/>
+<b>ex:<br/>
+</b><span style="font-size: 13pt"><span style="font-family: inherit">// In Eloquent</span></span>&nbsp;<br/>
+<span style="font-size: 13pt"><span style="font-family: inherit">$student</span></span>&nbsp;= App\Student::find(<span style="font-size: 13pt"><span style="font-family: inherit">$id</span></span>);<br/>
+<span style="font-size: 13pt"><span style="font-family: inherit">// In DB facade<br/>
+</span></span><span style="font-size: 13pt"><span style="font-family: inherit">$student</span></span>&nbsp;= DB::table(<span style="font-size: 13pt"><span style="font-family: inherit">'student'</span></span>)-&gt;where(<span style="font-size: 13pt"><span style="font-family: inherit">'id'</span></span>, <span style="font-size: 13pt"><span style="font-family: inherit">$id</span></span>)-&gt;first(); <br/>
+<br/>
+<b>So when we use Eloquent and when DB facades:<br/>
+<br/>
+</b>1-When we'll work on a simple and small records site with simple CRUD and there records are not fact, then use Eloquent there.<br/>
+<br/>
+2-When we'll work on a lot's of records, it's better to us DB Query than eloquent<br/>
+<br/>
+<b>ex:<br/>
+</b><br/>
+1-<b>University website</b>&nbsp;which may contain maxium 5000 teachers and 10000 students and some notices and files then it's better to do this with simple Laravel Eloquent which is very much standard and readable<br/>
+<br/>
+2-<b>Stackoverflow</b>&nbsp;which may contains more than 10000000(posts and many more things) conventional DB facades there, it's more faster for searching the posts from so much records<br/>
+<br/>
+<br/>
+<b>To create model and migration file with the same name in same time<br/>
+<br/>
+</b>#php artisan make:model Category -m <br/>
+#php artisan migrate<br/>
+----------------------------------------------------------<br/>
+<b>Eloquent vs Query Builder(DB Query)</b><br/>
+<br/>
+--&gt;When we work with <b>query builder</b>, you don't need to work with <b>models folder</b>, unlike <b>eloquent<br/>
+</b>----------------------------------------------------------<br/>
+<b>What does protected $fillable does in laravel?<br/>
+<br/>
+</b>--&gt;it guards your model attributes. Only these you define in <b>$fillable</b>&nbsp;will be updated in database, except for <b>id, updated_at, created_at</b><br/>
+----------------------------------------------------------<br/>
+<b>enctype</b>--&gt;attribute in form to be able to insert image in form<br/>
+----------------------------------------------------------<br/>
+<b>Intervention Package<br/>
+<br/>
+</b>--&gt;to resize image<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<b>&nbsp;</b><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+</body></html>

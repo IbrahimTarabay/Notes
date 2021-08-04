@@ -63,33 +63,35 @@
         </array>
         <key>windows</key><dict>
             <key>ids</key><dict>
-                <key>a27c2f0a-7285-41ee-ab0f-009e5bb966fb</key><dict>
-                    <key>viewerid</key><string>5fe0c53a-149a-44db-acc4-24f446c46be2</string>
+                <key>01274d6d-2e2c-4c1b-bd94-9b76746a0c5c</key><dict>
+                    <key>viewerid</key><string>923408ad-54be-4e87-81b6-cf5d435cd3fd</string>
                     <key>viewer_type</key><string>tabbed_viewer</string>
                 </dict>
             </dict>
         </dict>
         <key>viewers</key><dict>
             <key>ids</key><dict>
-                <key>d54d3ff3-944e-459b-9788-92939d1587fd</key><dict>
+                <key>b35f5d44-7cd7-48ae-885f-ede321e66dec</key><dict>
                     <key>selected_treeview_nodes</key><array>
+                        <string>8a20e485-b360-4b75-9830-32ad705422c9</string>
                     </array>
                     <key>selected_listview_nodes</key><array>
+                        <string>8a20e485-b360-4b75-9830-32ad705422c9</string>
                     </array>
                 </dict>
-                <key>5fe0c53a-149a-44db-acc4-24f446c46be2</key><dict>
+                <key>923408ad-54be-4e87-81b6-cf5d435cd3fd</key><dict>
                     <key>tabs</key><array>
                         <dict>
-                            <key>viewerid</key><string>d54d3ff3-944e-459b-9788-92939d1587fd</string>
+                            <key>viewerid</key><string>b35f5d44-7cd7-48ae-885f-ede321e66dec</string>
                             <key>viewer_type</key><string>three_pane_viewer</string>
                             <key>name</key><string></string>
                         </dict>
                     </array>
-                    <key>current_viewer</key><string>d54d3ff3-944e-459b-9788-92939d1587fd</string>
+                    <key>current_viewer</key><string>b35f5d44-7cd7-48ae-885f-ede321e66dec</string>
                 </dict>
             </dict>
         </dict>
-        <key>default_font</key><string>Sans 10</string>
+        <key>default_font</key><string>sans 12</string>
     </dict>
 </pref>
 </notebook>

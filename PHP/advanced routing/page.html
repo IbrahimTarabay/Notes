@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Advanced Routing</title>
+</head><body><b>The Router<br/>
+<br/>
+</b><img src="the router.png" /><br/>
+<img src="simple route matching.png" /><br/>
+<br/>
+<img src="advanced route matching.png" /><br/>
+<br/>
+--&gt;this way our routing table will be much simpler<br/>
+----------------------------------------------------------<br/>
+<b>String Comparisons<br/>
+<br/>
+</b><img src="fixed string comparison.png" /><br/>
+<br/>
+<b>Regular experssions<br/>
+<br/>
+</b>1- A regular expression describes a <b>pattern </b>of characters<br/>
+<br/>
+2-Can match <b>part of a string<br/>
+</b><b><br/>
+</b>3-Can be used for advanced <b>matching</b>&nbsp;and <b>replacing:<br/>
+</b>&nbsp; --&gt;match or replace <b>just numbers </b>in a string<br/>
+&nbsp; --&gt;see if a string contains a <b>valid email address</b><br/>
+<br/>
+<img src="regular expression.png" /><br/>
+<br/>
+<img src="simple character matching.png" /><br/>
+<br/>
+<img src="simple character matching2.png" /><br/>
+<br/>
+<img src="metacharacters.png" /><br/>
+<br/>
+<img src="metacharacters2.png" /><br/>
+<br/>
+<br/>
+<b>www.phpliveregex.com</b><br/>
+---------------------------------------------------------<br/>
+<b>Advanced Pattern Matching<br/>
+<br/>
+</b><img src="the start and end of the string.png" /><br/>
+<br/>
+<img src="the start and end of the string2.png" /><br/>
+<br/>
+<img src="repetition.png" /><br/>
+<br/>
+<img src="wildcards.png" /><br/>
+<br/>
+<img src="escaping.png" /><br/>
+<br/>
+<img src="escaping2.png" /><br/>
+<br/>
+<img src="case sensitive.png" /><br/>
+<br/>
+<img src="case sensitive2.png" /><br/>
+<br/>
+---------------------------------------------------------<br/>
+<b>Character sets and ranges<br/>
+<br/>
+</b><img src="character sets.png" /><br/>
+<br/>
+<img src="character ranges.png" /><br/>
+<br/>
+<img src="character ranges2.png" /><br/>
+<br/>
+<img src="negated character sets.png" /><br/>
+<br/>
+<img src="negated character sets2.png" /><br/>
+<br/>
+---------------------------------------------------------<br/>
+<b>Capture Groups<br/>
+<br/>
+</b><img src="regx.png" /><br/>
+<br/>
+<img src="regx2.png" /><br/>
+<br/>
+<b>$matches--&gt;</b>has a result of the match<br/>
+<br/>
+<img src="capture groups.png" /><br/>
+<br/>
+<img src="capture groups2.png" /><br/>
+<br/>
+<img src="capture groups3.png" /><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<img src="named capture groups.png" /><br/>
+<br/>
+<br/>
+----------------------------------------------------------<br/>
+<b>Get the controller and action from a URL with a fixed structure<br/>
+<br/>
+</b><img src="matching routes.png" /><br/>
+<br/>
+<img src="regx url.png" /><br/>
+<img src="regx url2.png" /><br/>
+--&gt;so with this powerful regular expression we can get controller and action from URL without having separate entries in routing table for each controller and action<br/>
+---------------------------------------------------------<br/>
+<b>Replace parts of strings using regular expression<br/>
+<br/>
+</b>$result = <b>preg_replace</b>($reg_exp, $replacement, $string)<br/>
+<br/>
+--&gt;Searches <b>$string</b>&nbsp;for matches to <b>$reg_exp</b>&nbsp;and replaces them with <b>$replacement<br/>
+</b><b><br/>
+</b><img src="regular expression replacing.png" /><b><br/>
+</b><b><br/>
+</b><img src="regular expression replacing2.png" /><b><br/>
+</b><b><br/>
+</b><img src="backreferences.png" /><b><br/>
+</b><b><br/>
+</b><img src="backrefernces2.png" /><b><br/>
+</b><b><br/>
+--------------------------------------------------------<br/>
+Get the controller and action from a URL with a variable structure<br/>
+<br/>
+</b>Simple fixed URL structure<br/>
+<br/>
+<b>daveh.io/controller/action</b><br/>
+<br/>
+ex:<br/>
+daveh.io/posts/index<br/>
+daveh.io/posts/new<br/>
+daveh.io/blog/index<br/>
+daveh.io/products/list<br/>
+<br/>
+<img src="routes with variables.png" /><br/>
+<br/>
+<img src="fixed routes.png" /><br/>
+<br/>
+<img src="routes with variables 2.png" /><br/>
+<br/>
+--&gt;So instead of doing a string comparison of the request URL with each entry in the routing table looking for a match we will do regular expression match with the routes so the routes in routing table will be regular expression instead of fixed strings<br/>
+<br/>
+<img src="matching the request2.png" /><br/>
+<br/>
+<img src="processing the route.png" /><br/>
+<br/>
+<img src="turning the route into a regular express.png" /><br/>
+<img src="turning the route into a regular express 2.png" /><br/>
+<br/>
+--------------------------------------------------------<br/>
+<b>Add custom variables of any format to the URL<br/>
+<br/>
+</b><img src="custome variable.png" /><b><br/>
+</b><b><br/>
+</b><img src="custom regular expression.png" /><b><br/>
+</b><b><br/>
+</b><img src="turning the route into a regular express 3.png" /><b><br/>
+</b><b><br/>
+</b></body></html>

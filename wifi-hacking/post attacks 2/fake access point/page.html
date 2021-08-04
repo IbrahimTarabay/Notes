@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Fake Access Point</title>
+</head><body><img src="2020-06-19 16_15_16-window.png" /><b><br/>
+</b><b><br/>
+<br/>
+Using MANA-TOOLKIT:<br/>
+<br/>
+</b>-Tools rogue access point attacks<br/>
+-It can:<br/>
+&nbsp; +Automatically configure and create fake AP<br/>
+&nbsp; +Automatically sniff data<br/>
+&nbsp; +Automatically bypass https<br/>
+&nbsp; +etc<br/>
+<br/>
+MANA has 3 main start scripts:<br/>
+<br/>
+1-start-noupstream.sh--&gt;starts fake AP with no internet access<br/>
+<br/>
+2-start-nat-simple.sh--&gt;starts fake AP with internet access<br/>
+<br/>
+3-start-nat-full.sh--&gt;starts fake AP with internet access, and automatically starts sniffing data, bypass https<br/>
+<br/>
+<b>Install:<br/>
+<br/>
+</b>#apt-get update<br/>
+#sudo aptitude install mana-toolkit<br/>
+--------------------------------------------------------------------------<br/>
+#leafpad /etc/mana-toolkit/hostapd-mana.conf<br/>
+#leafpad /usr/share/mana-toolkit/run-mana/start-nat-simple.sh<br/>
+#bash /usr/share/mana-toolkit/run-mana/start-nat-simple.sh (to execute the code inside it)<br/>
+<br/>
+<b>Note:</b>&nbsp;Don't test this network from the host machine because will not work, either tested from another virtual machine with another wireless adapter or from your phone or from another laptop<br/>
+</body></html>

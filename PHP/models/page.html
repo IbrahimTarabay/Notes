@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Models</title>
+</head><body><b>Models<br/>
+<br/>
+</b>1-Models are where an application's <b>data </b>are stored<br/>
+<br/>
+2-Responsible for <b>storing </b>and <b>retrieving </b>data<br/>
+<br/>
+3-Models commonly store data in a <b>database<br/>
+</b><b><br/>
+</b>4-A <b>single model </b>often has an <b>equivalent database table</b>, ex: Post <b>model</b>--&gt;posts <b>table<br/>
+</b><b><br/>
+</b><img src="models and databases.png" /><b><br/>
+</b><b>Separation of concerns<br/>
+<br/>
+</b>1-Controllers pass data <b>to </b>the views<br/>
+2-Controllers pass data <b>to </b>and <b>from </b>the models<br/>
+3-The views know <b>nothing</b>&nbsp;about where the data comes from<br/>
+<img src="separation of concerns.png" /><br/>
+<img src="without framework.png" /><br/>
+--&gt;Without a framework, you might do something like this, all in the same PHP script, access the database, retrieve some data, and display it, all in the same file, <b>Presentation </b>and <b>Application </b>code all mixed together<br/>
+---------------------------------------------------------<br/>
+<b>Database connection data<br/>
+<br/>
+</b><img src="database connection data.png" /><br/>
+ex:<br/>
+$host = "localhost";<br/>
+$db_name = "redbee";<br/>
+$user = "admin";<br/>
+$password = "secret";<br/>
+<br/>
+//Create a connection<br/>
+$conn = new mysqli($host, $db_name,$user,$password);<br/>
+---------------------------------------------------------<br/>
+<b>PDO: PHP Data Objects<br/>
+</b>--&gt;why it makes working with databases in PHP easier<br/>
+<br/>
+<img src="database specific functions.png" /><br/>
+<b>What is PDO and why use it?</b><br/>
+--&gt;PDO(PHP Data Objects) is <b>a code library for accessing databases<br/>
+</b><b><br/>
+Advantages:<br/>
+</b><br/>
+1-Not specific to any database platform<b>--&gt;faster to code<br/>
+</b><b><br/>
+</b>2-Named parameters in SQL statements<b>--&gt;more secure<br/>
+</b><b><br/>
+</b>3-Exceptions are used for error handling<b>--&gt;improved code quality</b><br/>
+<br/>
+<img src="connecting to a database.png" /><br/>
+--&gt;the exception is raised if there is an error which make it easier to handle problems<br/>
+<br/>
+<img src="simple queries.png" /><br/>
+<img src="simple inserts and updates.png" /><br/>
+--&gt;if we executing some SQL that doesn't return any results then we use <b>exec() </b>which returns the number of affected rows we can use this for simple inserts and updates for example<br/>
+<br/>
+--&gt;for more complex SQL we can use <b>prepare() </b>which can accept named parameters<b><br/>
+</b><img src="prepared statements.png" /><br/>
+----------------------------------------------------------<br/>
+<b>Displaying data from a model<br/>
+<br/>
+<img src="displaying data from a model.png" /><br/>
+<br/>
+</b><br/>
+<span style="font-family: Arial"><div style="text-align: left"><span style="font-size: 13pt">--&gt;An ORM will involve creating entities and then the code will look at the mappings to figure out how to change that into SQL, etc.</span><span style="font-size: 15pt"><br/>
+</span></div></span><br/>
+<span style="font-family: Arial"><div style="text-align: left"><span style="font-size: 13pt">--&gt;Using PDO is just straight SQL statements. You give it a string of SQL and it'll run that.</span><span style="font-size: 15pt"><br/>
+</span></div></span><br/>
+<img src="pdo vs mysqli.png" /><br/>
+<br/>
+--&gt;MySQLi fast 2.5% to 6% than PDO<br/>
+---------------------------------------------------------<br/>
+<b>Optimise that database connection: </b>connect on demand and reuse it<br/>
+<br/>
+<b>Where to connect to the database?</b><br/>
+<br/>
+1-Connecting to the database is <b>costly </b>(time, server resourses)<br/>
+<br/>
+2-A <b>single </b>request might contain <b>multiple </b>database queries<br/>
+<br/>
+3-Ideally we would only connect to the database <b>once </b>per request, <b>reusing </b>the same connection for multiple queries<br/>
+<br/>
+<img src="database connection.png" /><br/>
+<b>Where to connect to the database?<br/>
+<br/>
+</b>1-Not all <b>models</b>&nbsp;will necessarily need to connect to the database<br/>
+<br/>
+2-Not all <b>methods </b>in a model will necessarily need to access the database<br/>
+<br/>
+<img src="connect to the database.png" /><br/>
+<img src="connect to the database2.png" /><br/>
+<br/>
+1- The value of a <b>static </b>variable is remembered between calls<br/>
+<br/>
+2-The connection is only made <b>once, </b>and is reused after the first call<br/>
+---------------------------------------------------------<br/>
+<b>PDO vs MySQLi<br/>
+<br/>
+</b>1-<b>Performance<br/>
+</b>--&gt;if MySQLi and PDO don't use <b>prepared statements </b>MySQLi is 2.5% faster if both use <b>prepared statements </b>&nbsp;MySQLi is 6% faster<br/>
+<br/>
+2-<b>Security<br/>
+</b>--&gt;Same, they just support different styles<br/>
+<br/>
+<b>PDO</b>--&gt;Named Parameters, Question Mark, Passing array<br/>
+<br/>
+<b>MySQLi</b>--&gt;Question Mark<br/>
+---------------------------------------------------------<br/>
+<b>Prepared Statements and Bound Parameters<br/>
+<br/>
+</b>--&gt;A prepared statement is a feature used to execute the same (or similar) SQL statements repeatedly with high efficiency<br/>
+<br/>
+--&gt;Prepared statements basically work like this:<br/>
+<br/>
+1-<b>Prepare</b>: An SQL statement template is created and sent to the database. Certain values are left unspecified called parameters(labeled "?"). ex: INSERT INTO MyGuests VALUES(?,?,?)<br/>
+<br/>
+2-The database parses, compiles, and performs query optimization on the SQL statement template, and stores the result without executing it<br/>
+<br/>
+3-Execute: At a later time, the application binds the values to the parameters, and the database executes the statement. The application may execute the statement as many times as it wants with different values<br/>
+<br/>
+<b>Advantages:<br/>
+<br/>
+</b>1-Prepared statements reduce parsing time as the preparation on the query is done only once(although the statement is executed multiple times)<br/>
+<br/>
+2-Bound parameters minimize bandwidth to the server as you need send only the parameters each time, and not the whole query<br/>
+<br/>
+3-Prepared statements are very useful against SQL injections, because parameter values, which are transmitted later using a different protocol, need not be correctly escaped. if the original statement template is not derived from external input, SQL injection cannot occur<br/>
+---------------------------------------------------------</body></html>

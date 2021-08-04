@@ -1,6 +1,7 @@
-<!DOCTYPE html  PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Pre-Connection Attacks</title>
 </head><body><span style="font-size: 12pt"><b>Packet Sniffing:</b><br/>
 <br/>
@@ -9,12 +10,12 @@
 <b>BSSID: </b>The MAC address of the target network<br/>
 <b>PWR: </b>Signal Power of the network, the higher value the better signal we have so -52 better than -58<br/>
 <b>Beacons: </b>These are frames sent by the network in order to broadcast its existence, so every network even if it's set to be hidden always sends these type of frames basically broadcast<br/>
-<b>#Data:</b>These are the useful packets<br/>
+<b>#Data:</b>&nbsp;These are the useful packets<br/>
 <b>#/s: </b>number of data packets that we collected<br/>
-<b>CH:</b>channel that the network works on<br/>
-<b>MB:</b>Maximum speed supported by the network<br/>
-<b>ENC:</b>The Encryption used by the network<br/>
-<b>CIPHER:</b>is the cipher used in the network<br/>
+<b>CH:</b>&nbsp;channel that the network works on<br/>
+<b>MB:</b>&nbsp;Maximum speed supported by the network<br/>
+<b>ENC:</b>&nbsp;The Encryption used by the network<br/>
+<b>CIPHER:</b>&nbsp;is the cipher used in the network<br/>
 <b>AUTH: </b>authentication<br/>
 <br/>
 <b>Targeted Packet Sniffing:</b><br/>
@@ -57,9 +58,9 @@ airodump-ng[MonitorModeInterface]<br/>
 <b>Deauthentication Attack:<br/>
 <br/>
 </b><b>--&gt;</b>Disconnect any client from any network<br/>
- -Works on encrypted netwroks(WEP,WPA&amp;WPA2)<br/>
- -No need to know the network key<br/>
- -No need to connect to the network<br/>
+&nbsp; -Works on encrypted netwroks(WEP,WPA&amp;WPA2)<br/>
+&nbsp; -No need to know the network key<br/>
+&nbsp; -No need to connect to the network<br/>
 <br/>
 <b>USE:</b><br/>
 aireplay-ng --deauth [#DeauthPackets] -a [NetworkMac] -c [TargetMac] [Interface]<br/>

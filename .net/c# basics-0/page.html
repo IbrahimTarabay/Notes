@@ -1,0 +1,522 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>C# Basics</title>
+</head><body><b>The .NET Framework</b><br/>
+<br/>
+--&gt;The .NET Framework consists of the .NET Framework <b>class library</b>, The <b>CLR </b>is the foundation of the .NET Framework. It manages code at execution time, providing core services such as memory management, code accuracy, and many other aspects of your code.<b>&nbsp;</b>The <b>class library </b>is a collection of classes, interfaces, and value types that enable you to accomplish a range of common programming tasks, such as data collection, file access, and working with text.<b><br/>
+</b>------------------------------------------------------------<br/>
+<b>Variables<br/>
+<br/>
+</b>There are a number of built-in data types in C#. The most common are:<br/>
+<br/>
+<b>int </b>- integer<br/>
+<b>float </b>- floating point number<br/>
+<b>double </b>- double-precision version of float<br/>
+<b>char </b>- a single character<br/>
+<b>bool </b>- Boolean that can have only one of two values: True or False<br/>
+<b>string </b>- a sequence of characters<br/>
+<br/>
+--&gt;Note that <b>char </b>values are assigned using single quotes and <b>string </b>values require double quotes<br/>
+---------------------------------------------------------<br/>
+<b><span style="font-family: inherit">Console application</span></b> uses a text-only interface. We chose this type of application to focus on learning the fundamentals of C#.<br/>
+<br/>
+remember that every C# console application must contain a <b>method (a function) named Main. </b>Main is the starting point of every application, i.e. the point where our program starts execution from.<b><br/>
+</b>---------------------------------------------------------<br/>
+<span style="font-family: inherit">The <b>Console.ReadLine()</b></span> method returns a <b>string </b>value.<b>&nbsp;</b>if you are expecting another type of value (such as int or double), the entered data must be converted to that type, This can be done using the <b>Convert.ToXXX</b>, where XXX is the .NET name of the type that we want to convert to. For example, methods include <b>Convert.ToDouble </b>and <b>Convert.ToBoolean</b>&nbsp;For integer conversion, there are three alternatives available based on the bit size of the integer: <b>Convert.ToInt16, Convert.ToInt32 </b>and <b>Convert.ToInt64</b>. The default int type in C# is 32-bit<br/>
+---------------------------------------------------------<br/>
+<b><span style="font-family: inherit">The var Keyword</span></b>&nbsp; <br/>
+<br/>
+ex:<br/>
+var num = 15;<br/>
+<br/>
+--&gt;The code above makes the compiler determine the type of the variable. Since the value assigned to the variable is an integer, the variable will be declared as an integer automatically.<br/>
+<br/>
+<br/>
+ex:<br/>
+<b><span style="font-family: inherit">var </span></b>num; <br/>
+num = 42;<br/>
+--&gt;cause error<br/>
+<br/>
+--&gt;Overuse of <b>var </b>can harm the readability of your code. Best practice is to explicitly declare variables.<br/>
+---------------------------------------------------------<br/>
+<b>Constants<br/>
+<br/>
+</b>ex<b><br/>
+</b>const double PI = 3.14; <br/>
+PI = 8; //error<br/>
+<br/>
+--&gt;Constants <b>must </b>be initialized with a value when declared<br/>
+---------------------------------------------------------<br/>
+<b>Division<br/>
+<br/>
+</b>The division operator (/) divides the first operand by the second. If the operands are both integers, any remainder is dropped in order to return an integer value.<br/>
+<br/>
+--&gt;Division by 0 is undefined and will crash your program<br/>
+---------------------------------------------------------<br/>
+<b>Prefix &amp; Postfix Forms<br/>
+<br/>
+</b>++x; //prefix<br/>
+x++; //postfix<br/>
+<br/>
+<b>prefix</b>&nbsp;increments the value, and then proceeds with the expression<br/>
+<br/>
+<b>postfix </b>evaluates the expression and then performs the incrementing<br/>
+<br/>
+ex:<br/>
+int x = 3;<br/>
+int y = ++x;<br/>
+// x is 4, y is 4<br/>
+<br/>
+ex:<br/>
+int x = 3;<br/>
+int y = x++;<br/>
+// x is 4, y is 3<br/>
+----------------------------------------------------------<br/>
+<b>The break Statement<br/>
+<br/>
+</b>What would occur if we forget to include a break statement at the end of case code?<br/>
+<br/>
+--&gt;compile error<br/>
+----------------------------------------------------------<br/>
+<br/>
+--&gt;<span style="font-family: inherit"><b>for (; ;) {}</b></span> is an infinite loop.<br/>
+<br/>
+--&gt;If you are using nested loops (i.e., one loop inside another loop), the <b>break </b>statement will stop the execution of the innermost loop and start executing the next line of code after the block.<b><br/>
+</b><b><br/>
+ex:<br/>
+</b><br/>
+for(int i=0; i&lt;10; i++){<br/>
+&nbsp;if(i==5)<br/>
+&nbsp; &nbsp;continue;<br/>
+&nbsp; Console.WriteLine(i);<br/>
+}<br/>
+<br/>
+--&gt;number 5 is not printed, as the <b>continue </b>statement skips the remaining statements of that iteration of the loop.<br/>
+----------------------------------------------------------<br/>
+<span style="font-family: inherit"><span style="font-size: 16pt"><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<span style="font-family: Fira Mono"><span style="font-size: 18pt"><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+</span></span></span></span>Which of the following is used to take user input?<br/>
+<br/>
+--&gt;<b>Console.ReadLine</b><br/>
+-----------------------------------------------------------<br/>
+--&gt;<span style="font-family: inherit"><b>void </b></span>is a basic data type that defines a valueless state.<br/>
+<br/>
+--&gt;The <b>static </b>keyword used to make methods accessible in Main.<br/>
+-----------------------------------------------------------<br/>
+<br/>
+--&gt;Parameters behave within the method similarly to other local variables. They are created upon entering the method and are destroyed upon exiting the method.<br/>
+<br/>
+<b>Named Arguments<br/>
+<br/>
+ex:<br/>
+</b><br/>
+static int Area(int h, int w){<br/>
+&nbsp; return h*w;<br/>
+}<br/>
+<br/>
+static void Main(string[] args){<br/>
+&nbsp; int res = Area(w: 5, h: 8);<br/>
+&nbsp; Console.WriteLine(res);<br/>
+}<br/>
+-----------------------------------------------------------<br/>
+<b>Passing Arguments<br/>
+<br/>
+</b>--&gt;There are three ways to pass arguments to a method when the method is called: By <b>value, </b>By <b>reference, </b>and as <b>Output<br/>
+</b><b><br/>
+</b>--&gt;By <b>value </b>copies the argument's value into the method's formal parameter. Here, we can make changes to the parameter within the method without having any effect on the argument.<b><br/>
+</b><b><br/>
+</b>--&gt;By default, C# uses call <b>by value </b>to pass arguments<br/>
+<br/>
+<b>example by value:<br/>
+<br/>
+</b>static void Sqr(int x){<br/>
+&nbsp; x = x*x;<br/>
+}<br/>
+static void Main(){<br/>
+&nbsp; int a = 3;<br/>
+&nbsp; Sqr(a);<br/>
+&nbsp; Console.WriteLine(a); //Output 3<br/>
+}<br/>
+<br/>
+--&gt;As you can see, the <b>sqr </b>method does not change the original value of the variable, as it's passed by <b>value, </b>meaning that it operates on the <b>value, </b>not the actual variable.<br/>
+-----------------------------------------------------------<br/>
+<b>Passing by Reference<br/>
+<br/>
+ex:<br/>
+</b>static void Sqr(ref int x){<br/>
+&nbsp; x = x*x;<br/>
+}<br/>
+static void Main(){<br/>
+&nbsp; int a = 3;<br/>
+&nbsp; Sqr(ref a);<br/>
+&nbsp;Console.WriteLine(a); // Outputs 9<br/>
+}<br/>
+<br/>
+--&gt;The <b>ref </b>keyword passes the memory address to the method parameter, which allows the method to operate on the actual variable.<br/>
+-----------------------------------------------------------<br/>
+<b>Passing by Output<br/>
+<br/>
+</b><b>ex:</b><span style="color: #569cd6"><span style="font-size: 14pt"><span style="font-family: Consolas"><span style="background-color: #1e1e1e"><span style="color: #d4d4d4"><br/>
+</span></span></span></span></span>static void GetValues(out int x, out int y){<br/>
+&nbsp; x = 5;<br/>
+&nbsp; y = 42;<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp;int a, b;<br/>
+&nbsp;GetValues(out a, out b);<br/>
+&nbsp;//Now a equals 5, b equals 42<br/>
+}<br/>
+<br/>
+--&gt;Similar to the <b>ref </b>keyword, the <b>out </b>keyword is used both when defining the method and when calling it.<br/>
+-----------------------------------------------------------<br/>
+<b>Method Overloading</b><br/>
+<br/>
+--&gt;Method <b>overloading </b>is when multiple methods have the <b>same name, </b>but <b>different parameters<br/>
+</b><b><br/>
+</b>static void Print(int a){<br/>
+&nbsp; Console.WriteLine("Value: "+a);<br/>
+}<br/>
+static void Print(double a){<br/>
+&nbsp;Console.WriteLine("Value: "+a);<br/>
+}<br/>
+<br/>
+--&gt;Now, the same <b>print </b>method name will work for both integers and doubles.<br/>
+<br/>
+<b>ex:<br/>
+</b>static void Print(int a){<br/>
+&nbsp; Console.WriteLine("Value: "+a);<br/>
+}<br/>
+static void Print(double a){<br/>
+&nbsp;Console.WriteLine("Value: "+a);<br/>
+}<br/>
+static void Print(string label, double a){<br/>
+&nbsp;Console.WriteLine<br/>
+}<br/>
+<br/>
+--&gt;When overloading methods, the definitions of the methods must differ from each other by the types and/or number of parameters<br/>
+<br/>
+--&gt;You cannot overload method declarations that differ only by return type<br/>
+<br/>
+<b>The following declaration results in an error:<br/>
+</b><br/>
+<b>int</b>&nbsp;PrintName(int a){}<br/>
+<b>float</b>&nbsp;PrintName(int b){}<br/>
+<b>double</b>&nbsp;PrintName(int c){}<br/>
+<br/>
+<br/>
+<b>ex:<br/>
+</b><b>What is the output of this code?</b><br/>
+<br/>
+static void Print(int a) { <br/>
+Console.WriteLine(a*a);<br/>
+} <br/>
+static void Print(double a) { <br/>
+Console.WriteLine(a+a);<br/>
+} <br/>
+static void Main(string[] args) { Print(3); } &nbsp;<br/>
+----------------------------------------------------------<br/>
+<b>Classes<br/>
+<br/>
+</b>--&gt;a class is a data type that defines a set of variables and methods for a declared <b>object</b>, a class is like <b>blueprint</b>. it defines the data and behavior for a type<br/>
+<br/>
+<b>objects<br/>
+<br/>
+</b>--&gt;the term <b>type </b>is used to refer to a class <b>name</b>, we're creating an object of a particular <b>type</b>, an object is called an instance of a class<br/>
+<br/>
+<b>properties</b>--&gt;determines the <b>current state </b>of an object<br/>
+----------------------------------------------------------<br/>
+<b>Value Types<br/>
+<br/>
+</b>--&gt;the built-in data types, such as int and double, are used to declare variables that are <b>value types<br/>
+</b><b><br/>
+ex:<br/>
+</b>int x =10;<br/>
+<br/>
+<img src="stack.png" /><br/>
+<br/>
+<br/>
+<b>Reference Types<br/>
+<br/>
+</b>--&gt;<b>Reference </b>types are used for storing objects, Reference types are stored in a part of the memory called the <b>heap</b>&nbsp;when you instantiate an object, the data for that object is stored on the heap, while its heap memory address is stored on the stack<br/>
+<br/>
+<img src="reference.png" /><br/>
+<br/>
+--&gt;<b>Stack </b>is used for static memory allocation, which includes all your value types, like x<br/>
+<br/>
+--&gt;<b>Heap </b>is used for dynamic memory allocation, which includes custom objects, that might need additional memory during the runtime of your program<br/>
+----------------------------------------------------------<br/>
+<b>ex:<br/>
+</b><br/>
+class Person{<br/>
+&nbsp; int age;<br/>
+&nbsp; string name;<br/>
+&nbsp; public void SayHi(){<br/>
+&nbsp; &nbsp;Console.WriteLine("Hi");<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+--&gt;You can include an <b>access modifier </b>for fields and methods(also called <b>members</b>) of a class. Access modifiers are keywords used to specify the accessibility of a member.<br/>
+<br/>
+--&gt;A member that has been defined <b>public </b>can be accessed from outside the class, as long as it's anywhere within the scope of the class object. That is why our <b>SayHi </b>method is declared <b>public</b>, as<b>&nbsp;</b>we are going to call it from outside of the class<br/>
+<br/>
+--&gt;You can also designate class members as <b>private </b>or <b>protected</b>, if no access modifier is defined, the member is <b>private </b>by default.<br/>
+<br/>
+<b>ex:<br/>
+</b>class Person{<br/>
+&nbsp; int age;<br/>
+&nbsp; string name;<br/>
+&nbsp; public void SayHi(){<br/>
+&nbsp; &nbsp;Console.WriteLine("Hi");<br/>
+&nbsp;}<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp; Person p1 = new Person();<br/>
+&nbsp; p1.SayHi();<br/>
+}<br/>
+-----------------------------------------------------------<br/>
+<b>Encapsulation<br/>
+<br/>
+</b>--&gt;Encapsulation is also called <b>information hiding.<br/>
+</b><b><br/>
+</b>--&gt;Part of the meaning of the word <b>encapsulation</b>&nbsp;is the idea of "surrounding" an entity, not just to keep what's inside together, but also to protect it, in programming, encapsulation means more than simply combining members together within a class, it also means restricting access to the inner workings of that class<br/>
+<br/>
+--&gt;Encapsulation is implemented by using <b>access modifiers. </b>an access modifier defines the scope and visibility of a class member<br/>
+<br/>
+<b>access modifiers:</b>&nbsp;public, private, protected, internal, protected internal<br/>
+<br/>
+<b>ex:<br/>
+</b>class BankAccount{<br/>
+&nbsp; private double balance=0;<br/>
+&nbsp; <br/>
+&nbsp; public void Deposit(double n){<br/>
+&nbsp; &nbsp; balance +=n;<br/>
+&nbsp; }<br/>
+<br/>
+&nbsp; public void Withdraw(double n){<br/>
+&nbsp; &nbsp; balance -=n<br/>
+&nbsp; }<br/>
+<br/>
+&nbsp; public double GetBalance(){<br/>
+&nbsp; &nbsp; return balance;<br/>
+&nbsp;}<br/>
+}<br/>
+<br/>
+--&gt;We used encapsulation to hide the <b>balance </b>member from the outside code, the class data can be read through the <b>GetBalance </b>method, this helps maintain data integrity<br/>
+<br/>
+<b>In summary, the benefits of encapsulation are:<br/>
+<br/>
+</b>1-Control the way data is accessed or modified<br/>
+2-Code is more flexible and easy to change with new requirements<br/>
+3-Change one part of code without affecting other parts of code<br/>
+-----------------------------------------------------------<br/>
+<b>Constructors<br/>
+<br/>
+</b>--&gt;A class constructor is a special member method of a class that is executed whenever a new object of that class is created<br/>
+<br/>
+--&gt;A constructor has exactly the same name as its class, is public, and doesn't have any return type<br/>
+<br/>
+<b>ex:<br/>
+</b>class Person{<br/>
+&nbsp; private int age;<br/>
+&nbsp; public Person(){<br/>
+&nbsp; &nbsp; Console.WriteLine("Hi there");<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+--&gt;This can be useful in a number of situations. For example, when creating an object of type BankAccount, you could send an email notification to the owner, The same functionality could be achieved using a separate public method. The advantage of the constructor is that it is called automatically.<br/>
+<br/>
+--&gt;Constuctors can be very useful for setting initial values for certain member variables, a default constructor has no parameters. however, when needed, parameters can be added to a constructor. This makes it possible to assign an initial value to an object when it's created<br/>
+<br/>
+<b>ex:<br/>
+<br/>
+</b>class Person{<br/>
+&nbsp; private int age;<br/>
+&nbsp; private string name;<br/>
+<br/>
+&nbsp; public Person(string m){<br/>
+&nbsp; &nbsp;name = nm;<br/>
+&nbsp; }<br/>
+<br/>
+&nbsp; public string getName(){<br/>
+&nbsp; &nbsp; return name;<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+static void Main(string[] args){<br/>
+&nbsp; Person p = new Person("David");<br/>
+&nbsp; Console.WriteLine(p.getName());<br/>
+}<br/>
+<br/>
+<br/>
+--&gt;Consturctor can be <b>overloaded </b>like any method by using different numbers of parameters.<br/>
+-----------------------------------------------------------<br/>
+<b>Properties<br/>
+<br/>
+</b>--&gt;it's a good practice to encapsulate members of a class and provide access to them only through public methods.<br/>
+<br/>
+--&gt;<b>property </b>is a member that provides a flexible mechanism to read, write, or compute the value of a private field. Properties can be used as if they are public data members, but actually include special methods called <b>accessors<br/>
+</b><b><br/>
+</b>--&gt;The accessor of a property contains the executable statements that help in getting(reading or computing) or setting (writing) a corresponding field. Accessor declarations can include a <b>get </b>accessor, a <b>set </b>accessor, or both.<br/>
+<br/>
+<b>ex:<br/>
+</b>class Person{<br/>
+&nbsp; private string name; //field<br/>
+&nbsp; <br/>
+&nbsp; public string Name{ //property<br/>
+&nbsp; &nbsp; get {return name;}<br/>
+&nbsp; &nbsp; set {name = value;}<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+--&gt;<b>value </b>is a special keyword, which represents the value we assign to a property using the <b>set </b>accessor, the name of the property can be anything you want, but coding conventions dictate properties have the same name as the private field with a capital letter.<br/>
+<br/>
+<br/>
+--&gt;any accessor of a property can be omitted <b>ex:<br/>
+</b>class Person{<br/>
+&nbsp; private string name;<br/>
+&nbsp; public string Name{<br/>
+&nbsp; &nbsp; get {return name;}<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+--&gt;A property can also be <b>private, </b>so it can be called only from within the class<br/>
+<br/>
+--&gt;You can have any custom logic with <b>get </b>and <b>set </b>accessors<br/>
+<br/>
+<br/>
+<b>Auto-Implemented Properties<br/>
+<br/>
+</b>--&gt;When you don't need any custom logic, C# provides a fast and effective mechanism for declaring private members through their properties.<br/>
+<br/>
+<b>ex:<br/>
+</b>public string Name {get; set;}<br/>
+-----------------------------------------------------------<br/>
+<b>Arrays<br/>
+<br/>
+</b>--&gt;array is a reference type because it's an object<b><br/>
+</b><b><br/>
+</b>--&gt;C# provides numerous built-in classes to store and manipulate data, one example of such a class is the <b>Array </b>class<br/>
+<br/>
+<b>int[] myArray;</b>--&gt;this statement declares an array of integers<br/>
+<br/>
+--&gt;since arrays ara <b>objects</b>, we need to instantiate them with the <b>new </b>keyword:<br/>
+<br/>
+<b>int[] myArray = new int[5];</b>--&gt;This instantiates an array named myArray that holds 5 integers.<br/>
+<br/>
+<br/>
+--&gt;we can provide initial values to the array when it is declared by using curly brackets:<br/>
+<br/>
+<b>ex:<br/>
+</b>int[] prices = new int[4] {3,5,6,7};<br/>
+<br/>
+--&gt;we can omit the size declaration when the number of elements are provided in the curly braces:<br/>
+<br/>
+<b>ex:<br/>
+</b>int[] prices = new int[] {3,5,6,7};<br/>
+<br/>
+--&gt;we can even omit the <b>new </b>operator <br/>
+<br/>
+<b>ex:<br/>
+</b>int[] prices = {3,5,6,7};<br/>
+-----------------------------------------------------------<br/>
+<b>The foreach Loop<br/>
+<br/>
+ex:<br/>
+</b>foreach(int k in a){<br/>
+&nbsp; Console.WriteLine(k);<br/>
+}<br/>
+<br/>
+--&gt;The <b>foreach</b>&nbsp;loop iterates through the array a and assigns the value of the current element to the variable <b>k </b>at each iteration of the loop. So, at the first iteration, k=a[0], at the second k=a[1]<br/>
+<br/>
+--&gt;the data type of the variable in the <b>foreach </b>loop should match the type of the array elements, often the keyword <b>var </b>is used as the type of the variable, as in: <b>foreach(var k in a) </b>the compiler determines the appropriate type for <b>var<br/>
+</b>-----------------------------------------------------------<br/>
+<b>Multidimensional Arrays<br/>
+<br/>
+</b>int[ , ] x = new int[3,4];<br/>
+<br/>
+<img src="multi-array.png" /><br/>
+<br/>
+<br/>
+<b>ex:<br/>
+</b>int[ , ] someNums = {{2,3},{5,6},{4,6}};<br/>
+<br/>
+--&gt;Arrays can have any number of dimensions, but keep in mind that arrays with more than three dimensions are harder to manage.<br/>
+-----------------------------------------------------------<br/>
+<b>Jagged Arrays<br/>
+<br/>
+</b>--&gt;is an array whose elements are arrays. so it's basically an array of arrays.<br/>
+<br/>
+<b>ex:<br/>
+</b>int[][] jaggedArr = new int[3][];<br/>
+<br/>
+--&gt;Each dimension is an array, so you can also initialize the array upon declaration like this:<br/>
+<br/>
+int[][] jaggedArr = new int[][] {<br/>
+&nbsp; new int[] {1,8,2,7,9},<br/>
+&nbsp; new int[] {2,4,6},<br/>
+&nbsp; new int[] {33,42}<br/>
+};<br/>
+<br/>
+<b>jagged array</b>--&gt;is an array of arrays, so an int[][] is an array of int[ , ] each of which can be of different lengths and occupy their own block in memory<br/>
+<br/>
+<b>multidimensional array</b>--&gt;int[,] is a single block of memory (essentially a matrix). it always has the same amount of columns for every row<br/>
+<br/>
+<b>ex:<br/>
+</b>int[ ][ , ] a = new int[8][ , ];<br/>
+<br/>
+--&gt;jagged array that contains 8 two dimensional arrays<br/>
+-----------------------------------------------------------<br/>
+<b>Arrays Properties<br/>
+<br/>
+</b><b>arr.Length</b>--&gt;to know the number of elements<br/>
+<br/>
+<b>arr.Rank</b>--&gt;to know the number of dimensions<br/>
+<br/>
+<b>Array Methods<br/>
+<br/>
+</b><b>arr.Max()</b>--&gt;returns the largest value.<br/>
+<b>arr.Min()</b>--&gt;returns the smallest value.<br/>
+<b>arr.Sum()</b>--&gt;returns the sum of all elements.<br/>
+-----------------------------------------------------------<br/>
+<b>Strings<br/>
+<br/>
+</b>--&gt;it's common to think of strings as arrays of characters. in reality, strings in C# are objects<br/>
+<br/>
+--&gt;When you declare a <b>string </b>variable, you basically instantiate an object of type <b>String<br/>
+</b><b><br/>
+</b>--&gt;String objects support a number of useful properties and methods:<br/>
+<br/>
+<b>Length</b>--&gt;returns the length of the string<br/>
+<br/>
+<b>IndexOf(value)</b>--&gt;returns the index of the first occurrence of the value within the string.<br/>
+<br/>
+<b>Insert(index,value)</b>--&gt;inserts the value into the string starting from the specified index<br/>
+<br/>
+<b>Remove(index)</b>--&gt;removes all characters in the string from the specified index<br/>
+<br/>
+<b>Replace(oldValue, newValue)</b>--&gt;replaces the specified value in the string<br/>
+<br/>
+<b>Substring(index,length) </b>returns a substring of the specified length, starting from the specified index. if length is not specified, the operation continues to the end of the string<br/>
+<br/>
+<b>Contains(value)</b>--&gt;returns true if the string contains the specified value <br/>
+<br/>
+<b>ex:<br/>
+</b>string s = "Hello";<br/>
+char x;<br/>
+x = s[s.Length-1];<br/>
+<br/>
+--&gt;to assign last character of the string to the x variable.<br/>
+-----------------------------------------------------------<br/>
+<br/>
+</body></html>

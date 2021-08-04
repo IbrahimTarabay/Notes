@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Routing</title>
+</head><body><b>Create a central entry point to the framework<br/>
+<br/>
+</b><img src="url bad idea.png" /><br/>
+<br/>
+<img src="the front controller.png" /><br/>
+<br/>
+<b>Using a front controller:<br/>
+<br/>
+</b>1-The URL does <b>not</b>&nbsp;map to an individual PHP script<br/>
+<br/>
+2-All requests are sent through <b>one </b>page<br/>
+<br/>
+3-This is called a <b>Front Controller:<br/>
+</b><b>&nbsp;</b>--&gt;Provides a <b>central entry point </b>for all requests<br/>
+&nbsp;--&gt;Handles everything <b>common to every request, </b>Such as session handling etc<br/>
+<br/>
+<b>The request is in the query string<br/>
+<br/>
+</b>1-The query string <b>is the part of</b>&nbsp;the URL that comes after the first question mark <br/>
+&nbsp;--&gt;daveh.io/index.php?<b>/home</b><br/>
+<br/>
+2-We can use this to decide <b>where </b>to route the request(<b>which controller</b>)<br/>
+&nbsp;--&gt;daveh.io/index.php?<b>/show_post/123<br/>
+</b>&nbsp;--&gt;daveh.io/index.php?<b>/posts?page=2</b><br/>
+<br/>
+3-The entire query string will be the <b>request URL </b>or <b>route<br/>
+</b>---------------------------------------------------------<br/>
+<b>Remove the default page<br/>
+<br/>
+</b>--&gt;The default page is (most likely) <b>index.php<br/>
+</b>--&gt;So it can be removed from the URL:<br/>
+<br/>
+daveh.io/<b>index.php </b>&nbsp;= daveh.io<br/>
+daveh.io/<b>index.php?/posts </b>= daveh.io/<b>?/posts<br/>
+</b><b><br/>
+</b><img src="remove the question mark.png" /><b><br/>
+</b><b><br/>
+</b><b>.htaccess</b>--&gt;Enable us to remove index.php from the request but maintain the query string<br/>
+---------------------------------------------------------<br/>
+<b>Create and require (not include) the router class<br/>
+<br/>
+</b><img src="the router2.png" /><b><br/>
+</b><b><br/>
+Each class in a separate file<br/>
+<br/>
+</b><img src="each class in a separate file.png" /><br/>
+<br/>
+<img src="require or include.png" /><br/>
+<br/>
+---------------------------------------------------------<br/>
+<b>Create the routing table in the router, and add some routes<br/>
+<br/>
+</b><img src="the routing table.png" /><b><br/>
+</b><b><br/>
+Match the requested route to the list of routes in the routing table<br/>
+<br/>
+</b><img src="matching the request.png" /><br/>
+<br/>
+</body></html>

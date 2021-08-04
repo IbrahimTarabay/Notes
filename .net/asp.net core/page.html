@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ASP.NET Core</title>
+</head><body><b>1-Fundamentals of ASP.NET Core<br/>
+<br/>
+2-Entity Framework Core<br/>
+<br/>
+3-CRUD Operation<br/>
+<br/>
+4-Session, Viewdata, viewbag, validations<br/>
+<br/>
+5-Add Identity to project<br/>
+<br/>
+6-Email Templates<br/>
+<br/>
+7-Assignments, Error Solving<br/>
+<br/>
+</b><b>How to restore default settings in visual studio?? </b>Tools → Import and Export Settings<b><br/>
+</b><b>------------------------------------------------------------<br/>
+.net core is biggest change to .net language<br/>
+</b><br/>
+why we use .net core instead of classic .net framwork??<br/>
+<br/>
+1-fast and open source <br/>
+<br/>
+2-cross platform<br/>
+<br/>
+3-Built in dependency injection(saves a lot of time)<br/>
+<br/>
+4-Easy Updates<br/>
+<br/>
+5-Cloud Friendly<br/>
+<br/>
+6-Performance--&gt;.net core acutal performance is multiple times more than any of the famous framework implementations<br/>
+<br/>
+<br/>
+--&gt;Microsoft has quite long term plan with .net core technology<br/>
+<br/>
+<b>&lt;ItemGroup&gt;</b>--&gt;include all third party packages<br/>
+<br/>
+in file Program.cs <b>CreateHostBuilder()</b>--&gt;configures the web host using defaults <br/>
+----------------------------------------------------------<br/>
+<b>Dependency Injection<br/>
+<br/>
+</b><img src="dependency injection.png" /><br/>
+<br/>
+<b>What happens if in future you change the implementation of how you access the database or email?<br/>
+<br/>
+</b>--&gt;Based on the current configuration, you might need to make changes in all the three pages<br/>
+<br/>
+<img src="dependency injection-2.png" /><br/>
+<br/>
+<br/>
+--&gt;With dependency injection, we have something new which is DI CONTAINER(dependency injection container), and rather to have email and database functionality in just classes, we will use <b>interface </b>for email and database<br/>
+<br/>
+--&gt;so inside the page we will actually be using interfaces and then dependency injection does all its magic of passing the object when websites needs it, that way we don't need to deal with creating the object, disposing or managing that object inside our pages<br/>
+<br/>
+--&gt;our pages will look very clean with just the interfaces and all the instance and implementation will be done by the dependency injection container<br/>
+---------------------------------------------------------<br/>
+<b>Startup Class<br/>
+<br/>
+</b>--&gt;it's a basic class with no extension or implementations of interface<br/>
+<br/>
+--&gt;Startup class has method called <b>ConfigureServices()</b>--&gt;it's place where you do the registration of your service, service basically any functionality that you want to register so other parts of application can use it like email, database, etc<br/>
+<br/>
+--&gt;Startup Class has another method called <b>Configure(IApplicationBuilder app, IWebHostEnvironment env)<br/>
+</b><b><br/>
+</b><b>IWebHostEnvironment</b>--&gt;to check if it's development environment or if it's something else, based on that we configure the pipeline<br/>
+<br/>
+<b>IApplicationBuilder</b>--&gt;configures the http request pipeline of asp.net core, the pipeline specifies how the application should respond to http request<br/>
+<br/>
+<img src="pipeline.png" /><br/>
+<br/>
+<b>Pipeline</b>--&gt;is made up of middlewares and MVC i middleware itself, examples of middleware: Auth, MVC, Static Files, Session, so when request happen it go through middleware, it can get modified by them and eventually it's passed to the next middleware and if that is the last middleware in the pipeline the response is return back to server<br/>
+-------------------------------------------------------<br/>
+<b>Routing in MVC<br/>
+<br/>
+</b><img src="routing in mvc.png" /><br/>
+<br/>
+--&gt;.net core is now more than just an MVC application, it can also have Razor pages and signalR, it's possible to have all three in a single application, all of these technologies have middleware where's that register endpoints<br/>
+<br/>
+<img src="endpoints.png" /><br/>
+<br/>
+---------------------------------------------------------<br/>
+<b>appsettings.json<br/>
+<br/>
+</b>--&gt;This is the file in which we'll be adding all of the connection strings and static files like secrets that we want in a production application<br/>
+-------------------------------------------------------<br/>
+<b>MVC Architecture<br/>
+<br/>
+</b>--&gt;if you have 10 tables in the database, you will have at least 10 models.<br/>
+<br/>
+--&gt;if a class is a model, then all the properties in that class will be all the columns of a table<br/>
+<br/>
+<img src="mvc architecture.png" /><br/>
+<br/>
+---------------------------------------------------------<br/>
+<b>Views in Default Project<br/>
+<br/>
+</b>--&gt;in the views, we have a shared folder, this shared folder is used for partial views, partial views is similar to user components if you're coming from classic C#, so it's basically a view that you want to consume in multiple places in your application<br/>
+<br/>
+--&gt;in views folder we have <b>_ViewImports.cshtml</b>--&gt;the purpose of this file is to provide a mechanism to make directive's available to reserve page globally so that you don't have to add them to the pages individually<br/>
+<br/>
+<b>ex:<br/>
+</b>@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers<br/>
+<br/>
+--&gt;with this all the default tage helper's that asp.net core team provide will be added to a razor pages in your application<br/>
+<br/>
+--&gt;tag helpers you will see in views files, it's make the binding like html language but it does the binding with C# code <b>ex:<br/>
+</b>asp-area=""<br/>
+asp-controller=""<br/>
+asp-action=""<br/>
+<br/>
+--&gt;Tag helpers is an idea that microsoft team has adopted from other languages after looking at the success like angular and react<br/>
+<br/>
+<b>_ViewStart.cshtml</b>--&gt;The main purpose is to set values that all the other views will have to use, most common views that will set properties is layout<br/>
+---------------------------------------------------------<br/>
+<b>Create First Model<br/>
+<br/>
+ex:<br/>
+</b>using System.ComponentModel.DataAnnotations;<br/>
+<br/>
+namespace Rocky.Models{<br/>
+&nbsp; public class Category{<br/>
+&nbsp; &nbsp; &nbsp; [Key]<br/>
+&nbsp; &nbsp; &nbsp; public int Id {get; set;}<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+--&gt;once you add data annotations, it tells entity framework that this column needs to be an identity column (primary key)<br/>
+<br/>
+<b>What is data annotation in C#??<br/>
+<br/>
+</b><br/>
+Data annotations (available as part of the System. ComponentModel. DataAnnotations namespace) are <b>attributes that can be applied to classes or class members to specify the relationship between classes, describe how the data is to be displayed in the UI, and specify validation rules</b><br/>
+---------------------------------------------------------<br/>
+<b>Connection String<br/>
+<br/>
+</b>--&gt;in ASP.NET core configuration system is very flexible, and the connection string could be stored in appsettings.json, an environment variable, the user secret store or another configuration source<br/>
+<br/>
+<b>ex:<br/>
+</b>in <b>appsettings.json</b>:<br/>
+<br/>
+{<br/>
+&nbsp; "ConnectionStrings": {<br/>
+&nbsp; &nbsp;"DefaultConnection": &nbsp;{"Server=.;Database=Rocky;Trusted_Connection=True;'MultipleActiveResultSets=True'"}<br/>
+}<br/>
+----------------------------------------------------------<br/>
+<b>Setup DbContext<br/>
+<br/>
+</b><b>DbContext</b>--&gt;is provided by entity framework<br/>
+<br/>
+<b>Entity Framework</b>--&gt;is an Object Relational Mapping(ORM) framework that offers an automated mechanism to developers for storing and accessing the data in the database.<br/>
+<br/>
+--&gt;You need to download <b>two packages</b>:<br/>
+<br/>
+1-Microsoft.EntityFrameworkCore<br/>
+<br/>
+2-Microsoft.EntityFrameworkCore.SqlServer<br/>
+<br/>
+--&gt;<b>Add</b>&nbsp;folder in project named "Data" and make file called "<b>ApplicationDbContext.cs</b>":<br/>
+<br/>
+<b>ex:</b><br/>
+namespace Rocky.Data {<br/>
+<br/>
+&nbsp; public class ApplicationDbContext : DbContext{<br/>
+&nbsp; public ApplicationDbContext(DbContextOptions&lt;ApplicationDbContext&gt; options): base(options){<br/>
+<br/>
+&nbsp; &nbsp;}<br/>
+&nbsp; &nbsp;public DbSet&lt;Category&gt; Category {get; set;}<br/>
+&nbsp;} &nbsp;<br/>
+}<br/>
+<br/>
+<b>Complete DbContext Configuration<br/>
+<br/>
+</b>in <b>Startup.cs:</b><br/>
+<br/>
+public void ConfigureServices(IServiceCollection services){<br/>
+&nbsp; services.AddDbContext&lt;ApplicationDbContext&gt;(options =&gt; options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")))<br/>
+<br/>
+}<br/>
+---------------------------------------------------------<br/>
+<b>Push Category to Database<br/>
+<br/>
+</b>--&gt;we need to add migration to push category to the database, in order to add migration we install <b>Microsoft.EntityFrameworkCore.Tools</b>&nbsp;package then we go to tools-&gt;NuGet Package Manager-&gt;Package Manager Console<br/>
+<br/>
+PM&gt;add-migration addCategoryToDatabase<br/>
+PM&gt;update-database<br/>
+<br/>
+--&gt;if you don't have database, it will first create the database and then proceed fruther to push migration<br/>
+---------------------------------------------------------<br/>
+<b>Entity Framework vs ADO.NET<br/>
+<br/>
+</b>--&gt;ADO.NET entity is an ORM (Object Relational Mapping) which creates a higher abstract object model over ADO.NET components... Entity Framework is a wrapper for ADO.NET thus there is nearly no difference between those two in performance (Maybe entity framework is a bit slower)<br/>
+---------------------------------------------------------<br/>
+<b>Add Category Controller<br/>
+<br/>
+</b><b>Note</b>--&gt;in order to add any folder or file to your project you need to stop application if it's running(IIS Express) server.<br/>
+<br/>
+--&gt;You can create view by click right on action in controller and add razor view, it will add a few new packages for scaffolding and then it will create the view<br/>
+----------------------------------------------------------<br/>
+<b>Note</b>--&gt;with Razor syntax, you can combine C# syntax with HTML<br/>
+---------------------------------------------------------<br/>
+<b>What is the advantages of writing &lt;label asp-for="DisplayOrder"&gt;&lt;/label&gt; instead of DisplayOrder?<br/>
+<br/>
+--&gt;The advantage this tag helper brings is if we open up our category model you can use data annotations to display something else ex:<br/>
+<br/>
+</b>[DisplayName("Display Order")]<br/>
+public int DisplayOrder {get; set;}<b><br/>
+</b>---------------------------------------------------------<b><br/>
+</b><b>Validations in ASP.NET Core<br/>
+<br/>
+</b>--&gt;You can always use custom javascript to what was entered and display alert message, but with ASP.NET coure you get validation right out of the box, in order to implement validations, we have data annotations<b><br/>
+</b><b><br/>
+</b>--&gt;you can make validation using server side or client side<b><br/>
+</b><b><br/>
+<br/>
+</b><br/>
+<br/>
+</body></html>

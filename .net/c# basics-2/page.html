@@ -1,0 +1,687 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>C# Basics-2</title>
+</head><body><b>Structs<br/>
+<br/>
+</b>A <b>struct </b>type is a value type that is typically used to encapsulate small groups of related variables.<br/>
+<br/>
+<b>ex:<br/>
+</b>struct Book {<br/>
+&nbsp; public string title;<br/>
+&nbsp; public double price;<br/>
+&nbsp; public string author<br/>
+}<br/>
+<br/>
+--&gt;Structs share most of the same syntax as classes, but are more limited than classes, unlike classes, structs can be instantiated without using a new operator<br/>
+<br/>
+<b>ex:<br/>
+</b>static void Main(string[] args){<br/>
+&nbsp; Book b;<br/>
+&nbsp; b.title = "Test";<br/>
+&nbsp; b.price = 5.99;<br/>
+&nbsp; b.author = "David";<br/>
+<br/>
+&nbsp; Console.WriteLine(b.title);<br/>
+}<br/>
+<br/>
+--&gt;Structs do <b>not </b>support inheritance and cannot contain virtual methos<br/>
+<br/>
+1-Structs can contain methods, properties, indexers, and so on<br/>
+<br/>
+2-Structs cannot contain default constructors(a constructor without parameters), but they can have constructors that take parameters<br/>
+<br/>
+3-the <b>new </b>keyword is use to instantiate a struct object, similar to class objects<br/>
+<br/>
+<b>ex:<br/>
+</b>struct Point {<br/>
+&nbsp;public int x;<br/>
+&nbsp;public int y;<br/>
+&nbsp;public Point(int x, int y){<br/>
+&nbsp; &nbsp;this.x = x;<br/>
+&nbsp; &nbsp;this.y = y;<br/>
+&nbsp;}<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp; Point p = new Point(10,15);<br/>
+&nbsp; Console.WriteLine(p.x);<br/>
+}<br/>
+<br/>
+<b>Structs vs Classes<br/>
+<br/>
+</b><span style="font-family: inherit">--&gt;classes are used to model more complex behavior, or data, that is intended to be modified after a class object is created. Structs are best suited for small data structures that contain primarily data that is not intended to be modified after the struct is created. Consider defining a struct instead of a class if you are trying to represent a simple set of data.</span><br/>
+<br/>
+<br/>
+--&gt;All standard C# types (int, double, bool, char, etc) are actually <b>structs<br/>
+</b>-----------------------------------------------------------<br/>
+<b>Enums<br/>
+<br/>
+</b>--&gt;The <b>enum </b>keyword is used to declare an enumeration: a type that consists of a set of named constants called the enumerator list<br/>
+<br/>
+<b>ex:<br/>
+</b>enum Days {Sun, Mon, Tue, Wed, Thu, Fri, Sat};<br/>
+<br/>
+--&gt;You can also assign your own enumerator values:<br/>
+<br/>
+<b>ex:<br/>
+</b>enum Days {Sun, Mon, Tue=4, Wed, Thu, Fri, Sat};<br/>
+<br/>
+--&gt;the enumeration will start from 0, then Mon is 1, Tue is 4, Wed is 5, and so on.<br/>
+<br/>
+<b>ex:<br/>
+</b>enum Days {Sun, Mon, Tue, Wed, Thu, Fri, Sat};<br/>
+<br/>
+static void Main(string[] args){<br/>
+&nbsp;int x = (int)Days.Tue;<br/>
+&nbsp;Console.WriteLine(x);<br/>
+}<br/>
+<br/>
+--&gt;Some sample Enum uses include month names, days of the week, cards in a deck, etc.<br/>
+<br/>
+--&gt;Enums are often used with <b>switch </b>statements<br/>
+<br/>
+<b>ex:<br/>
+</b>enum TrafficLights {Green, Red, Yellow};<b><br/>
+</b><b><br/>
+</b>static void Main(string[] args){<br/>
+&nbsp; TrafficLights x = TrafficLights.Red;<br/>
+&nbsp; switch(x){<br/>
+&nbsp; &nbsp; case TrafficLights.Green:<br/>
+&nbsp; &nbsp; &nbsp; Console.WriteLine("Go!");<br/>
+&nbsp; &nbsp; &nbsp; break;<br/>
+&nbsp; &nbsp; case TrafficLights.Red:<br/>
+&nbsp; &nbsp; &nbsp; Console.WriteLine("Stop!");<br/>
+&nbsp; &nbsp; &nbsp; break;<br/>
+&nbsp; &nbsp; case TrafficLights.Yellow:<br/>
+&nbsp; &nbsp; &nbsp; Console.WriteLine("Caution!");<br/>
+&nbsp; &nbsp; &nbsp; break;<br/>
+&nbsp; }<br/>
+}<b><br/>
+</b>----------------------------------------------------------<b><br/>
+</b><b>Exceptions<br/>
+<br/>
+</b>An<b>&nbsp;exception </b>is a problem that occurs during program execution. Exceptions cause abnormal termination of the program.<br/>
+<br/>
+<b>Examples:<br/>
+<br/>
+</b>1-user has entered invalid data.<b><br/>
+</b>2-file that needs to be opened cannot be found.<br/>
+3-network connection has been lost in the middle of communications.<b><br/>
+</b>4-Insufficient memory and other issues related to physical resources.<b><br/>
+</b><b><br/>
+ex:<br/>
+</b>int[] arr = new int[] {4,5,8};<b><br/>
+</b>Console.Write(arr[8]);<b><br/>
+</b><b><br/>
+<br/>
+Handling Exceptions<br/>
+<br/>
+ex:<br/>
+</b>try{<br/>
+&nbsp;int[] arr = new int[] {4,5,8};<br/>
+&nbsp;Console.Write(arr[8]);<br/>
+}<br/>
+catch(Exception e){<br/>
+&nbsp; Console.WriteLine(e.Message);<br/>
+}<br/>
+// Index was outside the bounds of the array<b><br/>
+</b><b><br/>
+<br/>
+Handling Multiple Exception<br/>
+<br/>
+ex:<br/>
+</b>int x, y;<b><br/>
+</b>try{<br/>
+&nbsp;x = Convert.ToInt32(Console.Read());<br/>
+&nbsp;y = Convert.ToInt32(Console.Read());<br/>
+&nbsp;Console.WriteLine(x/y);<br/>
+}<br/>
+catch (DivideByZeroException e) {<br/>
+&nbsp; Console.WriteLine("Cannot divide by 0");<br/>
+}<br/>
+catch(Exception e){<br/>
+&nbsp; Console.WriteLine("An error occurred");<br/>
+}<br/>
+<br/>
+--&gt;The following exception types are some of the most commonly used: <b>FileNotFoundException</b>, <b>FormatException</b>, <b>IndexOutOfRangeException</b>, <b>InvalidOperationException</b>, <b>OutOfMemoryException</b>.<br/>
+---------------------------------------------------------<br/>
+<b>finally<br/>
+<br/>
+</b>--&gt;An optional <b>finally </b>block can be used after the <b>catch </b>blocks. The <b>finally </b>block is used to execute a given set of statements, whether an exception is thrown or not <br/>
+<br/>
+<b>ex:<br/>
+</b>int result = 0;<br/>
+int num1 = 8;<br/>
+int num2 = 4;<br/>
+try {<br/>
+&nbsp; result = num1 / num2;<br/>
+}<br/>
+catch(DivideByZeroException e){<br/>
+&nbsp; Console.WriteLine("Error");<br/>
+}<br/>
+finally {<br/>
+&nbsp; Console.WriteLine(result);<br/>
+}<br/>
+<br/>
+--&gt;The <b>finally </b>block can be used, for example, when you work with files or other resources. These should be closed or released in the <b>finally </b>block, whether an exception is raised or not.<br/>
+---------------------------------------------------------<br/>
+<b>Writing to Files<br/>
+<br/>
+</b>--&gt;The <b>System.IO </b>namespace has various classes that are used for performing numerous operations with files, such as creating and deleting files, reading from or writing to a file, closing a file<br/>
+<br/>
+<b>ex:<br/>
+</b>string str = "Some text";<br/>
+File.WriteAllText("test.txt", str);<br/>
+<br/>
+--&gt;To use the <b>File </b>class you need to use the System.IO namespace: <b>using System.IO;</b><br/>
+<br/>
+<b>Reading from Files<br/>
+<br/>
+ex:<br/>
+</b>string txt = File.ReadAllText("test.txt");<br/>
+Console.WriteLine(txt);<br/>
+<br/>
+The following methods are available in the File class:<br/>
+<br/>
+<b><span style="font-family: inherit">AppendAllText()</span></b> - appends text to the end of the file.<br/>
+<br/>
+<b><span style="font-family: inherit">Create() </span></b>- creates a file in the specified location.<br/>
+<br/>
+<b><span style="font-family: inherit">Delete() </span></b>- deletes the specified file.<br/>
+<br/>
+<b><span style="font-family: inherit">Exists()</span></b> - determines whether the specified file exists.<br/>
+<br/>
+<b><span style="font-family: inherit">Copy()</span></b> - copies a file to a new location.<br/>
+<br/>
+<b><span style="font-family: inherit">Move()</span></b> - moves a specified file to a new location<br/>
+<br/>
+--&gt;All methods automatically close the file after performing the operation.<br/>
+----------------------------------------------------------<br/>
+<b>Generics</b><br/>
+<br/>
+--&gt;Allow the reuse of code across different types<br/>
+<br/>
+<b>ex:<br/>
+</b>static void Swap(ref int a, ref int b){<br/>
+&nbsp; int temp = a;<br/>
+&nbsp; a = b;<br/>
+&nbsp; b = temp;<br/>
+}<br/>
+<br/>
+--&gt;<b><span style="font-size: 13pt">you almost never need to use ref/out</span></b><span style="font-size: 13pt"><div style="text-align: left"><span style="font-family: -apple-system">. It's basically a way of getting another return value, and should usually be avoided precisely because it means the method's probably trying to do too much</span></div></span>, so better <b>ex:<br/>
+</b>static void Swap(int a, int b){<br/>
+&nbsp; int temp = a;<br/>
+&nbsp; a = b;<br/>
+&nbsp; b = temp;<br/>
+}<br/>
+<br/>
+--&gt;Our <b>swap </b>method will work only for integer parameters. If we want to use it for other types, for example, doubles or strings, we have to overload it for all the types we want to use it with. Besides a lot of code repetition, it becomes harder to manage the code because changes in one method mean changes to all of the overloaded methods.<b><br/>
+</b><b><br/>
+</b>--&gt;Generics provide a flexible mechanism to define a generic type.<br/>
+<br/>
+<b>ex:<br/>
+</b>static void Swap&lt;T&gt;(T a, T b){<br/>
+&nbsp; T temp = a;<br/>
+&nbsp; a = b;<br/>
+&nbsp; b = temp;<br/>
+}<br/>
+<br/>
+--&gt;In the code above, <b>T </b>is the name of our generic type. We can name it anything we want, but <b>T </b>is a commonly used name. Our Swap method now takes two parameters of type <b>T. </b>we also use the <b>T </b>type for our <b>temp </b>variable that is used to swap the values<br/>
+<br/>
+--&gt;Note the brackets in the syntax <b>&lt;T&gt;, </b>which are used to define a generic type.<br/>
+<br/>
+<b>Generic Methods<br/>
+<br/>
+</b>--&gt;Now, we can use our <b>swap </b>method with different types :<br/>
+<br/>
+static void Swap&lt;T&gt;(T a, T b){<br/>
+&nbsp; T temp = a;<br/>
+&nbsp; a = b;<br/>
+&nbsp; b = temp;<br/>
+}<br/>
+static void Main(string[] args){<br/>
+&nbsp; int a = 4, b = 9;<br/>
+&nbsp; Swap&lt;int&gt;(a,b);<br/>
+&nbsp; //Now b is 4, a is 9<br/>
+<br/>
+&nbsp; string x = "Hello";<br/>
+&nbsp; string y = "World";<br/>
+&nbsp; Swap&lt;string&gt;(ref x, ref y);<br/>
+&nbsp; //Now x is "World", y is "Hello"<br/>
+}<br/>
+<br/>
+--&gt;If you omit specifying the type when calling a generic method, the compiler will use the type based on the arguments passed to the method.<br/>
+<br/>
+--&gt;Multiple generic parameters can be used with a single method. For example: <b>Func&lt;T,U&gt; </b>takes two different generic types<br/>
+--------------------------------------------------------<br/>
+<b>Generic Classes<br/>
+<br/>
+</b>--&gt;Generic types can also be used with classes<br/>
+<br/>
+--&gt;The most common use for generic classes is with collections of items, where operations such as adding and removing items from the collection are performed in basically the same way regardless of the type of data being stored. One type of collection is called a stack. Items are "pushed", or added to the collection, and "popped", or removed from the collection. A stack is sometimes called a Last In First Out (LIFO) data structure.<br/>
+<br/>
+<b>ex:<br/>
+</b>class Stack&lt;T&gt; {<br/>
+&nbsp; int index = 0;<br/>
+&nbsp; T[] innerArray = new T[100];<br/>
+&nbsp; public void Push(T item){<br/>
+&nbsp; &nbsp; innerArray[index++] = item;<br/>
+&nbsp; }<br/>
+&nbsp; public T Pop(){<br/>
+&nbsp; &nbsp; return innerArray[--index];<br/>
+&nbsp; }<br/>
+&nbsp; public T Get(int k) { return innerArray[k];}<br/>
+}<br/>
+<br/>
+static void Main(string[] args){<br/>
+&nbsp; Stack&lt;int&gt; intStack = new Stack&lt;int&gt;();<br/>
+&nbsp; Stack&lt;string&gt; strStack = new Stack&lt;string&gt;();<br/>
+&nbsp; Stack&lt;Person&gt; PersonStack = new Stack&lt;Person&gt;();<br/>
+}<br/>
+<br/>
+--&gt;We can also use the generic class with custom types, such as the custom defined <b>Person </b>type<br/>
+<br/>
+--&gt;In a generic class we do not need to define the generic type for its methods, because the generic type is already defined on the class level.<br/>
+---------------------------------------------------------<br/>
+<b>C# Collections<br/>
+<br/>
+</b>A <b>collection </b>is used to group related objects. unlike an <b>array</b>, it's <b>dynamic</b>, a collection can grow and shrink to accommodate any number of objects. Collection classes are organized into <b>namespaces </b>and contain built in methods for processing elements within the collection<br/>
+<br/>
+--&gt;Different kinds of collections are suited to different kinds of applications, and some are highly specialized to specific tasks, for <b>ex:<br/>
+</b><b><br/>
+</b><b>Dictionaries</b>--&gt;are used to represent connections on social websites(such as Twitter, Facebook)<br/>
+<br/>
+<b>Queues</b>--&gt;can be used to create task schedulers<br/>
+<br/>
+<b>HashSets</b>--&gt;are used in searching algorithms<br/>
+<br/>
+<br/>
+--&gt;Since a collection is a class you must first declare an instance of the class before you can add elements to that collection.<br/>
+---------------------------------------------------------<br/>
+<b>Generic Collections<br/>
+<br/>
+</b>--&gt;are the preferred type to use as long as every element in the collection is of the same data type. Only desired data types can be added to a generic collection and this is enforced by using strong typing which reduces the possibility of errors<br/>
+<br/>
+--&gt;The .NET Framework provides a number of generic collection classes, useful for storing and manipulating data<br/>
+<br/>
+--&gt;The <b>System.Collections.Generic </b>namespace includes the following generic collections:<br/>
+<br/>
+- <b>List&lt;T&gt;<br/>
+</b><b>- Dictionary&lt;TKey, TValue&gt;<br/>
+- SortedList&lt;TKey, TValue&gt;<br/>
+- Stack&lt;T&gt;<br/>
+- Queue&lt;T&gt;<br/>
+- Hashset&lt;T&gt;<br/>
+<br/>
+<br/>
+Non-Generic Collections<br/>
+<br/>
+</b>--&gt;Non-generic collections can store items that are of type Object. Since an Object data type can refer to any data type, you run the risk of unexpected outcomes. Non-generic collections may also be slower to access as well as execute<br/>
+<br/>
+--&gt;The <b>System.collections </b>namespace includes the following non-generic collections:<br/>
+<br/>
+<b>- ArrayList<br/>
+- SortedList<br/>
+- Stack<br/>
+-Queue<br/>
+-Hashtable<br/>
+</b><b>-BitArray</b><br/>
+<br/>
+<b>Note</b>--&gt;Because non-generic collections are error prone and less performant, it is recommended to always use generic collections from the System.Collections.Generic namespace if available and to avoid using legacy collections from the System.Collections namespace.<br/>
+<br/>
+<br/>
+<b>Array</b>--&gt;array is Group of Homogeneous data type object.<br/>
+<br/>
+<b>Collection</b>--&gt;is Group of Homogeneous and Heterogeneous data type object.<br/>
+---------------------------------------------------------<br/>
+<b>List&lt;T&gt;<br/>
+<br/>
+</b>--&gt;A <b>list </b>is similar to an array, but the elements in a list can be inserted and removed <b>dynamically<br/>
+</b><b><br/>
+</b>--&gt;The C# generic collection <b>List&lt;T&gt; </b>class requires all elements be of the same type <b>T<br/>
+</b><b><br/>
+</b><b>List&lt;T&gt;</b>properties and methods include:<br/>
+<br/>
+1-<b>Count</b>&nbsp;A property that gets the number of elements contained in the list.<br/>
+<br/>
+2-<b>Item[int i] </b>Gets or sets the element in the list at the index i. Item is the indexer and is not required when accessing an element. You only need to use the brackets [] and the index value inside the brackets.<b><br/>
+</b><b><br/>
+</b>3-<b>Add(T t) </b>Adds an element <b>t </b>to the end of the list <br/>
+<br/>
+4-<b>RemoveAt(int index)</b>&nbsp;Removes the element at the specified position (index) from the list.<br/>
+<br/>
+5-<b>Sort() </b>Sorts element in the list<br/>
+<br/>
+6-<b>Capacity </b>A property that gets the number of elements the list can hold before needing to be resized.<b><br/>
+</b><b><br/>
+</b>7-<b>clear() </b>Removes all the elements from the list.<b><br/>
+</b><b><br/>
+</b>8-<b>TrimExcess() </b> Sets the capacity to the actual number of elements in the list. This is useful when trying to reduce memory overhead.<b><br/>
+</b><b><br/>
+</b>9-<b>AddRange(IEnumerable coll) </b>Adds the elements of collection coll with elements of the same type as List&lt;T&gt; to the end of the list. IEnumerable is the collections interface that supports simple iteration over the collection.<b><br/>
+</b><b><br/>
+</b>10-<b>Insert(int i, T t) </b>Inserts an element t at a specific index i in the list.<b><br/>
+</b><b><br/>
+</b>12-<b>InsertRange(int i, IEnumerable coll) </b>Inserts the elements of a collection coll at a specified index i in the list. IEnumerable is the collections interface that supports simple iteration over the collection<b><br/>
+</b><b><br/>
+</b>13-<b>Remove(T t) </b>Removes the first occurrence of the object t from the list.<b><br/>
+</b><b><br/>
+</b>14-<b>RemoveRange(int i, int count) </b>Removes a specified number of elements count from the list starting at a specified index i.<b><br/>
+</b><b><br/>
+</b>15-<b>Contains(T t) </b>Returns true if the specified element t is present in the list.<b><br/>
+</b><b><br/>
+</b>16-<b>IndexOf(T t) </b>Returns the index of the first occurrence of the element t in the list.<b><br/>
+</b><b><br/>
+</b>17-<b>Reverse() </b>Reverses the order of the elements in the list.<b><br/>
+</b><b><br/>
+</b>18-<b>ToArray() </b>Copies the elements of the list into a new array.<b><br/>
+</b>---------------------------------------------------------<br/>
+<b>SortedList&lt;K,V&gt;<br/>
+<br/>
+</b>--&gt;A<b>&nbsp;sorted list </b>is a collection of <b>key/value pairs </b>that are sorted by key<br/>
+<br/>
+--&gt;The C# generic collection <b>SortedList&lt;K,V&gt; </b>class requires all element key/value pairs to be of the same type <b>K, V </b>Duplicate keys are <b>not permitted, </b>which ensures that every key/value pair is unique<br/>
+<br/>
+<b>SortedList&lt;K,V&gt; </b>properties include:<br/>
+<br/>
+<b>-Count</b>&nbsp;Gets the number of key/value pairs contained in the sorted list.<br/>
+<br/>
+-<b>Item[K key] </b>Gets or sets the value associated the specified key contained in the sorted list. Item is the indexer and is not required when accessing an element. You only need to use the brackets [] and the key, value.<b><br/>
+</b><b><br/>
+</b><b>Keys </b>Gets a sorted and indexed collection containing only the keys in the sorted list.<b><br/>
+</b><b><br/>
+</b><b>SortedList&lt;K,V&gt; </b>methods include:<br/>
+<br/>
+-<b>Add(K key, V value) </b>Adds an element with a specific key, value pair into the sorted list.<br/>
+<br/>
+-<b>Remove(K key) </b>Removes the element with the specific key, value pair associated with the specified key from the sorted list.<br/>
+<br/>
+<b>ex:<br/>
+</b>SortedList&lt;string, int&gt; sl = new SortedList&lt;string, int&gt;();<br/>
+<br/>
+sl.Add("Solo",59);<br/>
+sl.Add("A",95);<br/>
+sl.Add("Learn",72);<br/>
+sl.Remove("A");<br/>
+Console.WriteLine("Sorted List: ");<br/>
+foreach (string s in sl.Keys)<br/>
+&nbsp; Console.WriteLine(s + ": "+sl[]); //Learn: 72 Solo: 59<br/>
+Console.WriteLine("\nCount: "+sl.Count); //2<br/>
+<br/>
+<br/>
+-<b>Values </b>Gets a sorted and indexed collection of the values in the sorted list.<b><br/>
+</b><b><br/>
+</b>-<b>Clear() </b>Removes all the elements from the sorted list.<b><br/>
+</b><b><br/>
+</b>-<b>ContainsKey(K key) </b>Returns true when the specified key is present in the sorted list.<b><br/>
+</b><b><br/>
+</b>-<b>ContainsValue(V value) </b>Returns true when a specified value is present in the sorted list.<b><br/>
+</b><b><br/>
+</b>-<b>IndexOfKey(K key) </b>Returns the index of the specified key within the sorted list.<b><br/>
+</b><b><br/>
+</b>-<b>IndexOfValue(V value) </b>Returns the index of the specified value within the sorted list.<b><br/>
+</b>----------------------------------------------------------<br/>
+<b>BitArray<br/>
+<br/>
+</b>--&gt;A bit array is a <b>collection of bits. </b>The value of a bit can be either <b><br/>
+</b><b><br/>
+</b>--&gt;Bit arrays compactly store bits. Most commonly, they are used to represent a simple group of boolean flags or an ordered sequence of boolean values.<br/>
+<br/>
+<br/>
+<span style="font-family: inherit"><b>BitArray</b></span> properties include:<br/>
+<br/>
+<span style="font-family: inherit"><b>Count</b></span> - Gets the number of bits in the bit array.<br/>
+<br/>
+<span style="font-family: inherit"><b>IsReadOnly</b></span> - Gets a value indicating if the bit array is read only or not.<br/>
+<br/>
+<span style="font-family: inherit"><b>BitArray</b></span> methods include:<br/>
+<br/>
+<span style="font-family: inherit"><b>Get(int i)</b></span> - Gets the value of the bit at a specified position i in the bit array.<br/>
+<br/>
+<span style="font-family: inherit"><b>Set(int i, bool value)</b></span> - Sets the bit at a specified position i to a specified value in the bit array.<br/>
+<br/>
+<span style="font-family: inherit"><b>SetAll(bool value)</b></span> - Sets all the bits to a specified value in the bit array.<br/>
+<br/>
+<span style="font-family: inherit"><b>And(BitArray ba)</b></span> - Performs the bitwise AND operation on the elements of the bit array object with a specified bit array ba.<br/>
+<br/>
+<span style="font-family: inherit"><b>Or(BitArray ba)</b></span> - Performs the bitwise OR operation on the elements of the bit array and the specified bit array ba.<br/>
+<br/>
+<span style="font-family: inherit"><b>Not()</b></span> - Inverts the bit values of the bit array.<br/>
+<br/>
+<span style="font-family: inherit"><b>Xor(BitArray ba)</b></span> - Performs the bitwise XOR operation on the elements of the current bit array object and the elements in the specified bit array ba.<br/>
+<br/>
+<b>ex:<br/>
+</b>static void Main(string[] args){<br/>
+&nbsp; BitArray ba1 = new BitArray(4);<br/>
+&nbsp; BitArray ba2 = new BitArray(4);<br/>
+<br/>
+&nbsp; ba1.SetAll(true);<br/>
+&nbsp; ba2.SetAll(false);<br/>
+<br/>
+&nbsp; ba1.Set(2,false);<br/>
+&nbsp; ba2.Set(3, true);<br/>
+<br/>
+&nbsp; PrintBarr("ba1", ba1);<br/>
+&nbsp; PrintBarr("ba2", ba2);<br/>
+&nbsp; Console.WriteLine();<br/>
+<br/>
+&nbsp; PrintBarr("ba1 AND ba2", ba1.And(ba2));<br/>
+&nbsp; PrintBarr(" &nbsp;NOT ba2", ba2.Not());<br/>
+}<br/>
+<br/>
+static void PrintBarr(string name, BitArray ba){<br/>
+&nbsp;Console.Write(name + " : ");<br/>
+&nbsp;for(int x = 0; x &lt; ba.Length; x++)<br/>
+&nbsp; &nbsp;Console.Write(ba.Get(x) + " ");<br/>
+&nbsp;Console.WriteLine();<br/>
+}<br/>
+----------------------------------------------------------<br/>
+<b>Stack&lt;T&gt;<br/>
+<br/>
+</b>--&gt;A <b>stack </b>is a <b>Last In, First Out(LIFO) </b>collection of elements where the last element that goes into the stack will be the first element that comes out<br/>
+<br/>
+--&gt;Inserting an element onto a stack is called <b>pushing. </b>Deleting an element from a stack is called <b>popping. </b>Pushing and popping can be performed only at the <b>top </b>of the stack<br/>
+<br/>
+--&gt;The C# generic collection <b>Stack&lt;T&gt; </b>class requires all elements to be of the same type <b>T<br/>
+</b><b><br/>
+</b><b>Stack&lt;T&gt; </b>properties include:<br/>
+<br/>
+<b>Count </b>Returns the number of elements in the stack<br/>
+<br/>
+<b>Stack&lt;T&gt; </b>methods include:<br/>
+<br/>
+<span style="font-family: inherit"><b>Peek()</b></span> - Returns the element at the top of the stack without removing it.<br/>
+<br/>
+<span style="font-family: inherit"><b>Pop()</b></span> - Returns the element at the top of the stack and removes it from the stack.<br/>
+<br/>
+<span style="font-family: inherit"><b>Push(T t)</b></span> - Inserts an element t at the top of the stack.<br/>
+<br/>
+<span style="font-family: inherit"><b>Clear()</b></span> - Removes all the elements from the stack.<br/>
+<br/>
+<span style="font-family: inherit"><b>Contains(T t)</b></span> - Returns true when the element <br/>
+<br/>
+<span style="font-family: inherit"><b>ToArray()</b></span> - Copies the stack into a new array.<br/>
+<br/>
+<b>ex:<br/>
+</b>static void Main(string[] args){<br/>
+&nbsp; Stack&lt;int&gt; s = new Stack&lt;int&gt;();<br/>
+&nbsp; &nbsp;s.Push(59);<br/>
+&nbsp; &nbsp;s.Push(72);<br/>
+&nbsp; &nbsp;s.Push(65);<br/>
+<br/>
+&nbsp; &nbsp;Console.Write("Stack: ");<br/>
+&nbsp; &nbsp;foreach(int i in s)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; Console.Write(i+ " "); //65 72 59<br/>
+&nbsp; &nbsp;Console.Write("\nCount: "+s.Count); // 3<br/>
+<br/>
+&nbsp; &nbsp;Console.Write("\nTop: "+s.Peek()); // 65<br/>
+&nbsp; &nbsp;Console.Write("\nPop: "+s.Pop()); // 65<br/>
+<br/>
+&nbsp; &nbsp;Console.Write("\nStack: ");<br/>
+&nbsp; &nbsp;foreach(int i in s)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Console.Write(i + " "); // 72 59<br/>
+&nbsp; &nbsp;Console.Write("\nCount: "+s.Count); //2<br/>
+&nbsp;<br/>
+}<br/>
+---------------------------------------------------------<br/>
+<b>Queue&lt;T&gt;<br/>
+<br/>
+</b>--&gt;A <b>queue </b>is a <b>First In, First Out (FIFO) </b>collection of elements where the first element that goes into a queue is also the first element that comes out <br/>
+<br/>
+--&gt;Inserting an element into a queue is referred to as <b>Enqueue. </b>Deleting an element from a queue is referred to as <b>Dequeue</b><br/>
+<br/>
+--&gt;The C# generic collection <b>Queue&lt;T&gt; </b>class requires that all elements be of the same type <b>T<br/>
+</b><b><br/>
+</b><b>Queue&lt;T&gt; </b>properties include:<br/>
+<br/>
+<span style="font-family: inherit"><b>Count</b></span> - Gets the number of elements in the queue.<br/>
+<br/>
+And methods include:<br/>
+<br/>
+<span style="font-family: inherit"><b>Dequeue()</b></span> - Returns the object at the beginning of the queue and also removes it.<br/>
+<br/>
+<span style="font-family: inherit"><b>Enqueue(T t)</b></span> - Adds the object t to the end of the queue.<br/>
+<br/>
+<span style="font-family: inherit"><b>Clear()</b></span> - Removes all objects from the queue.<br/>
+<br/>
+<span style="font-family: inherit"><b>Contains(T t)</b></span> - Returns true when the element t is present in the queue.<br/>
+<br/>
+<span style="font-family: inherit"><b>Peek()</b></span> - Returns the object at the beginning of the queue without removing it.<br/>
+<br/>
+<span style="font-family: inherit"><b>ToArray()</b> - Copies the queue into a new array.</span><br/>
+<br/>
+<b>ex:<br/>
+</b>static void Main(string[] args){<br/>
+&nbsp; Queue&lt;int&gt; q = new Queue&lt;int&gt;();<br/>
+<br/>
+&nbsp; q.Enqueue(5);<br/>
+&nbsp; q.Enqueue(10);<br/>
+&nbsp; q.Enqueue(15); &nbsp;<br/>
+&nbsp; Console.Write("Queue: ");<br/>
+&nbsp; foreach(int i in q)<br/>
+&nbsp; &nbsp; &nbsp;Console.Write(i + " "); // 5 10 15<br/>
+&nbsp; Console.Write("\nCount: "+q.Count); // 3<br/>
+<br/>
+&nbsp; Console.Write("\nDequeue: "+q.Dequeue()); //5<br/>
+<br/>
+&nbsp; Console.Write("\nQueue: ");<br/>
+&nbsp; foreach(int i in q)<br/>
+&nbsp; &nbsp; &nbsp;Console.Write(i+ " "); //10 15<br/>
+&nbsp; Console.Write("\nCount: "+q.Count); // 2<br/>
+}<br/>
+---------------------------------------------------------<br/>
+<b>Dictionary&lt;U,V&gt;<br/>
+<br/>
+</b>--&gt;A <b>dictionary </b>is a collection of unique key/value pairs where a key is used to access the corresponding value. Dictionaries are used in database indexing cache implementation<br/>
+<br/>
+--&gt;The C# generic collection <b>Dictionary&lt;K,V&gt; </b>class requires all key/value pairs be of the same type <b>K,V </b>Duplicate keys are <b>not permitted </b>to ensure that every key/value pair is unique<br/>
+<br/>
+<b>Dictionary&lt;K,V&gt; </b>properties include:<br/>
+<br/>
+<span style="font-family: inherit"><b>Count</b></span> - Gets the number of key/value pairs contained in the dictionary.<br/>
+<br/>
+<span style="font-family: inherit"><b>Item[K key]</b></span> - Gets the value associated with the specified key in the dictionary. Item is the indexer and is not required when accessing an element. You only need to use the brackets [] and key value.<br/>
+<br/>
+<span style="font-family: inherit"><b>Keys</b></span> - Gets an indexed collection containing only the keys contained in the dictionary.<br/>
+<br/>
+<span style="font-family: inherit"><b>Dictionary&lt;K, V&gt;</b></span> methods include:<br/>
+<br/>
+<span style="font-family: inherit"><b>Add(K key, V value)</b></span> - Adds the key, value pair to the dictionary.<br/>
+<br/>
+<span style="font-family: inherit"><b>Remove(K key)</b></span> - Removes the key/value pair related to the specified key from the dictionary.<br/>
+<br/>
+<span style="font-family: inherit"><b>Values</b></span> - Gets an indexed collection containing only the values in the dictionary.<br/>
+<br/>
+<span style="font-family: inherit"><b>Clear()</b></span> - Removes all the key/value pairs from the dictionary.<br/>
+<br/>
+<span style="font-family: inherit"><b>ContainsKey(K key)</b></span> - Returns true if the specified key is present in the dictionary.<br/>
+<br/>
+<span style="font-family: inherit"><b>ContainsValue(V value)</b></span> - Returns true if the specified value is present in the dictionary.<br/>
+<br/>
+<b>ex:<br/>
+</b>static void Main(string[] args){<br/>
+&nbsp; Dictionary&lt;string, int&gt; d = new Dictionary&lt;string, int&gt;();<br/>
+&nbsp; <br/>
+&nbsp; d.Add("Uno", 1);<br/>
+&nbsp; d.Add("One", 1);<br/>
+&nbsp; d.Add("Dos", 2);<br/>
+&nbsp; d.Add("Deux", 2);<br/>
+&nbsp; d.Remove("one"); // Remove key-value pair one, 1<br/>
+&nbsp; d.Remove("Dos"); // Remove key-value pari Dos, 2<br/>
+<br/>
+&nbsp; Console.WriteLine("Dictionary: ");<br/>
+&nbsp; foreach(string s in d.keys)<br/>
+&nbsp; &nbsp; &nbsp; Console.WriteLine(s + ": "+ d[s]); // Uno: 1 Deux: 2<br/>
+&nbsp; Console.WriteLine("\nCount: {0}", d.count); //2<br/>
+}<br/>
+----------------------------------------------------------<br/>
+<b>HashSet&lt;T&gt;</b><br/>
+<br/>
+--&gt;A <b>hash set </b>&nbsp;is a set of unique values where duplicates are not allowed<br/>
+<br/>
+--&gt;C# includes the <b>HashSet&lt;T&gt; </b>class in the generic collections namespace. All <b>HashSet&lt;T&gt; </b>elements are required to be of the same type <b>T</b><br/>
+<br/>
+--&gt;Hash sets are different from other collections because they are simply a set of values. They do not have index positions and elements cannot be ordered<br/>
+<br/>
+--&gt;The HashSet&lt;T&gt; class provides high-performance set operations. HashSets allow fast lookup, addition, and removal of items, and can be used to implement either dynamic sets of items or lookup tables that allow finding an item by its key (e.g., finding the phone number of a person by the last name).<br/>
+<br/>
+<br/>
+HashSet&lt;T&gt; <b>properties </b>include:<br/>
+<br/>
+<span style="font-family: inherit"><b>Count</b></span> Returns the number of values in the hash set.<br/>
+<br/>
+And <b>methods </b>include:<br/>
+<br/>
+<span style="font-family: inherit"><b>Add</b></span>(T t) Adds a value (t) to the hash set.<br/>
+<br/>
+<span style="font-family: inherit"><b>IsSubsetOf(ICollection c)</b></span> Returns true if the hash set is a subset of the specified collection (c).<br/>
+<br/>
+<span style="font-family: inherit"><b>Remove</b></span>(T t) Removes the value (t) from the hash set.<br/>
+<br/>
+<span style="font-family: inherit"><b>Clear</b></span>() Removes all the elements form the hash set.<br/>
+<br/>
+<span style="font-family: inherit"><b>Contains</b></span>(T t) Returns true when a value (t) is present in the hash set.<br/>
+<br/>
+<span style="font-family: inherit"><b>ToString</b></span>() Creates a string from the hash set.<br/>
+<br/>
+<span style="font-family: inherit"><b>IsSupersetOf</b></span>(ICollection c) Returns true if the hash set is a superset of the specified collection.<br/>
+<br/>
+<span style="font-family: inherit"><b>UnionWith</b></span>(ICollection c) Applies set union operation on the hash set and the specified collection (c).<br/>
+<br/>
+<span style="font-family: inherit"><b>IntersectWith</b></span>(ICollection c) Applies set intersection operation on the hash set and the specified collection (c).<br/>
+<br/>
+<span style="font-family: inherit"><b>ExceptWith</b></span>(ICollection c) Applies set difference operation on the hash set and the specified collection (c).<br/>
+<br/>
+<b>ex:<br/>
+</b>static void Main(string[] args){<br/>
+&nbsp; HashSet&lt;int&gt; hs = new HashSet&lt;int&gt;();<br/>
+<br/>
+&nbsp; hs.Add(5);<br/>
+&nbsp; hs.Add(10);<br/>
+&nbsp; hs.Add(15);<br/>
+&nbsp; hs.Add(20);<br/>
+&nbsp; Console.Write("\nHashSet: ");<br/>
+&nbsp; foreach(int i in hs)<br/>
+&nbsp; &nbsp; Console.Write(i + " "); // 5 10 15 20 *elements maybe in any order<br/>
+&nbsp; Console.Write("\nCount: "+hs.Count);<br/>
+&nbsp; hs2.Add(15);<br/>
+&nbsp; hs2.Add(20);<br/>
+&nbsp; Console.Write("\n{15,20} is a subset of {5, 10, 15, 20}: "+hs2.IsSubsetOf(hs)); // True<br/>
+}<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+</body></html>

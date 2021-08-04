@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>SQL Fundamentals</title>
+</head><body><b>Query<br/>
+<br/>
+</b>--&gt;query in english is question, so queries are the way that we are going to put together our questions to which we want an answer from the database, query is also know as <b>SQL Statement</b><br/>
+<br/>
+<b>ex</b>: SELECT * FROM USERS;<br/>
+------------------------------------------------------------<b>Query Breakdown<br/>
+</b><b><br/>
+</b><img src="query breakdown.png" /><br/>
+<br/>
+--&gt;SQL is a declartive language<br/>
+---------------------------------------------------------<br/>
+<b>Declarative vs Imperative<br/>
+<br/>
+</b><b>Declarative</b>--&gt;What will happen?<br/>
+<br/>
+<b>Imperative</b>--&gt;How it will happen?<br/>
+<br/>
+<img src="declarative vs impertive.png" /><br/>
+<br/>
+<img src="python vs java.png" /><br/>
+--&gt;python can be declarative or imperative<br/>
+--&gt;Java imperative<br/>
+---------------------------------------------------------<br/>
+<b>History of SQL<br/>
+<br/>
+</b>--&gt;used to name as SEQUEL--&gt;structured english query language<br/>
+---------------------------------------------------------<br/>
+<b>SQL Standards<br/>
+</b><br/>
+Why companies follow SQL Standards??<br/>
+<br/>
+--&gt;Because they want all people in the industry to use their software, their databases, they add slight things just to make product slightly different<br/>
+<br/>
+<img src="sql standards.png" /><br/>
+<br/>
+----------------------------------------------------------<br/>
+<b>What is a database??<br/>
+<br/>
+</b>--&gt;it's a structured set of data that is structured in a certain way to scale with organizations that have massive quantities of data<br/>
+<br/>
+--&gt;Databases are our modern day interpretation of how to organize data but before databases were around, we had something called <b>file processing systems</b><br/>
+<br/>
+<img src="file processing systems.png" /><br/>
+<br/>
+--&gt;This is the precursor to the modern database, you were saving data on individual files and there was no correlation between the files, you basically were creating systems to save particular types of data <br/>
+<br/>
+<b>ex:</b>&nbsp;let's say you had a real estate firm in one part of the system, in first part or file you would keep all listings of real estate, second file you keep customers and third file you keep sales, but there wasn't really any relationship between the data<br/>
+<br/>
+--&gt;if customer changed in one file for example the change wouldn't go all the way through to the sales, you basically copying customer information into the sales<br/>
+<br/>
+--&gt;so file processing systems had a lot of benefits, but a lot of negatives because you were building custom software in specific coding languages like <b>java</b>&nbsp;that would manage your data, you were doing it all, all the programmers, the coders, the developers, whatever you want to call them, they were building their own systems and that's what we call <b>file processing systems</b><br/>
+<br/>
+<img src="file processing systems2.png" /><br/>
+<br/>
+--&gt;for user he would be talking to the computer and some specific coding language like python which talking directly to the machinery and this was a large disadvantage because you had all of this management to do in python for example, you even needed to know how your data was being stored, what hard drives you were using, what software was running on the server, whether it be Mac, windows or linux, you need to know all of that in order to write the software<br/>
+<br/>
+<img src="limitation.png" /><br/>
+<br/>
+--&gt;There was no common model<br/>
+<br/>
+<b>What is the model??</b><br/>
+<br/>
+--&gt;model is just a way of saying, hey my data is going to follow cetain structure, and if all of the data followed a similar model, they could talk to each other<br/>
+----------------------------------------------------------<br/>
+<b>Database Oriented Approach<br/>
+<br/>
+</b><img src="database approach.png" /><br/>
+<br/>
+--&gt;There is this software that is utilized to manage databases and it's called a database management software, and it's going to enforce a <b>model</b>&nbsp;that each one of these(library-exams-students) needs to follow<br/>
+<br/>
+--&gt;by enforcing that structure now, no one needs to care about where the data is stored, this isn't important anymore because all of these structures are following the same principles and there is a layer of software in front of whoever's talking to it that is doing this management, that means you don't need software developers anymore to create custom solutions<br/>
+<br/>
+--&gt;So database approach took all of these fragmented, isolated systems that stored data separately in different ways and unified made them make them one<br/>
+<br/>
+<img src="database approach2.png" /><br/>
+<br/>
+--&gt;each database management system has their own model ex: <b>relational model</b><br/>
+----------------------------------------------------------<br/>
+<b>Database Models<br/>
+<br/>
+</b>1-Hierarchical<br/>
+2-Networking<br/>
+3-Entity-relationship<br/>
+4-Relational<br/>
+5-Object Oriented<br/>
+6-Flat<br/>
+7-Semi-Structured<br/>
+<br/>
+<b>Database Model</b>--&gt;is nothing more than a way to organize and store your data<br/>
+<br/>
+<b>Relational</b>--&gt;the most popular model<br/>
+<br/>
+<b>Hierarchical, Networking</b>--&gt;old from 70s, 80s but they important to know how we are now<br/>
+----------------------------------------------------------<br/>
+<b>Hierarchical Model<br/>
+<br/>
+</b><img src="hierarcal.png" /><br/>
+<br/>
+--&gt;it's not efficient model, it decides to store and organize data in a tree like structure, and it has this concept of parent child, every child only can have a single root, there is no ability to say mo and andrei both make same book1 for example<br/>
+<br/>
+--&gt;there are many things that emulate it, to make this structure look like it would have been stored is <b>XML</b><br/>
+<br/>
+<b>XML</b>--&gt;is a document type in which we structured data in a tree like fashion<br/>
+<br/>
+--&gt;when you delete a parent, all child's information goes away, so the data is what we call <b>tightly coupled</b>--&gt;meaning it's directly related to its parent<br/>
+<br/>
+--&gt;it's good for describing what we would call <b>&nbsp;a one to many relationship</b><br/>
+<br/>
+<b>Networking Model</b><br/>
+--&gt;expanded on the hierarchical model, allowing many to many relationships<br/>
+<br/>
+<img src="networking model.png" /><br/>
+<br/>
+--&gt;we could now see the child entities could have multiple parents, so it's more complex<br/>
+----------------------------------------------------------<br/>
+<b>Relational Model<br/>
+<br/>
+</b>--&gt;it followed a table structure, organizing your data in tables<br/>
+<br/>
+<img src="relational model.png" /><br/>
+<br/>
+--&gt;by storing all our data in a flat way unrelated to parent and child like structure, we can now draw relationships in a much simpler way<br/>
+----------------------------------------------------------<br/>
+<b>DBMS Revisited<br/>
+<br/>
+</b><img src="what can i do.png" /><br/>
+<br/>
+----------------------------------------------------------<br/>
+<br/>
+<b>Degree</b>--&gt;is the collection of columns in the table<br/>
+<br/>
+<img src="degree.png" /><br/>
+<br/>
+--&gt;when we talk about what a column can store, we call that the <b>domain or constraint</b><br/>
+<br/>
+<img src="domain.png" /><br/>
+<br/>
+<b>Attribute = Column = Field</b><br/>
+----------------------------------------------------------<br/>
+<b>Rows = Tuples = Record<br/>
+<br/>
+<img src="cardinality.png" /><br/>
+<br/>
+</b><b>Cardinality--&gt;</b>the collection of rows in the table<br/>
+----------------------------------------------------------<br/>
+<b>Primary and Foreign Keys<br/>
+<br/>
+</b><b>Primary Key</b>--&gt;something that uniquely identifies your row<br/>
+<br/>
+<img src="foreign key.png" /><br/>
+<br/>
+----------------------------------------------------------<br/>
+<b>OLTP vs OLAP<br/>
+<br/>
+</b><b>OLTP</b>--&gt;(<div style="text-align: left"><span style="font-family: arial"><span style="font-size: 13pt">Online Transactional Processing</span></span></div>) is the supporting day to day database, online transactions processing, these are databases that are driving the day to day transactions, they have the users, orders, purchases, all they do is store and categorize this data in that relational model<br/>
+<br/>
+<img src="oltp.png" /><br/>
+<br/>
+<b>OLAP</b>--&gt;(<div style="text-align: left"><span style="font-family: Google Sans"><span style="font-size: 13pt">Online analytical processing</span></span></div>) when you take transactional processing data and you put it in a data warehouse and then you start doing all types of analytical processing to know what is valuable about that data<br/>
+<br/>
+<img src="olap.png" /></body></html>

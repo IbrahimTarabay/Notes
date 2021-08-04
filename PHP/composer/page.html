@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Composer</title>
+</head><body><b>Third-party code<br/>
+<br/>
+</b>--&gt;Using existing third-party <b>libraries </b>or <b>packages </b>in your code<br/>
+<br/>
+<b>for example:<br/>
+</b>--&gt;library for sending email, or writing to a log file or a template engine etc<br/>
+<br/>
+<b>Downloading code libraries<br/>
+</b><br/>
+--&gt;<b>Download </b>packages and save them with the rest of your code<br/>
+<br/>
+<b>Dependencies<br/>
+</b>--&gt;Packages <b>dependent </b>on other packages so you need to download and install those as well, doing all of this can take a lot of time, fortunately there is a tool that do all of that to you called <b>composer<br/>
+</b><b><br/>
+</b><b>Composer</b>--&gt;Dependency Manager for PHP<br/>
+<br/>
+<b>So how does it work?<br/>
+<br/>
+</b>1-You specify which libraries you need in your project and you do this in a file called <b>composer.json</b>--&gt;it's just a text file which lists package names and versions, you then run the composer program which read this file and then downloads and installs the packages into a folder in your project<br/>
+--------------------------------------------------------<br/>
+Checking composer by writing this command<br/>
+<br/>
+$<b>composer about<br/>
+</b>--&gt;to know if you have composer<br/>
+<br/>
+$<b>composer install</b><br/>
+--&gt;This will download and save all the packages and their dependencies into your project automatically<br/>
+<br/>
+$<b>composer require </b>"twig/twig:~1.0"<br/>
+--&gt;to install one package<br/>
+<br/>
+<b>composer.lock</b>--&gt;This contains a list of the exact versions of each of the packages installed into the project, This file is generated and updated automatically, so you never need to open it and edit it manually<br/>
+<br/>
+<b>packagist</b>--&gt;is the website where you can find packages<br/>
+--------------------------------------------------------<br/>
+<b>Include all package classes automatically using the composer autoloader<br/>
+<br/>
+</b><img src="using classes from separate files.png" /><br/>
+--&gt;when you use a class that's defined in a separate file, you have to require that file first<br/>
+<br/>
+<img src="adding autoloader.png" /><br/>
+--&gt;you can use an autoloader to load these classes automatically so you don't have to require each one individually<br/>
+<br/>
+<img src="package autoloaders.png" /><br/>
+--&gt;Many third-party packages provide their own autoloader so if a package has many classes and you want to use these classes, all you need to do is to include the package's autoloader<br/>
+<br/>
+<img src="package autoloaders2.png" /><br/>
+--&gt;So for each different third-party package that you're using in a project, you need to find and require its autoloader<br/>
+<br/>
+<img src="composer autoloader.png" /><br/>
+--&gt;if you're using composer to install the packages you don't need to do this as composer includes its own autoloader that automatically includes all the autoloaders from each individual package so by simply including composer's autoloader in your code you get autoloading of all the classes in all of your packages with just one require statement<br/>
+<br/>
+<img src="composer autoloader2.png" /><br/>
+---------------------------------------------------------<br/>
+<b>Updating the Composer autoloader<br/>
+<br/>
+</b>$composer dump-autoload<br/>
+---------------------------------------------------------</body></html>

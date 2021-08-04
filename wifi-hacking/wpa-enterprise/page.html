@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WPA-Enterprise</title>
+</head><body><b>WPA ENTERPRISE:</b><br/>
+<br/>
+-All WPA/WPA2 networks in houses use <b>PSK</b>&nbsp;authentication<br/>
+-A <b>shared key</b>&nbsp;is used to authenticate users<br/>
+-<b>One</b>&nbsp;key per network<br/>
+-Router manages authentication<br/>
+<br/>
+--&gt;WPA Enterprise is another form of authentication<br/>
+--&gt;Each user get their <b>own</b>&nbsp;key to connect to the network<br/>
+--&gt;Authentication is managed through a <b>central serve</b>r(RADIUS Server)<br/>
+----------------------------------------------------------------------------------------------------------------------------<br/>
+<b>captive portal:</b><div style="text-align: left"><span style="font-size: 16pt"><span style="font-family: arial"> </span></span><span style="font-family: arial"><span style="font-size: 12pt">is a web page accessed with a web browser that is displayed to newly connected users of a Wi-Fi or wired network before they are granted broader access to network resources. the data is unencrypted so you can run ARP Spoofing and sniff the data, so now we use WPA/WPA2 enterprise instead it's have the same functionality of captive portals like control users and see what each one of them is doing but at the same time the people authenticate using WPA/WPA2 authentication procedure<br/>
+</span></span></div><div style="text-align: left"><span style="font-family: arial"><span style="font-size: 12pt"><br/>
+in a network company it's like a captive portal but:<br/>
+<b>problems:</b><br/>
+</span></span></div><div style="text-align: left"><span style="font-family: arial"><span style="font-size: 12pt">1-</span></span></div>Encryption is used, so can't sniff credentials in monitor mode<br/>
+2-Can't use ARP spoofing because we need to connect first<br/>
+<br/>
+<b>The only solution is to run an evil twin attack:</b><br/>
+1- using the traditional method, just use a page that looks like login box<br/>
+2-create a fack AP that uses WPA enterprise:<br/>
+&nbsp; -Drawbacks:<br/>
+&nbsp; &nbsp; -&gt;Captured password will be encrypted<br/>
+&nbsp; -Advantages:<br/>
+&nbsp; &nbsp; -&gt;Looks and behaves exactly like a real WPA-Enterprise network<br/>
+<br/>
+<br/>
+<b>installation:</b><br/>
+<br/>
+#apt-get update<br/>
+#apt-get install hostapd-wpe<br/>
+#leafpad /etc/hostapd-wpe/hostapd-wpe.conf<br/>
+--&gt;change ssid name to company you target<br/>
+#service network-manager stop<br/>
+#hostapd-wpe /etc/hostapd-wpe/hostapd-wpe.conf<br/>
+--&gt;you will capture username and encrypted password if one in company connect you<br/>
+<br/>
+<b>Note: </b>you login WIFI is 100% identical to company WIFIs<br/>
+<br/>
+<b>Dictionary Attack:<br/>
+<br/>
+</b>#asleap -C &lt;challenge&gt; -R &lt;response&gt; -W wordlist.txt<br/>
+<br/>
+<br/>
+summary:<br/>
+&nbsp;1-Do not use captive portals<br/>
+&nbsp;2-Never User WEP<br/>
+&nbsp;3-Disable WPS<br/>
+&nbsp;4-Use WPA/WPA2 with a long complex password<br/>
+&nbsp;5-Educate users</body></html>

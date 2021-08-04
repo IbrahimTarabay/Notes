@@ -47,8 +47,20 @@ sudo modprobe 8188eu<br/>
 ifconfig wlan0 down<br/>
 airmon-ng check kill<br/>
 iwconfig wlan0 mode monitor<br/>
-ifconfig wlan0 up &nbsp;<br/>
+ifconfig wlan0 up<br/>
 iwconfig \\check mode: monitor<br/>
+-------------------------------------------------------------------<br/>
+<br/>
+<b>To enable Managed mode</b><br/>
+<br/>
+ifconfig wlan0 down<br/>
+service network-manager start<br/>
+iwconfig wlan0 mode managed<br/>
+ifconfig wlan0 up<br/>
+or<br/>
+disconnect wireless adapter then connect again<br/>
+go to devices check it<br/>
+service network-manager start<br/>
 &nbsp;<br/>
 <b>Important note:</b>&nbsp; &nbsp;If after restarting your kali machine doesn't recognise your device.. As lot of people are facing the same problem .. I have a solution for you.. Whenever you restart your kali OS Insert the adapter and run the command &nbsp; <br/>
 <br/>
@@ -71,4 +83,49 @@ Disconnect the device and connect again.. &nbsp;Then check<br/>
 Mode: Managed--&gt;it's default and it means is this device will only capture packets that has a destination MAC as the MAC address<br/>
 <br/>
 <b>note: </b>when we need to change configuration in wlan0 we use #ifconfig wlan0 down (at first command to disable it)<br/>
-</span></body></html>
+<br/>
+<br/>
+<b>E: unable to locate package:<br/>
+<br/>
+</b>1-add to etc/apt/sources.list:<br/>
+deb http://http.kali.org/kali kali-last-snapshot main non-free contrib<br/>
+deb-src http://http.kali.org/kali kali-rolling main non-free contrib<br/>
+deb http://old.kali.org/kali moto main non-free contrib<br/>
+<br/>
+2-apt-get update<br/>
+3-apt-get upgrade(optional)<br/>
+4-apt autoremove(optional)<br/>
+5-apt-get install aptitude<br/>
+6-sudo aptitude install &lt;packagename&gt;<br/>
+<br/>
+<br/>
+<b>if you want to uninstall any program:</b><br/>
+<br/>
+#apt-get autoremove &lt;program name&gt;<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<b>MAC FILTERING</b><br/>
+</span><br/>
+-MAC address is unique to each network device<br/>
+-Routers can use MAC filtering to allow/deny devices from connecting based on their mac address<br/>
+<br/>
+-Implementations:<br/>
+&nbsp;1-Using a blacklist-allow all MACs to connect except the ones in the list<br/>
+&nbsp;2-Using a whitelist-deny all MACs from connecting except the ones in the list<br/>
+<br/>
+<b>How to pass MAC Filtering:</b><br/>
+<br/>
+#airodump-ng wlan0<br/>
+ctrl+c<br/>
+#airodump-ng --bssid 64:16:F0:EC:7B:F3 --channel 6 wlan0<br/>
+--&gt;copy client MAC address and put wireless adapter in managed mode<br/>
+#ifconfig<br/>
+#ifconfig wlan0 down<br/>
+#macchanger -m &lt;MAC address you copy&gt; wlan0<br/>
+--if problem happen:<br/>
+#ifconfig wlan0 down<br/>
+#macchanger -m &lt;MAC address you copy&gt; wlan0<br/>
+<br/>
+--&gt;we will wait for someone to connect the network, if client connect thats means that his MAC address is allowed so all we have to do is change our wireless card MAC address to client computer MAC address</body></html>

